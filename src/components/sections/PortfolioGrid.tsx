@@ -41,15 +41,15 @@ export default function PortfolioGrid() {
   console.debug('PortfolioGrid items:', portfolioItems);
   const allItems = Array.isArray(portfolioItems)
     ? portfolioItems
-        .filter((i) => i && i.title && i.category && i.cover_url && i.slug)
-        .map((item) => ({
-          title: String(item.title),
-          category: String(item.category),
-          imageUrl: String(item.cover_url),
-          slug: String(item.slug),
-          portfolio_type: String((item as any).portfolio_type || 'gallery'),
-          summary: String((item as any).tagline || (item as any).short_description || item.category || 'Creative collaboration'),
-        }))
+      .filter((i) => i && i.title && i.category && i.cover_url && i.slug)
+      .map((item) => ({
+        title: String(item.title),
+        category: String(item.category),
+        imageUrl: String(item.cover_url),
+        slug: String(item.slug),
+        portfolio_type: String((item as any).portfolio_type || 'gallery'),
+        summary: String((item as any).tagline || (item as any).short_description || item.category || 'Creative collaboration'),
+      }))
     : [];
   const caseStudyItems = allItems.filter((i) => i.portfolio_type === 'case_study');
   const collectionRefs = React.useRef<(HTMLDivElement | null)[]>([]);
@@ -130,24 +130,24 @@ export default function PortfolioGrid() {
         <div className="flex flex-col gap-4 mb-6">
           <div className="flex items-center justify-center md:justify-between">
             <TabsList
-              className="inline-flex h-auto flex-shrink-0 items-center justify-center gap-1 rounded-full bg-gray-100 p-1.5 sm:p-1 mx-3 sm:mx-0"
+              className="inline-flex h-auto flex-shrink-0 items-center justify-center gap-1 rounded-full bg-white/5 border border-white/10 p-1.5 sm:p-1 mx-3 sm:mx-0 backdrop-blur-md"
             >
               <TabsTrigger
                 value="portfolio"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-gray-700 transition-all data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-sm sm:w-32"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-zinc-500 transition-all data-[state=active]:bg-brand-blue data-[state=active]:text-white data-[state=active]:shadow-[0_0_20px_rgba(0,85,255,0.4)] sm:w-32"
               >
                 Portfolio
               </TabsTrigger>
               <TabsTrigger
                 value="case_studies"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-gray-700 transition-all data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-sm sm:w-36"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-zinc-500 transition-all data-[state=active]:bg-brand-blue data-[state=active]:text-white data-[state=active]:shadow-[0_0_20px_rgba(0,85,255,0.4)] sm:w-36"
               >
                 <span className="sm:hidden">Case Study</span>
                 <span className="hidden sm:inline">Case Study Files</span>
               </TabsTrigger>
               <TabsTrigger
                 value="research_docs"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-gray-700 transition-all data-[state=active]:bg-white data-[state=active]:text-black data-[state=active]:shadow-sm sm:w-32"
+                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-zinc-500 transition-all data-[state=active]:bg-brand-blue data-[state=active]:text-white data-[state=active]:shadow-[0_0_20px_rgba(0,85,255,0.4)] sm:w-32"
               >
                 <span className="sm:hidden">Research</span>
                 <span className="hidden sm:inline">Research Docs</span>
@@ -155,18 +155,18 @@ export default function PortfolioGrid() {
             </TabsList>
 
             {/* Suggestions (right side) */}
-            <div className="hidden md:flex items-center gap-4 text-sm text-gray-700 whitespace-nowrap">
-              <span className="font-medium">Projects</span>
-              <span>People</span>
-              <span>Assets</span>
-              <span>Images</span>
+            <div className="hidden md:flex items-center gap-4 text-sm text-zinc-400 whitespace-nowrap">
+              <span className="font-medium text-white/90">Projects</span>
+              <span className="hover:text-white transition-colors cursor-pointer">People</span>
+              <span className="hover:text-white transition-colors cursor-pointer">Assets</span>
+              <span className="hover:text-white transition-colors cursor-pointer">Images</span>
               <Button
                 variant="outline"
                 className={cn(
-                  "rounded-full border border-gray-300 px-4 py-2 text-gray-700 transition-colors",
+                  "rounded-full border border-white/10 px-4 py-2 text-zinc-400 transition-all",
                   tab === 'collections'
-                    ? 'bg-black text-white border-black hover:bg-black/90'
-                    : 'hover:bg-gray-50'
+                    ? 'bg-brand-blue text-white border-brand-blue shadow-[0_0_15px_rgba(0,85,255,0.4)] hover:bg-brand-blue/90'
+                    : 'bg-white/5 hover:bg-white/10 hover:text-white'
                 )}
                 onClick={() => setTab('collections')}
               >
@@ -215,9 +215,12 @@ export default function PortfolioGrid() {
               )}
 
               {tab === 'research_docs' && (
-                <div className="rounded-3xl border border-gray-200 p-8 text-center text-gray-700 bg-white">
-                  <h3 className="text-xl font-semibold mb-2">Research Docs – Coming Soon</h3>
-                  <p className="text-sm text-gray-500">You’ll be able to see behind-the-scenes docs for select projects here.</p>
+                <div className="rounded-3xl border border-white/10 p-12 text-center text-white/90 bg-white/5 backdrop-blur-sm">
+                  <div className="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center mx-auto mb-4">
+                    <span className="text-brand-blue text-xl font-bold">!</span>
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Research Docs – Coming Soon</h3>
+                  <p className="text-sm text-zinc-500 max-w-md mx-auto">We're curating deep dives into our creative process. You’ll be able to see behind-the-scenes strategy and documentation here very soon.</p>
                 </div>
               )}
 
@@ -226,10 +229,10 @@ export default function PortfolioGrid() {
                   {placeholderCollections.map((collection, index) => (
                     <section key={collection.id} className="relative">
                       <div className="flex items-baseline justify-between gap-4 mb-6">
-                        <h3 className="font-display text-2xl font-medium text-gray-900">
+                        <h3 className="font-display text-2xl font-medium text-white">
                           {collection.title}
                         </h3>
-                        <span className="text-xs uppercase tracking-[0.3em] text-gray-400">
+                        <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-zinc-500">
                           10 previews
                         </span>
                       </div>
@@ -277,7 +280,7 @@ export default function PortfolioGrid() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="rounded-full border-gray-300"
+                            className="rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-all"
                             onClick={() => scrollCollection(index, 'prev')}
                           >
                             Prev
@@ -285,7 +288,7 @@ export default function PortfolioGrid() {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="rounded-full border-gray-300"
+                            className="rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-all"
                             onClick={() => scrollCollection(index, 'next')}
                           >
                             Next

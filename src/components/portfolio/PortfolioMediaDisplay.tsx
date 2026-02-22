@@ -15,13 +15,13 @@ interface PortfolioMediaDisplayProps {
   className?: string;
 }
 
-export default function PortfolioMediaDisplay({ 
-  coverImage, 
-  mediaFiles = [], 
-  className = "" 
+export default function PortfolioMediaDisplay({
+  coverImage,
+  mediaFiles = [],
+  className = ""
 }: PortfolioMediaDisplayProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  
+
   // Combine cover and media files for display
   const allMedia = [
     ...(coverImage ? [coverImage] : []),
@@ -50,7 +50,7 @@ export default function PortfolioMediaDisplay({
 
   const renderMedia = (media: MediaFile, index: number) => {
     const isClickable = media.type === 'image' || media.type === 'gif';
-    
+
     switch (media.type) {
       case 'image':
       case 'gif':
@@ -64,7 +64,7 @@ export default function PortfolioMediaDisplay({
             loading="lazy"
           />
         );
-      
+
       case 'video':
         return (
           <div key={media.id} className="relative w-full">
@@ -76,7 +76,7 @@ export default function PortfolioMediaDisplay({
             />
           </div>
         );
-      
+
       case 'pdf':
         return (
           <div key={media.id} className="w-full bg-gray-100 p-8 flex flex-col items-center justify-center min-h-[200px]">
@@ -94,7 +94,7 @@ export default function PortfolioMediaDisplay({
             </Button>
           </div>
         );
-      
+
       default:
         return null;
     }
@@ -112,7 +112,7 @@ export default function PortfolioMediaDisplay({
 
       {/* Lightbox */}
       {lightboxIndex !== null && (
-        <div className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black bg-opacity-95 z-[100] flex items-center justify-center">
           <div className="relative max-w-full max-h-full p-4">
             {/* Close Button */}
             <Button

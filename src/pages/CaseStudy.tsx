@@ -124,38 +124,28 @@ export default function CaseStudy() {
             <div className="grid gap-10 lg:grid-cols-[minmax(240px,280px)_minmax(320px,1fr)] lg:items-start">
               <div className="space-y-6">
                 <div>
-                  <h2 className="font-display text-xs uppercase tracking-[0.35em] text-gray-500 mb-2">Client</h2>
-                  <p className="text-base text-gray-900 font-medium">
+                  <h2 className="font-display text-xs uppercase tracking-[0.35em] text-zinc-500 mb-2">Client</h2>
+                  <p className="text-base text-white font-medium">
                     {currentCaseStudy.client || "Confidential"}
                   </p>
-                  {currentCaseStudy.client_url && (
-                    <a
-                      href={currentCaseStudy.client_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-1 inline-block text-sm text-gray-600 underline underline-offset-4"
-                    >
-                      {currentCaseStudy.client_url.replace(/^https?:\/\//, "")}
-                    </a>
-                  )}
                 </div>
 
                 <div className="grid gap-4">
                   <div>
-                    <h3 className="font-display text-xs uppercase tracking-[0.35em] text-gray-500 mb-1">Industry</h3>
-                    <p className="text-sm text-gray-700">
+                    <h3 className="font-display text-xs uppercase tracking-[0.35em] text-zinc-500 mb-1">Industry</h3>
+                    <p className="text-sm text-zinc-300">
                       {currentCaseStudy.industry || "N/A"}
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-display text-xs uppercase tracking-[0.35em] text-gray-500 mb-1">Location</h3>
-                    <p className="text-sm text-gray-700">
+                    <h3 className="font-display text-xs uppercase tracking-[0.35em] text-zinc-500 mb-1">Location</h3>
+                    <p className="text-sm text-zinc-300">
                       {currentCaseStudy.location || "N/A"}
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-display text-xs uppercase tracking-[0.35em] text-gray-500 mb-1">Year</h3>
-                    <p className="text-sm text-gray-700">
+                    <h3 className="font-display text-xs uppercase tracking-[0.35em] text-zinc-500 mb-1">Year</h3>
+                    <p className="text-sm text-zinc-300">
                       {currentCaseStudy.year || new Date(currentCaseStudy.created_at).getFullYear()}
                     </p>
                   </div>
@@ -163,15 +153,15 @@ export default function CaseStudy() {
 
                 {(roleItems.length > 0 || currentCaseStudy.our_role) && (
                   <div>
-                    <h3 className="font-display text-xs uppercase tracking-[0.35em] text-gray-500 mb-2">Our Role</h3>
+                    <h3 className="font-display text-xs uppercase tracking-[0.35em] text-zinc-500 mb-2">Our Role</h3>
                     {roleItems.length > 1 ? (
-                      <ul className="space-y-1 text-sm text-gray-700 list-disc list-inside">
+                      <ul className="space-y-1 text-sm text-zinc-300 list-disc list-inside">
                         {roleItems.map((role) => (
                           <li key={role}>{role}</li>
                         ))}
                       </ul>
                     ) : (
-                      <p className="text-sm text-gray-700">
+                      <p className="text-sm text-zinc-300">
                         {roleItems[0] || currentCaseStudy.our_role}
                       </p>
                     )}
@@ -182,11 +172,11 @@ export default function CaseStudy() {
               <div className="space-y-8">
                 {challengeParagraphs.length > 0 && (
                   <div className="space-y-3">
-                    <h3 className="font-display text-sm uppercase tracking-[0.3em] text-gray-500">
+                    <h3 className="font-display text-sm uppercase tracking-[0.3em] text-zinc-500">
                       The Challenge
                     </h3>
                     {challengeParagraphs.map((paragraph, index) => (
-                      <p key={`challenge-${index}`} className="text-base text-gray-800 leading-relaxed">
+                      <p key={`challenge-${index}`} className="text-base text-zinc-200 leading-relaxed">
                         {paragraph}
                       </p>
                     ))}
@@ -195,11 +185,11 @@ export default function CaseStudy() {
 
                 {solutionParagraphs.length > 0 && (
                   <div className="space-y-3">
-                    <h3 className="font-display text-sm uppercase tracking-[0.3em] text-gray-500">
+                    <h3 className="font-display text-sm uppercase tracking-[0.3em] text-zinc-500">
                       The Solution
                     </h3>
                     {solutionParagraphs.map((paragraph, index) => (
-                      <p key={`solution-${index}`} className="text-base text-gray-800 leading-relaxed">
+                      <p key={`solution-${index}`} className="text-base text-zinc-200 leading-relaxed">
                         {paragraph}
                       </p>
                     ))}
@@ -207,7 +197,7 @@ export default function CaseStudy() {
                 )}
 
                 {!challengeParagraphs.length && !solutionParagraphs.length && currentCaseStudy.tagline && (
-                  <p className="text-base text-gray-800 leading-relaxed">
+                  <p className="text-base text-zinc-200 leading-relaxed">
                     {currentCaseStudy.tagline}
                   </p>
                 )}
@@ -256,7 +246,7 @@ export default function CaseStudy() {
           {projectTags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-700"
+              className="rounded-full bg-white/5 border border-white/10 px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-zinc-400 transition-all duration-300 hover:bg-white/10 hover:border-white/20 hover:text-white"
             >
               {tag}
             </span>

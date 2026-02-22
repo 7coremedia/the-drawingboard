@@ -51,7 +51,7 @@ export default function Navbar() {
     return (
         <nav
             className={cn(
-                "fixed top-6 inset-x-0 z-50 transition-transform duration-500",
+                "fixed top-6 inset-x-0 z-[60] transition-transform duration-500",
                 isAtTop ? "translate-y-0" : "translate-y-[-10px]"
             )}
         >

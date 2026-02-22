@@ -40,7 +40,7 @@ export default function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 h-16 md:h-20 transition-all duration-300",
+        "fixed inset-x-0 top-0 z-[60] h-16 md:h-20 transition-all duration-300",
         isHidden ? "-translate-y-full" : "translate-y-0",
         !isAtTop && "bg-black/0" // Transparent, relying on global CinematicNavbarBlur
       )}

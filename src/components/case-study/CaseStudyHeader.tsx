@@ -1,6 +1,8 @@
 import { Button } from '@/components/ui/button';
 import { Bookmark, Plus } from 'lucide-react';
 import PortfolioActions from '@/components/portfolio/PortfolioActions';
+import { useHeaderScroll } from '@/hooks/useHeaderScroll';
+import { cn } from '@/lib/utils';
 
 interface CaseStudyHeaderProps {
   title: string;
@@ -13,8 +15,13 @@ export default function CaseStudyHeader({
   owner,
   slug,
 }: CaseStudyHeaderProps) {
+  const isHidden = useHeaderScroll();
+
   return (
-    <div className="w-full bg-black border-b border-white/10 py-4 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between shadow-sm sticky top-0 z-50 backdrop-blur-md bg-black/90">
+    <div className={cn(
+      "w-full bg-black border-b border-white/10 py-4 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between shadow-sm sticky top-0 z-50 backdrop-blur-md bg-black/90 transition-transform duration-300",
+      isHidden ? "-translate-y-full" : "translate-y-0"
+    )}>
       <div className="flex items-center gap-4">
         {/* Owner/Profile Info - Simplified for now */}
         <div className="flex items-center gap-2">
