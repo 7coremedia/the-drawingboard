@@ -14,34 +14,34 @@ export default function CaseStudyHeader({
   slug,
 }: CaseStudyHeaderProps) {
   return (
-    <div className="w-full bg-white border-b border-gray-200 py-4 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between shadow-sm sticky top-0 z-20">
+    <div className="w-full bg-black border-b border-white/10 py-4 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between shadow-sm sticky top-0 z-50 backdrop-blur-md bg-black/90">
       <div className="flex items-center gap-4">
         {/* Owner/Profile Info - Simplified for now */}
         <div className="flex items-center gap-2">
           {/* Placeholder for owner avatar */}
-          <div className="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0"></div>
+          <div className="w-8 h-8 rounded-full bg-white/10 flex-shrink-0"></div>
           <div className="flex flex-col text-sm">
-            <span className="font-medium">{owner}</span>
-            <span className="text-gray-500">Multiple Owners</span> {/* Placeholder for now */}
+            <span className="font-medium text-white">{owner}</span>
+            <span className="text-gray-400">Project Lead</span>
           </div>
         </div>
-        <Button variant="outline" className="border border-gray-300 px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50">
-          <Plus className="w-3 h-3 mr-1" /> Follow All
+        <Button variant="outline" className="border border-white/20 px-3 py-1.5 text-xs text-white hover:bg-white/10 bg-transparent transition-colors">
+          <Plus className="w-3 h-3 mr-1" /> Follow
         </Button>
       </div>
 
       <div className="flex-1 text-center md:text-left md:ml-8 mt-2 md:mt-0">
-        <h1 className="text-lg font-semibold truncate">{title}</h1>
+        <h1 className="text-lg font-semibold truncate text-white">{title}</h1>
       </div>
 
       <div className="flex items-center gap-2 mt-4 md:mt-0">
-        <Button variant="outline" size="sm" className="flex items-center gap-1 border border-gray-300 px-3 py-1.5 text-xs text-gray-700 hover:bg-gray-50">
+        <Button variant="outline" size="sm" className="flex items-center gap-1 border border-white/20 px-3 py-1.5 text-xs text-white hover:bg-white/10 bg-transparent transition-colors">
           <Bookmark className="w-3 h-3" /> Save
         </Button>
-        <PortfolioActions 
-          title={title} 
-          slug={slug} 
-          variant="header" 
+        <PortfolioActions
+          title={title}
+          slug={slug}
+          variant="header"
         />
       </div>
     </div>

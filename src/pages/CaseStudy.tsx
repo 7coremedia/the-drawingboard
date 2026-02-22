@@ -16,7 +16,7 @@ export default function CaseStudy() {
   const { slug } = useParams<{ slug: string }>();
   const { data: currentCaseStudy, isLoading, error } = usePublicPortfolioItem(slug || '');
   const { data: portfolioMedia, isLoading: isLoadingMedia } = usePublicPortfolioMedia(currentCaseStudy?.id || '');
-  
+
   // Fetch all portfolio items to find related ones.
   // Note: usePublicPortfolioItem already fetches the full item, so we can use `currentCaseStudy` for the overlay.
   const { data: allPortfolioItems } = usePublicPortfolio();
@@ -217,7 +217,7 @@ export default function CaseStudy() {
         </div>
       </section>
 
-      {/* Main Media Section - No Container for full-width */} 
+      {/* Main Media Section - No Container for full-width */}
       {currentCaseStudy.portfolio_type === 'case_study' ? (
         <section className="w-full pt-4 pb-8">
           <div className="container mx-auto px-4">
@@ -284,8 +284,8 @@ export default function CaseStudy() {
       </section>
 
       {/* Bottom Actions */}
-      <div className="w-full bg-white border-t border-gray-200 py-4 px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-center gap-3 shadow-sm mt-8 overflow-x-auto">
-        <PortfolioActions 
+      <div className="w-full bg-black border-t border-white/10 py-8 px-4 sm:px-6 lg:px-8 flex flex-row items-center justify-center gap-3 shadow-2xl mt-8 overflow-x-auto backdrop-blur-md">
+        <PortfolioActions
           title={currentCaseStudy.title}
           slug={slug || ''}
           variant="bottom"
