@@ -126,8 +126,8 @@ export default function CinematicHero() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
                 >
-                    <Link to="/portfolio" className="group">
-                        <div className="bg-[#3D2C1F] text-white rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-10 aspect-[3/4] md:aspect-auto md:h-[420px] relative overflow-hidden flex flex-col justify-between transition-transform duration-500 hover:scale-[0.99] shadow-sm">
+                    <Link to="/contact" className="group">
+                        <div className="bg-[#3D2C1F] text-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-8 aspect-[3/4] md:aspect-video relative overflow-hidden flex flex-col justify-between transition-transform duration-500 hover:scale-[0.99] shadow-sm">
                             
                             {/* Web Video Background (remains unchanged for web) */}
                             <video 
@@ -143,39 +143,43 @@ export default function CinematicHero() {
                             
                             <div className="z-10 relative flex flex-col items-start gap-1">
                                 <div className="bg-[#C9A66B] text-[#3D2C1F] text-[7px] md:text-[10px] font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-full uppercase tracking-widest shadow-xl absolute top-0 right-0 md:relative md:top-auto md:right-auto">New</div>
-                                <p className="text-[#C9A66B] font-bold text-[10px] md:text-lg mb-0.5 md:mb-2 drop-shadow-md">Start your</p>
-                                <h3 className="text-xl md:text-5xl font-display tracking-tighter leading-none max-w-[140px] md:max-w-[200px] drop-shadow-lg">
+                                <p className="text-[#C9A66B] font-bold text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl mb-0 md:mb-1 drop-shadow-md">Start your</p>
+                                <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-display tracking-tighter leading-[0.95] drop-shadow-lg w-[95%] md:max-w-[240px] lg:max-w-[320px] pr-4 md:pr-0">
                                     identity strategy
                                 </h3>
                             </div>
 
-                            <div className="z-10 relative flex items-center justify-between mt-auto">
-                                <span className="font-semibold text-xs md:text-lg border-b border-white/30 hover:border-white transition-colors drop-shadow-md truncate max-w-[80%]">Find your code</span>
-                                <ChevronRight className="w-4 h-4 md:w-6 md:h-6 drop-shadow-md flex-shrink-0" />
+                            <div className="z-10 relative flex items-center justify-between mt-auto pt-4">
+                                <span className="font-semibold text-xs sm:text-sm md:text-xl lg:text-2xl border-b border-white/30 hover:border-white transition-colors drop-shadow-md truncate max-w-[80%] pb-1">Find your code</span>
+                                <ChevronRight className="w-5 h-5 md:w-8 md:h-8 drop-shadow-md flex-shrink-0" />
                             </div>
                         </div>
                     </Link>
 
-                    <Link to="/portfolio" className="group">
-                        <div className="bg-[#D9C5B2] text-[#0D0D0D] rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-10 aspect-[3/4] md:aspect-auto md:h-[420px] relative overflow-hidden flex flex-col justify-between transition-transform duration-500 hover:scale-[0.99] shadow-sm">
+                    <Link to="/brand-audit" className="group">
+                        <div className="bg-[#D9C5B2] text-[#0D0D0D] rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-8 aspect-[3/4] md:aspect-video relative overflow-hidden flex flex-col justify-between transition-transform duration-500 hover:scale-[0.99] shadow-sm">
+                            
                             <div className="z-10 relative">
-                                <p className="text-[#5C4D42] font-semibold text-[10px] md:text-lg mb-0.5 md:mb-1">See how much</p>
-                                <h3 className="text-xl md:text-5xl font-display tracking-tighter leading-none max-w-[140px] md:max-w-[250px] text-[#3D2C1F]">
-                                    growth you can unlock
-                                </h3>
-                            </div>
-
-                            {/* Graphic Placeholder (Right side image) */}
-                            <div className="absolute right-0 bottom-0 w-3/4 h-full group-hover:scale-105 transition-transform duration-1000">
-                                <img src="/placeholder.svg" alt="Growth" className="w-full h-full object-cover opacity-10" />
-                                <div className="absolute bottom-1/4 left-4 md:left-10 text-[7px] md:text-[10px] font-bold uppercase tracking-widest text-[#3D2C1F] flex items-center gap-1 md:gap-2">
-                                    <span className="text-xs md:text-lg">↓</span> 35% growth
+                                <p className="text-[#5C4D42] font-semibold text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl mb-0 md:mb-1">See how much</p>
+                                <div className="flex flex-col md:flex-row md:items-end gap-2 md:gap-4 md:flex-wrap">
+                                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] font-display tracking-tighter leading-[0.9] text-[#3D2C1F] max-w-[95%] md:max-w-[85%]">
+                                        growth you can unlock
+                                    </h3>
+                                    
+                                    <div className="text-[7.5px] md:text-[11px] font-bold uppercase tracking-[0.15em] text-[#3D2C1F] flex items-center gap-1 group w-max mt-1 md:mt-0 md:mb-1.5">
+                                        <span className="text-xs md:text-xl transition-transform group-hover:translate-y-1">↓</span> 35% growth
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="z-10 relative flex items-center justify-between">
+                            {/* Graphic Placeholder (Right side image) */}
+                            <div className="absolute right-0 bottom-0 w-1/2 h-full min-h-[50%] group-hover:scale-105 transition-transform duration-1000">
+                                <img src="/placeholder.svg" alt="Growth" className="w-full h-full object-cover opacity-5" />
+                            </div>
+
+                            <div className="z-10 relative flex items-center justify-between mt-auto pt-4">
                                 <span>&nbsp;</span>
-                                <ChevronRight className="w-4 h-4 md:w-6 md:h-6 opacity-60" />
+                                <ChevronRight className="w-5 h-5 md:w-8 md:h-8 opacity-60 flex-shrink-0" />
                             </div>
                         </div>
                     </Link>
