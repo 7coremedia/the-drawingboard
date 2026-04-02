@@ -200,10 +200,10 @@ export default function CinematicHero() {
                     }}
                 >
                     {[
-                        { title: "Strategic brand systems", color: "text-[#1B4B66]", img: "/Quick Actions/Strategic Brand Systems.png", link: "/portfolio", scaleClass: "scale-[2] md:scale-[2.4]" },
-                        { title: "Rebuild brand authority", color: "text-[#8B4513]", img: "/Quick Actions/Rebuild Brand Authority.png", link: "/portfolio", scaleClass: "scale-[1.6] md:scale-[1.8]" },
-                        { title: "Scale your presence", color: "text-[#3D2C1F]", img: "/Quick Actions/Scale Your Presence.png", link: "/portfolio", scaleClass: "scale-[1.3] md:scale-[1.4]" },
-                        { title: "Free brand assessment", color: "text-[#006400]", img: "/Quick Actions/Free Brand Assesment.png", link: "/brand-audit-quiz", scaleClass: "scale-[1.6] md:scale-[1.8]" },
+                        { title: "Strategic brand systems", color: "text-[#1B4B66]", img: "/Quick Actions/Strategic Brand Systems.png", link: "/portfolio", scaleClass: "scale-[3.8] md:scale-[2.5]" },
+                        { title: "Rebuild brand authority", color: "text-[#8B4513]", img: "/Quick Actions/Rebuild Brand Authority.png", link: "/portfolio", scaleClass: "scale-[2.4] md:scale-[1.8]" },
+                        { title: "Scale your presence", color: "text-[#3D2C1F]", img: "/Quick Actions/Scale Your Presence.png", link: "/portfolio", scaleClass: "scale-[1.9] md:scale-[1.35]" },
+                        { title: "Free brand assessment", color: "text-[#006400]", img: "/Quick Actions/Free Brand Assesment.png", link: "/brand-audit-quiz", scaleClass: "scale-[2.4] md:scale-[1.8]" },
                     ].map((card, i) => (
                         <motion.div
                             key={i}
