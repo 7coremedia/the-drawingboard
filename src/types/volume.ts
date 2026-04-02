@@ -1,3 +1,5 @@
+import { EditorialBlock } from "./blocks";
+
 export type VolumeRecord = {
   id: string;
   slug: string;
@@ -6,7 +8,7 @@ export type VolumeRecord = {
   writer: string;
   goal: string;
   summary: string;
-  content: string[];
+  content: string[] | EditorialBlock[];
   leadParagraph?: string | null;
   heroImageUrl?: string | null;
   isPublished: boolean;

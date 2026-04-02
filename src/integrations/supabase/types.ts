@@ -218,6 +218,7 @@ export type Database = {
           brand_name: string | null
           category: string | null
           client: string | null
+          content_blocks: Json | null
           cover_url: string
           created_at: string | null
           description: string | null
@@ -239,6 +240,7 @@ export type Database = {
           brand_name?: string | null
           category?: string | null
           client?: string | null
+          content_blocks?: Json | null
           cover_url?: string
           created_at?: string | null
           description?: string | null
@@ -260,6 +262,7 @@ export type Database = {
           brand_name?: string | null
           category?: string | null
           client?: string | null
+          content_blocks?: Json | null
           cover_url?: string
           created_at?: string | null
           description?: string | null

@@ -22,6 +22,7 @@ import BrandingChat from "./pages/BrandingChat";
 import BrandProfileDetails from "./pages/BrandProfileDetails";
 import Volumes from "./pages/Volumes";
 import VolumeDetail from "./pages/VolumeDetail";
+import BrandAudit from "./pages/BrandAudit";
 // Dashboard imports
 import ProtectedLayout from "./components/layout/ProtectedLayout";
 import ManagementDashboard from "./pages/management/Index";
@@ -39,6 +40,7 @@ import CursorRing from "@/components/ui/CursorRing";
 import Jobs from "./pages/Jobs";
 import Contracts from "./pages/Contracts";
 import { cn } from "@/lib/utils";
+import AnnouncementBanner from "./components/redesign/AnnouncementBanner";
 import CinematicNavbarBlur from "./components/redesign/CinematicNavbarBlur";
 
 const queryClient = new QueryClient();
@@ -48,18 +50,19 @@ function AppShell() {
   const isHome = location.pathname === "/";
   const isChatPage = location.pathname === "/branding-chat";
   const isVolumeRoute = location.pathname.startsWith("/volumes");
+  const isPortfolio = location.pathname === "/portfolio" || location.pathname.startsWith("/portfolio/");
   return (
     <>
       <Helmet>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
       </Helmet>
       <CursorRing enabled={false} size={56} />
-      {!isChatPage && <CinematicNavbarBlur />}
-      {!isChatPage && (isHome ? <Navbar /> : <Header />)}
+      {isHome && <AnnouncementBanner />}
+      {!isChatPage && !location.pathname.startsWith("/management") && <CinematicNavbarBlur />}
+      {!isChatPage && !location.pathname.startsWith("/management") && <Navbar />}
       <main
         className={cn(
           !isHome && !isChatPage && "pt-28 md:pt-32",
-          isHome && "pt-12",
           isVolumeRoute && "bg-[#1a1b1d]"
         )}
       >
@@ -69,6 +72,7 @@ function AppShell() {
           <Route path="/portfolio/:slug" element={<CaseStudy />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/brand-audit" element={<BrandAudit />} />
           <Route path="/volumes" element={<Volumes />} />
           <Route path="/volumes/:id" element={<VolumeDetail />} />
           <Route path="/jobs" element={<Jobs />} />

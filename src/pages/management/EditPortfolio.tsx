@@ -7,6 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import CreatePortfolioFormV2 from "@/components/admin/CreatePortfolioFormV2";
 import { PortfolioItem } from "@/hooks/usePortfolio";
 import { usePortfolioMedia } from "@/hooks/usePortfolioMedia";
+import { ArrowLeft } from "lucide-react";
 
 export default function EditPortfolio() {
   const { id } = useParams<{ id: string }>();
@@ -53,6 +54,7 @@ export default function EditPortfolio() {
         the_solution: data.the_solution,
         notes: data.notes,
         is_notes_downloadable: data.is_notes_downloadable,
+        content_blocks: data.content_blocks,
         updated_at: new Date().toISOString(),
       };
 
@@ -174,16 +176,32 @@ export default function EditPortfolio() {
   }
 
   return (
-    <main className="container mx-auto py-8 px-4">
+    <main className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] py-16 md:py-24 selection:bg-[#C94A2C] selection:text-white">
       <Helmet>
-        <title>Edit {portfolio.title} – KING</title>
+        <title>Edit {portfolio.title} – KŌDĒ</title>
       </Helmet>
 
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">Edit Portfolio Item</h1>
-        <p className="mt-2 text-muted-foreground">
-          Update the details of your portfolio item
-        </p>
+      <div className="container mx-auto px-6">
+        <header className="mb-20 space-y-8">
+            <button 
+                onClick={() => navigate("/management/portfolio")}
+                className="flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] font-black text-black/40 hover:text-[#C94A2C] transition-colors group"
+            >
+                <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+                Back to Registry
+            </button>
+            
+            <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                    <span className="text-[10px] uppercase tracking-[0.5em] font-black text-[#C94A2C]">Exhibition Entry Protocol</span>
+                    <div className="h-px w-12 bg-black/10" />
+                </div>
+                <h1 className="text-4xl md:text-6xl font-display font-black tracking-tighter leading-none uppercase">Edit Archival <br /><span className="text-black/20"> Entry.</span></h1>
+                <p className="text-lg text-[#0D0D0D]/40 font-medium max-w-xl">
+                    Synchronizing clinical updates for {portfolio.title} into the primary KŌDĒ repository.
+                </p>
+            </div>
+        </header>
       </div>
 
       <CreatePortfolioFormV2
@@ -202,8 +220,10 @@ export default function EditPortfolio() {
           the_solution: (portfolio as any).the_solution,
           notes: (portfolio as any).notes,
           is_notes_downloadable: (portfolio as any).is_notes_downloadable,
+          content_blocks: (portfolio as any).content_blocks,
           is_multiple_partners: (portfolio as any).is_multiple_partners,
           brand_name: (portfolio as any).brand_name,
+          portfolio_type: (portfolio as any).portfolio_type || 'gallery',
           media_url: (portfolio as any).cover_url ?? (portfolio as any).media_url,
           full_image_url: (portfolio as any).full_image_url ?? (portfolio as any).cover_url,
           media_files: (portfolioMedia || [])

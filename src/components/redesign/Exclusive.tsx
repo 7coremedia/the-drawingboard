@@ -1,73 +1,98 @@
 import { motion } from "framer-motion";
+import { ArrowRight, ShieldCheck, Activity } from "lucide-react";
 
 export default function Exclusive() {
     return (
-        <section className="py-20 md:py-48 bg-black flex flex-col items-center justify-center relative overflow-hidden border-t border-white/5">
-            {/* Background radial glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-white/5 blur-[120px] rounded-full pointer-events-none" />
+        <section className="py-32 md:py-64 bg-[#F5F0E8] flex flex-col items-center justify-center relative overflow-hidden border-t border-black/5 px-2 md:px-6">
+            {/* Subtle background element */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] border border-black/[0.03] rounded-full pointer-events-none -z-0 scale-125" />
 
-            <div className="container px-6 relative z-10 flex flex-col items-center">
-                {/* Ticket/Envelope Visual Container */}
-                <div className="relative mb-16 flex justify-center w-full max-w-2xl">
-                    {/* Top Card (Black Titanium Style) */}
+            <div className="container relative z-10 flex flex-col items-center max-w-6xl mx-auto">
+                {/* Priority / Access Card Visual Container */}
+                <div className="relative w-full">
+                    
+                    {/* 1. FLOATING PROTOCOL BADGE (Clinical Fidelity) */}
                     <motion.div
-                        initial={{ y: 20, rotate: -4, opacity: 0 }}
-                        whileInView={{ y: 0, rotate: -4, opacity: 1 }}
+                        initial={{ y: 40, rotate: -8, opacity: 0 }}
+                        whileInView={{ y: 0, rotate: -8, opacity: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1, ease: "easeOut" }}
-                        className="absolute -top-10 md:-top-12 -left-2 md:-left-12 w-40 sm:w-48 md:w-64 aspect-[1.6/1] bg-gradient-to-br from-zinc-800 to-black rounded-xl shadow-[0_25px_50px_-12px_rgba(0,0,0,0.8)] border border-white/10 p-4 md:p-8 flex flex-col justify-between z-20 backdrop-blur-3xl overflow-hidden"
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute -top-12 md:-top-32 left-0 md:-left-12 w-48 sm:w-64 md:w-80 aspect-[1.6/1] bg-white rounded-[2rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-black/[0.05] p-8 md:p-12 flex flex-col justify-between z-30 group hover:rotate-0 transition-transform duration-700"
                     >
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full -mr-16 -mt-16" />
-                        <div className="relative z-10 flex justify-between items-start">
-                            <div className="text-white/40 text-[8px] uppercase tracking-[0.4em] font-bold">Priority Selection</div>
-                            <div className="w-8 h-6 bg-white/10 rounded-md border border-white/10" />
+                         <div className="flex justify-between items-start">
+                            <div className="space-y-1">
+                                <div className="text-[#C94A2C] font-bold text-[9px] uppercase tracking-[0.4em]">Protocol 2.26</div>
+                                <div className="text-[#0D0D0D]/20 text-[7px] uppercase font-bold tracking-[0.2em]">Diagnostic Clearance</div>
+                            </div>
+                            <ShieldCheck size={24} className="text-[#C94A2C]" />
                         </div>
-                        <div className="relative z-10 space-y-2">
-                            <div className="text-white font-display text-xs md:text-sm tracking-widest uppercase">ID: PROTOCOL-26</div>
-                            <div className="text-white/20 text-[7px] md:text-[8px] font-medium leading-tight max-w-[140px]">Reserved for brands with the vision to redefine their category.</div>
+                        <div className="space-y-3">
+                             <div className="text-[#0D0D0D] font-display text-sm md:text-lg font-black tracking-widest uppercase">ID: ELITE-PRIME</div>
+                             <div className="h-0.5 w-16 bg-[#C94A2C]" />
+                             <p className="text-[#0D0D0D]/40 text-[8px] md:text-[10px] font-bold tracking-widest leading-tight uppercase flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-[#C94A2C] rounded-full animate-pulse" />
+                                High Fidelity Priority
+                             </p>
                         </div>
                     </motion.div>
 
-                    {/* Main Card */}
-                    <div className="w-full aspect-[4/3] md:aspect-video bg-zinc-900 border border-white/10 rounded-3xl md:rounded-[3rem] p-6 md:p-16 flex flex-col justify-center items-center text-center relative z-10 overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
-                        {/* Pattern Background */}
-                        <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: `radial-gradient(circle, white 1px, transparent 1px)`, backgroundSize: '24px 24px' }} />
+                    {/* 2. MAIN ENROLLMENT MODULE */}
+                    <div className="w-full bg-white border border-black/[0.05] rounded-[3.5rem] md:rounded-[5rem] px-5 py-12 md:p-32 flex flex-col justify-center items-center text-center relative z-10 overflow-hidden shadow-[0_80px_150px_-40px_rgba(0,0,0,0.08)] min-h-[500px] md:min-h-[700px]">
+                        
+                        {/* Clinical Background Detail */}
+                        <div className="absolute top-0 right-1/3 w-px h-40 bg-gradient-to-b from-black/[0.08] to-transparent" />
+                        <div className="absolute bottom-0 left-1/4 w-px h-40 bg-gradient-to-t from-black/[0.08] to-transparent" />
 
                         <motion.div
-                            initial={{ scale: 0.8, opacity: 0 }}
+                            initial={{ scale: 0.9, opacity: 0 }}
                             whileInView={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.8 }}
-                            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 border border-white/10 mb-8 flex items-center justify-center backdrop-blur-xl"
+                            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                            className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#F5F0E8] border border-black/[0.05] mb-12 flex items-center justify-center relative"
                         >
-                            <div className="w-2 h-2 bg-white rounded-full animate-pulse shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
+                            <Activity size={24} className="text-[#C94A2C]" />
+                            <div className="absolute inset-0 rounded-full border border-[#C94A2C]/20 animate-ping" />
                         </motion.div>
 
-                        <h2 className="text-3xl md:text-5xl font-display mb-10 leading-tight">
-                            Reserved for the <em className="italic text-zinc-400">future</em><br />
-                            of human industry.
-                        </h2>
+                        <div className="space-y-12 max-w-4xl relative z-20 px-4">
+                            <span className="text-[10px] uppercase tracking-[0.5em] font-black text-[#C94A2C]">Engagement Capacity</span>
+                            <h2 className="text-3xl md:text-6xl font-display leading-[0.95] text-[#0D0D0D] font-black tracking-tighter">
+                                Architecture, <br className="hidden md:block" /> Not Volume.
+                            </h2>
+                            <p className="text-[#0D0D0D]/50 text-lg md:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
+                                We admit a select number of new category-shifting projects each quarter. This ensures the KŌDĒ standard of undeniable market authority.
+                            </p>
+                        </div>
 
-                        <div className="flex flex-col md:flex-row gap-3 md:gap-6 relative z-20 w-full sm:w-auto mt-4 md:mt-0">
+                        <div className="flex flex-col md:flex-row gap-6 md:gap-10 mt-16 relative z-20 w-full sm:w-auto px-6">
                             <a
                                 href="/onboarding"
-                                className="w-full sm:w-auto bg-white text-black py-3.5 px-8 md:px-10 rounded-full font-display font-bold text-xs uppercase tracking-widest hover:scale-105 transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+                                className="group w-full sm:w-auto bg-[#0D0D0D] text-white py-6 px-12 md:px-16 rounded-full font-display text-[11px] font-bold uppercase tracking-[0.3em] hover:scale-105 transition-all shadow-2xl flex items-center justify-center gap-4 border border-transparent"
                             >
-                                Apply for Selection
+                                Initiate Brief
+                                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                             </a>
                             <a
                                 href="/about"
-                                className="w-full sm:w-auto bg-white/5 py-3.5 px-8 md:px-10 rounded-full font-display font-medium text-xs uppercase tracking-widest hover:bg-white/10 transition-colors border border-white/10 text-white backdrop-blur-md"
+                                className="w-full sm:w-auto bg-transparent py-6 px-12 md:px-16 rounded-full font-display text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-black/[0.03] transition-all border border-black/10 text-[#0D0D0D] flex items-center justify-center"
                             >
-                                View Philosophy
+                                Our Methodology
                             </a>
                         </div>
 
-                        <div className="absolute bottom-6 md:bottom-10 left-0 right-0 flex justify-center items-center gap-2 md:gap-8 opacity-20 px-2 text-center flex-wrap">
-                            <span className="text-[7px] md:text-[8px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-white">GEN v2.26</span>
-                            <div className="hidden sm:block w-1 h-1 bg-white rounded-full" />
-                            <span className="hidden sm:block text-[7px] md:text-[8px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-white">BOUTIQUE MODEL</span>
-                            <div className="w-1 h-1 bg-white rounded-full" />
-                            <span className="text-[7px] md:text-[8px] uppercase tracking-[0.3em] md:tracking-[0.5em] text-white">AGENCY ACCESS</span>
+                        {/* Status Ticker Footer */}
+                        <div className="absolute bottom-12 md:bottom-20 left-0 right-0 flex justify-center items-center gap-6 md:gap-16 opacity-30 px-8 text-center text-[7px] md:text-[9px] font-black uppercase tracking-[0.4em] text-[#0D0D0D]">
+                            <div className="flex items-center gap-3">
+                                <div className="w-1 h-1 bg-[#C94A2C] rounded-full" />
+                                <span className="whitespace-nowrap">High Touch Strategy</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <div className="w-1 h-1 bg-black rounded-full" />
+                                <span className="whitespace-nowrap font-black text-[#C94A2C]">Enrollment Open Q2</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                                <div className="w-1 h-1 bg-black rounded-full" />
+                                <span className="whitespace-nowrap">Global Access Authorized</span>
+                            </div>
                         </div>
                     </div>
                 </div>

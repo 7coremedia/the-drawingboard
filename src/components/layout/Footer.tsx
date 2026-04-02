@@ -7,20 +7,20 @@ export default function Footer() {
       <div className="container mx-auto max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           <div className="col-span-1 md:col-span-2">
-            <img
-              src="/TheDrawingBoard Logo.svg"
-              alt="The-DrawingBoard"
-              className="h-10 w-auto mb-8 opacity-90"
-            />
+            <a href="/" className="block mb-8">
+              <span style={{fontFamily:'"Satoshi-Variable",sans-serif', fontWeight:700, fontSize:'1.75rem', letterSpacing:'-0.04em', color:'#F5F0E8', textTransform:'uppercase'}}>
+                KŌDĒ
+              </span>
+            </a>
             <p className="text-white/40 max-w-sm font-medium leading-relaxed">
-              Engineering cultural shifts through premium brand identity and strategic digital luxury.
+              The Drawing Board by KŌDĒ — building brands that define the next generation of African commerce and culture.
             </p>
           </div>
 
           <div>
             <h3 className="text-white font-bold mb-6 text-sm uppercase tracking-widest">Connect</h3>
             <ul className="space-y-4">
-              <li><a href="mailto:studio@thedrawingboard.com.ng" className="text-white/60 hover:text-brand-blue transition-colors font-medium text-sm">studio@thedrawingboard.com.ng</a></li>
+              <li><a href="mailto:hello@kode.com.ng" className="text-white/60 hover:text-[#C94A2C] transition-colors font-medium text-sm">hello@kode.com.ng</a></li>
               <li><a href="#" className="text-white/60 hover:text-brand-blue transition-colors font-medium text-sm">Instagram</a></li>
               <li><a href="#" className="text-white/60 hover:text-brand-blue transition-colors font-medium text-sm">Twitter</a></li>
             </ul>

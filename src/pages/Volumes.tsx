@@ -10,12 +10,12 @@ export default function Volumes() {
   const supportingArticles = seoArticles.length > 1 ? seoArticles.slice(1) : seoArticles;
 
   return (
-    <main className="bg-[#1a1b1d] text-white">
+    <main className="bg-[#0D0D0D] text-[#F5F0E8] font-display">
       <Helmet>
-        <title>Volumes – KING</title>
+        <title>Volumes – KŌDĒ | The Drawing Board</title>
         <meta
           name="description"
-          content="Explore KING Volumes: SEO-rich branding essays, color psychology guides, AI film workflows, and masterclass-style volumes for African creators."
+          content="Explore KŌDĒ Volumes: brand intelligence essays, culture-first frameworks, and masterclass-style volumes for African founders and creators."
         />
         <link rel="canonical" href="/volumes" />
       </Helmet>
@@ -41,10 +41,7 @@ export default function Volumes() {
                   <span className="rounded-md border border-white/40 px-3 py-1 backdrop-blur-sm">Latest Volume</span>
                   <span>{featureArticle.category}</span>
                 </div>
-                <h1
-                  className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl leading-tight text-white"
-                  style={{ WebkitTextStroke: "0.7px rgba(255,255,255,0.24)" }}
-                >
+                <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl leading-tight text-[#F5F0E8] font-bold tracking-tight">
                   {featureArticle.title}
                 </h1>
                 <p className="mt-4 max-w-2xl text-base sm:text-lg text-white/80">
@@ -75,10 +72,7 @@ export default function Volumes() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.8fr)]">
           <div className="space-y-6">
             <p className="text-xs uppercase tracking-[0.45em] text-white/55">Purpose</p>
-            <h2
-              className="font-display text-3xl sm:text-4xl text-white"
-              style={{ WebkitTextStroke: "0.5px rgba(255,255,255,0.2)" }}
-            >
+            <h2 className="font-display text-3xl sm:text-4xl text-[#F5F0E8] font-semibold tracking-tight">
               Insights shaped by African future-makers
             </h2>
             <p className="text-sm sm:text-base text-white/75 leading-relaxed">
@@ -127,9 +121,7 @@ export default function Volumes() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.45em] text-white/55">Recent stories</p>
-            <h2
-              style={{ WebkitTextStroke: "0.45px rgba(255,255,255,0.2)" }}
-            >
+            <h2 className="font-display text-3xl sm:text-4xl text-[#F5F0E8] font-semibold tracking-tight">
               Latest from the studio
             </h2>
           </div>
@@ -152,7 +144,7 @@ export default function Volumes() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: index * 0.05, ease: "easeOut" }}
-                  className="group relative overflow-hidden rounded-4xl border border-white/12 bg-white/[0.05] backdrop-blur-sm shadow-[0_18px_45px_rgba(6,7,12,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.08]"
+                  className="group relative overflow-hidden rounded-2xl border border-white/5 bg-[#111111] transition-all duration-300 hover:-translate-y-1"
                 >
                   <a href={`#${article.id}`} className="flex h-full flex-col" aria-label={`Read ${article.title} by ${article.author}`}>
                     <div className="relative aspect-[4/3] overflow-hidden">
@@ -170,10 +162,7 @@ export default function Volumes() {
                         <span className="h-1 w-1 rounded-full bg-white/30" aria-hidden="true" />
                         <span>{article.readTime}</span>
                       </div>
-                      <h3
-                        className="font-display text-xl text-white sm:text-2xl"
-                        style={{ WebkitTextStroke: "0.35px rgba(255,255,255,0.25)" }}
-                      >
+                      <h3 className="font-display text-xl text-[#F5F0E8] sm:text-2xl font-bold tracking-tight">
                         {article.title}
                       </h3>
                       <p className="text-sm text-white/75 leading-relaxed line-clamp-3">{article.subtitle}</p>
@@ -195,20 +184,15 @@ export default function Volumes() {
                 <Link
                   key={volume.id}
                   to={`/volumes/${volume.id}`}
-                  className="group relative block overflow-hidden rounded-4xl border border-white/12 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-white/35 hover:bg-white/[0.08] hover:shadow-[0_28px_70px_rgba(7,8,11,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-                  aria-label={`Read ${volume.title}`}
                 >
-                  <div className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-[#f5b544] via-white to-[#6fb7ff] opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+                  <div className="absolute inset-y-0 left-0 w-1 rounded-l-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[#C94A2C]" aria-hidden="true" />
                   <div className="relative grid gap-6 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[auto_1fr_auto] lg:items-end">
                     <div className="flex flex-col justify-between text-xs uppercase tracking-[0.5em] text-white/55 lg:h-full">
                       <span>{volume.number}</span>
                       <span className="mt-6 hidden lg:block">Masterclass</span>
                     </div>
                     <div className="space-y-4">
-                      <h3
-                        className="font-display text-2xl text-white sm:text-3xl"
-                        style={{ WebkitTextStroke: "0.4px rgba(255,255,255,0.2)" }}
-                      >
+                      <h3 className="font-display text-2xl text-[#F5F0E8] sm:text-3xl font-bold tracking-tight">
                         {volume.title}
                       </h3>
                       <p className="text-sm text-white/75 leading-relaxed line-clamp-4">{volume.summary}</p>
@@ -232,7 +216,7 @@ export default function Volumes() {
       <section className="container mx-auto px-4 pb-28">
         <div className="rounded-4xl border border-white/12 bg-white/[0.05] p-8 backdrop-blur-sm lg:flex lg:items-center lg:justify-between lg:gap-12">
           <div className="space-y-4 max-w-3xl">
-            <h3 className="text-xs uppercase tracking-[0.4em] text-white/55">Why KING Volumes</h3>
+            <h3 className="text-xs uppercase tracking-[0.4em] text-white/55">Why KŌDĒ Volumes</h3>
             <ul className="space-y-3 text-sm text-white/75">
               <li className="flex items-start gap-3">
                 <span className="mt-1 h-2 w-2 flex-none rounded-full bg-white" aria-hidden="true" />

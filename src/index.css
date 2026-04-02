@@ -29,86 +29,63 @@ All colors MUST be HSL.
 */
 
 @layer base {
-  @font-face {
-    font-family: "Satoshi-Variable";
-    src: url("./assets/Fonts/satoshi_web/fonts/Satoshi-Variable.woff2") format("woff2"),
-      url("./assets/Fonts/satoshi_web/fonts/Satoshi-Variable.woff") format("woff"),
-      url("./assets/Fonts/satoshi_web/fonts/Satoshi-Variable.ttf") format("truetype");
-    font-weight: 300 900;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Satoshi-VariableItalic";
-    src: url("./assets/Fonts/satoshi_web/fonts/Satoshi-VariableItalic.woff2") format("woff2"),
-      url("./assets/Fonts/satoshi_web/fonts/Satoshi-VariableItalic.woff") format("woff"),
-      url("./assets/Fonts/satoshi_web/fonts/Satoshi-VariableItalic.ttf") format("truetype");
-    font-weight: 300 900;
-    font-style: italic;
-    font-display: swap;
-  }
+  /* Import Inter font if not already loaded globally */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    /* KŌDĒ Brand — Minimalist Bold Retro */
+    --background: 0 0% 5%;           /* #0D0D0D Deep Black */
+    --foreground: 36 30% 93%;        /* #F5F0E8 Warm Cream */
 
-    --card: 0 0% 3%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 7%;
+    --card-foreground: 36 30% 93%;
 
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 36 30% 93%;
 
-    /* Premium Accents */
-    --primary: 219 100% 50%;
-    /* #0055FF - Electric Blue */
-    --primary-foreground: 0 0% 100%;
+    /* KŌDĒ Primary — Signal Red */
+    --primary: 13 64% 47%;           /* #C94A2C Retro Signal Red */
+    --primary-foreground: 36 30% 93%;
 
     --secondary: 0 0% 10%;
-    /* Rich Dark Gray */
-    --secondary-foreground: 0 0% 100%;
+    --secondary-foreground: 36 30% 93%;
 
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 63%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 330 100% 50%;
-    /* #FF007F - Vibrant Magenta */
-    --accent-foreground: 0 0% 100%;
+    --accent: 13 64% 47%;            /* Signal Red as accent too */
+    --accent-foreground: 36 30% 93%;
 
-    --purple: 266 100% 50%;
-    /* #7000FF - Deep Violet */
-
-    --border: 0 0% 12%;
-    --input: 0 0% 12%;
-    --ring: 219 100% 50%;
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 13 64% 47%;
 
     --radius: 1rem;
 
-    --sidebar-background: 0 0% 2%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 219 100% 50%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 330 100% 50%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 15%;
-    --sidebar-ring: 219 100% 50%;
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 36 30% 93%;
+    --sidebar-primary: 13 64% 47%;
+    --sidebar-primary-foreground: 36 30% 93%;
+    --sidebar-accent: 13 64% 47%;
+    --sidebar-accent-foreground: 36 30% 93%;
+    --sidebar-border: 0 0% 14%;
+    --sidebar-ring: 13 64% 47%;
 
-    /* Premium extras */
-    --gradient-hero: linear-gradient(135deg, #0055FF 0%, #7000FF 100%);
-    --gradient-pink: linear-gradient(135deg, #FF007F 0%, #FF00FF 100%);
+    /* KŌDĒ extras */
+    --gradient-hero: linear-gradient(135deg, #C94A2C 0%, #0D0D0D 100%);
     --glass-blur: blur(20px);
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-bg: rgba(245, 240, 232, 0.03);
+    --glass-border: rgba(245, 240, 232, 0.08);
   }
 
   /* Since the theme is already "Cyber-Luxury" dark balanced, we keep consistency in dark mode or force it */
   .dark {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 5%;
+    --foreground: 36 30% 93%;
     --card: 0 0% 7%;
-    --primary: 243 100% 50%;
-    --accent: 328 95% 56%;
-    --border: 0 0% 15%;
+    --primary: 13 64% 47%;
+    --accent: 13 64% 47%;
+    --border: 0 0% 14%;
   }
 
 }
@@ -120,22 +97,23 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    background-color: #000000;
+    background-color: #F5F0E8; /* Hims style light default, flipped later for stark contrast */
+    color: #0D0D0D;
+  }
+
+  .dark body {
+    background-color: #0D0D0D;
+    color: #F5F0E8;
   }
 
   .glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--glass-border);
+    background: transparent;
+    border: 1px solid rgba(0,0,0,0.1);
     border-radius: var(--radius);
   }
-
-  .text-glow-blue {
-    text-shadow: 0 0 20px rgba(0, 85, 255, 0.5);
-  }
-
-  .text-glow-pink {
-    text-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+  
+  .dark .glass-card {
+    border-color: rgba(255,255,255,0.1);
   }
 }
 
@@ -213,12 +191,12 @@ All colors MUST be HSL.
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  /* Enhance all elements using the Satoshi family to be medium weight, and slightly wider tracking */
+  /* Inter - One font, one voice. */
   .font-display {
-    font-family: "Satoshi-Variable", sans-serif;
+    font-family: "Inter", sans-serif;
     text-transform: none;
-    font-weight: 500;
-    letter-spacing: 0.025em;
+    font-weight: 400;
+    letter-spacing: -0.05em; /* Premium -5% Kerning for sleek display feel */
   }
 
   .font-display.normal-case {
@@ -233,111 +211,42 @@ All colors MUST be HSL.
     text-transform: capitalize;
   }
 
-  /* Hero section enhancements */
-  .hero-gradient {
-    background: linear-gradient(45deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.4) 100%);
-    background-size: 400% 400%;
-    animation: gradient 8s ease infinite;
-  }
-
   .typewriter-cursor {
     border-right: 2px solid;
     animation: blink 1s infinite;
   }
 
-  @keyframes gradient {
-
-    0%,
-    100% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
   @keyframes blink {
-
     0%,
     50% {
       border-color: transparent;
     }
-
     51%,
     100% {
       border-color: currentColor;
     }
   }
 
-  /* Blue shimmer animation for premium buttons */
-  .gold-shimmer {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(135deg, #0b00ff 0%, #0055ff 50%, #0b00ff 100%);
-    background-size: 200% 200%;
-    animation: shimmer 3s ease-in-out infinite;
-  }
-
-  /* Hero italic styling */
+  /* Hero italic styling removed per user request */
   .font-display em {
-    font-style: italic;
-    text-transform: lowercase;
+    font-style: normal;
+    font-weight: 300;
   }
 
-  .gold-shimmer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-        transparent,
-        rgba(255, 255, 255, 0.4),
-        transparent);
-    transition: left 0.5s;
+  /* Hims Style Clinical Buttons */
+  .btn-cyber-blue, .btn-primary {
+    @apply bg-brand-red text-brand-cream font-semibold px-6 py-3 rounded-full transition-all duration-200;
   }
 
-  .gold-shimmer:hover::before {
-    left: 100%;
+  .btn-cyber-blue:hover, .btn-primary:hover {
+    @apply opacity-90 scale-[1.02];
   }
 
-  @keyframes shimmer {
-
-    0%,
-    100% {
-      background-position: 0% 50%;
-    }
-
-    50% {
-      background-position: 100% 50%;
-    }
-  }
-
-  /* Cyber-Luxury Button Styles */
-  .btn-cyber-blue {
-    @apply bg-brand-blue text-white font-medium px-4 py-1.5 rounded-full transition-all duration-300;
-    box-shadow: 0 0 15px rgba(11, 0, 255, 0.4);
-  }
-
-  .btn-cyber-blue:hover {
-    @apply scale-105;
-    box-shadow: 0 0 25px rgba(11, 0, 255, 0.6);
-  }
-
-  .bg-grainy-blue {
-    background: radial-gradient(circle at center, #0b00ff 0%, #000000 100%);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .bg-grainy-blue::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    opacity: 0.12;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-    pointer-events: none;
+  /* KŌDĒ wordmark — the name IS the logo */
+  .kode-wordmark {
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
   }
 }

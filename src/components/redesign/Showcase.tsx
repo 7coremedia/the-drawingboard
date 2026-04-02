@@ -6,7 +6,7 @@ export default function Showcase() {
             <div className="container px-6">
                 <div className="max-w-4xl mx-auto text-center mb-16 md:mb-24">
                     <span className="text-[10px] uppercase tracking-[0.4em] text-zinc-500 font-bold mb-4 block">Case Study Spotlight</span>
-                    <h2 className="text-3xl md:text-5xl font-display tracking-tight text-white italic">Design as a Weapon of Influence.</h2>
+                    <h2 className="text-3xl md:text-5xl font-display tracking-tight text-white">Design as a Weapon of Influence.</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 max-w-7xl mx-auto">
@@ -24,9 +24,9 @@ export default function Showcase() {
                             className="aspect-video rounded-[2rem] md:rounded-[3rem] bg-zinc-900 overflow-hidden relative group border border-white/10 shadow-2xl"
                         >
                             <img
-                                src="/redesign/loomrooms_showcase.png"
+                                src="/placeholder.svg"
                                 alt="LoomRooms Showcase"
-                                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
+                                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-[1.03]"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent pointer-events-none" />
 
@@ -42,31 +42,31 @@ export default function Showcase() {
                         {/* Text Content */}
                         <div className="space-y-10 mb-12">
                             <div className="space-y-3">
-                                <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white border-l-2 border-zinc-500 pl-4">Institutional Presence</h4>
+                                <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white border-l-2 pl-4" style={{borderColor:'#C94A2C'}}>Institutional Presence</h4>
                                 <p className="text-zinc-500 text-sm leading-relaxed pl-4">Establishing market authority through psychological design cues and high-touch visual systems.</p>
                             </div>
                             <div className="space-y-3">
-                                <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white border-l-2 border-zinc-500 pl-4">Category Monolith</h4>
+                                <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white border-l-2 pl-4" style={{borderColor:'#C94A2C'}}>Category Monolith</h4>
                                 <p className="text-zinc-500 text-sm leading-relaxed pl-4">We position your brand as the only logical choice, rendering competition secondary in the mind of the consumer.</p>
                             </div>
                             <div className="space-y-3">
-                                <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white border-l-2 border-zinc-500 pl-4">Intergenerational Legacy</h4>
+                                <h4 className="font-display font-bold text-sm uppercase tracking-widest text-white border-l-2 pl-4" style={{borderColor:'#C94A2C'}}>Intergenerational Legacy</h4>
                                 <p className="text-zinc-500 text-sm leading-relaxed pl-4">Brands architected not for the next fiscal quarter, but for the next half-century of cultural shifts.</p>
                             </div>
                         </div>
 
                         {/* Palette/Typography Card (Now Dark/Glass) */}
-                        <div className="rounded-[2rem] bg-zinc-900/40 border border-white/10 p-8 md:p-10 flex flex-col justify-between min-h-[320px] backdrop-blur-3xl shadow-2xl">
+                        <div className="rounded-[2rem] bg-[#111111] border border-[#222222] p-8 md:p-10 flex flex-col justify-between min-h-[320px]">
                             <div className="flex justify-between items-start">
                                 <div className="flex flex-col gap-1.5">
-                                    <div className="w-12 h-6 bg-[#FEA301] rounded-sm opacity-90 shadow-[0_0_15px_rgba(254,163,1,0.2)]" />
-                                    <div className="w-12 h-6 bg-zinc-800 rounded-sm" />
-                                    <div className="w-12 h-6 bg-zinc-100 rounded-sm" />
-                                    <div className="w-12 h-6 bg-brand-blue rounded-sm opacity-90 shadow-[0_0_15px_rgba(0,85,255,0.2)]" />
+                                    <div className="w-12 h-6 bg-[#FEA301] rounded-sm" />
+                                    <div className="w-12 h-6 rounded-sm" style={{backgroundColor:'#0D0D0D'}} />
+                                    <div className="w-12 h-6 rounded-sm" style={{backgroundColor:'#F5F0E8'}} />
+                                    <div className="w-12 h-6 rounded-sm" style={{backgroundColor:'#C94A2C'}} />
                                 </div>
                                 <div className="text-white text-right">
-                                    <p className="text-4xl md:text-5xl font-display font-light">Aa<sub className="text-[10px] bottom-0 opacity-40">/12</sub></p>
-                                    <p className="text-5xl md:text-6xl font-display font-black italic tracking-tighter">AA<sub className="text-[10px] bottom-0 opacity-40">/01</sub></p>
+                                    <p className="text-4xl md:text-5xl font-display font-light tracking-tight text-white/40">Aa<sub className="text-[10px] bottom-0 opacity-40">/12</sub></p>
+                                    <p className="text-5xl md:text-6xl font-display font-black tracking-tighter">AA<sub className="text-[10px] bottom-0 opacity-40">/01</sub></p>
                                 </div>
                             </div>
                             <div className="mt-8 space-y-1">

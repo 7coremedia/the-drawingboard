@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { usePublicPortfolio } from '@/hooks/usePublicPortfolio';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { AlertCircle, Layers, FolderArchive, Microscope } from 'lucide-react';
 
 const FALLBACK_PREVIEW_ITEMS = [
   {
@@ -38,7 +39,6 @@ export default function PortfolioGrid() {
   const { data: portfolioItems, isLoading, error } = usePublicPortfolio();
   const [tab, setTab] = useState<'portfolio' | 'case_studies' | 'research_docs' | 'collections'>('portfolio');
 
-  console.debug('PortfolioGrid items:', portfolioItems);
   const allItems = Array.isArray(portfolioItems)
     ? portfolioItems
       .filter((i) => i && i.title && i.category && i.cover_url && i.slug)
@@ -85,11 +85,13 @@ export default function PortfolioGrid() {
         title: 'Ad Posters',
         id: 'ad-posters',
         items: buildItems(0),
+        icon: <Layers size={18} />
       },
       {
         title: 'Video Design',
         id: 'video-design',
         items: buildItems(secondOffset),
+        icon: <FolderArchive size={18} />
       },
     ];
   }, [basePreviewItems]);
@@ -104,10 +106,10 @@ export default function PortfolioGrid() {
 
   if (isLoading) {
     return (
-      <section className="container mx-auto py-12 px-4">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading portfolio...</p>
+      <section className="container mx-auto py-32 px-6">
+        <div className="flex flex-col items-center gap-6">
+          <div className="w-12 h-12 border-2 border-[#C94A2C] border-t-transparent rounded-full animate-spin" />
+          <p className="text-[10px] uppercase tracking-[0.4em] font-bold text-black/40">Initiating Grid Protocol...</p>
         </div>
       </section>
     );
@@ -115,183 +117,190 @@ export default function PortfolioGrid() {
 
   if (error) {
     return (
-      <section className="container mx-auto py-12 px-4">
-        <div className="text-center">
-          <p className="text-red-500">Error loading portfolio items</p>
+      <section className="container mx-auto py-32 px-6 text-center">
+        <div className="max-w-md mx-auto space-y-4">
+            <AlertCircle size={32} className="mx-auto text-[#C94A2C]" />
+            <h3 className="text-xl font-display font-black tracking-tighter">Connection Interrupted</h3>
+            <p className="text-sm text-black/40">Diagnostic error while fetching exhibition assets. Please verify connection protocol.</p>
         </div>
       </section>
     );
   }
 
   return (
-    <section className="container mx-auto py-12 px-4">
+    <section className="w-full pb-32">
       <Tabs value={tab} onValueChange={(v) => setTab(v as any)} className="w-full">
-        {/* Top Bar: Tabs on left, suggestions on right */}
-        <div className="flex flex-col gap-4 mb-6">
-          <div className="flex items-center justify-center md:justify-between">
-            <TabsList
-              className="inline-flex h-auto flex-shrink-0 items-center justify-center gap-1 rounded-full bg-white/5 border border-white/10 p-1.5 sm:p-1 mx-3 sm:mx-0 backdrop-blur-md"
-            >
+        {/* EXHIBITION TAB SYSTEM */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 mb-16">
+            <TabsList className="bg-white/40 backdrop-blur-md p-1.5 md:p-1 rounded-2xl md:rounded-full border border-black/[0.05] flex md:inline-flex h-auto w-full md:w-auto">
               <TabsTrigger
                 value="portfolio"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-zinc-500 transition-all data-[state=active]:bg-brand-blue data-[state=active]:text-white data-[state=active]:shadow-[0_0_20px_rgba(0,85,255,0.4)] sm:w-32"
+                className="flex-1 md:flex-initial rounded-full px-3 md:px-8 py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] transition-all data-[state=active]:bg-[#0D0D0D] data-[state=active]:text-white"
               >
-                Portfolio
+                Archive
               </TabsTrigger>
               <TabsTrigger
                 value="case_studies"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-zinc-500 transition-all data-[state=active]:bg-brand-blue data-[state=active]:text-white data-[state=active]:shadow-[0_0_20px_rgba(0,85,255,0.4)] sm:w-36"
+                className="flex-1 md:flex-initial rounded-full px-3 md:px-8 py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] transition-all data-[state=active]:bg-[#0D0D0D] data-[state=active]:text-white"
               >
-                <span className="sm:hidden">Case Study</span>
-                <span className="hidden sm:inline">Case Study Files</span>
+                Case Files
               </TabsTrigger>
               <TabsTrigger
                 value="research_docs"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium text-zinc-500 transition-all data-[state=active]:bg-brand-blue data-[state=active]:text-white data-[state=active]:shadow-[0_0_20px_rgba(0,85,255,0.4)] sm:w-32"
+                className="flex-1 md:flex-initial rounded-full px-3 md:px-8 py-3 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.15em] md:tracking-[0.2em] transition-all data-[state=active]:bg-[#0D0D0D] data-[state=active]:text-white"
               >
-                <span className="sm:hidden">Research</span>
-                <span className="hidden sm:inline">Research Docs</span>
+                Research
               </TabsTrigger>
             </TabsList>
 
-            {/* Suggestions (right side) */}
-            <div className="hidden md:flex items-center gap-4 text-sm text-zinc-400 whitespace-nowrap">
-              <span className="font-medium text-white/90">Projects</span>
-              <span className="hover:text-white transition-colors cursor-pointer">People</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Assets</span>
-              <span className="hover:text-white transition-colors cursor-pointer">Images</span>
-              <Button
-                variant="outline"
-                className={cn(
-                  "rounded-full border border-white/10 px-4 py-2 text-zinc-400 transition-all",
-                  tab === 'collections'
-                    ? 'bg-brand-blue text-white border-brand-blue shadow-[0_0_15px_rgba(0,85,255,0.4)] hover:bg-brand-blue/90'
-                    : 'bg-white/5 hover:bg-white/10 hover:text-white'
-                )}
-                onClick={() => setTab('collections')}
-              >
-                Collections
-              </Button>
+            <div className="flex items-center justify-between md:justify-end gap-6 w-full md:w-auto border-t md:border-t-0 md:border-l border-black/[0.05] pt-6 md:pt-0 md:pl-8">
+                <div className="flex lg:flex items-center gap-6">
+                    <button className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-black/40 hover:text-[#C94A2C] transition-colors">Digital</button>
+                    <button className="text-[8px] md:text-[9px] uppercase tracking-widest font-black text-black/40 hover:text-[#C94A2C] transition-colors">Physical</button>
+                </div>
+                <Button
+                    variant="outline"
+                    className={cn(
+                    "rounded-full border-black/10 px-8 py-3 h-auto text-[10px] uppercase font-bold tracking-widest transition-all",
+                    tab === 'collections'
+                        ? 'bg-[#C94A2C] text-white border-[#C94A2C]'
+                        : 'bg-white hover:bg-black/5'
+                    )}
+                    onClick={() => setTab('collections')}
+                >
+                    Collections
+                </Button>
             </div>
-          </div>
         </div>
 
-        {/* Content below the fixed top bar with Framer Motion transitions */}
-        <div className="mt-0">
+        <div className="min-h-[400px]">
           <AnimatePresence mode="wait">
             <motion.div
               key={tab}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ type: 'spring', stiffness: 320, damping: 28, mass: 0.6 }}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             >
-              {tab === 'portfolio' && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-                  {allItems.map((item, index) => (
-                    <PortfolioItem
+              {(tab === 'portfolio' || tab === 'case_studies') && (
+                <motion.div 
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16"
+                  initial="hidden"
+                  animate="visible"
+                  variants={{
+                    visible: {
+                      transition: {
+                        staggerChildren: 0.1
+                      }
+                    }
+                  }}
+                >
+                  {(tab === 'portfolio' ? allItems : caseStudyItems).map((item, index) => (
+                    <motion.div
                       key={index}
-                      title={item.title}
-                      category={item.category}
-                      imageUrl={item.imageUrl}
-                      slug={item.slug}
-                    />
+                      variants={{
+                        hidden: { opacity: 0, y: 20 },
+                        visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+                      }}
+                    >
+                      <PortfolioItem
+                        title={item.title}
+                        category={item.category}
+                        imageUrl={item.imageUrl}
+                        slug={item.slug}
+                      />
+                    </motion.div>
                   ))}
-                </div>
-              )}
-
-              {tab === 'case_studies' && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
-                  {caseStudyItems.map((item, index) => (
-                    <PortfolioItem
-                      key={index}
-                      title={item.title}
-                      category={item.category}
-                      imageUrl={item.imageUrl}
-                      slug={item.slug}
-                    />
-                  ))}
-                </div>
+                </motion.div>
               )}
 
               {tab === 'research_docs' && (
-                <div className="rounded-3xl border border-white/10 p-12 text-center text-white/90 bg-white/5 backdrop-blur-sm">
-                  <div className="w-12 h-12 rounded-full bg-brand-blue/20 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-brand-blue text-xl font-bold">!</span>
+                <div className="rounded-[4rem] border border-black/[0.05] p-24 text-center bg-white shadow-xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-64 h-64 bg-[#C94A2C]/5 blur-[100px] pointer-events-none" />
+                  <div className="max-w-2xl mx-auto space-y-8 relative z-10">
+                    <div className="w-20 h-20 rounded-[2.5rem] bg-[#F5F0E8] border border-black/5 flex items-center justify-center mx-auto mb-10">
+                        <Microscope size={28} className="text-[#C94A2C]" />
+                    </div>
+                    <h3 className="text-4xl font-display font-black tracking-tighter leading-none">Internal Protocol <br /> Under Stage 4 Audit</h3>
+                    <p className="text-lg text-black/40 font-medium leading-relaxed">
+                        Our research archives are currently undergoing clinical vetting. We are curating deep-perspective documentation of our category-shifting processes. Access granted soon.
+                    </p>
+                    <div className="pt-8 flex justify-center items-center gap-4 text-[9px] uppercase font-bold tracking-[0.4em] text-black/20">
+                        <span>Lagos</span>
+                        <div className="w-1.5 h-1.5 rounded-full bg-black/5" />
+                        <span>London</span>
+                        <div className="w-1.5 h-1.5 rounded-full bg-black/5" />
+                        <span>Ready Q3</span>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Research Docs – Coming Soon</h3>
-                  <p className="text-sm text-zinc-500 max-w-md mx-auto">We're curating deep dives into our creative process. You’ll be able to see behind-the-scenes strategy and documentation here very soon.</p>
                 </div>
               )}
 
               {tab === 'collections' && (
-                <div className="space-y-12">
+                <div className="space-y-24">
                   {placeholderCollections.map((collection, index) => (
-                    <section key={collection.id} className="relative">
-                      <div className="flex items-baseline justify-between gap-4 mb-6">
-                        <h3 className="font-display text-2xl font-medium text-white">
-                          {collection.title}
-                        </h3>
-                        <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-zinc-500">
-                          10 previews
+                    <section key={collection.id} className="relative group">
+                      <div className="flex items-center justify-between gap-4 mb-10 pb-6 border-b border-black/[0.03]">
+                        <div className="flex items-center gap-4">
+                            <div className="text-[#C94A2C]">{collection.icon}</div>
+                            <h3 className="font-display text-4xl font-black text-[#0D0D0D] tracking-tighter">
+                            {collection.title}
+                            </h3>
+                        </div>
+                        <span className="text-[10px] uppercase font-bold tracking-[0.4em] text-black/20">
+                          Archive Vol. 00{index + 1}
                         </span>
                       </div>
+
                       <div className="relative">
                         <div
                           ref={(el) => {
                             collectionRefs.current[index] = el;
                           }}
-                          className="flex gap-5 overflow-x-auto overflow-y-visible pb-4 snap-x snap-mandatory pr-4 scrollbar-hidden"
+                          className="flex gap-8 overflow-x-auto overflow-y-visible pb-12 snap-x snap-mandatory scrollbar-hidden px-1"
                         >
                           {collection.items.map((item, itemIndex) => (
                             <div
                               key={`${collection.id}-${itemIndex}`}
-                              className="relative z-10 flex-shrink-0 w-52 sm:w-60 md:w-72 snap-center"
+                              className="relative z-10 flex-shrink-0 w-64 sm:w-80 snap-center"
                             >
-                              <div className="group relative flex h-full min-h-[320px] flex-col overflow-hidden rounded-lg shadow-lg shadow-black/20 ring-1 ring-black/5">
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#f2f2f2] via-[#e4e4e4] to-[#f7f7f7]" aria-hidden="true" />
-
-                                <div className="absolute inset-0">
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-transparent opacity-90 transition-opacity duration-500 group-hover:opacity-100" />
-                                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60 opacity-80 transition-opacity duration-500 group-hover:opacity-90" />
-                                </div>
-
-                                <div className="relative z-10 mt-auto flex flex-col gap-3 px-4 pb-5 pt-32">
-                                  <div className="space-y-1">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.35em] text-white/70">
-                                      {collection.title}
-                                    </p>
-                                    <h4 className="text-base font-semibold text-white">
-                                      {item.title}
+                              <div className="group/item relative aspect-[3/4] rounded-[2.5rem] bg-white border border-black/[0.05] p-8 shadow-sm flex flex-col justify-between transition-all hover:shadow-xl hover:-translate-y-2">
+                                <div className="space-y-4">
+                                    <div className="w-10 h-10 rounded-full bg-[#F5F0E8] border border-black/5 flex items-center justify-center">
+                                        <span className="text-[8px] font-black text-[#C94A2C]">PRT</span>
+                                    </div>
+                                    <h4 className="text-2xl font-display font-black text-[#0D0D0D] tracking-tighter leading-tight">
+                                        {item.title}
                                     </h4>
-                                  </div>
-                                  <p className="text-xs text-white/80 leading-relaxed line-clamp-4">
-                                    {item.summary}
-                                  </p>
+                                    <p className="text-sm text-black/40 leading-relaxed font-medium line-clamp-4">
+                                        {item.summary}
+                                    </p>
                                 </div>
-
-                                <div className="pointer-events-none absolute inset-0 rounded-lg ring-1 ring-white/10" />
+                                <div className="flex justify-between items-end border-t border-black/5 pt-4">
+                                    <span className="text-[7px] uppercase font-bold tracking-widest text-black/20">Asset Link Active</span>
+                                    <div className="w-2 h-2 rounded-full bg-[#C94A2C] opacity-30 shadow-[0_0_8px_rgba(201,74,44,1)]" />
+                                </div>
                               </div>
                             </div>
                           ))}
                         </div>
 
-                        <div className="mt-4 flex justify-end gap-3">
+                        <div className="flex justify-end gap-3 mt-4">
                           <Button
                             variant="outline"
-                            size="sm"
-                            className="rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-all"
+                            size="icon"
+                            className="rounded-full w-12 h-12 border-black/10 bg-white hover:bg-[#0D0D0D] hover:text-white transition-all shadow-sm"
                             onClick={() => scrollCollection(index, 'prev')}
                           >
-                            Prev
+                            ←
                           </Button>
                           <Button
                             variant="outline"
-                            size="sm"
-                            className="rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-zinc-400 hover:text-white transition-all"
+                            size="icon"
+                            className="rounded-full w-12 h-12 border-black/10 bg-white hover:bg-[#0D0D0D] hover:text-white transition-all shadow-sm"
                             onClick={() => scrollCollection(index, 'next')}
                           >
-                            Next
+                            →
                           </Button>
                         </div>
                       </div>

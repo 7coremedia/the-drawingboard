@@ -19,7 +19,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ['"Satoshi-Variable"', "system-ui", "sans-serif"],
+        display: ["Inter", "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
       },
       colors: {
@@ -56,10 +56,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        "brand-blue": "#0055FF",
-        "brand-pink": "#FF007F",
-        "brand-purple": "#7000FF",
-        "brand-gray": "#1A1A1A",
+        // KŌDĒ Brand Palette
+        "brand-red": "#C94A2C",
+        "brand-cream": "#F5F0E8",
+        "brand-stone": "#E8E4DE",
+        "brand-charcoal": "#3A3A3A",
+        "brand-deep": "#0D0D0D",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

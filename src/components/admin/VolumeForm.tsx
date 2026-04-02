@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VolumeRecord } from "@/types/volume";
+import { EditorialBlock } from "@/types/blocks";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,81 +16,48 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Loader2, Plus, Trash2 } from "lucide-react";
+import { Loader2, Archive, Activity, PenTool, Hash, UserCircle, Globe, Settings2, LayoutGrid } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import EnhancedMediaUpload from "./EnhancedMediaUpload";
+import VolumeEditorialBuilder from "./VolumeEditorialBuilder";
 
-const insightSchema = z.object({
-  value: z.string().min(1, "Content cannot be empty"),
-});
+interface MediaFile {
+  id: string;
+  url: string;
+  type: 'image' | 'video' | 'gif' | 'pdf';
+  name: string;
+}
 
 export const volumeFormSchema = z.object({
-  volumeNumber: z.string().min(1, "Volume number is required"),
-  slug: z.string().min(1, "Slug is required"),
-  title: z.string().min(1, "Title is required"),
-  writer: z.string().min(1, "Writer is required"),
-  goal: z.string().min(1, "Goal is required"),
-  summary: z.string().min(1, "Summary is required"),
-  leadParagraph: z.string().min(1, "Editorial lede is required"),
-  heroImageUrl: z
-    .string()
-    .optional()
-    .refine((value) => !value || value.trim().length === 0 || /^https?:\/\//.test(value), {
-      message: "Enter a valid URL starting with http(s)",
-    }),
-  orderIndex: z.coerce.number().int().min(0, "Order must be zero or greater"),
+  volumeNumber: z.string().min(1, "Required"),
+  slug: z.string().min(1, "Required"),
+  title: z.string().min(1, "Required"),
+  writer: z.string().min(1, "Required"),
+  goal: z.string().min(1, "Required"),
+  summary: z.string().min(1, "Required"),
+  heroImageUrl: z.string().optional(),
+  orderIndex: z.coerce.number().int().min(0),
   isPublished: z.boolean().default(false),
   isFeatured: z.boolean().default(false),
   isLatest: z.boolean().default(false),
-  insights: z.array(insightSchema).min(1, "Add at least one highlight"),
-
+  content: z.array(z.any()).min(1),
 });
 
 export type VolumeFormValues = z.infer<typeof volumeFormSchema>;
 
-export type VolumeSubmitPayload = {
-  slug: string;
-  volumeNumber: string;
-  title: string;
-  writer: string;
-  goal: string;
-  summary: string;
-  leadParagraph: string;
-  heroImageUrl?: string;
-  orderIndex: number;
-  isPublished: boolean;
-  isFeatured: boolean;
-  isLatest: boolean;
-  content: string[];
-};
-
 const slugify = (value: string) =>
-  value
-    .toLowerCase()
-    .trim()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
+  value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 
-const buildContentArray = (lead: string, insights: { value?: string }[]) => {
-  const trimmedLead = lead.trim();
-  const rest = insights
-    .map((item) => item.value?.trim() ?? "")
-    .filter((entry) => entry.length > 0);
-  return trimmedLead ? [trimmedLead, ...rest] : rest;
-};
-
-const getInsightsFromContent = (record?: VolumeRecord | null) => {
-  if (!record?.content || record.content.length === 0) {
-    return [{ value: "" }];
-  }
-  const [, ...rest] = record.content;
-  if (rest.length > 0) {
-    return rest.map((entry) => ({ value: entry }));
-  }
-  return [{ value: record.content[0] ?? "" }];
-};
-
-const getLeadParagraph = (record?: VolumeRecord | null) => {
-  if (record?.leadParagraph) return record.leadParagraph;
-  return record?.content?.[0] ?? "";
+const hydrateContent = (content?: any[]): EditorialBlock[] => {
+    if (!content || content.length === 0) return [];
+    if (typeof content[0] === 'object' && content[0].type) return content as EditorialBlock[];
+    return content.map((str, idx) => ({
+        id: `legacy-${idx}`,
+        type: idx === 0 ? 'text' : 'registry_highlight',
+        content: idx === 0 ? `<p>${str}</p>` : str,
+        style: 'default'
+    }));
 };
 
 interface VolumeFormProps {
@@ -97,8 +65,7 @@ interface VolumeFormProps {
   defaultOrderIndex?: number;
   isSubmitting?: boolean;
   submitLabel?: string;
-  submitButtonContent?: React.ReactNode;
-  onSubmit: (payload: VolumeSubmitPayload) => Promise<void>;
+  onSubmit: (payload: any) => Promise<void>;
   onCancel?: () => void;
   className?: string;
 }
@@ -107,18 +74,19 @@ export default function VolumeForm({
   initialData,
   defaultOrderIndex = 0,
   isSubmitting = false,
-  submitLabel = initialData ? "Update volume" : "Create volume",
-  submitButtonContent,
   onSubmit,
   onCancel,
   className,
 }: VolumeFormProps) {
+  const inputClasses = "bg-white border-black/[0.03] rounded-xl h-11 text-sm font-bold tracking-tight text-[#0D0D0D] placeholder:text-black/10 focus-visible:ring-[#C94A2C] focus-visible:ring-offset-0 transition-all w-full shadow-sm";
+  const labelClasses = "text-[8px] uppercase tracking-[0.45em] font-black text-black/30 mb-2 block";
+  
   const volumeId = initialData?.id;
-  const storageKey = useMemo(
-    () => (volumeId ? `volume-form-draft:${volumeId}` : "volume-form-draft:new"),
-    [volumeId]
-  );
+  const storageKey = useMemo(() => (volumeId ? `volume-form-draft:${volumeId}` : "volume-form-draft:new"), [volumeId]);
+  
   const isHydratingRef = useRef(false);
+  const [currentCover, setCurrentCover] = useState<MediaFile | null>(null);
+  const [contentBlocks, setContentBlocks] = useState<EditorialBlock[]>(hydrateContent(initialData?.content));
 
   const form = useForm<VolumeFormValues>({
     resolver: zodResolver(volumeFormSchema),
@@ -129,26 +97,24 @@ export default function VolumeForm({
       writer: initialData?.writer ?? "",
       goal: initialData?.goal ?? "",
       summary: initialData?.summary ?? "",
-      leadParagraph: getLeadParagraph(initialData),
       heroImageUrl: initialData?.heroImageUrl ?? "",
       orderIndex: initialData?.orderIndex ?? defaultOrderIndex,
       isPublished: initialData?.isPublished ?? false,
       isFeatured: initialData?.isFeatured ?? false,
       isLatest: initialData?.isLatest ?? false,
-      insights: getInsightsFromContent(initialData),
+      content: hydrateContent(initialData?.content),
     },
   });
 
   const { control, watch, setValue, handleSubmit } = form;
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "insights",
-  });
 
-  const clearDraft = useCallback(() => {
-    if (typeof window === "undefined") return;
-    window.localStorage.removeItem(storageKey);
-  }, [storageKey]);
+  useEffect(() => { setValue('content', contentBlocks, { shouldDirty: true }); }, [contentBlocks, setValue]);
+
+  useEffect(() => {
+    if (initialData?.heroImageUrl && !currentCover) {
+      setCurrentCover({ id: 'initial', url: initialData.heroImageUrl, type: 'image', name: 'Cover' });
+    }
+  }, [initialData, currentCover]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -157,367 +123,220 @@ export default function VolumeForm({
     try {
       const parsed = JSON.parse(rawDraft) as Partial<VolumeFormValues>;
       isHydratingRef.current = true;
-      form.reset({
-        ...form.getValues(),
-        ...parsed,
-        insights:
-          parsed.insights && parsed.insights.length > 0
-            ? parsed.insights
-            : [{ value: "" }],
-        orderIndex:
-          typeof parsed.orderIndex === "number"
-            ? parsed.orderIndex
-            : Number(parsed.orderIndex ?? 0),
-      });
-    } catch (error) {
-      console.warn("Invalid volume form draft, clearing stored copy", error);
-      window.localStorage.removeItem(storageKey);
-    } finally {
-      isHydratingRef.current = false;
-    }
+      form.reset({ ...form.getValues(), ...parsed });
+      if (parsed.content) setContentBlocks(parsed.content);
+      if (parsed.heroImageUrl) setCurrentCover({ id: 'draft', url: parsed.heroImageUrl, type: 'image', name: 'Draft' });
+    } catch (e) { window.localStorage.removeItem(storageKey); } finally { isHydratingRef.current = false; }
   }, [form, storageKey]);
-
-  const titleValue = watch("title");
-  const slugValue = watch("slug");
-
-  useEffect(() => {
-    if (initialData) {
-      if (typeof window !== "undefined") {
-        const existingDraft = window.localStorage.getItem(storageKey);
-        if (existingDraft) {
-          return;
-        }
-      }
-      form.reset({
-        volumeNumber: initialData.volumeNumber,
-        slug: initialData.slug,
-        title: initialData.title,
-        writer: initialData.writer,
-        goal: initialData.goal,
-        summary: initialData.summary,
-        leadParagraph: getLeadParagraph(initialData),
-        heroImageUrl: initialData.heroImageUrl ?? "",
-        orderIndex: initialData.orderIndex ?? defaultOrderIndex,
-        isPublished: initialData.isPublished ?? false,
-        isFeatured: initialData.isFeatured ?? false,
-        isLatest: initialData.isLatest ?? false,
-        insights: getInsightsFromContent(initialData),
-      });
-    }
-  }, [initialData, form, defaultOrderIndex, storageKey]);
-
-  useEffect(() => {
-    if (!initialData && titleValue && !slugValue) {
-      setValue("slug", slugify(titleValue), { shouldDirty: true });
-    }
-  }, [initialData, titleValue, slugValue, setValue]);
-
-  useEffect(() => {
-    if (!initialData) {
-      setValue("orderIndex", defaultOrderIndex);
-    }
-  }, [initialData, defaultOrderIndex, setValue]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const persistValues = () => {
+    const subscription = watch((values) => {
       if (isHydratingRef.current) return;
-      const currentValues = form.getValues();
-      const sanitized: VolumeFormValues = {
-        ...currentValues,
-        orderIndex: Number(currentValues.orderIndex ?? 0),
-        insights:
-          currentValues.insights && currentValues.insights.length > 0
-            ? currentValues.insights.map((item) => ({ value: item.value ?? "" }))
-            : [{ value: "" }],
-      };
-      try {
-        window.localStorage.setItem(storageKey, JSON.stringify(sanitized));
-      } catch (error) {
-        console.warn("Unable to persist volume form draft", error);
-      }
-    };
-
-    const subscription = watch(() => {
-      persistValues();
+      window.localStorage.setItem(storageKey, JSON.stringify(values));
     });
+    return () => subscription.unsubscribe();
+  }, [watch, storageKey]);
 
-    window.addEventListener("beforeunload", persistValues);
-
-    return () => {
-      subscription.unsubscribe();
-      window.removeEventListener("beforeunload", persistValues);
-    };
-  }, [watch, storageKey, form]);
+  const titleValue = watch("title");
+  const slugValue = watch("slug");
+  useEffect(() => {
+    if (!initialData && titleValue && !slugValue) setValue("slug", slugify(titleValue), { shouldDirty: true });
+  }, [initialData, titleValue, slugValue, setValue]);
 
   const submitHandler = async (values: VolumeFormValues) => {
-    await onSubmit({
-      slug: values.slug,
-      volumeNumber: values.volumeNumber,
-      title: values.title,
-      writer: values.writer,
-      goal: values.goal,
-      summary: values.summary,
-      leadParagraph: values.leadParagraph,
-      heroImageUrl: values.heroImageUrl?.trim() ? values.heroImageUrl.trim() : undefined,
-      orderIndex: values.orderIndex,
-      isPublished: values.isPublished,
-      isFeatured: values.isFeatured,
-      isLatest: values.isLatest,
-      content: buildContentArray(values.leadParagraph, values.insights),
-    });
-    clearDraft();
+    await onSubmit({ ...values, heroImageUrl: currentCover?.url || undefined, content: values.content as EditorialBlock[] });
   };
-
-  const handleCancel = useCallback(() => {
-    clearDraft();
-    onCancel?.();
-  }, [clearDraft, onCancel]);
 
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(submitHandler)} className={`space-y-8 ${className || ''}`}>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <FormField
-            control={control}
-            name="volumeNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Volume Number</FormLabel>
-                <FormControl>
-                  <Input placeholder="Volume I" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="slug"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Slug</FormLabel>
-                <FormControl>
-                  <Input placeholder="volume-i" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="title"
-            render={({ field }) => (
-              <FormItem className="sm:col-span-2">
-                <FormLabel>Title</FormLabel>
-                <FormControl>
-                  <Input placeholder="Brand Systems for Bold African Futures" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="writer"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Writer</FormLabel>
-                <FormControl>
-                  <Input placeholder="Chima Obidi, Strategy Lead" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="goal"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Goal</FormLabel>
-                <FormControl>
-                  <Input placeholder="Position KING as the go-to culture-led branding studio." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="summary"
-            render={({ field }) => (
-              <FormItem className="sm:col-span-2">
-                <FormLabel>Summary</FormLabel>
-                <FormControl>
-                  <Textarea rows={3} placeholder="A friendly guide to building a full identity system..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="leadParagraph"
-            render={({ field }) => (
-              <FormItem className="sm:col-span-2">
-                <FormLabel>Editorial Lede</FormLabel>
-                <FormControl>
-                  <Textarea rows={3} placeholder="Strong brands start with a promise..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="heroImageUrl"
-            render={({ field }) => (
-              <FormItem className="sm:col-span-2">
-                <FormLabel>Hero Image URL (optional)</FormLabel>
-                <FormControl>
-                  <Input placeholder="https://..." {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name="orderIndex"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Display order</FormLabel>
-                <FormControl>
-                  <Input type="number" min={0} {...field} />
-                </FormControl>
-                <div className="text-xs text-muted-foreground">
-                  Lower numbers appear first in the public list.
+      <form onSubmit={handleSubmit(submitHandler)} className={`space-y-16 pb-32 max-w-[1500px] mx-auto ${className || ''}`}>
+        
+        {/* Cinematic Deployment Bar */}
+        <div className="flex items-center justify-between border-b border-black/5 pb-10">
+            <div className="flex items-center gap-6">
+                <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-black/5 shadow-sm">
+                    <Archive size={16} className="text-[#C94A2C]" />
                 </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <div className="grid gap-3 sm:grid-cols-3">
-            <FormField
-              control={control}
-              name="isPublished"
-              render={({ field }) => (
-                <FormItem className="flex items-center justify-between rounded-lg border p-3">
-                  <div>
-                    <FormLabel>Publish on site</FormLabel>
-                    <div className="text-xs text-muted-foreground">
-                      Toggle on to make this volume visible to everyone.
-                    </div>
-                  </div>
-                  <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={control}
-              name="isFeatured"
-              render={({ field }) => (
-                <FormItem className="flex items-center justify-between rounded-lg border p-3">
-                  <div>
-                    <FormLabel>Feature this volume</FormLabel>
-                    <div className="text-xs text-muted-foreground">
-                      Promote this volume in featured slots around the site.
-                    </div>
-                  </div>
-                  <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={control}
-              name="isLatest"
-              render={({ field }) => (
-                <FormItem className="flex items-center justify-between rounded-lg border p-3">
-                  <div>
-                    <FormLabel>Mark as latest release</FormLabel>
-                    <div className="text-xs text-muted-foreground">
-                      Display this volume as the newest edition in feeds.
-                    </div>
-                  </div>
-                  <FormControl>
-                    <Switch checked={field.value} onCheckedChange={field.onChange} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
+                <div className="space-y-1">
+                    <h2 className="text-sm font-black uppercase tracking-[0.6em] text-black/20">Archival Registry</h2>
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-black/60">Sequence 00{watch('volumeNumber') || 'XX'}</p>
+                </div>
+            </div>
+            
+            <div className="flex items-center gap-4">
+                <Button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    className="bg-[#0D0D0D] hover:bg-[#C94A2C] text-white px-10 h-14 rounded-full text-[10px] font-black uppercase tracking-widest transition-all shadow-xl"
+                >
+                    {isSubmitting ? <Loader2 size={16} className="animate-spin" /> : "Publish Record"}
+                </Button>
+                {onCancel && (
+                    <Button type="button" variant="ghost" onClick={onCancel} className="text-[9px] font-black uppercase tracking-widest text-black/30 hover:text-black">
+                        Dismiss
+                    </Button>
+                )}
+            </div>
         </div>
 
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <FormLabel className="text-sm font-medium">Highlights</FormLabel>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              onClick={() => append({ value: "" })}
-            >
-              <Plus className="mr-2 h-4 w-4" />
-              Add highlight
-            </Button>
-          </div>
-          <div className="space-y-3 max-h-72 overflow-y-auto pr-1">
-            {fields.map((fieldItem, index) => (
-              <FormField
-                key={fieldItem.id}
-                control={control}
-                name={`insights.${index}.value`}
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs text-muted-foreground">
-                      Highlight {index + 1}
-                    </FormLabel>
-                    <div className="flex items-start gap-2">
-                      <FormControl>
-                        <Textarea rows={2} {...field} />
-                      </FormControl>
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 mt-1"
-                        onClick={() => remove(index)}
-                        disabled={fields.length === 1}
-                        aria-label={`Remove note ${index + 1}`}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
+        {/* Master Identity Protocol Area */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            {/* LHS: Primary Identity (Wide) */}
+            <div className="lg:col-span-8 space-y-12">
+                
+                {/* Huge Display Title */}
+                <FormField
+                    control={control}
+                    name="title"
+                    render={({ field }) => (
+                        <FormItem className="space-y-4">
+                            <FormLabel className={labelClasses}>Edition Title Protocol</FormLabel>
+                            <FormControl>
+                                <Input 
+                                    className="border-none bg-transparent h-auto p-0 text-5xl md:text-6xl font-display font-black tracking-tighter uppercase focus-visible:ring-0 placeholder:text-black/[0.03]" 
+                                    placeholder="Enter Title" 
+                                    {...field} 
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 border-t border-black/5">
+                    <FormField
+                        control={control}
+                        name="summary"
+                        render={({ field }) => (
+                            <FormItem className="md:col-span-2">
+                                <FormLabel className={labelClasses}>Executive Summary</FormLabel>
+                                <FormControl>
+                                    <Textarea 
+                                        className="bg-black/[0.015] border-black/[0.03] rounded-3xl min-h-[140px] p-8 text-base font-medium leading-relaxed shadow-inner focus-visible:ring-[#C94A2C] resize-none" 
+                                        placeholder="Tactical overview of this session..." 
+                                        {...field} 
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+
+                    <div className="space-y-6">
+                        <FormField
+                            control={control}
+                            name="writer"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className={labelClasses}><UserCircle size={10} className="inline mr-2" /> Author</FormLabel>
+                                    <FormControl><Input className={cn(inputClasses, "bg-black/[0.01]")} {...field} /></FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={control}
+                            name="volumeNumber"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className={labelClasses}><Hash size={10} className="inline mr-2" /> Rank</FormLabel>
+                                    <FormControl><Input className={cn(inputClasses, "bg-black/[0.01]")} {...field} /></FormControl>
+                                </FormItem>
+                            )}
+                        />
                     </div>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            ))}
-          </div>
+
+                    <div className="space-y-6">
+                        <FormField
+                            control={control}
+                            name="slug"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className={labelClasses}><Globe size={10} className="inline mr-2" /> Web Slug</FormLabel>
+                                    <FormControl><Input className={cn(inputClasses, "font-mono text-[10px] bg-black/[0.01]")} {...field} /></FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={control}
+                            name="goal"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel className={labelClasses}><Activity size={10} className="inline mr-2" /> Objective</FormLabel>
+                                    <FormControl><Input className={cn(inputClasses, "bg-black/[0.01]")} {...field} /></FormControl>
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                </div>
+
+                {/* Sub-Header Settings */}
+                <div className="flex flex-wrap items-center gap-6 pt-10 border-t border-black/5">
+                    <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-2xl border border-black/[0.03] shadow-sm">
+                        <span className="text-[10px] font-black uppercase text-black/40 mr-2 tracking-widest">Visibility</span>
+                        <FormField control={control} name="isPublished" render={({ field }) => (
+                            <div className="flex items-center gap-2">
+                                <span className="text-[8px] font-black uppercase text-black/60">Live</span>
+                                <Switch checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-[#C94A2C] scale-90" />
+                            </div>
+                        )} />
+                        <div className="w-px h-4 bg-black/5 mx-2" />
+                        <FormField control={control} name="isFeatured" render={({ field }) => (
+                            <div className="flex items-center gap-2">
+                                <span className="text-[8px] font-black uppercase text-black/60">Featured</span>
+                                <Switch checked={field.value} onCheckedChange={field.onChange} className="data-[state=checked]:bg-[#C94A2C] scale-90" />
+                            </div>
+                        )} />
+                    </div>
+                    
+                    <FormField control={control} name="orderIndex" render={({ field }) => (
+                        <div className="flex items-center gap-3 ml-auto">
+                            <span className="text-[9px] font-black uppercase tracking-widest text-black/30">Registry_Order</span>
+                            <Input className="w-14 h-10 bg-white border-black/[0.03] text-center text-[10px] font-black rounded-lg shadow-sm" type="number" {...field} />
+                        </div>
+                    )} />
+                </div>
+            </div>
+
+            {/* RHS: Compact Visual Registry (Narrow) */}
+            <div className="lg:col-span-4 space-y-6">
+                <div className="space-y-4">
+                    <div className="flex items-center gap-3 px-2">
+                        <LayoutGrid size={14} className="text-[#C94A2C]" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.6em] text-black/40">Clinical Source</span>
+                    </div>
+                    <div className="rounded-[2.5rem] bg-white border border-black/5 p-4 shadow-sm min-h-[300px] flex items-center justify-center overflow-hidden">
+                        <div className="w-full scale-90 origin-center">
+                            <EnhancedMediaUpload 
+                                coverImage={currentCover || undefined}
+                                onCoverChange={(file) => {
+                                    setCurrentCover(file);
+                                    setValue("heroImageUrl", file?.url || "", { shouldDirty: true });
+                                }}
+                                onMediaFilesChange={() => {}}
+                                maxFiles={1}
+                                acceptedTypes={['image/*']}
+                            />
+                        </div>
+                    </div>
+                    <p className="text-[8px] font-black uppercase tracking-[0.5em] text-black/20 text-center px-8">
+                       Recommended aspect ratio mapping: 4:5 or 1:1 Clinical Standards.
+                    </p>
+                </div>
+            </div>
         </div>
-        <div className="flex items-center justify-end gap-3">
-          {onCancel && (
-            <Button type="button" variant="outline" onClick={handleCancel} disabled={isSubmitting}>
-              Cancel
-            </Button>
-          )}
-          <Button
-            type="submit"
-            className="w-full sm:w-auto"
-            disabled={isSubmitting}
-          >
-            {submitButtonContent || (
-              <>
-                {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {submitLabel}
-              </>
-            )}
-          </Button>
+
+        {/* Editorial Action Area */}
+        <div className="space-y-10 pt-16 border-t border-black/5">
+            <div className="flex items-center gap-6 px-4">
+                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg border border-black/5">
+                    <PenTool size={20} className="text-[#C94A2C]" />
+                </div>
+                <div className="space-y-0.5">
+                    <h3 className="text-xl font-display font-black tracking-tighter uppercase text-[#0D0D0D]">Editorial Workspace</h3>
+                    <p className="text-[9px] font-black uppercase tracking-[0.5em] text-black/30">Construct modular sequence</p>
+                </div>
+            </div>
+            <VolumeEditorialBuilder blocks={contentBlocks} onChange={setContentBlocks} />
         </div>
       </form>
     </Form>

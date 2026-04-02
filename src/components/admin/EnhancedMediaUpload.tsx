@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Upload, Plus } from "lucide-react";
+import { Upload, Plus, FileUp, Activity, Image as ImageIcon, Video, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";
 import MediaPreview from "./MediaPreview";
 import DraggableMediaList from "./DraggableMediaList";
+import { cn } from "@/lib/utils";
 
 interface MediaFile {
   id: string;
@@ -30,7 +31,7 @@ export default function EnhancedMediaUpload({
   mediaFiles = [],
   onCoverChange,
   onMediaFilesChange,
-  maxFiles = 10,
+  maxFiles = 20,
   acceptedTypes = ['image/*', 'video/*', '.pdf']
 }: EnhancedMediaUploadProps) {
   const [uploadingCover, setUploadingCover] = useState(false);
@@ -148,24 +149,35 @@ export default function EnhancedMediaUpload({
   return (
     <div className="space-y-6">
       {/* Cover Image Upload */}
-      <Card className="p-6">
-        <h3 className="text-lg font-semibold mb-4">Cover Image</h3>
+      <Card className="bg-white border-black/[0.05] p-6 md:p-8 rounded-[2.5rem] shadow-sm space-y-6">
+        <div className="space-y-1.5">
+            <h3 className="text-base font-display font-black tracking-tighter uppercase flex items-center gap-2 text-[#0D0D0D]">
+                <ImageIcon size={16} className="text-[#C94A2C]" />
+                Primary Exhibit Mapping
+            </h3>
+            <p className="text-[8px] uppercase tracking-[0.4em] font-black text-black/40 font-bold">Operational_Registry_Core</p>
+        </div>
         
         {coverImage ? (
-          <div className="space-y-4">
+          <div className="space-y-6 animate-in fade-in duration-500">
             <MediaPreview
               file={coverImage}
               size="cover"
               onRemove={removeCover}
-              className="max-w-md mx-auto"
+              className="max-w-sm mx-auto rounded-[2rem] border-black/5 overflow-hidden shadow-lg"
             />
-            <div className="text-center">
+            <div className="flex justify-center">
               <Button
-                variant="outline"
                 onClick={() => document.getElementById('cover-input')?.click()}
                 disabled={uploadingCover}
+                className="bg-black text-white hover:bg-[#C94A2C] rounded-full px-6 h-10 text-[8px] font-black uppercase tracking-widest transition-all shadow-md"
               >
-                {uploadingCover ? 'Uploading...' : 'Change Cover'}
+                {uploadingCover ? (
+                    <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                        <span>Injecting...</span>
+                    </div>
+                ) : 'Purge & Replace'}
               </Button>
               <input
                 id="cover-input"
@@ -182,79 +194,91 @@ export default function EnhancedMediaUpload({
         ) : (
           <div
             {...getCoverRootProps()}
-            className={`
-              border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors
-              ${isCoverDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'}
-              ${uploadingCover ? 'opacity-50 cursor-not-allowed' : ''}
-            `}
+            className={cn(
+                "group relative border-2 border-dashed rounded-[2rem] p-12 text-center cursor-pointer transition-all duration-500",
+                isCoverDragActive ? "border-[#C94A2C] bg-[#C94A2C]/5" : "border-black/5 bg-[#F5F0E8]/40 hover:bg-[#F5F0E8]",
+                uploadingCover ? "opacity-50 pointer-events-none" : ""
+            )}
           >
             <input {...getCoverInputProps()} />
-            <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-            <p className="text-lg font-medium text-gray-900 mb-2">
-              {uploadingCover ? 'Uploading...' : 'Upload Cover Image'}
-            </p>
-            <p className="text-sm text-gray-500">
-              {isCoverDragActive ? 'Drop the image here' : 'Drag & drop or click to browse'}
-            </p>
-            <p className="text-xs text-gray-400 mt-2">
-              Recommended: 1920x1080px (16:9 aspect ratio)
-            </p>
+            <div className="relative z-10 space-y-4">
+                <div className="w-12 h-12 bg-white rounded-[1.25rem] border border-black/5 flex items-center justify-center mx-auto shadow-sm group-hover:bg-[#0D0D0D] transition-all group-hover:scale-105 duration-500">
+                    <FileUp size={20} className="text-[#C94A2C] group-hover:text-white transition-colors" />
+                </div>
+                <div className="space-y-1">
+                    <p className="text-[9px] font-black uppercase tracking-[0.3em] text-[#0D0D0D] group-hover:text-[#C94A2C] transition-colors">
+                      {uploadingCover ? 'Ingesting Data...' : 'Initialize Cover Protocol'}
+                    </p>
+                    <p className="text-[7px] font-bold text-black/60 uppercase tracking-widest leading-relaxed">
+                      {isCoverDragActive ? 'Release bitstream to begin mapping' : 'Drop clinical source or click to browse'}
+                    </p>
+                </div>
+                <div className="pt-3 flex items-center justify-center gap-6 border-t border-black/5 max-w-[150px] mx-auto opacity-40 group-hover:opacity-80 transition-opacity">
+                    <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[7px] font-black text-[#0D0D0D]">16:9</span>
+                        <span className="text-[5px] font-bold tracking-widest text-[#0D0D0D]/60 uppercase">Ratio</span>
+                    </div>
+                    <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[7px] font-black text-[#0D0D0D]">4K</span>
+                        <span className="text-[5px] font-bold tracking-widest text-[#0D0D0D]/60 uppercase">Mapping</span>
+                    </div>
+                </div>
+            </div>
           </div>
         )}
       </Card>
 
       {/* Media Files Upload */}
-      <Card className="p-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-semibold">Media Files</h3>
-          <span className="text-sm text-gray-500">
-            {mediaFiles.length} / {maxFiles} files
-          </span>
+      <Card className="bg-white border-black/[0.05] p-6 md:p-8 rounded-[2.5rem] shadow-sm space-y-6">
+        <div className="flex items-center justify-between border-b border-black/5 pb-4">
+            <div className="space-y-1.5">
+                <h3 className="text-base font-display font-black tracking-tighter uppercase flex items-center gap-2 text-[#0D0D0D]">
+                    <Activity size={16} className="text-[#C94A2C]" />
+                    Media Ingestion
+                </h3>
+                <p className="text-[8px] uppercase tracking-[0.4em] font-black text-black/40 font-bold">Supplemental_Registry</p>
+            </div>
+            <div className="flex flex-col items-end">
+                <span className="text-[9px] font-black text-black tracking-[0.2em]">{mediaFiles.length} / {maxFiles}</span>
+                <span className="text-[6px] font-bold text-black/40 uppercase tracking-widest">Protocol Limiter</span>
+            </div>
         </div>
 
         {/* Upload Area */}
         {mediaFiles.length < maxFiles && (
           <div
             {...getMediaRootProps()}
-            className={`
-              border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors mb-6
-              ${isMediaDragActive ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'}
-              ${uploadingMedia ? 'opacity-50 cursor-not-allowed' : ''}
-            `}
+            className={cn(
+                "group border-2 border-dashed rounded-[2rem] p-8 text-center cursor-pointer transition-all duration-500",
+                isMediaDragActive ? "border-[#C94A2C] bg-[#C94A2C]/5" : "border-black/5 bg-[#F5F0E8]/40 hover:bg-[#F5F0E8]",
+                uploadingMedia ? "opacity-50 pointer-events-none" : ""
+            )}
           >
             <input {...getMediaInputProps()} />
-            <Plus className="mx-auto h-8 w-8 text-gray-400 mb-2" />
-            <p className="font-medium text-gray-900 mb-1">
-              {uploadingMedia ? 'Uploading...' : 'Add Media Files'}
-            </p>
-            <p className="text-sm text-gray-500">
-              {isMediaDragActive ? 'Drop files here' : 'Images, videos, GIFs, or PDFs'}
-            </p>
-          </div>
-        )}
-
-        {/* Media Grid Preview */}
-        {mediaFiles.length > 0 && (
-          <div className="mb-6">
-            <h4 className="text-sm font-medium text-gray-700 mb-3">Preview</h4>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-              {mediaFiles.map((file) => (
-                <MediaPreview
-                  key={file.id}
-                  file={file}
-                  size="medium"
-                  showRemove={false}
-                />
-              ))}
+            <div className="space-y-4">
+                <div className="w-10 h-10 bg-white rounded-xl border border-black/5 flex items-center justify-center mx-auto shadow-sm group-hover:bg-[#C94A2C] transition-all">
+                    <Plus size={18} className="text-[#0D0D0D]/40 group-hover:text-white transition-colors" />
+                </div>
+                <div className="space-y-1">
+                    <p className="text-[9px] font-black uppercase tracking-[0.2em] text-[#0D0D0D] group-hover:text-[#C94A2C] transition-colors">
+                      {uploadingMedia ? 'Processing Pipeline...' : 'Inject Supplemental Assets'}
+                    </p>
+                    <p className="text-[7px] font-bold text-black/60 uppercase tracking-[0.15em]">
+                      {isMediaDragActive ? 'Awaiting bitstream release' : 'Images, Industrial Videos, clinical PDFs'}
+                    </p>
+                </div>
             </div>
           </div>
         )}
 
         {/* Draggable File List */}
-        <div>
-          <h4 className="text-sm font-medium text-gray-700 mb-3">
-            Uploaded Files {mediaFiles.length > 0 && '(drag to reorder)'}
-          </h4>
+        <div className="space-y-4 pt-2">
+          <div className="flex items-center gap-3">
+              <span className="text-[7px] font-black uppercase tracking-[0.4em] text-black/40 whitespace-nowrap">Registry Timeline</span>
+              <div className="h-px w-full bg-black/5" />
+              {mediaFiles.length > 0 && <span className="text-[6px] font-bold text-[#0D0D0D]/40 tracking-[0.2em]">DRAG_TO_SEQUENCE</span>}
+          </div>
+          
           <DraggableMediaList
             files={mediaFiles}
             onReorder={reorderMediaFiles}

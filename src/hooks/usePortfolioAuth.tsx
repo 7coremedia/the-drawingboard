@@ -23,6 +23,14 @@ export function PortfolioAuthProvider({ children }: { children: React.ReactNode 
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Development bypass to easily access Management Dashboard locally
+    if (import.meta.env.MODE === 'development') {
+      setUser({ email: 'admin@drawingboard.local', id: 'dev-admin-id' } as User);
+      setRole({ is_admin: true, is_moderator: true, is_worker: true });
+      setIsLoading(false);
+      return;
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
@@ -66,7 +74,7 @@ export function PortfolioAuthProvider({ children }: { children: React.ReactNode 
           .select("*")
           .eq("email", user.email)
           .single();
-        
+
         if (!emailError) {
           data = emailData;
           error = null;
@@ -86,7 +94,7 @@ export function PortfolioAuthProvider({ children }: { children: React.ReactNode 
   }
 
   return (
-    <PortfolioAuthContext.Provider 
+    <PortfolioAuthContext.Provider
       value={{ user, role, isLoading }}
     >
       {children}

@@ -1,164 +1,161 @@
-import Header from "@/components/layout/Header";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import RedesignFooter from "@/components/redesign/RedesignFooter";
 import Cta from "@/components/sections/Cta";
+import Testimonials from "@/components/redesign/Testimonials";
+import { ArrowUpRight, ShieldCheck, UserCheck } from "lucide-react";
 
 const About = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
+  
   return (
-    <div className="bg-black min-h-screen text-white overflow-hidden selection:bg-[#0b00ff] selection:text-white pb-20">
-      <Header />
-
+    <div className="bg-[#F5F0E8] min-h-screen text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
       <main ref={containerRef} className="relative">
 
-        {/* 1. CINEMATIC HERO SECTION */}
-        <section className="relative h-[90vh] md:h-screen w-full flex items-center justify-center overflow-hidden">
-          {/* Background Layer */}
-          <motion.div
-            style={{ y: heroY, opacity: heroOpacity }}
-            className="absolute inset-0 z-0"
-          >
-            {/* Dark gradient overlay for depth */}
-            <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/60 via-black/40 to-black" />
-
-            {/* Subtle glow orb in the background */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] bg-[#0b00ff]/20 rounded-full blur-[120px] pointer-events-none" />
-
-            {/* Optional: We can drop an actual video here later, using an abstract dark placeholder for now */}
-            <div className="w-full h-full bg-[#0a0a0a]" />
-          </motion.div>
-
-          {/* Hero Content */}
-          <div className="relative z-20 container mx-auto px-4 md:px-6 flex flex-col items-center text-center mt-20">
+        {/* 1. CLINICAL HERO SECTION */}
+        <section className="relative px-6 container mx-auto">
+          <div className="max-w-5xl mb-24 md:mb-40">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-8"
             >
-              <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter max-w-5xl leading-[1.1] text-white mix-blend-difference">
-                A Boutique <br />
-                <em className="font-serif italic font-light text-white/90">Branding Studio.</em>
+              <div className="flex items-center gap-4">
+                <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">KŌDĒ Genesis</span>
+                <div className="h-px w-12 bg-black/5" />
+              </div>
+              <h1 className="font-display text-5xl md:text-8xl font-black tracking-tighter leading-[0.95]">
+                Great Brands <br /> Engineered for <br /> <span className="text-[#C94A2C]">Authority.</span>
               </h1>
+              <p className="max-w-2xl text-lg md:text-2xl font-medium text-[#0D0D0D]/50 leading-relaxed">
+                We started KŌDĒ because the most influential brands shouldn’t only belong to the largest budgets. We built a system to change that.
+              </p>
             </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.6 }}
-              className="mt-6 md:mt-8 text-white/60 text-lg md:text-xl max-w-2xl font-light"
-            >
-              We don't build websites for everyone. We forge high-retention,
-              strategic brand identities for the boldest visionaries.
-            </motion.p>
           </div>
         </section>
 
-        {/* 2. THE PHILOSOPHY / APPROACH */}
-        <section className="relative py-24 md:py-32 z-20">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-4xl mx-auto space-y-16">
-
-              <div className="text-center space-y-4">
-                <h2 className="text-sm md:text-base font-bold tracking-widest uppercase text-[#0b00ff]">Our Philosophy</h2>
-                <p className="font-display text-3xl md:text-5xl font-semibold leading-tight">
-                  High-Touch Strategy, <br className="hidden md:block" />
-                  Not High-Volume Assembly.
-                </p>
-              </div>
-
-              {/* Glassmorphism Exclusivity Card */}
+        {/* 2. ARCHITECTURAL STORY SECTION */}
+        <section className="relative pb-32 md:pb-56 z-20 px-2 md:px-6 overflow-hidden">
+             {/* Decorative Background element */}
+             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-[1200px] h-[1200px] border border-black/[0.03] rounded-full pointer-events-none -z-10 -translate-x-1/2" />
+             
+          <div className="container mx-auto">
+            <div className="max-w-6xl mx-auto">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8 }}
-                className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12"
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-white rounded-[3.5rem] px-5 py-12 md:p-24 shadow-[0_60px_100px_-20px_rgba(0,0,0,0.06)] border border-black/[0.03] relative"
               >
-                <div className="grid md:grid-cols-2 gap-12">
-                  <div className="space-y-6">
-                    <h3 className="text-2xl font-bold">The Boutique Model</h3>
-                    <p className="text-white/70 leading-relaxed font-light">
-                      We believe in deep trust and long-term partnerships.
-                      By strictly limiting our roster to 3-5 high-quality brands per month,
-                      we guarantee that every project receives the undivided attention of our Creative Director.
-                    </p>
-                    <p className="text-white/70 leading-relaxed font-light">
-                      This isn't just about beautiful design; it's about positioning your business
-                      for actual ROI, reputation building, and market leverage.
-                    </p>
-                  </div>
+                {/* Protocol Tag */}
+                <div className="absolute top-12 right-12 hidden md:block">
+                    <div className="w-16 h-16 rounded-full border border-black/5 flex items-center justify-center p-2 text-center">
+                        <span className="text-[7px] uppercase font-bold tracking-tight leading-tight text-[#0D0D0D]/40">
+                             Strategic <br /> Standard
+                        </span>
+                    </div>
+                </div>
 
-                  <div className="flex flex-col justify-center space-y-6 md:pl-8 md:border-l border-white/10">
-                    <div className="space-y-2">
-                      <h4 className="text-4xl font-display font-bold text-[#0b00ff]">95%</h4>
-                      <p className="text-white/60 text-sm tracking-wider uppercase">Client Retention Rate</p>
-                    </div>
-                    <div className="space-y-2">
-                      <h4 className="text-4xl font-display font-bold">3-5</h4>
-                      <p className="text-white/60 text-sm tracking-wider uppercase">Brands Onboarded Monthly</p>
-                    </div>
-                  </div>
+                <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
+                     <div className="lg:col-span-12 space-y-12">
+                        <div className="space-y-8">
+                             <h2 className="text-3xl md:text-5xl font-display font-black tracking-tighter leading-tight">Born in Pressure. <br /> Designed for Scale.</h2>
+                             <div className="h-1 w-20 bg-[#C94A2C]" />
+                        </div>
+                        
+                        <div className="grid md:grid-cols-2 gap-12 text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-[1.6]">
+                             <div className="space-y-8">
+                                <p>
+                                    KŌDĒ was born in Lagos — one of the world’s most competitive, culturally rich business environments. We’ve built brands for startups and personal brands winning international rooms across fashion, fintech, music, and corporate.
+                                </p>
+                                <p>
+                                    The brands that travel — across industries, borders, and rooms — are built on one thing: clarity. Clarity about who you are and what you stand for that nobody else can claim.
+                                </p>
+                             </div>
+                             <div className="space-y-8">
+                                <p>
+                                    That’s what we build. Not just logos. Not just color palettes. Systems. We are the architects of the brands that will define the next decade of commerce, culture, and taste.
+                                </p>
+                                <div className="pt-8 flex flex-col gap-6">
+                                     <p className="text-2xl md:text-3xl font-display font-black text-[#0D0D0D] tracking-tight leading-tight">If you’re building something serious — we should talk.</p>
+                                     <a href="/onboarding" className="group w-fit flex items-center gap-4 bg-[#0D0D0D] text-white px-10 py-5 rounded-full font-display font-bold text-[10px] tracking-[0.3em] uppercase transition-all hover:scale-105 active:scale-95 shadow-xl">
+                                         Start Application
+                                         <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                     </a>
+                                </div>
+                             </div>
+                        </div>
+                     </div>
                 </div>
               </motion.div>
-
             </div>
           </div>
         </section>
 
-        {/* 3. THE TEAM / CREATIVE DIRECTION */}
-        <section className="relative py-24 bg-[#050505] z-20">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+        {/* 3. LEADERSHIP BIOMETRICS SECTION */}
+        <section className="relative pb-32 md:pb-64 z-20 px-6">
+          <div className="container mx-auto">
+            <div className="max-w-6xl mx-auto grid lg:grid-cols-12 gap-20 items-center">
 
-              {/* Portrait */}
+              {/* Portrait Visual Wrapper */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-                className="w-full aspect-[3/4] bg-zinc-900 rounded-2xl border border-white/5 overflow-hidden relative group"
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="lg:col-span-5 relative"
               >
-                <img
-                  src="/kingedmund.jpg"
-                  alt="King Edmund - Creative Director"
-                  className="absolute inset-0 w-full h-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                />
-                <div className="absolute inset-x-0 bottom-0 p-8 pt-32 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent">
-                  <p className="text-xs tracking-widest uppercase text-[#0b00ff] font-bold mb-1">Creative Director</p>
-                  <h3 className="text-2xl font-bold">King Edmund</h3>
+                <div className="aspect-[3/4] rounded-[3.5rem] bg-white border border-black/[0.03] overflow-hidden shadow-2xl relative">
+                  <img
+                    src="/placeholder.svg"
+                    alt="Creative Direction Leadership"
+                    className="w-full h-full object-contain p-12 transition-all duration-1000 grayscale hover:grayscale-0"
+                  />
+                  
+                  {/* Digital Signature / Badge */}
+                  <div className="absolute inset-x-8 bottom-8 p-6 bg-[#F5F0E8]/90 backdrop-blur-xl rounded-[2.5rem] border border-black/5 shadow-md">
+                    <div className="flex justify-between items-center">
+                        <div>
+                            <div className="flex items-center gap-2 mb-1">
+                                <UserCheck size={12} className="text-[#C94A2C]" />
+                                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#C94A2C]">Operational Lead</span>
+                            </div>
+                            <p className="text-[#0D0D0D] font-display text-xl font-black tracking-tight">King Edmund</p>
+                            <p className="text-[9px] uppercase font-bold text-[#0D0D0D]/30 tracking-widest mt-1">Founding Creative Director</p>
+                        </div>
+                    </div>
+                  </div>
                 </div>
+                
+                 {/* Decorative element */}
+                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full border border-[#C94A2C]/10 rounded-[4rem] -z-10 scale-105 -rotate-3" />
               </motion.div>
 
-              <div className="space-y-8">
-                <h2 className="font-display text-4xl md:text-5xl font-bold leading-tight">
-                  Design lead with a <br /> Mind for Strategy.
-                </h2>
-                <div className="space-y-4 text-white/70 font-light leading-relaxed">
+              {/* Leadership Copy */}
+              <div className="lg:col-span-7 space-y-12">
+                <div className="space-y-6">
+                     <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Our Methodology</span>
+                     <h2 className="font-display text-4xl md:text-6xl font-black leading-[0.95] tracking-tighter">
+                        Direct Access. <br /> Lean Strategy. <br /> High Fidelity.
+                     </h2>
+                </div>
+                
+                <div className="space-y-8 text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-relaxed max-w-xl">
                   <p>
-                    With years of experience navigating the digital landscape,
-                    my approach strips away the bloated agency model. When you work with T-DB Studio,
-                    you have direct access to the creative decision-maker.
+                    When you work with KŌDĒ, you have direct access to the creative decision-maker. No account managers playing telephone. No juniors learning on your dime.
                   </p>
                   <p>
-                    We operate lean: a dedicated Creative Director, an in-house expert, and strategic administration.
-                    No account managers playing telephone. No juniors learning on your dime.
+                    We operate lean: a dedicated Creative Director, an in-house expert, and strategic administration. We strip away the bloated agency model to focus purely on the architecture of your brand.
                   </p>
                 </div>
 
-                <div className="pt-4">
-                  <Button variant="premium" className="rounded-full px-8 py-6 text-sm bg-white text-black hover:bg-neutral-200 border-0">
-                    Join the Waitlist
-                  </Button>
+                <div className="pt-6">
+                   <a href="#contact" className="w-fit flex items-center gap-4 bg-[#F5F0E8] text-[#0D0D0D] px-10 py-5 rounded-full font-display font-medium text-[10px] tracking-[0.3em] uppercase transition-all hover:bg-white active:scale-95 border border-black/5 shadow-sm">
+                        Join the Partnership
+                   </a>
                 </div>
               </div>
 
@@ -168,12 +165,13 @@ const About = () => {
 
       </main>
 
-      {/* Footer CTA block */}
-      <div className="relative z-20 bg-black pt-20">
+      {/* Footer / Exit Block */}
+      <div className="relative z-20">
+        <Testimonials />
         <Cta background="transparent" />
         <RedesignFooter />
       </div>
-    </div>
+    </div >
   );
 };
 

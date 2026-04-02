@@ -61,7 +61,8 @@ export default function PortfolioMediaDisplay({
             alt={media.name}
             className={`w-full block ${isClickable ? 'cursor-pointer hover:opacity-95 transition-opacity' : ''}`}
             onClick={isClickable ? () => openLightbox(index) : undefined}
-            loading="lazy"
+            loading={index < 2 ? "eager" : "lazy"}
+            decoding={index < 2 ? "sync" : "async"}
           />
         );
 

@@ -45,83 +45,75 @@ export default function Header() {
         !isAtTop && "bg-black/0" // Transparent, relying on global CinematicNavbarBlur
       )}
     >
-      <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6 gap-2 relative">
-        {/* Left: Hamburger (Mobile) */}
-        <button
-          className="md:hidden text-white/80 hover:text-white p-1 rounded-full bg-white/5 border border-white/10 transition-colors backdrop-blur-md absolute left-4 z-50"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
-        >
-          {menuOpen ? <X size={18} /> : <Menu size={18} />}
-        </button>
-
-        {/* Center: Logo (Centered on mobile, Left on desktop) */}
-        <NavLink to="/" className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 flex items-center gap-2 group flex-shrink-0" onClick={() => setMenuOpen(false)}>
-          <img
-            src="/TheDrawingBoard Logo.svg"
-            alt="The-DrawingBoard"
-            className="h-5 sm:h-6 md:h-8 w-auto hover:opacity-80 transition-opacity"
-          />
+      <div className="w-full flex items-start justify-between px-6 md:px-10 py-6 relative">
+        {/* Top Left: Logo (Text) */}
+        <NavLink to="/" className="flex items-center gap-2 flex-shrink-0 pt-2" onClick={() => setMenuOpen(false)}>
+          <span className="kode-wordmark text-lg sm:text-xl tracking-tight select-none" style={{color:'#F5F0E8', fontWeight:800, letterSpacing:'-0.05em', fontFamily:'"Inter",sans-serif', textTransform:'uppercase'}}>
+            K<span style={{fontVariant:'normal'}}>Ō</span>D<span style={{fontVariant:'normal'}}>Ē</span>
+          </span>
         </NavLink>
 
-        {/* Right: Pill Navigation (Desktop) */}
-        <nav className="hidden md:flex items-center bg-[#2A2A2A]/80 backdrop-blur-xl rounded-full p-1 border border-white/5 flex-shrink-0">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              cn(
-                "px-6 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap",
-                isActive ? "bg-brand-blue text-white shadow-[0_0_15px_rgba(11,0,255,0.4)]" : "text-white/60 hover:text-white"
-              )
-            }
+        {/* Top Right: Navigation */}
+        <div className="flex items-center gap-4 pt-2">
+          {/* Pill Navigation (Desktop) */}
+          <nav className="hidden md:flex items-center bg-[#0D0D0D] rounded-full p-1.5 flex-shrink-0 border border-white/10 shadow-2xl">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                cn(
+                  "px-5 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 whitespace-nowrap",
+                  isActive ? "bg-[#C94A2C] text-[#F5F0E8]" : "text-white/60 hover:text-white"
+                )
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                cn(
+                  "px-5 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 whitespace-nowrap",
+                  isActive ? "bg-[#C94A2C] text-[#F5F0E8]" : "text-white/60 hover:text-white"
+                )
+              }
+            >
+              Studio
+            </NavLink>
+            <NavLink
+              to="/portfolio"
+              className={({ isActive }) =>
+                cn(
+                  "px-5 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 whitespace-nowrap",
+                  isActive ? "bg-[#C94A2C] text-[#F5F0E8]" : "text-white/60 hover:text-white"
+                )
+              }
+            >
+              Work
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                cn(
+                  "px-5 py-1.5 rounded-full text-[13px] font-medium transition-all duration-300 whitespace-nowrap",
+                  isActive ? "bg-[#C94A2C] text-[#F5F0E8]" : "text-white/60 hover:text-white"
+                )
+              }
+            >
+              Contact
+            </NavLink>
+          </nav>
+
+          {/* Hamburger (Mobile) */}
+          <button
+            className="md:hidden text-white/80 hover:text-white p-2 rounded-full bg-white/5 border border-white/10 transition-colors backdrop-blur-md z-50"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
           >
-            Home
-          </NavLink>
-          <NavLink
-            to="/portfolio"
-            className={({ isActive }) =>
-              cn(
-                "px-6 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap",
-                isActive ? "bg-brand-blue text-white shadow-[0_0_15px_rgba(11,0,255,0.4)]" : "text-white/60 hover:text-white"
-              )
-            }
-          >
-            Work
-          </NavLink>
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              cn(
-                "px-6 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap",
-                isActive ? "bg-brand-blue text-white shadow-[0_0_15px_rgba(11,0,255,0.4)]" : "text-white/60 hover:text-white"
-              )
-            }
-          >
-            Studio
-          </NavLink>
-          <NavLink
-            to="/volumes"
-            className={({ isActive }) =>
-              cn(
-                "px-6 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap",
-                isActive ? "bg-brand-blue text-white shadow-[0_0_15px_rgba(11,0,255,0.4)]" : "text-white/60 hover:text-white"
-              )
-            }
-          >
-            Volumes
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              cn(
-                "px-6 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap",
-                isActive ? "bg-brand-blue text-white shadow-[0_0_15px_rgba(11,0,255,0.4)]" : "text-white/60 hover:text-white"
-              )
-            }
-          >
-            Contact
-          </NavLink>
-        </nav>
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
+
 
         {/* Mobile Stacked Popup Menu */}
         <AnimatePresence>
@@ -131,7 +123,7 @@ export default function Header() {
               animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -20, scale: 0.9, filter: "blur(10px)" }}
               transition={{ type: "spring", stiffness: 350, damping: 25, mass: 0.8 }}
-              className="absolute top-16 left-4 bg-[#232323]/60 backdrop-blur-3xl border border-white/10 rounded-[2rem] p-2 flex flex-col w-48 shadow-2xl md:hidden z-50 overflow-hidden"
+              className="absolute top-16 left-4 bg-[#0D0D0D] border border-white/10 rounded-3xl p-3 flex flex-col w-56 shadow-2xl md:hidden z-50 overflow-hidden"
             >
               <NavLink
                 to="/"
@@ -139,7 +131,7 @@ export default function Header() {
                 className={({ isActive }) =>
                   cn(
                     "px-4 py-3.5 text-center text-lg font-medium transition-all duration-300 w-full rounded-[1.5rem]",
-                    isActive ? "bg-[#0b00ff] text-white" : "text-white/70 hover:text-white hover:bg-white/5"
+                    isActive ? "bg-[#C94A2C] text-[#F5F0E8]" : "text-white/70 hover:text-white hover:bg-white/5"
                   )
                 }
               >
@@ -151,7 +143,7 @@ export default function Header() {
                 className={({ isActive }) =>
                   cn(
                     "px-4 py-3.5 text-center text-lg font-medium transition-all duration-300 w-full rounded-[1.5rem]",
-                    isActive ? "bg-[#0b00ff] text-white" : "text-white/70 hover:text-white hover:bg-white/5"
+                    isActive ? "bg-[#C94A2C] text-[#F5F0E8]" : "text-white/70 hover:text-white hover:bg-white/5"
                   )
                 }
               >
@@ -163,7 +155,7 @@ export default function Header() {
                 className={({ isActive }) =>
                   cn(
                     "px-4 py-3.5 text-center text-lg font-medium transition-all duration-300 w-full rounded-[1.5rem]",
-                    isActive ? "bg-[#0b00ff] text-white" : "text-white/70 hover:text-white hover:bg-white/5"
+                    isActive ? "bg-[#C94A2C] text-[#F5F0E8]" : "text-white/70 hover:text-white hover:bg-white/5"
                   )
                 }
               >

@@ -10,6 +10,8 @@ import { toast } from "@/hooks/use-toast";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { ArrowUpRight, PhoneCall, Mail, MapPin } from "lucide-react";
+import RedesignFooter from "@/components/redesign/RedesignFooter";
 
 const Schema = z.object({ name: z.string().min(2), email: z.string().email(), message: z.string().min(10) });
 
@@ -18,10 +20,9 @@ type Values = z.infer<typeof Schema>;
 export default function Contact() {
   const [searchParams] = useSearchParams();
   const form = useForm<Values>({ resolver: zodResolver(Schema) });
-  const whatsappNumber = "2348160891799"; // Your WhatsApp number without + sign
+  const whatsappNumber = "2348160891799"; 
   const callNumber = "+2349137145159";
 
-  // Auto-fill form with portfolio information from URL params
   useEffect(() => {
     const portfolioTitle = searchParams.get('portfolio');
     const portfolioUrl = searchParams.get('url');
@@ -50,21 +51,11 @@ export default function Contact() {
   }, [searchParams, form]);
 
   const sendToWhatsApp = (values: Values) => {
-    const message = `Hi! I'm ${values.name}.
-
-Email: ${values.email}
-Message: ${values.message}`;
-
+    const message = `Protocol Request: Strategic Brand Inquiry.\n\nName: ${values.name}\nEmail: ${values.email}\nMessage: ${values.message}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
     window.open(whatsappUrl, '_blank');
-
-    toast({
-      title: "Redirecting to WhatsApp",
-      description: "Opening WhatsApp with your message."
-    });
-
+    toast({ title: "Opening WhatsApp", description: "Protocol sequence initiated." });
     form.reset();
   };
 
@@ -73,57 +64,63 @@ Message: ${values.message}`;
   };
 
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-brand-blue selection:text-white pb-32">
+    <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
       <Helmet>
-        <title>Contact – KING</title>
-        <meta name="description" content="Contact KING for branding and creative projects." />
+        <title>Initiate Protocol – KŌDĒ | The Drawing Board</title>
+        <meta name="description" content="Contact KŌDĒ for strategic brand architecture. Lagos — London. Working globally." />
         <link rel="canonical" href="/contact" />
       </Helmet>
 
-      <main className="container mx-auto py-12 px-4 md:px-0 relative">
-        {/* Background glow orb */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60vw] h-[60vw] bg-brand-blue/10 rounded-full blur-[120px] pointer-events-none -z-10" />
-
-        {/* CTA-style header borrowed from gravity block */}
-        <div className="max-w-4xl mx-auto mb-10 text-center md:text-left">
-          <motion.h1
+      <main className="container mx-auto px-6 relative">
+        {/* Header Section */}
+        <div className="max-w-4xl mb-24 md:mb-40 text-left">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-4xl md:text-6xl font-bold text-white mb-4 tracking-tighter"
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-8"
           >
-            READY TO BUILD A <br className="hidden md:block" />
-            BRAND WITH <span className="text-brand-blue">GRAVITY?</span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-white/60 text-lg md:text-xl font-light"
-          >
-            Let's turn your vision into a decisive identity.
-          </motion.p>
+            <div className="flex items-center gap-4">
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Access Protocol</span>
+              <div className="h-px w-12 bg-black/5" />
+            </div>
+            <h1 className="font-display text-5xl md:text-8xl font-black tracking-tighter leading-[0.95]">
+              Let’s Build <br /> Something <br /> <span className="text-[#C94A2C]">Indisputable.</span>
+            </h1>
+            <p className="text-[#0D0D0D]/60 text-lg md:text-2xl font-medium max-w-2xl leading-relaxed">
+              We’re currently accepting new strategic engagements. The first step is a clinical discovery briefing — focused, decisive, and results-oriented.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 pt-4">
+                <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-4 bg-[#0D0D0D] text-white px-10 py-5 rounded-full font-display font-bold text-[10px] tracking-[0.3em] uppercase transition-all hover:scale-105 active:scale-95 shadow-xl">
+                    Schedule Briefing
+                    <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+                <a href="/brand-audit" className="group flex items-center justify-center gap-4 bg-white text-[#0D0D0D] border border-black/5 px-10 py-5 rounded-full font-display font-bold text-[10px] tracking-[0.3em] uppercase transition-all hover:bg-black/5">
+                    Strategic Audit
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#C94A2C] shadow-[0_0_8px_rgba(201,74,44,0.5)]" />
+                </a>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Elevated rounded container */}
+        {/* Clinical Intake Module */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="mt-2 max-w-4xl mx-auto rounded-[2.5rem] border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-xl p-8 md:p-12 shadow-2xl overflow-hidden relative group"
+          transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-6xl mx-auto rounded-[3.5rem] bg-white p-8 md:p-24 shadow-[0_60px_120px_-30px_rgba(0,0,0,0.06)] border border-black/[0.03] mb-40"
         >
-          {/* Subtle accent border at the top */}
-          <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-brand-blue/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <FormField name="name" control={form.control} render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-white/40 uppercase tracking-widest text-xs font-bold">Name</FormLabel>
+                  <FormItem className="space-y-4">
+                    <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Full Name / Entity</FormLabel>
                     <FormControl>
                       <Input
-                        className="rounded-xl bg-white/5 border-white/10 text-white h-12 focus:border-brand-blue/50 transition-all placeholder:text-white/20"
-                        placeholder="Your name"
+                        className="rounded-2xl bg-[#F5F0E8]/50 border-black/[0.05] text-[#0D0D0D] h-16 focus:ring-1 focus:ring-[#C94A2C] transition-all placeholder:text-black/10 px-6 text-lg font-medium"
+                        placeholder="Clinical Identity"
                         {...field}
                       />
                     </FormControl>
@@ -131,13 +128,13 @@ Message: ${values.message}`;
                   </FormItem>
                 )} />
                 <FormField name="email" control={form.control} render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-white/40 uppercase tracking-widest text-xs font-bold">Email</FormLabel>
+                  <FormItem className="space-y-4">
+                    <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Electronic Mail</FormLabel>
                     <FormControl>
                       <Input
-                        className="rounded-xl bg-white/5 border-white/10 text-white h-12 focus:border-brand-blue/50 transition-all placeholder:text-white/20"
+                        className="rounded-2xl bg-[#F5F0E8]/50 border-black/[0.05] text-[#0D0D0D] h-16 focus:ring-1 focus:ring-[#C94A2C] transition-all placeholder:text-black/10 px-6 text-lg font-medium"
                         type="email"
-                        placeholder="you@brand.com"
+                        placeholder="protocol@brand.com"
                         {...field}
                       />
                     </FormControl>
@@ -147,60 +144,85 @@ Message: ${values.message}`;
               </div>
 
               <FormField name="message" control={form.control} render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-white/40 uppercase tracking-widest text-xs font-bold">Message</FormLabel>
+                <FormItem className="space-y-4">
+                  <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Project Architecture Objectives</FormLabel>
                   <FormControl>
-                    <Textarea
-                      rows={5}
-                      className="rounded-2xl bg-white/5 border-white/10 text-white focus:border-brand-blue/50 transition-all placeholder:text-white/20 resize-none"
-                      placeholder="How can I help?"
-                      {...field}
-                    />
+                    <div className="relative group">
+                        <Textarea
+                        rows={6}
+                        className="rounded-[2rem] bg-[#F5F0E8]/50 border-black/[0.05] text-[#0D0D0D] focus:ring-1 focus:ring-[#C94A2C] transition-all placeholder:text-black/10 px-6 py-6 text-lg font-medium resize-none"
+                        placeholder="Define the scope of the engagement..."
+                        {...field}
+                        />
+                        <div className="absolute top-6 right-6 text-black/5 group-focus-within:text-[#C94A2C]/20 transition-colors">
+                            <Mail size={24} />
+                        </div>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )} />
 
-              {/* Action buttons inspired by CTA block */}
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-6 pt-4">
-                <div className="flex flex-wrap gap-4 w-full sm:w-auto justify-center sm:justify-start">
-                  <Button
-                    variant="premium"
-                    type="submit"
-                    className="rounded-full px-8 py-6 h-auto bg-brand-blue hover:bg-brand-blue/90 text-white border-0 shadow-[0_0_20px_rgba(11,0,255,0.3)]"
-                  >
-                    Send via WhatsApp
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    className="rounded-full px-8 py-6 h-auto border-white/10 hover:bg-white/5 text-white"
-                    onClick={() => {
-                      const values = form.getValues();
-                      const subject = encodeURIComponent("Brand enquiry – KING");
-                      const body = encodeURIComponent(
-                        `Hi KING,\n\n${values.message || ''}\n\n— ${values.name || ''} (${values.email || ''})`
-                      );
-                      window.location.href = `mailto:kingedmundbrand@gmail.com?subject=${subject}&body=${body}`;
-                    }}
-                  >
-                    Email us
-                  </Button>
+              <div className="flex flex-col lg:flex-row justify-between items-center gap-12 pt-8">
+                <div className="flex flex-wrap gap-4 w-full lg:w-auto">
+                    <Button
+                        type="submit"
+                        className="rounded-full px-10 py-7 h-auto bg-[#0D0D0D] text-white font-display font-bold text-[10px] tracking-[0.3em] uppercase hover:scale-105 active:scale-95 transition-all shadow-xl"
+                    >
+                        Initiate WhatsApp
+                    </Button>
+                    <Button
+                        type="button"
+                        onClick={() => {
+                        const values = form.getValues();
+                        const subject = encodeURIComponent("Strategic Briefing Request – KŌDĒ");
+                        const body = encodeURIComponent(
+                            `Protocol Inquiry:\n\n${values.message || ''}\n\nOrigin: ${values.name || ''} (${values.email || ''})`
+                        );
+                        window.location.href = `mailto:hello@kode.com.ng?subject=${subject}&body=${body}`;
+                        }}
+                        className="rounded-full px-10 py-7 h-auto bg-white text-[#0D0D0D] border border-black/10 font-display font-bold text-[10px] tracking-[0.3em] uppercase hover:bg-black/5 transition-all"
+                    >
+                        Official Email
+                    </Button>
                 </div>
 
-                <Button
-                  type="button"
-                  variant="ghost"
-                  className="text-white/60 hover:text-white hover:bg-transparent group transition-colors"
-                  onClick={() => window.open(`tel:${callNumber}`, '_self')}
-                >
-                  <span className="border-b border-white/20 group-hover:border-white transition-colors">Call now</span>
-                </Button>
+                <div className="flex items-center gap-8 w-full lg:w-auto lg:ml-auto">
+                    <button 
+                        type="button"
+                        onClick={() => window.open(`tel:${callNumber}`, '_self')}
+                        className="flex items-center gap-3 group text-[#0D0D0D]/30 hover:text-[#0D0D0D] transition-colors"
+                    >
+                        <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center transition-all group-hover:bg-[#C94A2C] group-hover:text-white shadow-sm">
+                            <PhoneCall size={16} />
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Authorized Call</span>
+                    </button>
+                    
+                    <div className="hidden md:flex items-center gap-3 text-[#0D0D0D]/20">
+                        <MapPin size={16} />
+                        <span className="text-[9px] font-bold uppercase tracking-[0.2em] whitespace-nowrap">LOS / LDN</span>
+                    </div>
+                </div>
+              </div>
+
+              {/* Minimalist Contact Card Footer */}
+              <div className="mt-16 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p className="text-[#0D0D0D]/30 text-[9px] font-bold uppercase tracking-[0.4em] text-center md:text-left">
+                  Global Operability — available in all major time zones.
+                </p>
+                <div className="flex gap-4">
+                    <div className="w-1.5 h-1.5 rounded-full bg-black/10" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-black/10" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-black/10" />
+                </div>
               </div>
             </form>
           </Form>
         </motion.div>
       </main>
+      
+      <RedesignFooter />
     </div>
   );
 }

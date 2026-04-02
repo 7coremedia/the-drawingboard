@@ -1,48 +1,74 @@
-import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 export default function RedesignFooter() {
     return (
-        <footer className="bg-black pt-20 md:pt-32 pb-10">
-            <div className="container px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 mb-20 md:mb-32 items-end">
-                    {/* Vertical Pillars */}
-                    <div className="flex flex-col gap-0">
-                        <span className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.85] text-white">TECH</span>
-                        <span className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.85] text-white">FASHION</span>
-                        <span className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.85] text-white/40">MUSIC</span>
-                        <span className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.85] text-white">CULTURE</span>
-                    </div>
+        <footer className="bg-white pt-24 md:pt-48 pb-20 border-t border-black/[0.05]">
+            <div className="container px-6 max-w-7xl mx-auto">
+                
+                {/* 1. BRAND STATEMENT */}
+                <div className="mb-24 md:mb-40 max-w-4xl">
+                    <p className="font-display text-4xl md:text-6xl font-black text-[#0D0D0D] tracking-tighter leading-[0.95]">
+                        Building brands that travel — across industries, across borders, across every stage of growth. <span className="text-[#C94A2C]">That is the KŌDĒ standard.</span>
+                    </p>
+                </div>
 
-                    {/* Abstract Block & Links */}
-                    <div className="flex flex-col gap-10">
-                        <div className="aspect-square w-full max-w-sm rounded-3xl bg-[#3C0A0A] border border-white/5 opacity-80" />
-
-                        <div className="grid grid-cols-2 gap-10">
-                            <div className="flex flex-col gap-4">
-                                <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Contact</span>
-                                <a href="mailto:hello@tdb.studio" className="text-sm text-white/60 hover:text-white transition-colors">hello@tdb.studio</a>
-                                <a href="#" className="text-sm text-white/60 hover:text-white transition-colors">Instagram</a>
-                            </div>
-                            <div className="flex flex-col gap-4 text-right">
-                                <span className="text-[10px] uppercase tracking-widest text-zinc-600 font-bold">Location</span>
-                                <p className="text-sm text-white/60">Lagos, Nigeria</p>
-                                <p className="text-sm text-white/60">London, UK</p>
-                            </div>
+                {/* 2. INFORMATION GRID */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20 mb-32 border-t border-black/[0.03] pt-16">
+                    
+                    {/* Contact Column */}
+                    <div className="space-y-8">
+                        <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Contact</span>
+                        <div className="flex flex-col gap-4">
+                            <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-medium text-[#0D0D0D] hover:text-[#C94A2C] transition-all">Book a Call</a>
+                            <a href="mailto:hello@kode.com.ng" className="text-lg md:text-xl font-medium text-[#0D0D0D] hover:text-[#C94A2C] transition-all">hello@kode.com.ng</a>
+                            <a href="https://instagram.com/kode.designed" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-medium text-[#0D0D0D] hover:text-[#C94A2C] transition-all">@kode.designed</a>
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-lg md:text-xl font-medium text-[#0D0D0D] hover:text-[#C94A2C] transition-all">LinkedIn</a>
                         </div>
                     </div>
+
+                    {/* Quick Links Column */}
+                    <div className="space-y-8">
+                        <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Quick Links</span>
+                        <div className="flex flex-col gap-4">
+                            <Link to="/services" className="text-lg md:text-xl font-medium text-[#0D0D0D] hover:text-[#C94A2C] transition-all">Services</Link>
+                            <Link to="/portfolio" className="text-lg md:text-xl font-medium text-[#0D0D0D] hover:text-[#C94A2C] transition-all">Work / Case Studies</Link>
+                            <Link to="/about" className="text-lg md:text-xl font-medium text-[#0D0D0D] hover:text-[#C94A2C] transition-all">About</Link>
+                            <Link to="/brand-audit" className="text-lg md:text-xl font-medium text-[#0D0D0D] hover:text-[#C94A2C] transition-all">Brand Audit</Link>
+                        </div>
+                    </div>
+
+                    {/* Location Column */}
+                    <div className="space-y-8">
+                        <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Location</span>
+                        <div className="space-y-6">
+                            <div className="space-y-1">
+                                <p className="text-lg md:text-xl font-black text-[#0D0D0D]">Lagos, Nigeria</p>
+                                <p className="text-lg md:text-xl font-black text-[#0D0D0D]">London, UK</p>
+                            </div>
+                            <p className="text-xs uppercase tracking-widest font-black text-[#C94A2C]">Working with clients globally</p>
+                        </div>
+                    </div>
+
                 </div>
 
-                {/* Massive Logo */}
-                <div className="pt-12 md:pt-20 border-t border-white/5 flex justify-center">
-                    <img
-                        src="/TheDrawingBoard Logo.svg"
-                        alt="The-DrawingBoard"
-                        className="w-full h-auto max-w-[85vw] md:max-w-7xl opacity-90 select-none pointer-events-none"
-                    />
-                </div>
-
-                <div className="mt-8 flex justify-center md:justify-between items-center text-[7px] md:text-[8px] uppercase tracking-[0.4em] text-zinc-700">
-                    <span>All Rights Reserved 2026</span>
+                {/* 3. BASE ANCHOR */}
+                <div className="pt-20 border-t border-black/5">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-12">
+                        <span
+                            className="select-none pointer-events-none block text-left leading-none font-display font-black tracking-tighter text-[#C94A2C] text-[clamp(4rem,15vw,12rem)]"
+                        >
+                            KŌDĒ
+                        </span>
+                        
+                        <div className="flex flex-col items-start md:items-end gap-4 text-[9px] uppercase tracking-[0.4em] font-bold text-black/20 pb-4">
+                            <div className="flex gap-4">
+                                <span>© 2026 KŌDĒ. All Rights Reserved.</span>
+                                <span className="hidden md:inline">•</span>
+                                <span>Lagos — London</span>
+                            </div>
+                            <span className="text-[#C94A2C]/40">Diagnostic Branding Protocol</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </footer>

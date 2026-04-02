@@ -19,6 +19,7 @@
   background: linear-gradient(45deg, rgba(255, 255, 255, 0.5), rgba(255, 215, 0, 0.5));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
   z-index: -1;
 }
@@ -41,7 +42,7 @@
 }
 
 .glowing-container input::placeholder {
-  font-style: italic;
+  font-weight: 400;
 }
 
 /* Dynamic button animations */

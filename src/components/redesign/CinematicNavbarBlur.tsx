@@ -1,4 +1,6 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 
 /**
  * CinematicNavbarBlur
@@ -6,6 +8,18 @@ import React from 'react';
  * This creates a high-end, smooth distortion effect for elements scrolling under the navigation.
  */
 export default function CinematicNavbarBlur() {
+    const location = useLocation();
+    const isHome = location.pathname === "/";
+    const [isAtTop, setIsAtTop] = React.useState(true);
+
+    React.useEffect(() => {
+        const onScroll = () => {
+            setIsAtTop(window.scrollY < 20);
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        return () => window.removeEventListener("scroll", onScroll);
+    }, []);
+
     // 7 layers of progressive stacking for a mathematically smooth 'liquid' distortion.
     // By stacking layers that all start at 0% but fade at different depths, 
     // we eliminate visible "bands" and create a truly cinematic lens effect.
@@ -21,11 +35,13 @@ export default function CinematicNavbarBlur() {
 
     return (
         <div
-            className="fixed top-0 left-0 right-0 h-32 pointer-events-none z-[45]"
+            className={cn(
+                "fixed left-0 right-0 h-32 pointer-events-none z-[45]",
+                isHome && isAtTop ? "top-14 md:top-16" : "top-0"
+            )}
             aria-hidden="true"
         >
-            {/* Physical Glass Highlight - Adds that premium white 'gleam' from your screenshot */}
-            <div className="absolute inset-x-0 top-0 h-full bg-gradient-to-b from-white/[0.05] via-transparent to-transparent opacity-100" />
+            {/* Pure Progressive Blur - No hard lines or highlights */}
 
             {/* Stacking Blur Engine */}
             <div className="absolute inset-0">

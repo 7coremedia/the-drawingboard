@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { PortfolioMediaItem } from "./usePortfolioMedia";
 
 export interface PublicPartner {
   id: string;
@@ -31,9 +32,11 @@ export interface PublicPortfolioItem {
   the_solution?: string;
   notes?: any;
   is_notes_downloadable?: boolean;
+  content_blocks?: any;
   created_at: string;
   updated_at: string;
   partners?: PublicPartner[];
+  media?: PortfolioMediaItem[];
 }
 
 export function usePublicPortfolio() {
@@ -64,9 +67,9 @@ export function usePublicPortfolio() {
         partners: portfolio.portfolio_partners?.map((partner: any) => ({
           id: partner.id,
           name: partner.name,
-          socialName: partner.social_name,
-          socialLink: partner.social_link,
-          imageUrl: partner.image_url,
+          social_name: partner.social_name,
+          social_link: partner.social_link,
+          image_url: partner.image_url,
         })) || [],
       }));
 
@@ -93,6 +96,9 @@ export function usePublicPortfolioItem(slug: string) {
             social_name,
             social_link,
             image_url
+          ),
+          portfolio_media (
+            *
           )
         `)
         .eq("slug", slug)
@@ -113,10 +119,11 @@ export function usePublicPortfolioItem(slug: string) {
         partners: portfolio.portfolio_partners?.map((partner: any) => ({
           id: partner.id,
           name: partner.name,
-          socialName: partner.social_name,
-          socialLink: partner.social_link,
-          imageUrl: partner.image_url,
+          social_name: partner.social_name,
+          social_link: partner.social_link,
+          image_url: partner.image_url,
         })) || [],
+        media: (portfolio.portfolio_media || []).sort((a: any, b: any) => a.display_order - b.display_order),
       };
 
       return transformedData as PublicPortfolioItem;

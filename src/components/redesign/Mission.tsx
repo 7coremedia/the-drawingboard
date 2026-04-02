@@ -3,43 +3,43 @@ import { MoveRight } from "lucide-react";
 
 const missionCards = [
     {
-        title: "Strategy & Research",
-        description: "Deep-dives into market psychology and category gaps.",
-        icon: "⚛️",
-        bg: "bg-brand-pink/90",
+        title: "Precision",
+        description: "Every word, every pixel, every client interaction held to one standard: is this the best it can be?",
+        icon: "⚡",
+        bg: "bg-[#C94A2C]",
         delay: 0.1,
     },
     {
-        title: "Visual Grade",
-        description: "Superior design execution that commands attention.",
-        icon: "👑",
-        bg: "bg-[#0A0A0A] border border-white/10",
+        title: "Cultural Intelligence",
+        description: "We are rooted in our context. African creative culture is not a reference — it is the foundation.",
+        icon: "🌍",
+        bg: "bg-[#1A1A1A] border border-white/10",
         delay: 0.15,
     },
     {
-        title: "Brand Invisibility",
-        description: "Psychological triggers that make competition disappear.",
-        icon: "💎",
-        bg: "bg-brand-purple/90",
+        title: "Long-Term Thinking",
+        description: "We build brands that compound. Not just work that wins awards this year, but positioning that pays dividends for a decade.",
+        icon: "🏛️",
+        bg: "bg-[#F5F0E8]",
         delay: 0.2,
     },
 ];
 
 export default function Mission() {
     return (
-        <section className="py-24 md:py-40 bg-black">
+        <section className="py-24 md:py-40 bg-[#F5F0E8] text-[#0D0D0D]">
             <div className="container px-6">
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 md:mb-24">
                     <div className="max-w-2xl space-y-4">
-                        <span className="text-[10px] uppercase tracking-[0.4em] text-brand-pink font-bold">The Protocol</span>
+                        <span className="text-[10px] uppercase tracking-[0.4em] font-bold" style={{color:'#C94A2C'}}>The KŌDĒ Standard</span>
                         <h2 className="text-4xl md:text-6xl font-display leading-[1.1] tracking-tight">
-                            Human <em className="italic opacity-80">Positioning</em><br />
-                            for AI <span className="font-sans font-black">takeover</span>
+                            Brand is not decoration. <br />
+                            <span className="opacity-80">Brand is infrastructure.</span>
                         </h2>
                     </div>
                     <div className="flex flex-col items-start md:items-end gap-3">
-                        <button className="flex items-center gap-2 group text-white/80 hover:text-white font-medium text-sm transition-colors">
+                        <button className="flex items-center gap-2 group text-[#0D0D0D]/80 hover:text-[#0D0D0D] font-medium text-sm transition-colors">
                             <span>Read Whitepaper</span>
                             <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </button>
@@ -55,7 +55,7 @@ export default function Mission() {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: card.delay, duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }}
                             viewport={{ once: true }}
-                            className={`p-10 md:p-12 rounded-[2.5rem] flex flex-col justify-between aspect-[1.1/1] hover:scale-[1.02] transition-transform duration-500 shadow-2xl ${card.bg}`}
+                            className={`p-10 md:p-12 rounded-[2.5rem] flex flex-col justify-between aspect-[1.1/1] hover:scale-[1.02] transition-transform duration-500 shadow-2xl ${card.bg} ${card.title === 'Long-Term Thinking' ? 'text-[#0D0D0D]' : 'text-white'}`}
                         >
                             <div className="text-4xl md:text-5xl drop-shadow-lg">{card.icon}</div>
                             <div className="space-y-4">

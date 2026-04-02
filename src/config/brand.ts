@@ -1,23 +1,26 @@
 /**
- * Centralized brand configuration for The-DrawingBoard (T-DB STUDIO).
+ * Centralized brand configuration for KŌDĒ — The Drawing Board.
  */
 export const BRAND_CONFIG = {
-  name: "The-DrawingBoard",
-  shortName: "T-DB STUDIO",
-  domain: "www.thedrawingboard.com.ng",
+  name: "KŌDĒ",
+  shortName: "KŌDĒ",
+  studioName: "The Drawing Board by KŌDĒ",
+  domain: "kode.com.ng",
+  instagram: "@kode.designed",
   palette: {
-    black: "#000000",
-    blue: "#0b00ff",
-    pink: "#f9258b",
-    slate: "#2A2A2A",
+    black: "#0D0D0D",
+    red: "#C94A2C",
+    cream: "#F5F0E8",
+    charcoal: "#3A3A3A",
+    stone: "#E8E4DE",
     white: "#FFFFFF",
   },
   headlines: {
-    hero: "architects of the future",
+    hero: "There is a code to greatness. We write it.",
   },
   seo: {
-    title: "The-DrawingBoard | Architects of the Future",
-    description: "Cyber-Luxury branding and design studio engineering cultural shifts and leading the future of brand identity.",
+    title: "KŌDĒ | The Drawing Board — Brand Strategy & Identity Studio",
+    description: "KŌDĒ is a prestige branding studio building the brands that define the next generation of African commerce and culture. Lagos — London. Working globally.",
   }
 };
 

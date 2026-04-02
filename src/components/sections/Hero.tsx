@@ -61,12 +61,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="font-display text-[68px] leading-[1.0] text-white tracking-tighter normal-case"
+          className="font-display text-[92px] md:text-[180px] leading-[0.82] text-white tracking-tighter normal-case"
         >
-          <span className="italic block">architects</span>
-          <span className="block">
-            of the <span className="italic">future.</span>
-          </span>
+          <span className="block">The identity</span>
+          <span className="block">your vision</span>
+          <span className="block">always deserved.</span>
         </motion.h1>
       </div>
 
