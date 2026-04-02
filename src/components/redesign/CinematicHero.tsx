@@ -200,10 +200,10 @@ export default function CinematicHero() {
                     }}
                 >
                     {[
-                        { title: "Strategic brand systems", color: "text-[#1B4B66]", img: "/placeholder.svg" },
-                        { title: "Rebuild brand authority", color: "text-[#8B4513]", img: "/placeholder.svg" },
-                        { title: "Scale your presence", color: "text-[#3D2C1F]", img: "/placeholder.svg" },
-                        { title: "Free brand assessment", color: "text-[#006400]", img: "/placeholder.svg" },
+                        { title: "Strategic brand systems", color: "text-[#1B4B66]", img: "/Quick Actions/Strategic Brand Systems.png", link: "/portfolio", scaleClass: "scale-[2] md:scale-[2.4]" },
+                        { title: "Rebuild brand authority", color: "text-[#8B4513]", img: "/Quick Actions/Rebuild Brand Authority.png", link: "/portfolio", scaleClass: "scale-[1.6] md:scale-[1.8]" },
+                        { title: "Scale your presence", color: "text-[#3D2C1F]", img: "/Quick Actions/Scale Your Presence.png", link: "/portfolio", scaleClass: "scale-[1.3] md:scale-[1.4]" },
+                        { title: "Free brand assessment", color: "text-[#006400]", img: "/Quick Actions/Free Brand Assesment.png", link: "/brand-audit-quiz", scaleClass: "scale-[1.6] md:scale-[1.8]" },
                     ].map((card, i) => (
                         <motion.div
                             key={i}
@@ -212,7 +212,7 @@ export default function CinematicHero() {
                                 visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
                             }}
                         >
-                            <Link to="/portfolio" className="group block w-full">
+                            <Link to={card.link} className="group block w-full">
                                 <div className="bg-white rounded-[1.5rem] md:rounded-[2rem] p-4 md:px-6 md:py-4 h-[80px] md:h-[100px] border border-black/5 flex flex-row items-center justify-between hover:bg-black/[0.02] transition-colors relative overflow-hidden">
                                     <div className="flex items-center gap-2 z-10 w-auto px-2 md:px-0">
                                         <h4 className={cn("text-base md:text-[17px] font-display font-medium leading-[1.1] max-w-[150px] md:max-w-[130px]", card.color)}>
@@ -224,10 +224,9 @@ export default function CinematicHero() {
                                         </h4>
                                     </div>
                                     
-                                    <div className="flex items-center gap-3 md:gap-4 z-10 px-2 md:px-0 flex-shrink-0">
-                                        <div className="relative w-12 h-12 md:w-14 md:h-14 opacity-100 group-hover:scale-110 md:group-hover:scale-115 transition-all duration-500">
-                                            <img src={card.img} alt="Card Icon" className="w-full h-full object-contain" />
-                                            <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-transparent rounded-full md:hidden" />
+                                    <div className="flex items-center gap-1 md:gap-2 z-10 px-2 md:px-0 flex-shrink-0">
+                                        <div className="relative w-16 h-16 md:w-24 md:h-24 opacity-100 group-hover:scale-110 transition-all duration-500 flex items-center justify-center pointer-events-none">
+                                            <img src={card.img} alt="Card Icon" className={cn("w-full h-full object-contain drop-shadow-lg", card.scaleClass)} />
                                         </div>
                                         <ChevronRight className="w-4 h-4 md:w-5 md:h-5 opacity-40 group-hover:opacity-100 transition-opacity" />
                                     </div>

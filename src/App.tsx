@@ -23,6 +23,7 @@ import BrandProfileDetails from "./pages/BrandProfileDetails";
 import Volumes from "./pages/Volumes";
 import VolumeDetail from "./pages/VolumeDetail";
 import BrandAudit from "./pages/BrandAudit";
+import BrandAssessment from "./pages/BrandAssessment";
 // Dashboard imports
 import ProtectedLayout from "./components/layout/ProtectedLayout";
 import ManagementDashboard from "./pages/management/Index";
@@ -74,6 +75,7 @@ function AppShell() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/brand-audit" element={<BrandAudit />} />
+          <Route path="/brand-audit-quiz" element={<BrandAssessment />} />
           <Route path="/volumes" element={<Volumes />} />
           <Route path="/volumes/:id" element={<VolumeDetail />} />
           <Route path="/jobs" element={<Jobs />} />

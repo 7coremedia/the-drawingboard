@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, ClipboardCheck, Clock, FileText, Activity } from "lucide-react";
 import RedesignFooter from "@/components/redesign/RedesignFooter";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -34,6 +35,11 @@ export default function BrandAudit() {
                         <p className="text-[#0D0D0D]/60 text-lg md:text-2xl font-medium max-w-2xl leading-relaxed">
                             A complete 48-hour brand review that shows you exactly where you're losing trust, leaving money on the table, and how to fix it.
                         </p>
+                        <div className="pt-6">
+                            <Link to="/brand-audit-quiz" className="inline-flex items-center gap-3 font-bold text-xs uppercase tracking-[0.1em] text-[#C94A2C] hover:text-[#0D0D0D] transition-colors">
+                                Not sure if you need one? Take the free assessment <ArrowUpRight size={16} />
+                            </Link>
+                        </div>
                     </motion.div>
                 </div>
 
