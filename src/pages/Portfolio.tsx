@@ -24,7 +24,7 @@ export default function Portfolio() {
             className="space-y-8"
           >
             <div className="flex items-center gap-4">
-              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Exhibition Protocol</span>
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Our Work</span>
               <div className="h-px w-12 bg-black/5" />
             </div>
             <motion.h1 
@@ -40,7 +40,7 @@ export default function Portfolio() {
                 }
               }}
             >
-              {[["Diagnostic", false], ["Exhibition", false], ["Archive.", true]].map(([word, isAccent], i) => (
+              {[["Brands", false], ["We've", false], ["Built.", true]].map(([word, isAccent], i) => (
                 <React.Fragment key={i}>
                   <motion.span
                     className={cn("inline-block", isAccent ? "text-[#C94A2C]" : "")}
@@ -66,7 +66,7 @@ export default function Portfolio() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
             >
-              An evidence-based collection of brand systems, identity frameworks, and strategic architecture. Engineered for authority.
+              Real brands. Real results. Every project here started with a founder who knew they deserved better — and decided to build it.
             </motion.p>
           </motion.div>
         </div>

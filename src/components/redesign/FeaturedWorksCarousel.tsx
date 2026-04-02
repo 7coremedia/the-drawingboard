@@ -47,19 +47,19 @@ export default function FeaturedWorksCarousel() {
       {/* Intro Copy block */}
       <div className="relative z-10 max-w-3xl px-6 md:px-16 mb-16 md:mb-24">
           <h2 className="text-[28px] sm:text-3xl md:text-5xl lg:text-[56px] font-display font-medium tracking-[-0.06em] leading-[0.9] mb-8">
-            KŌDĒ Protocol: Systems for <span className="text-[#C9A66B]">dominance.</span>
+            Brands built here. Results felt <span className="text-[#C9A66B]">everywhere.</span>
           </h2>
           <Link 
               to="/contact" 
               className="inline-flex items-center justify-center bg-[#F4D9A9] text-[#3D2C1F] font-bold text-sm md:text-base px-8 py-3.5 rounded-full hover:bg-white hover:scale-105 transition-all shadow-xl shadow-black/10"
           >
-              Get started
+               Work with us
           </Link>
       </div>
 
       <div className="mb-6 px-6 md:px-16 relative z-10">
         <h3 className="text-xl md:text-3xl lg:text-4xl font-display font-bold tracking-tighter text-white/90 leading-tight">
-          Access an archive of definitive frameworks
+          Selected ventures & case studies
         </h3>
       </div>
 
@@ -105,7 +105,7 @@ export default function FeaturedWorksCarousel() {
                 </h4>
                 {/* SMALL — project-related descriptor */}
                 <p className="text-[9px] md:text-[11px] font-bold uppercase tracking-widest text-white/30">
-                  Definitive Framework
+                  Case Study
                 </p>
             </div>
           </Link>

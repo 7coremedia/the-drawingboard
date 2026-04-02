@@ -20,7 +20,7 @@ export const BRAND_CONFIG = {
   },
   seo: {
     title: "KŌDĒ | The Drawing Board — Brand Strategy & Identity Studio",
-    description: "KŌDĒ is a prestige branding studio building the brands that define the next generation of African commerce and culture. Lagos — London. Working globally.",
+    description: "KŌDĒ is a lifestyle branding studio for founders who know their brand should be as ambitious as their vision. Brand strategy, identity, and design — Lagos to London.",
   }
 };
 

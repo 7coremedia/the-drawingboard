@@ -24,7 +24,7 @@ export default function CinematicHero() {
                     }}
                 >
                     <div className="block">
-                        {["The", "identity"].map((word, i) => (
+                        {["The", "brand"].map((word, i) => (
                             <motion.span
                                 key={`w1-${i}`}
                                 className="inline-block mr-[0.18em]"
@@ -43,7 +43,7 @@ export default function CinematicHero() {
                         ))}
                     </div>
                     <div className="block">
-                        {["your", "vision"].map((word, i) => (
+                        {["your", "ambition"].map((word, i) => (
                             <motion.span
                                 key={`w2-${i}`}
                                 className="inline-block mr-[0.18em]"
@@ -62,7 +62,7 @@ export default function CinematicHero() {
                         ))}
                     </div>
                     <div className="block">
-                        {["always", "deserved"].map((word, i) => (
+                        {["always", "needed"].map((word, i) => (
                             <motion.span
                                 key={`w3-${i}`}
                                 className="inline-block mr-[0.18em] text-black/20"
@@ -143,14 +143,14 @@ export default function CinematicHero() {
                             
                             <div className="z-10 relative flex flex-col items-start gap-1">
                                 <div className="bg-[#C9A66B] text-[#3D2C1F] text-[7px] md:text-[10px] font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-full uppercase tracking-widest shadow-xl absolute top-0 right-0 md:relative md:top-auto md:right-auto">New</div>
-                                <p className="text-[#C9A66B] font-bold text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl mb-0 md:mb-1 drop-shadow-md">Start your</p>
+                                <p className="text-[#C9A66B] font-bold text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl mb-0 md:mb-1 drop-shadow-md">Ready for a</p>
                                 <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-display tracking-tighter leading-[0.95] drop-shadow-lg w-[95%] md:max-w-[240px] lg:max-w-[320px] pr-4 md:pr-0">
-                                    identity strategy
+                                    brand strategy
                                 </h3>
                             </div>
 
                             <div className="z-10 relative flex items-center justify-between mt-auto pt-4">
-                                <span className="font-semibold text-xs sm:text-sm md:text-xl lg:text-2xl border-b border-white/30 hover:border-white transition-colors drop-shadow-md truncate max-w-[80%] pb-1">Find your code</span>
+                                <span className="font-semibold text-xs sm:text-sm md:text-xl lg:text-2xl border-b border-white/30 hover:border-white transition-colors drop-shadow-md truncate max-w-[80%] pb-1">Start building</span>
                                 <ChevronRight className="w-5 h-5 md:w-8 md:h-8 drop-shadow-md flex-shrink-0" />
                             </div>
                         </div>
@@ -160,14 +160,14 @@ export default function CinematicHero() {
                         <div className="bg-[#D9C5B2] text-[#0D0D0D] rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-8 aspect-[3/4] md:aspect-video relative overflow-hidden flex flex-col justify-between transition-transform duration-500 hover:scale-[0.99] shadow-sm">
                             
                             <div className="z-10 relative">
-                                <p className="text-[#5C4D42] font-semibold text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl mb-0 md:mb-1">See how much</p>
+                                <p className="text-[#5C4D42] font-semibold text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl mb-0 md:mb-1">Your brand is</p>
                                 <div className="flex flex-col md:flex-row md:items-end gap-2 md:gap-4 md:flex-wrap">
                                     <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] font-display tracking-tighter leading-[0.9] text-[#3D2C1F] max-w-[95%] md:max-w-[85%]">
-                                        growth you can unlock
+                                        leaving money on the table
                                     </h3>
                                     
                                     <div className="text-[7.5px] md:text-[11px] font-bold uppercase tracking-[0.15em] text-[#3D2C1F] flex items-center gap-1 group w-max mt-1 md:mt-0 md:mb-1.5">
-                                        <span className="text-xs md:text-xl transition-transform group-hover:translate-y-1">↓</span> 35% growth
+                                        <span className="text-xs md:text-xl transition-transform group-hover:translate-y-1">↑</span> 3x more trust
                                     </div>
                                 </div>
                             </div>
@@ -200,10 +200,10 @@ export default function CinematicHero() {
                     }}
                 >
                     {[
-                        { title: "Have better systems", color: "text-[#1B4B66]", img: "/placeholder.svg" },
-                        { title: "Regrow brand trust", color: "text-[#8B4513]", img: "/placeholder.svg" },
-                        { title: "Boost your presence", color: "text-[#3D2C1F]", img: "/placeholder.svg" },
-                        { title: "Get a brand audit", color: "text-[#006400]", img: "/placeholder.svg" },
+                        { title: "Strategic brand systems", color: "text-[#1B4B66]", img: "/placeholder.svg" },
+                        { title: "Rebuild brand authority", color: "text-[#8B4513]", img: "/placeholder.svg" },
+                        { title: "Scale your presence", color: "text-[#3D2C1F]", img: "/placeholder.svg" },
+                        { title: "Free brand assessment", color: "text-[#006400]", img: "/placeholder.svg" },
                     ].map((card, i) => (
                         <motion.div
                             key={i}

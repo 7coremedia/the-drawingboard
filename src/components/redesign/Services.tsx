@@ -5,8 +5,8 @@ import { ArrowUpRight } from "lucide-react";
 const services = {
     management: {
         title: "Strategic Management",
-        subtitle: "Global Oversight",
-        description: "Comprehensive strategic oversight for brands ready to dominate their category. We handle the psychology, growth, and positioning so you can focus on execution.",
+        subtitle: "Strategy & Direction",
+        description: "For brands that need the thinking before the making. We handle the strategy, positioning, and growth plan — so every creative decision has purpose behind it.",
         items: [
             "Brand Strategy & Research — Audience mapping, competitive positioning, brand architecture",
             "Growth & Expansion Branding — Brand systems built for the next stage",
@@ -19,8 +19,8 @@ const services = {
     },
     studio: {
         title: "KŌDĒ Studio",
-        subtitle: "Aesthetic Precision",
-        description: "The execution arm of our philosophy. Where world-class aesthetics meet architectural precision to create undeniable brand assets.",
+        subtitle: "Design & Execution",
+        description: "Where strategy becomes visible. World-class visual identity, digital design, and brand assets — built to make people stop scrolling and start paying attention.",
         items: [
             "Visual Identity Systems",
             "Creative Direction",
@@ -42,10 +42,10 @@ export default function Services() {
 
                 {/* Section Intro */}
                 <div className="max-w-2xl mx-auto text-center mb-16 md:mb-24 space-y-6">
-                    <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Collaborative Protocol</span>
-                    <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tighter leading-[0.95]">How We Operate</h2>
+                    <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">How We Work</span>
+                    <h2 className="text-4xl md:text-6xl font-display font-medium tracking-tighter leading-[0.95]">Two ways to work with us</h2>
                     <p className="text-[#0D0D0D]/60 text-base md:text-lg leading-relaxed font-medium">
-                        We don't take briefs and disappear. Every engagement starts with strategy — understanding the gap between where you are and where you need to be.
+                        We don't take briefs and disappear. Every engagement starts with understanding where you are, where you need to be, and what's standing in the way.
                     </p>
                 </div>
 
@@ -151,7 +151,7 @@ export default function Services() {
                                     <div className="absolute inset-x-10 bottom-10 p-8 bg-[#F5F0E8]/80 backdrop-blur-xl rounded-[2.5rem] border border-black/5 shadow-lg">
                                         <div className="flex justify-between items-center">
                                             <div>
-                                                <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#C94A2C] mb-1">Operational Tier</p>
+                                                <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#C94A2C] mb-1">Service Type</p>
                                                 <p className="text-[#0D0D0D] font-display text-xl font-bold tracking-tight">{services[activeTab].title}</p>
                                             </div>
                                             <div className="w-10 h-10 rounded-full bg-[#0D0D0D] text-white flex items-center justify-center">

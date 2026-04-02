@@ -30,8 +30,8 @@ export default function Testimonials() {
         <section className="py-24 md:py-48 bg-[#F5F0E8] border-t border-black/5 relative overflow-hidden">
             <div className="container px-6 relative z-10">
                 <div className="max-w-4xl mx-auto text-center mb-16 md:mb-32">
-                    <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C] mb-6 block">Clinical Evidence</span>
-                    <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter text-[#0D0D0D] leading-tight">Quantifiable Results.</h2>
+                    <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C] mb-6 block">Results</span>
+                    <h2 className="text-4xl md:text-6xl font-display font-black tracking-tighter text-[#0D0D0D] leading-tight">What happened after.</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-7xl mx-auto">

@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 const systems = [
     {
         id: 1,
-        name: "Brand Strategy Architecture",
-        description: "The logic before the craft. We build the architecture that sustains market leader status.",
+        name: "Brand Strategy & Positioning",
+        description: "Before a single visual is made, we build the strategy underneath — who you are, what you own, and why it matters.",
     },
     {
         id: 2,
-        name: "Visual Identity Systems",
-        description: "Engineered to be unmistakable. We create design languages that scale across all touchpoints.",
+        name: "Visual Identity & Design",
+        description: "Logos, color systems, and design languages built to be unmistakable — across every screen, surface, and room you walk into.",
     },
     {
         id: 3,
-        name: "Scale & Performance",
-        description: "Growth readiness. Brand systems built from first principles for Series A through exit.",
+        name: "Digital & Growth Systems",
+        description: "Websites, pitch decks, and brand assets built for the stage you're in — and the stage you're growing into.",
     },
 ];
 
@@ -32,10 +32,10 @@ export default function Hero() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-[#C94A2C] block mb-6">Our approach</span>
+                        <span className="text-[10px] uppercase tracking-[0.3em] font-black text-[#C94A2C] block mb-6">How we work</span>
                         <h2 className="text-4xl md:text-6xl lg:text-[72px] font-display font-medium tracking-[-0.08em] text-[#0D0D0D] leading-[0.82] mb-10 md:mb-14">
-                            We don’t do pretty. <br />
-                            <span className="text-[#C94A2C]">We do decisive.</span>
+                            We don't do decoration. <br />
+                            <span className="text-[#C94A2C]">We do direction.</span>
                         </h2>
                     </motion.div>
                     <motion.p 
@@ -45,7 +45,7 @@ export default function Hero() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
                     >
-                        KŌDĒ works with emerging businesses ready to build brands that travel — across industries, borders, and every stage of growth.
+                        We work with founders building something worth remembering — and give it the brand it deserves to travel across industries, borders, and stages of growth.
                     </motion.p>
                 </div>
 
@@ -99,17 +99,17 @@ export default function Hero() {
                     
                     <div className="flex flex-col items-center text-center max-w-3xl mx-auto relative z-10">
                         <h3 className="text-3xl md:text-5xl lg:text-[60px] font-display tracking-[-0.08em] font-medium mb-10 leading-[0.82]">
-                            The growth you’ve <br /> always deserved.
+                            A brand that makes you proud <br /> in every room you walk into.
                         </h3>
                         <p className="text-white/60 text-lg md:text-xl mb-12 max-w-xl mx-auto leading-relaxed">
-                            Join 20+ brands that have scaled with the KŌDĒ clinical framework. Lagos — London.
+                            Join the founders who stopped apologising for their brand. Lagos — London — Working globally.
                         </p>
                         
                         <Link
                             to="/contact"
                             className="bg-[#F5F0E8] text-[#0D0D0D] py-5 px-12 rounded-full font-display font-medium text-lg hover:scale-[1.02] transition-transform shadow-2xl"
                         >
-                            Apply to Work With Us
+                            Start a Conversation
                         </Link>
                     </div>
 

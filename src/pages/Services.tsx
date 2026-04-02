@@ -4,53 +4,57 @@ import ServicesTabbed from "@/components/redesign/Services";
 import Exclusive from "@/components/redesign/Exclusive";
 import RedesignFooter from "@/components/redesign/RedesignFooter";
 import { MoveRight, Star } from "lucide-react";
+import CurrencySelector from "@/components/redesign/CurrencySelector";
+import { useCurrency } from "@/context/CurrencyContext";
 
-const services = [
+const servicesData = [
   {
     category: "Strategic Diagnostic",
     title: "Brand Audit",
-    price: "$250",
+    priceUsd: 250,
     frequency: "One-time session",
-    desc: "A complete diagnostic of your brand across all touchpoints. Delivered in 48 hours.",
+    desc: "A complete review of your brand across every touchpoint. Clear gaps, clear next steps — delivered in 48 hours.",
     tag: "Essential",
-    badge: "Clinical Standard"
+    badge: "Essential"
   },
   {
     category: "Identity System",
     title: "Brand Sprint",
-    price: "$800",
+    priceUsd: 800,
     frequency: "Starting cost",
-    desc: "For businesses that need a sharp, professional brand identity fast. Logo system + color palette.",
+    desc: "A sharp, professional brand identity — fast. Logo system, color palette, and the confidence to show up in any room.",
     tag: "Fast Track",
-    badge: "Market-Ready"
+    badge: "Fast Track"
   },
   {
     category: "Core Architecture",
     title: "Brand Foundation",
-    price: "$2,500",
+    priceUsd: 2500,
     frequency: "Comprehensive",
-    desc: "Our most popular engagement. Full brand strategy + visual identity + brand voice system.",
+    desc: "Our most popular engagement. Full brand strategy, visual identity, and voice system — everything you need to be taken seriously.",
     tag: "Popular",
-    badge: "Architectural",
+    badge: "Most Popular",
     popular: true
   },
   {
     category: "Expansion & Growth",
     title: "Brand Elevation",
-    price: "$7,000",
+    priceUsd: 7000,
     frequency: "Full transformation",
-    desc: "Strategy, identity, digital design, launch assets, and brand management onboarding.",
+    desc: "The full transformation. Strategy, identity, website, launch assets, and ongoing brand management — for brands ready to lead their category.",
     tag: "High Touch",
-    badge: "Category King"
+    badge: "Full Service"
   }
 ];
 
 export default function Services() {
+  const { formatPrice } = useCurrency();
+
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
       <Helmet>
         <title>Services – KŌDĒ | Strategic Brand Systems</title>
-        <meta name="description" content="KŌDĒ brand strategy, identity, and management services. Clear deliverables, transparent pricing." />
+        <meta name="description" content="KŌDĒ brand strategy, identity, and design services. Clear deliverables, transparent pricing — in Naira, Dollars, or Euros." />
         <link rel="canonical" href="/services" />
       </Helmet>
 
@@ -63,19 +67,24 @@ export default function Services() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="space-y-6"
           >
-            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Investment Protocols</span>
+            <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Our Services</span>
             <h1 className="font-display text-5xl md:text-8xl font-black tracking-tighter leading-[0.95] mb-8">
-              Access the <br /> KŌDĒ Standard
+              Everything your <br /> brand needs to win.
             </h1>
             <p className="text-[#0D0D0D]/60 text-lg md:text-2xl font-medium max-w-2xl leading-relaxed">
-              Clear deliverables. Transparent pricing. Systems architected for authority and market influence.
+              Clear deliverables. Transparent pricing. From brand audit to full identity — choose where you start.
             </p>
           </motion.div>
         </div>
 
+        {/* Currency Selector */}
+        <div className="flex justify-end mb-8">
+          <CurrencySelector />
+        </div>
+
         {/* Horizontal Scroll Grid / Cards Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 pb-32">
-          {services.map((service, i) => (
+          {servicesData.map((service, i) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 40 }}
@@ -90,11 +99,11 @@ export default function Services() {
                   service.popular ? "bg-[#3D2C1F]/5" : "bg-white/50"
                 )}
               >
-                {/* Authority Badge (FDA Style) */}
+                {/* Authority Badge */}
                 <div className="absolute top-8 right-8 z-20">
                   <div className="w-16 h-16 rounded-full border border-[#0D0D0D]/10 flex items-center justify-center p-2 text-center bg-white/40 backdrop-blur-md">
                     <span className="text-[7px] uppercase font-bold tracking-tight leading-tight text-[#0D0D0D]/60">
-                      Standardized <br /> {service.badge}
+                      {service.badge}
                     </span>
                   </div>
                 </div>
@@ -127,7 +136,7 @@ export default function Services() {
                         <div className="pt-4 border-t border-[#0D0D0D]/5 flex items-end justify-between">
                             <div className="space-y-0.5">
                                 <p className="text-[10px] uppercase font-bold tracking-widest text-[#0D0D0D]/40">Starting at</p>
-                                <p className="text-lg font-bold">{service.price}*</p>
+                                <p className="text-lg font-bold">{formatPrice(service.priceUsd)}*</p>
                             </div>
                             <button className="w-10 h-10 rounded-full bg-[#0D0D0D] text-white flex items-center justify-center transition-transform hover:scale-110 active:scale-95 shadow-lg">
                                 <MoveRight size={18} />

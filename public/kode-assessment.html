@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Health Assessment — KŌDĒ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0D0D0D;
+    --red: #C94A2C;
+    --cream: #F5F0E8;
+    --brown: #3D2C1F;
+    --mid: #7A7A7A;
+    --border: #E2DDD5;
+    --white: #FFFFFF;
+    --display: 'Cormorant Garamond', Georgia, serif;
+    --body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    background: var(--cream);
+    color: var(--black);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── LAYOUT ─────────────────────────────── */
+  .shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .topbar {
+    padding: 24px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .logo {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    text-decoration: none;
+  }
+
+  .logo span { color: var(--red); }
+
+  .topbar-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .main {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 24px 80px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 620px;
+  }
+
+  /* ── PROGRESS ───────────────────────────── */
+  .progress-wrap {
+    margin-bottom: 48px;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .progress-step {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  .progress-pct {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--mid);
+    letter-spacing: 0.04em;
+  }
+
+  .bar {
+    height: 2px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    background: var(--red);
+    border-radius: 2px;
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 0%;
+  }
+
+  /* ── SCREENS ────────────────────────────── */
+  .screen { display: none; animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .screen.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── INTRO ──────────────────────────────── */
+  .intro-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .intro-eyebrow::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--border);
+  }
+
+  .intro-headline {
+    font-family: var(--display);
+    font-size: clamp(42px, 7vw, 68px);
+    font-weight: 600;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    color: var(--black);
+    margin-bottom: 24px;
+  }
+
+  .intro-headline em {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .intro-body {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--mid);
+    max-width: 460px;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  .intro-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 40px;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--white);
+  }
+
+  .intro-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .intro-meta-item span:first-child {
+    font-size: 19px;
+    font-family: var(--display);
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: -0.02em;
+  }
+
+  .intro-meta-item span:last-child {
+    font-size: 11px;
+    color: var(--mid);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .intro-meta-divider {
+    width: 1px;
+    height: 36px;
+    background: var(--border);
+  }
+
+  /* ── QUESTION ───────────────────────────── */
+  .q-number {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  .q-text {
+    font-family: var(--display);
+    font-size: clamp(28px, 5vw, 44px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+
+  .q-sub {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--mid);
+    margin-bottom: 32px;
+  }
+
+  /* ── OPTIONS ────────────────────────────── */
+  .opts { display: flex; flex-direction: column; gap: 10px; }
+
+  .opt {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 22px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .opt::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #FDF7F4;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .opt:hover { border-color: rgba(201,74,44,0.35); }
+  .opt:hover::before { opacity: 1; }
+
+  .opt.sel {
+    border-color: var(--red);
+    background: var(--white);
+  }
+
+  .opt.sel::before { opacity: 1; }
+
+  .opt-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    position: relative;
+    z-index: 1;
+  }
+
+  .opt.sel .opt-radio {
+    border-color: var(--red);
+    background: var(--red);
+  }
+
+  .opt-radio-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--white);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .opt.sel .opt-radio-dot { opacity: 1; transform: scale(1); }
+
+  .opt-content { position: relative; z-index: 1; }
+
+  .opt-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--black);
+    line-height: 1.4;
+  }
+
+  .opt-desc {
+    font-size: 13px;
+    color: var(--mid);
+    margin-top: 3px;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  /* ── NAV ────────────────────────────────── */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+  }
+
+  .btn-back {
+    background: none;
+    border: none;
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid);
+    cursor: pointer;
+    padding: 8px 0;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-back:hover { color: var(--black); }
+
+  .btn-next {
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 14px 32px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    background: var(--black);
+    color: var(--white);
+    opacity: 0.25;
+    pointer-events: none;
+  }
+
+  .btn-next.on {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .btn-next.on:hover {
+    background: var(--red);
+    transform: translateY(-1px);
+  }
+
+  .btn-start {
+    font-family: var(--body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 16px 40px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: var(--black);
+    color: var(--white);
+    transition: all 0.25s;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-start:hover { background: var(--red); transform: translateY(-1px); }
+  .btn-start:hover .btn-arrow { transform: translateX(3px); }
+
+  .btn-arrow { transition: transform 0.2s; }
+
+  /* ── RESULTS ────────────────────────────── */
+  .result-top {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .ring-wrap {
+    flex-shrink: 0;
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+
+  .ring-wrap svg { transform: rotate(-90deg); }
+
+  .ring-score {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ring-num {
+    font-family: var(--display);
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .ring-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .result-copy {}
+
+  .result-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 8px;
+  }
+
+  .result-title {
+    font-family: var(--display);
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    margin-bottom: 10px;
+  }
+
+  .result-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--mid);
+  }
+
+  /* ── INSIGHTS ───────────────────────────── */
+  .insights-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--mid);
+    margin-bottom: 16px;
+  }
+
+  .insights { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+
+  .insight {
+    padding: 20px 22px;
+    border-radius: 14px;
+    border-left: 3px solid var(--red);
+    background: var(--white);
+    border-top: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .insight:nth-child(2) { animation-delay: 0.1s; }
+  .insight:nth-child(3) { animation-delay: 0.2s; }
+
+  .insight-head {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .insight-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--mid);
+    font-weight: 400;
+  }
+
+  /* ── CTA BLOCK ──────────────────────────── */
+  .cta-block {
+    background: var(--brown);
+    border-radius: 24px;
+    padding: 36px 40px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-block::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: rgba(201,74,44,0.12);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .cta-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(201,74,44,0.9);
+    margin-bottom: 12px;
+  }
+
+  .cta-head {
+    font-family: var(--display);
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .cta-sub {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 28px;
+    max-width: 400px;
+  }
+
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+  .cta-btn-primary {
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 14px 28px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: var(--red);
+    color: var(--white);
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cta-btn-primary:hover { background: #a8391e; transform: translateY(-1px); }
+
+  .cta-btn-secondary {
+    font-family: var(--body);
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.45);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 14px 4px;
+    transition: color 0.2s;
+    text-decoration: none;
+  }
+
+  .cta-btn-secondary:hover { color: rgba(255,255,255,0.8); }
+
+  .restart-btn {
+    display: block;
+    margin: 20px auto 0;
+    background: none;
+    border: none;
+    font-family: var(--body);
+    font-size: 12px;
+    color: var(--mid);
+    cursor: pointer;
+    padding: 6px 0;
+    transition: color 0.2s;
+  }
+
+  .restart-btn:hover { color: var(--black); }
+
+  /* ── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 600px) {
+    .topbar { padding: 18px 20px; }
+    .main { padding: 40px 20px 60px; }
+
+    .intro-meta { flex-wrap: wrap; gap: 16px; }
+    .intro-meta-divider { display: none; }
+
+    .result-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .cta-block { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a href="#" class="logo">KŌD<span>Ē</span></a>
+    <span class="topbar-tag">Brand Assessment</span>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="card">
+
+      <!-- PROGRESS -->
+      <div class="progress-wrap" id="prog-wrap">
+        <div class="progress-meta">
+          <span class="progress-step" id="prog-label">Assessment</span>
+          <span class="progress-pct" id="prog-pct"></span>
+        </div>
+        <div class="bar"><div class="bar-fill" id="bar"></div></div>
+      </div>
+
+      <!-- ── SCREEN 0: INTRO ── -->
+      <div class="screen active" id="s0">
+        <div class="intro-eyebrow">Free brand assessment</div>
+        <h1 class="intro-headline">
+          Your brand is saying<br>something <em>right now.</em><br>Is it the right thing?
+        </h1>
+        <p class="intro-body">
+          Answer 5 honest questions and we'll show you exactly where your brand stands, what it's costing you, and what to do about it.
+        </p>
+        <div class="intro-meta">
+          <div class="intro-meta-item">
+            <span>5</span>
+            <span>Questions</span>
+          </div>
+          <div class="intro-meta-divider"></div>
+          <div class="intro-meta-item">
+            <span>2 min</span>
+            <span>To complete</span>
+          </div>
+          <div class="intro-meta-divider"></div>
+          <div class="intro-meta-item">
+            <span>Free</span>
+            <span>No strings</span>
+          </div>
+        </div>
+        <button class="btn-start" onclick="goTo(1)">
+          Start the assessment
+          <span class="btn-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- ── SCREEN 1 ── -->
+      <div class="screen" id="s1">
+        <div class="q-number">Question 1 of 5</div>
+        <h2 class="q-text">Where is your business right now?</h2>
+        <p class="q-sub">This calibrates what your brand actually needs at this stage.</p>
+        <div class="opts" id="q1-opts">
+          <div class="opt" data-q="1" data-v="10" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Pre-launch or just starting out</div>
+              <div class="opt-desc">Building or about to launch</div>
+            </div>
+          </div>
+          <div class="opt" data-q="1" data-v="25" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Early stage — under 2 years</div>
+              <div class="opt-desc">First clients, first revenue, building momentum</div>
+            </div>
+          </div>
+          <div class="opt" data-q="1" data-v="40" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Growing — 2 to 5 years in</div>
+              <div class="opt-desc">Proven concept, now scaling</div>
+            </div>
+          </div>
+          <div class="opt" data-q="1" data-v="50" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Established — 5+ years</div>
+              <div class="opt-desc">Track record built, brand hasn't kept up with growth</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn-back" onclick="goTo(0)">← Back</button>
+          <button class="btn-next" id="n1" onclick="goTo(2)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 2 ── -->
+      <div class="screen" id="s2">
+        <div class="q-number">Question 2 of 5</div>
+        <h2 class="q-text">What's your biggest brand problem?</h2>
+        <p class="q-sub">Be honest — this is where most of the value comes from.</p>
+        <div class="opts" id="q2-opts">
+          <div class="opt" data-q="2" data-v="15" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">I don't really have a brand yet</div>
+              <div class="opt-desc">Freelancer logo, Canva design, or nothing at all</div>
+            </div>
+          </div>
+          <div class="opt" data-q="2" data-v="30" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">My brand doesn't reflect the quality of my work</div>
+              <div class="opt-desc">We're better than we look</div>
+            </div>
+          </div>
+          <div class="opt" data-q="2" data-v="25" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">I'm embarrassed showing it to investors or enterprise clients</div>
+              <div class="opt-desc">The brand is actively costing us deals</div>
+            </div>
+          </div>
+          <div class="opt" data-q="2" data-v="40" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">The brand exists but it's not converting</div>
+              <div class="opt-desc">People aren't taking it seriously enough</div>
+            </div>
+          </div>
+          <div class="opt" data-q="2" data-v="45" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">We've outgrown our brand — it no longer fits</div>
+              <div class="opt-desc">Business has evolved, the brand hasn't kept up</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn-back" onclick="goTo(1)">← Back</button>
+          <button class="btn-next" id="n2" onclick="goTo(3)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 3 ── -->
+      <div class="screen" id="s3">
+        <div class="q-number">Question 3 of 5</div>
+        <h2 class="q-text">Walking into a big meeting — how do you feel about your brand?</h2>
+        <p class="q-sub">Investor pitch. Enterprise client. Partnership conversation. Be honest.</p>
+        <div class="opts" id="q3-opts">
+          <div class="opt" data-q="3" data-v="85" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Confident — my brand holds its own in any room</div>
+            </div>
+          </div>
+          <div class="opt" data-q="3" data-v="50" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Nervous — I'd rather not show the deck</div>
+              <div class="opt-desc">I know it's not quite there yet</div>
+            </div>
+          </div>
+          <div class="opt" data-q="3" data-v="25" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Embarrassed — it genuinely holds us back</div>
+              <div class="opt-desc">I've lost opportunities because of how we look</div>
+            </div>
+          </div>
+          <div class="opt" data-q="3" data-v="10" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">We don't have a brand — I wing it every time</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn-back" onclick="goTo(2)">← Back</button>
+          <button class="btn-next" id="n3" onclick="goTo(4)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 4 ── -->
+      <div class="screen" id="s4">
+        <div class="q-number">Question 4 of 5</div>
+        <h2 class="q-text">Compared to your strongest competitor — your brand looks...</h2>
+        <p class="q-sub">Think of the one competitor you most want to beat.</p>
+        <div class="opts" id="q4-opts">
+          <div class="opt" data-q="4" data-v="80" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Better — we clearly outclass them visually</div>
+              <div class="opt-desc">Our brand is a real competitive advantage</div>
+            </div>
+          </div>
+          <div class="opt" data-q="4" data-v="55" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">About the same — neither of us stands out</div>
+              <div class="opt-desc">The whole category looks similar</div>
+            </div>
+          </div>
+          <div class="opt" data-q="4" data-v="30" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Worse — they look more professional</div>
+              <div class="opt-desc">And I think it's affecting how clients choose</div>
+            </div>
+          </div>
+          <div class="opt" data-q="4" data-v="35" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">I honestly avoid comparing — it's uncomfortable</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn-back" onclick="goTo(3)">← Back</button>
+          <button class="btn-next" id="n4" onclick="goTo(5)">Continue →</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 5 ── -->
+      <div class="screen" id="s5">
+        <div class="q-number">Question 5 of 5</div>
+        <h2 class="q-text">What matters most in the next 12 months?</h2>
+        <p class="q-sub">Your goal shapes what your brand needs to do for you right now.</p>
+        <div class="opts" id="q5-opts">
+          <div class="opt" data-q="5" data-v="fund" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Raise funding or attract serious investors</div>
+            </div>
+          </div>
+          <div class="opt" data-q="5" data-v="clients" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Win bigger, higher-paying clients</div>
+            </div>
+          </div>
+          <div class="opt" data-q="5" data-v="expand" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Expand to new markets or go international</div>
+            </div>
+          </div>
+          <div class="opt" data-q="5" data-v="hire" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Scale the team and attract top talent</div>
+            </div>
+          </div>
+          <div class="opt" data-q="5" data-v="launch" onclick="pick(this)">
+            <div class="opt-radio"><div class="opt-radio-dot"></div></div>
+            <div class="opt-content">
+              <div class="opt-label">Launch a new product, service, or vertical</div>
+            </div>
+          </div>
+        </div>
+        <div class="nav">
+          <button class="btn-back" onclick="goTo(4)">← Back</button>
+          <button class="btn-next" id="n5" onclick="showResult()">See my brand score →</button>
+        </div>
+      </div>
+
+      <!-- ── SCREEN RESULT ── -->
+      <div class="screen" id="s-result">
+
+        <div class="result-top">
+          <div class="ring-wrap">
+            <svg width="120" height="120" viewBox="0 0 120 120">
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#E2DDD5" stroke-width="7"/>
+              <circle cx="60" cy="60" r="50" fill="none" stroke="#C94A2C" stroke-width="7"
+                stroke-linecap="round"
+                stroke-dasharray="314.16"
+                stroke-dashoffset="314.16"
+                id="ring" style="transition: stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1)"/>
+            </svg>
+            <div class="ring-score">
+              <div class="ring-num" id="ring-num">0</div>
+              <div class="ring-label">/ 100</div>
+            </div>
+          </div>
+          <div class="result-copy">
+            <div class="result-eyebrow" id="r-eyebrow">Your brand health score</div>
+            <div class="result-title" id="r-title"></div>
+            <div class="result-desc" id="r-desc"></div>
+          </div>
+        </div>
+
+        <p class="insights-label">What we found</p>
+        <div class="insights" id="insights"></div>
+
+        <div class="cta-block">
+          <div class="cta-tag">Recommended next step</div>
+          <div class="cta-head" id="cta-head"></div>
+          <div class="cta-sub" id="cta-sub"></div>
+          <div class="cta-actions">
+            <a href="https://kode.com.ng/brand-audit" class="cta-btn-primary">
+              Book my brand audit →
+            </a>
+            <a href="https://kode.com.ng/contact" class="cta-btn-secondary">
+              Or start a conversation
+            </a>
+          </div>
+        </div>
+
+        <button class="restart-btn" onclick="restart()">Retake the assessment</button>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  const answers = {};
+
+  const SCREENS = ['s0','s1','s2','s3','s4','s5','s-result'];
+  const PROG_LABELS = ['','1 of 5','2 of 5','3 of 5','4 of 5','5 of 5','Complete'];
+  const PROG_PCTS = [0, 20, 40, 60, 80, 100, 100];
+
+  function goTo(n) {
+    SCREENS.forEach(id => document.getElementById(id).classList.remove('active'));
+    document.getElementById(SCREENS[n]).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const label = PROG_LABELS[n];
+    const pct = PROG_PCTS[n];
+    document.getElementById('prog-label').textContent = label || 'Brand Assessment';
+    document.getElementById('prog-pct').textContent = label ? pct + '%' : '';
+    document.getElementById('bar').style.width = pct + '%';
+  }
+
+  function pick(el) {
+    const q = el.dataset.q;
+    document.querySelectorAll('[data-q="' + q + '"]').forEach(o => o.classList.remove('sel'));
+    el.classList.add('sel');
+    answers[q] = { v: el.dataset.v };
+    const btn = document.getElementById('n' + q);
+    if (btn) btn.classList.add('on');
+  }
+
+  function showResult() {
+    if (!answers[5]) return;
+
+    const q2 = parseFloat(answers[2].v) || 30;
+    const q3 = parseFloat(answers[3].v) || 30;
+    const q4 = parseFloat(answers[4].v) || 40;
+
+    const raw = Math.round(q2 * 0.3 + q3 * 0.4 + q4 * 0.3);
+    const score = Math.min(92, Math.max(10, raw));
+
+    goTo(6);
+
+    setTimeout(() => { animateScore(score); animateRing(score); }, 300);
+
+    let title, desc;
+    if (score < 35) {
+      title = 'Brand in critical condition';
+      desc = 'Your brand is actively working against you. Every room you walk into, every link you send — the brand is costing you trust, deals, and money. The gap between your ability and how you appear is your biggest business problem right now.';
+    } else if (score < 52) {
+      title = 'Brand needs serious attention';
+      desc = 'You have a brand, but it has real gaps that are limiting how seriously you\'re taken. Clients and investors are making judgments before you even open your mouth — and the brand isn\'t making the case for you.';
+    } else if (score < 70) {
+      title = 'Brand is functional but not working hard enough';
+      desc = 'Your brand holds its own, but it\'s not a competitive advantage. At this stage of your growth, "fine" is the ceiling — and it shouldn\'t be. Your brand should be actively winning you rooms, not just surviving them.';
+    } else {
+      title = 'Brand has a strong foundation';
+      desc = 'You have something solid. The question now is whether it\'s keeping pace with your ambition — and whether it\'s genuinely differentiating you or just keeping you in the game. Good brands get better or get overtaken.';
+    }
+
+    document.getElementById('r-title').textContent = title;
+    document.getElementById('r-desc').textContent = desc;
+
+    const goal = answers[5] ? answers[5].v : '';
+    const q3v = parseFloat(answers[3] ? answers[3].v : 50);
+    const q4v = parseFloat(answers[4] ? answers[4].v : 50);
+    const challenge = answers[2] ? answers[2].v : '30';
+
+    const insightsEl = document.getElementById('insights');
+    insightsEl.innerHTML = '';
+    buildInsights(score, goal, q3v, q4v, challenge).forEach(ins => {
+      insightsEl.innerHTML += `
+        <div class="insight">
+          <div class="insight-head">${ins.head}</div>
+          <div class="insight-body">${ins.body}</div>
+        </div>`;
+    });
+
+    const ctaHead = score < 55
+      ? 'Start with a Brand Audit'
+      : 'See exactly what to sharpen';
+    const ctaSub = score < 55
+      ? 'A 48-hour deep review of your brand across every touchpoint — with a specific roadmap for what to fix first. No fluff. No vague recommendations.'
+      : 'A 48-hour brand review that pinpoints the exact gaps between where your brand is and where your ambition is heading.';
+    document.getElementById('cta-head').textContent = ctaHead;
+    document.getElementById('cta-sub').textContent = ctaSub;
+  }
+
+  function buildInsights(score, goal, q3v, q4v, challenge) {
+    const pool = [];
+
+    if (q3v <= 25) {
+      pool.push({
+        head: 'Your brand is costing you deals in real time',
+        body: 'When you\'re embarrassed walking into rooms, that energy transmits — and sophisticated clients and investors pick it up. A confident brand isn\'t vanity. It\'s a business tool that either opens doors or closes them before you speak.'
+      });
+    } else if (q3v <= 50) {
+      pool.push({
+        head: 'That nervousness is costing you money',
+        body: 'The gap between how good your work is and how good your brand looks is a revenue gap. Every time you hesitate before sending someone your link, that\'s a signal. Clients and investors read it too.'
+      });
+    } else {
+      pool.push({
+        head: 'Confidence is an advantage — protect it',
+        body: 'A brand that makes you proud in rooms is a compounding asset. As your business grows, your brand needs to grow at the same pace — or faster. Confident brands attract confident clients.'
+      });
+    }
+
+    if (q4v <= 35) {
+      pool.push({
+        head: 'Your competitor has a positioning advantage',
+        body: 'When your brand looks weaker, you\'ve already lost part of the deal before the conversation starts. Brand is the first impression — and first impressions compound across every decision a client makes. Closing this gap is the fastest leverage available to you.'
+      });
+    } else if (q4v <= 55) {
+      pool.push({
+        head: 'Looking the same is the same as losing',
+        body: 'In a crowded category, parity is not a safe position — it\'s a losing one. When brands look similar, price becomes the differentiator. The moment your brand is unmistakably distinct, pricing conversations change.'
+      });
+    }
+
+    if (challenge === '15' || challenge === '10') {
+      pool.push({
+        head: 'Starting from scratch is actually an advantage',
+        body: 'Building a brand from the ground up means no baggage, no legacy decisions to undo. Done right, you get to enter the market looking exactly as serious as you intend to be — from day one.'
+      });
+    } else if (challenge === '30') {
+      pool.push({
+        head: 'You\'re over-delivering and under-presenting',
+        body: 'Your work is stronger than your brand. That\'s actually the best starting point — because the gap between your quality and your brand\'s quality is a fixable, visible transformation. Not a rebuild. A revelation.'
+      });
+    } else if (challenge === '45') {
+      pool.push({
+        head: 'An outgrown brand is a ceiling, not a foundation',
+        body: 'Businesses that grow faster than their brand eventually hit a wall. The identity that got you here won\'t get you there. A strategic rebrand at the right moment is one of the highest-leverage investments a growing company can make.'
+      });
+    }
+
+    if (goal === 'fund') {
+      pool.push({
+        head: 'Investors read your brand before they read your deck',
+        body: 'Sophisticated investors make first-impression judgments before you reach slide three. A brand that signals clarity, taste, and self-awareness opens rooms that a weak brand closes — before you even get to the numbers.'
+      });
+    } else if (goal === 'clients') {
+      pool.push({
+        head: 'Premium clients expect a premium brand',
+        body: 'The clients you\'re trying to win are already making brand judgments about the brands they work with. If you want to command premium rates, every touchpoint — from your Instagram to your invoice — needs to feel premium.'
+      });
+    } else if (goal === 'expand') {
+      pool.push({
+        head: 'Expansion exposes brand weakness fast',
+        body: 'New markets mean your brand has to work without the benefit of existing relationships and context. A brand built for Lagos needs to hold its own in London, New York, or Nairobi without you in the room to explain it.'
+      });
+    } else if (goal === 'hire') {
+      pool.push({
+        head: 'Talent evaluates your brand before they apply',
+        body: 'The best candidates are choosing between multiple opportunities. A brand that communicates culture, vision, and ambition attracts the people who will build the thing — not just fill the role.'
+      });
+    } else if (goal === 'launch') {
+      pool.push({
+        head: 'New products inherit your brand\'s reputation',
+        body: 'Whatever you launch next will be judged through the lens of your existing brand. A strong brand architecture makes every new product launch easier, faster, and more trusted. A weak one creates doubt before you\'ve said a word.'
+      });
+    }
+
+    return pool.slice(0, 3);
+  }
+
+  function animateScore(target) {
+    let n = 0;
+    const el = document.getElementById('ring-num');
+    const step = target / 50;
+    const timer = setInterval(() => {
+      n = Math.min(n + step, target);
+      el.textContent = Math.round(n);
+      if (n >= target) clearInterval(timer);
+    }, 20);
+  }
+
+  function animateRing(score) {
+    const circ = 314.16;
+    const offset = circ - (circ * score / 100);
+    setTimeout(() => {
+      document.getElementById('ring').style.strokeDashoffset = offset;
+    }, 100);
+  }
+
+  function restart() {
+    Object.keys(answers).forEach(k => delete answers[k]);
+    document.querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+    document.querySelectorAll('.btn-next').forEach(b => b.classList.remove('on'));
+    document.getElementById('ring').style.transition = 'none';
+    document.getElementById('ring').style.strokeDashoffset = '314.16';
+    document.getElementById('ring-num').textContent = '0';
+    goTo(0);
+  }
+</script>
+</body>
+</html>

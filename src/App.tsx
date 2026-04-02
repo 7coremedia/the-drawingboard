@@ -42,6 +42,7 @@ import Contracts from "./pages/Contracts";
 import { cn } from "@/lib/utils";
 import AnnouncementBanner from "./components/redesign/AnnouncementBanner";
 import CinematicNavbarBlur from "./components/redesign/CinematicNavbarBlur";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 
 const queryClient = new QueryClient();
 
@@ -117,9 +118,11 @@ const App = () => (
         <Sonner />
         <AuthProvider>
           <PortfolioAuthProvider>
+            <CurrencyProvider>
             <BrowserRouter>
               <AppShell />
             </BrowserRouter>
+            </CurrencyProvider>
           </PortfolioAuthProvider>
         </AuthProvider>
       </TooltipProvider>

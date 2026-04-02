@@ -13,7 +13,7 @@ export default function AnnouncementBanner() {
         >
             <div className="container mx-auto px-4 md:px-6 flex flex-row items-center justify-center gap-2 md:gap-6">
                 <p className="text-[12px] md:text-sm font-medium tracking-tight text-[#0D0D0D] text-center whitespace-nowrap">
-                    PR services launching soon <span className="opacity-50 ml-1 hidden md:inline">(We now take you global)</span>
+                    Now accepting Q2 projects <span className="opacity-50 ml-1 hidden md:inline">— limited spots available</span>
                 </p>
                 <Link 
                     to="/portfolio" 

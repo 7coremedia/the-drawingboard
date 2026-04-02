@@ -8,7 +8,7 @@ export default function RedesignFooter() {
                 {/* 1. BRAND STATEMENT */}
                 <div className="mb-24 md:mb-40 max-w-4xl">
                     <p className="font-display text-4xl md:text-6xl font-black text-[#0D0D0D] tracking-tighter leading-[0.95]">
-                        Building brands that travel — across industries, across borders, across every stage of growth. <span className="text-[#C94A2C]">That is the KŌDĒ standard.</span>
+                        We build brands that people have feelings about — the kind that travel across industries, borders, and every room you walk into. <span className="text-[#C94A2C]">That is the KŌDĒ standard.</span>
                     </p>
                 </div>
 
@@ -66,7 +66,7 @@ export default function RedesignFooter() {
                                 <span className="hidden md:inline">•</span>
                                 <span>Lagos — London</span>
                             </div>
-                            <span className="text-[#C94A2C]/40">Diagnostic Branding Protocol</span>
+                            <span className="text-[#C94A2C]/40">Lifestyle Branding Studio</span>
                         </div>
                     </div>
                 </div>

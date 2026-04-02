@@ -27,11 +27,11 @@ export default function Exclusive() {
                             <ShieldCheck size={24} className="text-[#C94A2C]" />
                         </div>
                         <div className="space-y-3">
-                             <div className="text-[#0D0D0D] font-display text-sm md:text-lg font-black tracking-widest uppercase">ID: ELITE-PRIME</div>
+                             <div className="text-[#0D0D0D] font-display text-sm md:text-lg font-black tracking-widest uppercase">Priority Access</div>
                              <div className="h-0.5 w-16 bg-[#C94A2C]" />
                              <p className="text-[#0D0D0D]/40 text-[8px] md:text-[10px] font-bold tracking-widest leading-tight uppercase flex items-center gap-2">
                                 <span className="w-1.5 h-1.5 bg-[#C94A2C] rounded-full animate-pulse" />
-                                High Fidelity Priority
+                                Currently Accepting Projects
                              </p>
                         </div>
                     </motion.div>
@@ -54,12 +54,12 @@ export default function Exclusive() {
                         </motion.div>
 
                         <div className="space-y-12 max-w-4xl relative z-20 px-4">
-                            <span className="text-[10px] uppercase tracking-[0.5em] font-black text-[#C94A2C]">Engagement Capacity</span>
+                            <span className="text-[10px] uppercase tracking-[0.5em] font-black text-[#C94A2C]">Limited Availability</span>
                             <h2 className="text-3xl md:text-6xl font-display leading-[0.95] text-[#0D0D0D] font-black tracking-tighter">
-                                Architecture, <br className="hidden md:block" /> Not Volume.
+                                We take on fewer projects. <br className="hidden md:block" /> So yours gets everything.
                             </h2>
                             <p className="text-[#0D0D0D]/50 text-lg md:text-2xl font-medium leading-relaxed max-w-2xl mx-auto">
-                                We admit a select number of new category-shifting projects each quarter. This ensures the KŌDĒ standard of undeniable market authority.
+                                We only take on a handful of brand projects each quarter. That means direct access to the creative director, undivided attention, and work that actually moves your business forward.
                             </p>
                         </div>
 
@@ -68,14 +68,14 @@ export default function Exclusive() {
                                 href="/onboarding"
                                 className="group w-full sm:w-auto bg-[#0D0D0D] text-white py-6 px-12 md:px-16 rounded-full font-display text-[11px] font-bold uppercase tracking-[0.3em] hover:scale-105 transition-all shadow-2xl flex items-center justify-center gap-4 border border-transparent"
                             >
-                                Initiate Brief
+                                Start Your Project
                                 <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
                             </a>
                             <a
                                 href="/about"
                                 className="w-full sm:w-auto bg-transparent py-6 px-12 md:px-16 rounded-full font-display text-[11px] font-bold uppercase tracking-[0.3em] hover:bg-black/[0.03] transition-all border border-black/10 text-[#0D0D0D] flex items-center justify-center"
                             >
-                                Our Methodology
+                                How We Work
                             </a>
                         </div>
 
@@ -83,15 +83,15 @@ export default function Exclusive() {
                         <div className="absolute bottom-12 md:bottom-20 left-0 right-0 flex justify-center items-center gap-6 md:gap-16 opacity-30 px-8 text-center text-[7px] md:text-[9px] font-black uppercase tracking-[0.4em] text-[#0D0D0D]">
                             <div className="flex items-center gap-3">
                                 <div className="w-1 h-1 bg-[#C94A2C] rounded-full" />
-                                <span className="whitespace-nowrap">High Touch Strategy</span>
+                                <span className="whitespace-nowrap">Founder-Led Strategy</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="w-1 h-1 bg-black rounded-full" />
-                                <span className="whitespace-nowrap font-black text-[#C94A2C]">Enrollment Open Q2</span>
+                                <span className="whitespace-nowrap font-black text-[#C94A2C]">Now Accepting Q2 Projects</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="w-1 h-1 bg-black rounded-full" />
-                                <span className="whitespace-nowrap">Global Access Authorized</span>
+                                <span className="whitespace-nowrap">Lagos · London · Global</span>
                             </div>
                         </div>
                     </div>

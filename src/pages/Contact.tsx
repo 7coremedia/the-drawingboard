@@ -51,7 +51,7 @@ export default function Contact() {
   }, [searchParams, form]);
 
   const sendToWhatsApp = (values: Values) => {
-    const message = `Protocol Request: Strategic Brand Inquiry.\n\nName: ${values.name}\nEmail: ${values.email}\nMessage: ${values.message}`;
+    const message = `Hi — I'm interested in working with KŌDĒ.\n\nName: ${values.name}\nEmail: ${values.email}\nMessage: ${values.message}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
@@ -81,23 +81,23 @@ export default function Contact() {
             className="space-y-8"
           >
             <div className="flex items-center gap-4">
-              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Access Protocol</span>
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Get In Touch</span>
               <div className="h-px w-12 bg-black/5" />
             </div>
             <h1 className="font-display text-5xl md:text-8xl font-black tracking-tighter leading-[0.95]">
-              Let’s Build <br /> Something <br /> <span className="text-[#C94A2C]">Indisputable.</span>
+              Let's build <br /> something you're <br /> <span className="text-[#C94A2C]">proud of.</span>
             </h1>
             <p className="text-[#0D0D0D]/60 text-lg md:text-2xl font-medium max-w-2xl leading-relaxed">
-              We’re currently accepting new strategic engagements. The first step is a clinical discovery briefing — focused, decisive, and results-oriented.
+              We're currently taking on new projects. Tell us where you are, where you want to be, and we'll figure out the rest together.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 pt-4">
                 <a href="https://calendly.com" target="_blank" rel="noopener noreferrer" className="group flex items-center justify-center gap-4 bg-[#0D0D0D] text-white px-10 py-5 rounded-full font-display font-bold text-[10px] tracking-[0.3em] uppercase transition-all hover:scale-105 active:scale-95 shadow-xl">
-                    Schedule Briefing
+                    Book a Call
                     <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
                 <a href="/brand-audit" className="group flex items-center justify-center gap-4 bg-white text-[#0D0D0D] border border-black/5 px-10 py-5 rounded-full font-display font-bold text-[10px] tracking-[0.3em] uppercase transition-all hover:bg-black/5">
-                    Strategic Audit
+                    Get a Brand Audit
                     <div className="w-1.5 h-1.5 rounded-full bg-[#C94A2C] shadow-[0_0_8px_rgba(201,74,44,0.5)]" />
                 </a>
             </div>
@@ -116,11 +116,11 @@ export default function Contact() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <FormField name="name" control={form.control} render={({ field }) => (
                   <FormItem className="space-y-4">
-                    <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Full Name / Entity</FormLabel>
+                    <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Your Name</FormLabel>
                     <FormControl>
                       <Input
                         className="rounded-2xl bg-[#F5F0E8]/50 border-black/[0.05] text-[#0D0D0D] h-16 focus:ring-1 focus:ring-[#C94A2C] transition-all placeholder:text-black/10 px-6 text-lg font-medium"
-                        placeholder="Clinical Identity"
+                        placeholder="Your full name"
                         {...field}
                       />
                     </FormControl>
@@ -129,7 +129,7 @@ export default function Contact() {
                 )} />
                 <FormField name="email" control={form.control} render={({ field }) => (
                   <FormItem className="space-y-4">
-                    <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Electronic Mail</FormLabel>
+                    <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Email Address</FormLabel>
                     <FormControl>
                       <Input
                         className="rounded-2xl bg-[#F5F0E8]/50 border-black/[0.05] text-[#0D0D0D] h-16 focus:ring-1 focus:ring-[#C94A2C] transition-all placeholder:text-black/10 px-6 text-lg font-medium"
@@ -145,13 +145,13 @@ export default function Contact() {
 
               <FormField name="message" control={form.control} render={({ field }) => (
                 <FormItem className="space-y-4">
-                  <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Project Architecture Objectives</FormLabel>
+                  <FormLabel className="text-[10px] uppercase tracking-[0.3em] font-bold text-[#0D0D0D]/30">Tell Us About Your Project</FormLabel>
                   <FormControl>
                     <div className="relative group">
                         <Textarea
                         rows={6}
                         className="rounded-[2rem] bg-[#F5F0E8]/50 border-black/[0.05] text-[#0D0D0D] focus:ring-1 focus:ring-[#C94A2C] transition-all placeholder:text-black/10 px-6 py-6 text-lg font-medium resize-none"
-                        placeholder="Define the scope of the engagement..."
+                        placeholder="What are you building? What's the biggest challenge your brand is facing right now?"
                         {...field}
                         />
                         <div className="absolute top-6 right-6 text-black/5 group-focus-within:text-[#C94A2C]/20 transition-colors">
@@ -169,7 +169,7 @@ export default function Contact() {
                         type="submit"
                         className="rounded-full px-10 py-7 h-auto bg-[#0D0D0D] text-white font-display font-bold text-[10px] tracking-[0.3em] uppercase hover:scale-105 active:scale-95 transition-all shadow-xl"
                     >
-                        Initiate WhatsApp
+                        Send via WhatsApp
                     </Button>
                     <Button
                         type="button"
@@ -196,7 +196,7 @@ export default function Contact() {
                         <div className="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center transition-all group-hover:bg-[#C94A2C] group-hover:text-white shadow-sm">
                             <PhoneCall size={16} />
                         </div>
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Authorized Call</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">Call Us</span>
                     </button>
                     
                     <div className="hidden md:flex items-center gap-3 text-[#0D0D0D]/20">
@@ -209,7 +209,7 @@ export default function Contact() {
               {/* Minimalist Contact Card Footer */}
               <div className="mt-16 pt-12 border-t border-black/5 flex flex-col md:flex-row justify-between items-center gap-6">
                 <p className="text-[#0D0D0D]/30 text-[9px] font-bold uppercase tracking-[0.4em] text-center md:text-left">
-                  Global Operability — available in all major time zones.
+                  Lagos · London · Working globally across all time zones.
                 </p>
                 <div className="flex gap-4">
                     <div className="w-1.5 h-1.5 rounded-full bg-black/10" />

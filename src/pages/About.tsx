@@ -23,14 +23,14 @@ const About = () => {
               className="space-y-8"
             >
               <div className="flex items-center gap-4">
-                <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">KŌDĒ Genesis</span>
+                <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Our Story</span>
                 <div className="h-px w-12 bg-black/5" />
               </div>
               <h1 className="font-display text-5xl md:text-8xl font-black tracking-tighter leading-[0.95]">
-                Great Brands <br /> Engineered for <br /> <span className="text-[#C94A2C]">Authority.</span>
+                Great brands <br /> aren't lucky. <br /> <span className="text-[#C94A2C]">They're built.</span>
               </h1>
               <p className="max-w-2xl text-lg md:text-2xl font-medium text-[#0D0D0D]/50 leading-relaxed">
-                We started KŌDĒ because the most influential brands shouldn’t only belong to the largest budgets. We built a system to change that.
+                We started KŌDĒ because the gap between a freelancer and a global agency shouldn't mean settling for less. African founders deserve world-class brand thinking — without the world-class price tag.
               </p>
             </motion.div>
           </div>
@@ -62,27 +62,27 @@ const About = () => {
                 <div className="grid lg:grid-cols-12 gap-12 lg:gap-20">
                      <div className="lg:col-span-12 space-y-12">
                         <div className="space-y-8">
-                             <h2 className="text-3xl md:text-5xl font-display font-black tracking-tighter leading-tight">Born in Pressure. <br /> Designed for Scale.</h2>
+                             <h2 className="text-3xl md:text-5xl font-display font-black tracking-tighter leading-tight">Born in Lagos. <br /> Built for everywhere.</h2>
                              <div className="h-1 w-20 bg-[#C94A2C]" />
                         </div>
                         
                         <div className="grid md:grid-cols-2 gap-12 text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-[1.6]">
                              <div className="space-y-8">
                                 <p>
-                                    KŌDĒ was born in Lagos — one of the world’s most competitive, culturally rich business environments. We’ve built brands for startups and personal brands winning international rooms across fashion, fintech, music, and corporate.
+                                    KŌDĒ was born in Lagos — one of the most competitive, culturally demanding business environments on earth. We've built brands across fashion, fintech, music, and consulting that win rooms in Lagos, London, and everywhere in between.
                                 </p>
                                 <p>
-                                    The brands that travel — across industries, borders, and rooms — are built on one thing: clarity. Clarity about who you are and what you stand for that nobody else can claim.
+                                    The brands that travel are built on one thing: clarity. Clarity about who you are, what you stand for, and why you're the only choice.
                                 </p>
                              </div>
                              <div className="space-y-8">
                                 <p>
-                                    That’s what we build. Not just logos. Not just color palettes. Systems. We are the architects of the brands that will define the next decade of commerce, culture, and taste.
+                                    That's what we build. Not logos. Not slide decks. We build brand systems that make people have feelings about your business — the kind of feelings that turn browsers into buyers and buyers into believers.
                                 </p>
                                 <div className="pt-8 flex flex-col gap-6">
-                                     <p className="text-2xl md:text-3xl font-display font-black text-[#0D0D0D] tracking-tight leading-tight">If you’re building something serious — we should talk.</p>
+                                     <p className="text-2xl md:text-3xl font-display font-black text-[#0D0D0D] tracking-tight leading-tight">If you're building something that matters — let's talk.</p>
                                      <a href="/onboarding" className="group w-fit flex items-center gap-4 bg-[#0D0D0D] text-white px-10 py-5 rounded-full font-display font-bold text-[10px] tracking-[0.3em] uppercase transition-all hover:scale-105 active:scale-95 shadow-xl">
-                                         Start Application
+                                         Start a Conversation
                                          <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                      </a>
                                 </div>
@@ -137,9 +137,9 @@ const About = () => {
               {/* Leadership Copy */}
               <div className="lg:col-span-7 space-y-12">
                 <div className="space-y-6">
-                     <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Our Methodology</span>
+                     <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Why Us</span>
                      <h2 className="font-display text-4xl md:text-6xl font-black leading-[0.95] tracking-tighter">
-                        Direct Access. <br /> Lean Strategy. <br /> High Fidelity.
+                        No account managers. <br /> No juniors. <br /> No telephone.
                      </h2>
                 </div>
                 
@@ -154,7 +154,7 @@ const About = () => {
 
                 <div className="pt-6">
                    <a href="#contact" className="w-fit flex items-center gap-4 bg-[#F5F0E8] text-[#0D0D0D] px-10 py-5 rounded-full font-display font-medium text-[10px] tracking-[0.3em] uppercase transition-all hover:bg-white active:scale-95 border border-black/5 shadow-sm">
-                        Join the Partnership
+                        Book a Call
                    </a>
                 </div>
               </div>

@@ -15,7 +15,7 @@ export default function Cta({ background = 'transparent', className }: CtaProps)
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleWhatsAppClick = () => {
-    const encodedMessage = encodeURIComponent(message || "Protocol Request: Strategic Brand Architecture Inquiry.");
+    const encodedMessage = encodeURIComponent(message || "Hi — I came across KŌDĒ and I'm interested in talking about my brand.");
     window.open(`https://wa.me/2348160891799?text=${encodedMessage}`, '_blank');
   };
 
@@ -65,14 +65,14 @@ export default function Cta({ background = 'transparent', className }: CtaProps)
           {/* Left: Heading & Context */}
           <div className="lg:col-span-12 xl:col-span-5 space-y-6">
             <div className="flex items-center gap-4">
-                <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Access Onboarding</span>
+                <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Ready to Start?</span>
                 <div className="h-px w-12 bg-black/5" />
             </div>
             <h2 className="font-display text-4xl md:text-6xl font-black text-[#0D0D0D] tracking-tighter leading-[0.95]">
-              Initiate Your <br /> Brand Protocol.
+              Tell us what <br /> you're building.
             </h2>
             <p className="text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-relaxed max-w-sm">
-              Brief us on your current position and target trajectory.
+              You don't need a perfect brief. Just tell us where you are and where you want to be — we'll take it from there.
             </p>
           </div>
 
@@ -83,7 +83,7 @@ export default function Cta({ background = 'transparent', className }: CtaProps)
                 name="message"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Current Project Objectives..."
+                placeholder="What's the biggest challenge your brand is facing?"
                 className="w-full h-40 p-10 bg-[#F5F0E8]/50 border border-black/[0.05] rounded-[2.5rem] placeholder:text-black/20 resize-none focus:outline-none focus:ring-1 focus:ring-[#C94A2C] text-[#0D0D0D] transition-all duration-500 font-medium text-lg leading-relaxed"
               />
               <div className="absolute top-8 right-8 text-black/5 group-focus-within:text-[#C94A2C]/20 transition-colors">
@@ -98,7 +98,7 @@ export default function Cta({ background = 'transparent', className }: CtaProps)
                         onClick={handleWhatsAppClick}
                         className="bg-[#0D0D0D] text-white rounded-full px-8 py-6 hover:scale-105 active:scale-95 transition-all font-display text-[10px] font-bold uppercase tracking-[0.3em] flex items-center gap-3 shadow-xl"
                     >
-                        WhatsApp Direct
+                        Send via WhatsApp
                     </Button>
                     <Button
                         type="button"
