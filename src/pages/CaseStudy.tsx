@@ -64,6 +64,11 @@ export default function CaseStudy() {
     .map((entry) => entry.trim())
     .filter(Boolean);
 
+  const growthParagraphs = (currentCaseStudy.description || "")
+    .split(/\n+/)
+    .map((entry) => entry.trim())
+    .filter(Boolean);
+
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] pt-24 md:pt-40">
       <Helmet>
@@ -130,7 +135,7 @@ export default function CaseStudy() {
                                 <p className="text-xl font-bold">{currentCaseStudy.industry || "Market Leader"}</p>
                             </div>
                             <div>
-                                <p className="text-[8px] uppercase tracking-widest text-black/20 font-bold mb-1">Metric_02</p>
+                                <p className="text-[8px] uppercase tracking-widest text-black/20 font-bold mb-1">Primary Outcome</p>
                                 <p className="text-xl font-bold">{currentCaseStudy.year || "2026 Archive"}</p>
                             </div>
                         </div>
@@ -160,7 +165,7 @@ export default function CaseStudy() {
                 {challengeParagraphs.length > 0 && (
                   <div className="space-y-8">
                     <div className="flex items-center gap-4">
-                        <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-[#0D0D0D]">The Challenge</h3>
+                        <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-[#0D0D0D]">Diagnostic (Before)</h3>
                         <div className="h-px flex-grow bg-black/[0.03]" />
                     </div>
                     {challengeParagraphs.map((paragraph, index) => (
@@ -174,11 +179,25 @@ export default function CaseStudy() {
                 {solutionParagraphs.length > 0 && (
                   <div className="space-y-8">
                     <div className="flex items-center gap-4">
-                        <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-[#0D0D0D]">The Solution</h3>
+                        <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-[#0D0D0D]">Strategy & Transformation</h3>
                         <div className="h-px flex-grow bg-black/[0.03]" />
                     </div>
                     {solutionParagraphs.map((paragraph, index) => (
                       <p key={`solution-${index}`} className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed max-w-4xl">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                )}
+
+                {growthParagraphs.length > 0 && (
+                  <div className="space-y-8">
+                    <div className="flex items-center gap-4">
+                        <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-[#0D0D0D]">Digital & Growth Execution</h3>
+                        <div className="h-px flex-grow bg-black/[0.03]" />
+                    </div>
+                    {growthParagraphs.map((paragraph, index) => (
+                      <p key={`growth-${index}`} className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed max-w-4xl">
                         {paragraph}
                       </p>
                     ))}

@@ -31,7 +31,7 @@ export default function Exclusive() {
                              <div className="h-0.5 w-16 bg-[#C94A2C]" />
                              <p className="text-[#0D0D0D]/40 text-[8px] md:text-[10px] font-bold tracking-widest leading-tight uppercase flex items-center gap-2">
                                 <span className="w-1.5 h-1.5 bg-[#C94A2C] rounded-full animate-pulse" />
-                                Currently Accepting Projects
+                                2 Spots Remaining
                              </p>
                         </div>
                     </motion.div>
@@ -87,7 +87,7 @@ export default function Exclusive() {
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="w-1 h-1 bg-black rounded-full" />
-                                <span className="whitespace-nowrap font-black text-[#C94A2C]">Now Accepting Q2 Projects</span>
+                                <span className="whitespace-nowrap font-black text-[#C94A2C]">Now Accepting Q2 Projects — 2 Spots Left</span>
                             </div>
                             <div className="flex items-center gap-3">
                                 <div className="w-1 h-1 bg-black rounded-full" />

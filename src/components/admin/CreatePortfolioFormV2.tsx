@@ -23,9 +23,9 @@ const portfolioSchema = z.object({
   category: z.enum(["Branding", "Logo", "Poster", "Other"]),
   industry: z.string().optional(),
   location: z.string().optional(),
-  our_role: z.string().optional(),
   the_challenge: z.string().optional(),
   the_solution: z.string().optional(),
+  description: z.string().optional(),
   notes: z.any().optional(),
   is_notes_downloadable: z.boolean().default(true),
   tagline: z.string().min(1, "Tagline is required"),
@@ -53,8 +53,8 @@ interface CreatePortfolioFormV2Props {
     industry?: string;
     location?: string;
     our_role?: string;
-    the_challenge?: string;
     the_solution?: string;
+    description?: string;
     notes?: any;
     is_notes_downloadable?: boolean;
     portfolio_type: 'gallery' | 'case_study';
@@ -70,8 +70,8 @@ interface CreatePortfolioFormV2Props {
     industry?: string;
     location?: string;
     our_role?: string;
-    the_challenge?: string;
     the_solution?: string;
+    description?: string;
     notes?: any;
     is_notes_downloadable?: boolean;
     portfolio_type?: 'gallery' | 'case_study';
@@ -129,6 +129,7 @@ export default function CreatePortfolioFormV2({
       our_role: initialData?.our_role ?? "",
       the_challenge: initialData?.the_challenge ?? "",
       the_solution: initialData?.the_solution ?? "",
+      description: initialData?.description ?? "",
       notes: initialData?.notes,
       is_notes_downloadable: initialData?.is_notes_downloadable ?? true,
       is_published: initialData?.is_published ?? true,
@@ -158,8 +159,8 @@ export default function CreatePortfolioFormV2({
       industry: data.industry,
       location: data.location,
       our_role: data.our_role,
-      the_challenge: data.the_challenge,
       the_solution: data.the_solution,
+      description: data.description,
       notes: data.notes,
       is_notes_downloadable: data.is_notes_downloadable,
       portfolio_type: mode,
@@ -250,9 +251,9 @@ export default function CreatePortfolioFormV2({
               )} />
               <FormField control={form.control} name="year" render={({ field }) => (
                 <FormItem>
-                    <FormLabel className={labelClasses}>Archival Year</FormLabel>
+                    <FormLabel className={labelClasses}>Primary Outcome (Results)</FormLabel>
                     <FormControl>
-                        <Input placeholder="YYYY" className={inputClasses} {...field} />
+                        <Input placeholder="e.g. +45% Conversion Lift..." className={inputClasses} {...field} />
                     </FormControl>
                     <FormMessage />
                 </FormItem>
@@ -305,15 +306,22 @@ export default function CreatePortfolioFormV2({
                 )} />
                 <FormField control={form.control} name="the_challenge" render={({ field }) => (
                   <FormItem>
-                      <FormLabel className={labelClasses}>The Challenge</FormLabel>
+                      <FormLabel className={labelClasses}>Diagnostic (Before)</FormLabel>
                       <FormControl><Textarea placeholder="Diagnostic complication..." className={cn(inputClasses, "min-h-[120px] py-4")} {...field} /></FormControl>
                       <FormMessage />
                   </FormItem>
                 )} />
                 <FormField control={form.control} name="the_solution" render={({ field }) => (
                   <FormItem>
-                      <FormLabel className={labelClasses}>The Solution</FormLabel>
+                      <FormLabel className={labelClasses}>Strategy & Transformation</FormLabel>
                       <FormControl><Textarea placeholder="Clinical mitigation..." className={cn(inputClasses, "min-h-[120px] py-4")} {...field} /></FormControl>
+                      <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="description" render={({ field }) => (
+                  <FormItem>
+                      <FormLabel className={labelClasses}>Digital & Growth Execution</FormLabel>
+                      <FormControl><Textarea placeholder="Digital and growth metrics/strategy..." className={cn(inputClasses, "min-h-[120px] py-4")} {...field} /></FormControl>
                       <FormMessage />
                   </FormItem>
                 )} />

@@ -26,20 +26,27 @@ export default function Navbar() {
     }, []);
 
     const isHome = location.pathname === "/";
+    const isSuperstars = location.pathname === "/superstars";
+    const hasBanner = isHome || isSuperstars;
+    // Dark pages where logo/icons should be white at top
+    const isDarkHero = isSuperstars;
 
     return (
         <>
             <nav
                 className={cn(
                     "fixed inset-x-0 z-[60] h-16 md:h-20 transition-all duration-500 flex items-center border-none shadow-none",
-                    isHome && isAtTop ? "top-14 md:top-16" : "top-0",
+                    hasBanner && isAtTop ? "top-14 md:top-16" : "top-0",
                     isAtTop ? "translate-y-0" : "translate-y-[-4px] backdrop-blur-sm bg-black/5"
                 )}
             >
                 <div className="w-full flex items-center justify-between px-6 md:px-10 relative">
                     {/* Top Left: Logo (Text) */}
                     <NavLink to="/" className="flex items-center gap-2 flex-shrink-0" onClick={() => setMenuOpen(false)}>
-                        <span className="kode-wordmark text-lg sm:text-xl tracking-tight select-none text-[#0D0D0D] font-black">
+                        <span className={cn(
+                            "kode-wordmark text-lg sm:text-xl tracking-tight select-none font-black transition-colors duration-300",
+                            isDarkHero && isAtTop ? "text-white" : "text-[#0D0D0D]"
+                        )}>
                             KŌDĒ
                         </span>
                     </NavLink>
@@ -47,7 +54,12 @@ export default function Navbar() {
                     {/* Sidebar Navigation Toggle */}
                     <div className="flex items-center gap-4">
                         <button
-                            className="text-[#0D0D0D]/80 hover:text-black p-2 md:p-3 rounded-full bg-black/5 border border-black/10 transition-colors backdrop-blur-md z-50 overflow-hidden"
+                            className={cn(
+                                "p-2 md:p-3 rounded-full border transition-colors backdrop-blur-md z-50 overflow-hidden",
+                                isDarkHero && isAtTop
+                                    ? "text-white/80 hover:text-white bg-white/10 border-white/20"
+                                    : "text-[#0D0D0D]/80 hover:text-black bg-black/5 border-black/10"
+                            )}
                             onClick={() => setMenuOpen(!menuOpen)}
                             aria-label="Toggle Menu"
                         >
@@ -80,9 +92,11 @@ export default function Navbar() {
                         >
                             {/* Sidebar Header with Close Button */}
                             <div className="flex items-center justify-between p-6 md:p-10 border-b border-black/[0.03]">
-                                <span className="kode-wordmark text-lg tracking-tight select-none text-[#0D0D0D] font-black">
-                                    KŌDĒ
-                                </span>
+                                <NavLink to="/" onClick={() => setMenuOpen(false)}>
+                                    <span className="kode-wordmark text-lg tracking-tight select-none text-[#0D0D0D] font-black">
+                                        KŌDĒ
+                                    </span>
+                                </NavLink>
                                 <button
                                     onClick={() => setMenuOpen(false)}
                                     className="p-3 rounded-full hover:bg-black/5 transition-colors text-[#0D0D0D]"
@@ -95,6 +109,7 @@ export default function Navbar() {
                                 {[
                                     { name: "Home", path: "/" },
                                     { name: "Work", path: "/portfolio" },
+                                    { name: "Solutions", path: "/solutions" },
                                     { name: "Services", path: "/services" },
                                     { name: "Studio", path: "/about" },
                                     { name: "Brand Audit", path: "/brand-audit" },

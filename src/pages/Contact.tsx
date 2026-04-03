@@ -87,8 +87,8 @@ export default function Contact() {
             <h1 className="font-display text-5xl md:text-8xl font-black tracking-tighter leading-[0.95]">
               Let's build <br /> something you're <br /> <span className="text-[#C94A2C]">proud of.</span>
             </h1>
-            <p className="text-[#0D0D0D]/60 text-lg md:text-2xl font-medium max-w-2xl leading-relaxed">
-              We're currently taking on new projects. Tell us where you are, where you want to be, and we'll figure out the rest together.
+            <p className="text-[#0D0D0D]/60 text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
+              <span className="font-bold text-[#C94A2C]">Now accepting Q2 projects — only 2 spots remaining.</span> Tell us where you are, where you want to be, and we'll figure out the rest together.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 pt-4">

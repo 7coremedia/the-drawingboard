@@ -49,6 +49,7 @@ export default function PortfolioGrid() {
         slug: String(item.slug),
         portfolio_type: String((item as any).portfolio_type || 'gallery'),
         summary: String((item as any).tagline || (item as any).short_description || item.category || 'Creative collaboration'),
+        createdAt: item.created_at,
       }))
     : [];
   const caseStudyItems = allItems.filter((i) => i.portfolio_type === 'case_study');
@@ -102,6 +103,15 @@ export default function PortfolioGrid() {
     const scrollAmount = container.clientWidth * 0.8;
     const delta = direction === 'next' ? scrollAmount : -scrollAmount;
     container.scrollBy({ left: delta, behavior: 'smooth' });
+  };
+
+  const isRecent = (dateString?: string | null) => {
+    if (!dateString) return false;
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffTime = now.getTime() - date.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    return diffDays <= 30 && diffDays >= 0;
   };
 
   if (isLoading) {
@@ -208,6 +218,7 @@ export default function PortfolioGrid() {
                         category={item.category}
                         imageUrl={item.imageUrl}
                         slug={item.slug}
+                        isNew={isRecent(item.createdAt)}
                       />
                     </motion.div>
                   ))}

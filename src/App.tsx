@@ -24,6 +24,12 @@ import Volumes from "./pages/Volumes";
 import VolumeDetail from "./pages/VolumeDetail";
 import BrandAudit from "./pages/BrandAudit";
 import BrandAssessment from "./pages/BrandAssessment";
+import BrandROICalculator from "./pages/BrandROICalculator";
+import Solutions from "./pages/Solutions";
+import PersonalBrandLauncher from "./pages/PersonalBrandLauncher";
+import AdvancedBrandLauncher from "./pages/AdvancedBrandLauncher";
+import StrategicBrandSystems from "./pages/StrategicBrandSystems";
+import Superstars from "./pages/Superstars";
 // Dashboard imports
 import ProtectedLayout from "./components/layout/ProtectedLayout";
 import ManagementDashboard from "./pages/management/Index";
@@ -44,6 +50,8 @@ import { cn } from "@/lib/utils";
 import AnnouncementBanner from "./components/redesign/AnnouncementBanner";
 import CinematicNavbarBlur from "./components/redesign/CinematicNavbarBlur";
 import { CurrencyProvider } from "@/context/CurrencyContext";
+import ExitIntentOverlay from "./components/redesign/ExitIntentOverlay";
+import StickyCTA from "./components/redesign/StickyCTA";
 
 const queryClient = new QueryClient();
 
@@ -53,18 +61,31 @@ function AppShell() {
   const isChatPage = location.pathname === "/branding-chat";
   const isVolumeRoute = location.pathname.startsWith("/volumes");
   const isPortfolio = location.pathname === "/portfolio" || location.pathname.startsWith("/portfolio/");
+  const isSuperstars = location.pathname === "/superstars";
   return (
     <>
       <Helmet>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=3" />
       </Helmet>
       <CursorRing enabled={false} size={56} />
+      <ExitIntentOverlay />
+      <StickyCTA />
       {isHome && <AnnouncementBanner />}
+      {isSuperstars && (
+        <AnnouncementBanner
+          pill="New"
+          message="Brand ROI Calculator"
+          messageSecondary="— see what weak branding costs you"
+          linkLabel="Try it"
+          linkTo="/brand-roi-calculator"
+          bgColor="#FFB16B"
+        />
+      )}
       {!isChatPage && !location.pathname.startsWith("/management") && <CinematicNavbarBlur />}
       {!isChatPage && !location.pathname.startsWith("/management") && <Navbar />}
       <main
         className={cn(
-          !isHome && !isChatPage && "pt-28 md:pt-32",
+          !isHome && !isChatPage && !isSuperstars && "pt-28 md:pt-32",
           isVolumeRoute && "bg-[#1a1b1d]"
         )}
       >
@@ -76,6 +97,12 @@ function AppShell() {
           <Route path="/services" element={<Services />} />
           <Route path="/brand-audit" element={<BrandAudit />} />
           <Route path="/brand-audit-quiz" element={<BrandAssessment />} />
+          <Route path="/brand-roi-calculator" element={<BrandROICalculator />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/personal-brand-launcher" element={<PersonalBrandLauncher />} />
+          <Route path="/advanced-brand-launcher" element={<AdvancedBrandLauncher />} />
+          <Route path="/strategic-brand-systems" element={<StrategicBrandSystems />} />
+          <Route path="/superstars" element={<Superstars />} />
           <Route path="/volumes" element={<Volumes />} />
           <Route path="/volumes/:id" element={<VolumeDetail />} />
           <Route path="/jobs" element={<Jobs />} />

@@ -71,6 +71,13 @@ export default function Portfolio() {
           </motion.div>
         </div>
 
+        <div className="flex justify-end mb-8 relative z-20 mx-4">
+          <a href="/brand-roi-calculator" className="bg-white rounded-full pl-6 pr-2 py-2 flex items-center gap-4 hover:shadow-lg transition-shadow border border-black/5 group">
+            <span className="text-sm font-bold text-[#0D0D0D]">Brand ROI Calculator</span>
+            <span className="bg-[#C9A66B] text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-sm group-hover:scale-105 transition-transform">New</span>
+          </a>
+        </div>
+
         <PortfolioGrid />
       </main>
       

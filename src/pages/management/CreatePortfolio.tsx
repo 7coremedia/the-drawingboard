@@ -37,6 +37,7 @@ export default function CreatePortfolio() {
           our_role: data.our_role,
           the_challenge: data.the_challenge,
           the_solution: data.the_solution,
+          description: data.description,
           notes: data.notes,
           is_notes_downloadable: data.is_notes_downloadable,
           portfolio_type: data.portfolio_type || 'gallery',

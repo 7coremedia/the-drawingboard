@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import FeaturedWorksCarousel from "./FeaturedWorksCarousel";
+import SocialProofTicker from "./SocialProofTicker";
 
 export default function CinematicHero() {
     return (
@@ -82,6 +83,8 @@ export default function CinematicHero() {
                     </div>
                 </motion.h1>
 
+                <SocialProofTicker />
+
                 {/* Mobile Video Section (shows before the cards) */}
                 <motion.div
                     className="md:hidden block mb-4"
@@ -160,9 +163,10 @@ export default function CinematicHero() {
                         <div className="bg-[#D9C5B2] text-[#0D0D0D] rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-8 aspect-[3/4] md:aspect-video relative overflow-hidden flex flex-col justify-between transition-transform duration-500 hover:scale-[0.99] shadow-sm">
                             
                             <div className="z-10 relative">
+                                <div className="bg-[#0D0D0D] text-white text-[7px] md:text-[10px] font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-full uppercase tracking-widest shadow-xl absolute top-0 right-0">New</div>
                                 <p className="text-[#5C4D42] font-semibold text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl mb-0 md:mb-1">Your brand is</p>
                                 <div className="flex flex-col md:flex-row md:items-end gap-2 md:gap-4 md:flex-wrap">
-                                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] font-display tracking-tighter leading-[0.9] text-[#3D2C1F] max-w-[95%] md:max-w-[85%]">
+                                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-[64px] font-display tracking-tighter leading-[0.9] text-[#3D2C1F] max-w-[85%]">
                                         leaving money on the table
                                     </h3>
                                     
@@ -200,10 +204,11 @@ export default function CinematicHero() {
                     }}
                 >
                     {[
-                        { title: "Strategic brand systems", color: "text-[#1B4B66]", img: "/Quick Actions/Strategic Brand Systems.png", link: "/portfolio", scaleClass: "scale-[3.8] md:scale-[2.5]" },
-                        { title: "Rebuild brand authority", color: "text-[#8B4513]", img: "/Quick Actions/Rebuild Brand Authority.png", link: "/portfolio", scaleClass: "scale-[2.4] md:scale-[1.8]" },
-                        { title: "Scale your presence", color: "text-[#3D2C1F]", img: "/Quick Actions/Scale Your Presence.png", link: "/portfolio", scaleClass: "scale-[1.9] md:scale-[1.35]" },
-                        { title: "Free brand assessment", color: "text-[#006400]", img: "/Quick Actions/Free Brand Assesment.png", link: "/brand-audit-quiz", scaleClass: "scale-[2.4] md:scale-[1.8]" },
+                        { title: "Strategic brand systems", color: "text-[#1B4B66]", img: "/Quick Actions/Strategic Brand Systems.png", link: "/strategic-brand-systems", scaleClass: "scale-[3.8] md:scale-[2.5]", badge: null },
+                        { title: "Rebuild brand authority", color: "text-[#8B4513]", img: "/Quick Actions/Rebuild Brand Authority.png", link: "/personal-brand-launcher", scaleClass: "scale-[2.4] md:scale-[1.8]", badge: null },
+                        { title: "Scale your presence", color: "text-[#3D2C1F]", img: "/Quick Actions/Scale Your Presence.png", link: "/superstars", scaleClass: "scale-[1.9] md:scale-[1.35]", badge: null },
+                        { title: "Free brand assessment", color: "text-[#006400]", img: "/Quick Actions/Free Brand Assesment.png", link: "/brand-audit-quiz", scaleClass: "scale-[2.4] md:scale-[1.8]", badge: null },
+                        { title: "Brand ROI calculator", color: "text-[#0D0D0D]", img: null, link: "/brand-roi-calculator", scaleClass: "", badge: "NEW" },
                     ].map((card, i) => (
                         <motion.div
                             key={i}
@@ -211,10 +216,11 @@ export default function CinematicHero() {
                                 hidden: { opacity: 0, y: 20 },
                                 visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
                             }}
+                            className={cn(card.title === "Brand ROI calculator" ? "block md:hidden" : "block")}
                         >
                             <Link to={card.link} className="group block w-full">
                                 <div className="bg-white rounded-[1.5rem] md:rounded-[2rem] p-4 md:px-6 md:py-4 h-[80px] md:h-[100px] border border-black/5 flex flex-row items-center justify-between hover:bg-black/[0.02] transition-colors relative overflow-hidden">
-                                    <div className="flex items-center gap-2 z-10 w-auto px-2 md:px-0">
+                                    <div className="flex flex-col items-start gap-2 z-10 w-auto px-2 md:px-0">
                                         <h4 className={cn("text-base md:text-[17px] font-display font-medium leading-[1.1] max-w-[150px] md:max-w-[130px]", card.color)}>
                                             {card.title.split(' ').map((word, idx) => (
                                               <span key={idx} className={cn(idx === card.title.split(' ').length - 1 ? "opacity-60" : "")}>
@@ -225,9 +231,14 @@ export default function CinematicHero() {
                                     </div>
                                     
                                     <div className="flex items-center gap-1 md:gap-2 z-10 px-2 md:px-0 flex-shrink-0">
-                                        <div className="relative w-16 h-16 md:w-24 md:h-24 opacity-100 group-hover:scale-110 transition-all duration-500 flex items-center justify-center pointer-events-none">
-                                            <img src={card.img} alt="Card Icon" className={cn("w-full h-full object-contain drop-shadow-lg", card.scaleClass)} />
-                                        </div>
+                                        {card.badge && (
+                                            <span className="bg-[#C9A66B] text-white text-[8px] font-black uppercase tracking-[0.2em] px-2 py-1 rounded-full shadow-sm mr-2">{card.badge}</span>
+                                        )}
+                                        {card.img && (
+                                            <div className="relative w-16 h-16 md:w-24 md:h-24 opacity-100 group-hover:scale-110 transition-all duration-500 flex items-center justify-center pointer-events-none">
+                                                <img src={card.img} alt="Card Icon" className={cn("w-full h-full object-contain drop-shadow-lg", card.scaleClass)} />
+                                            </div>
+                                        )}
                                         <ChevronRight className="w-4 h-4 md:w-5 md:h-5 opacity-40 group-hover:opacity-100 transition-opacity" />
                                     </div>
                                 </div>
