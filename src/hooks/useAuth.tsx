@@ -175,7 +175,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signInWithGoogle = React.useCallback(async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "https://kingsempire.vercel.app" },
+      options: { redirectTo: `${window.location.origin}/management` },
     });
     return { error };
   }, []);
