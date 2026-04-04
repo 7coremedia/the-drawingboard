@@ -205,115 +205,127 @@ export default function Auth() {
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center bg-background p-4">
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-[#F5F0E8] p-6 pt-32">
       <Helmet>
-        <title>Sign In - KING</title>
-        <meta name="description" content="Sign in to your KING account or create a new one to access your brand strategy." />
+        <title>Protocol Access – KŌDĒ</title>
+        <meta name="description" content="Sign in to access your strategic brand protocols." />
         <link rel="canonical" href="/auth" />
       </Helmet>
       
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <CardTitle className="font-display text-2xl">Welcome to KING</CardTitle>
-          <CardDescription>
-            {location.state?.fromOnboarding 
-              ? "Please sign up or sign in to complete your onboarding." 
-              : location.state?.fromWizard
-              ? "Please sign up or sign in to save your brand."
-              : "Sign in to access your brand strategy"
-            }
-          </CardDescription>
-          {location.state?.message && (
-            <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-md">
-              <p className="text-sm text-blue-800">{location.state.message}</p>
-            </div>
-          )}
-        </CardHeader>
-        <CardContent>
-          <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Sign In</TabsTrigger>
-              <TabsTrigger value="signup">Sign Up</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="signin" className="space-y-4">
-              <form onSubmit={handleSignIn} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
-                  <Input
-                    id="signin-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+      <div className="w-full max-w-[480px]">
+          <div className="text-center mb-12">
+              <span className="text-[10px] uppercase font-black tracking-[0.4em] text-[#C94A2C] mb-4 block">Security Gateway</span>
+              <h1 className="text-5xl md:text-6xl font-display font-black tracking-tighter leading-[0.9] text-[#0D0D0D]">
+                  Operational <br /> Access.
+              </h1>
+              <p className="mt-6 text-[#0D0D0D]/40 font-medium max-w-sm mx-auto">
+                {location.state?.fromOnboarding 
+                  ? "Authentication required to finalize onboarding protocols." 
+                  : location.state?.fromWizard
+                  ? "Authentication required to encrypt brand assets."
+                  : "Provide credentials to access your administrative dashboard."
+                }
+              </p>
+              
+              {location.state?.message && (
+                <div className="mt-8 p-4 bg-white rounded-2xl border border-black/5 shadow-md inline-block">
+                  <p className="text-[10px] uppercase font-bold tracking-widest text-[#C94A2C]">{location.state.message}</p>
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signin-password">Password</Label>
-                  <Input
-                    id="signin-password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Signing In..." : "Sign In"}
-                </Button>
-              </form>
-            </TabsContent>
-            
-            <TabsContent value="signup" className="space-y-4">
-              <form onSubmit={handleSignUp} className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
-                  <Input
-                    id="signup-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
-                  <Input
-                    id="signup-password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    minLength={6}
-                  />
-                </div>
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Creating Account..." : "Create Account"}
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
-          
-          <div className="mt-6">
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
-              </div>
-            </div>
-            <Button
-              variant="outline"
-              className="w-full mt-4"
-              onClick={handleGoogleAuth}
-              disabled={loading}
-            >
-              Sign in with Google
-            </Button>
+              )}
           </div>
-        </CardContent>
-      </Card>
+
+          <div className="bg-white p-8 md:p-10 rounded-[2.5rem] border border-black/5 shadow-2xl">
+              <Tabs defaultValue="signin" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 mb-8 bg-black/5 rounded-xl block p-1">
+                  <TabsTrigger value="signin" className="rounded-lg text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:text-[#0D0D0D] data-[state=active]:shadow-sm transition-all h-10">Sign In</TabsTrigger>
+                  <TabsTrigger value="signup" className="rounded-lg text-[10px] font-black uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:text-[#0D0D0D] data-[state=active]:shadow-sm transition-all h-10">Sign Up</TabsTrigger>
+                </TabsList>
+                
+                <TabsContent value="signin" className="space-y-6">
+                  <form onSubmit={handleSignIn} className="space-y-6">
+                    <div className="space-y-3">
+                      <Label htmlFor="signin-email" className="text-[9px] font-black uppercase tracking-[0.2em] text-[#0D0D0D]/40">Email Identification</Label>
+                      <Input
+                        id="signin-email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="h-14 bg-[#F5F0E8]/50 border border-black/5 rounded-xl px-4 font-medium focus:bg-white transition-colors"
+                        placeholder="admin@kode.studio"
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <Label htmlFor="signin-password" className="text-[9px] font-black uppercase tracking-[0.2em] text-[#0D0D0D]/40">Security Key</Label>
+                      <Input
+                        id="signin-password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="h-14 bg-[#F5F0E8]/50 border border-black/5 rounded-xl px-4 font-medium focus:bg-white transition-colors"
+                        placeholder="••••••••"
+                      />
+                    </div>
+                    <Button type="submit" className="w-full h-14 bg-[#0D0D0D] hover:bg-[#C94A2C] text-white rounded-xl text-[11px] font-black uppercase tracking-widest transition-colors shadow-lg" disabled={loading}>
+                      {loading ? "Authenticating..." : "Establish Secure Uplink"}
+                    </Button>
+                  </form>
+                </TabsContent>
+                
+                <TabsContent value="signup" className="space-y-6">
+                  <form onSubmit={handleSignUp} className="space-y-6">
+                    <div className="space-y-3">
+                      <Label htmlFor="signup-email" className="text-[9px] font-black uppercase tracking-[0.2em] text-[#0D0D0D]/40">Email Identification</Label>
+                      <Input
+                        id="signup-email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        className="h-14 bg-[#F5F0E8]/50 border border-black/5 rounded-xl px-4 font-medium focus:bg-white transition-colors"
+                        placeholder="admin@kode.studio"
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <Label htmlFor="signup-password" className="text-[9px] font-black uppercase tracking-[0.2em] text-[#0D0D0D]/40">Security Key</Label>
+                      <Input
+                        id="signup-password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        minLength={6}
+                        className="h-14 bg-[#F5F0E8]/50 border border-black/5 rounded-xl px-4 font-medium focus:bg-white transition-colors"
+                        placeholder="••••••••"
+                      />
+                    </div>
+                    <Button type="submit" className="w-full h-14 bg-[#0D0D0D] hover:bg-[#C94A2C] text-white rounded-xl text-[11px] font-black uppercase tracking-widest transition-colors shadow-lg" disabled={loading}>
+                      {loading ? "Generating Record..." : "Register Credentials"}
+                    </Button>
+                  </form>
+                </TabsContent>
+              </Tabs>
+              
+              <div className="mt-8 pt-8 border-t border-black/5">
+                <Button
+                  type="button"
+                  onClick={handleGoogleAuth}
+                  disabled={loading}
+                  className="w-full h-14 bg-white border border-black/10 hover:bg-[#F5F0E8] text-[#0D0D0D] rounded-xl text-[11px] font-black uppercase tracking-widest transition-all shadow-sm flex items-center justify-center gap-3"
+                >
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17.6401 9.20454C17.6401 8.56636 17.5828 7.95272 17.4764 7.36363H9.00006V11.1073H13.8437C13.6351 12.3182 12.9355 13.3373 11.9128 14.0209V16.4454H14.8214C16.5229 14.8786 17.6401 12.2727 17.6401 9.20454Z" fill="#4285F4"/>
+                      <path d="M9.00006 18C11.4259 18 13.4477 17.1982 14.8255 15.8645L11.9169 13.44C11.1724 13.9391 10.1701 14.2818 9.00006 14.2818C6.7337 14.2818 4.81096 12.7514 4.1237 10.6691H1.1087V13.0064C2.56096 15.8891 5.53915 18 9.00006 18Z" fill="#34A853"/>
+                      <path d="M4.12371 10.6691C3.9478 10.1455 3.84962 9.58499 3.84962 9.00001C3.84962 8.41503 3.9478 7.85455 4.12371 7.33092V4.99365H1.10871C0.519616 6.16773 0.184143 7.53546 0.184143 9.00001C0.184143 10.4646 0.519616 11.8323 1.10871 13.0064L4.12371 10.6691Z" fill="#FBBC05"/>
+                      <path d="M9.00006 3.71818C10.3214 3.71818 11.4996 4.17273 12.4323 5.06455L14.891 2.60591C13.4437 1.25591 11.4219 0 9.00006 0C5.53915 0 2.56096 2.11091 1.1087 4.99364L4.1237 7.33091C4.81096 5.24864 6.7337 3.71818 9.00006 3.71818Z" fill="#EA4335"/>
+                  </svg>
+                  Authenticate via Google
+                </Button>
+              </div>
+          </div>
+      </div>
     </main>
   );
 }
