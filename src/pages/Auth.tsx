@@ -33,7 +33,7 @@ export default function Auth() {
             
             // Save brand data to database
             const { data: brand, error } = await supabase
-              .from('brands')
+              .from('brands' as any)
               .insert({
                 brand_name: wizardData.name,
                 description: wizardData.description,
@@ -116,7 +116,7 @@ export default function Auth() {
           try {
             const brandData = JSON.parse(pendingData);
             const { data, error } = await supabase
-              .from('brands')
+              .from('brands' as any)
               .insert({ ...brandData, user_id: user.id, is_primary: false })
               .select()
               .single();
@@ -204,7 +204,6 @@ export default function Auth() {
     setLoading(false);
   };
 
-  return (
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#F5F0E8] p-6 pt-32">
       <Helmet>
