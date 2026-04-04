@@ -81,28 +81,28 @@ export default function CaseStudy() {
       </Helmet>
 
       {/* Case Study Header & Cover Section */}
-      <div className="container mx-auto px-0 md:px-6 mb-24">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-12 md:gap-16">
+      <div className="container mx-auto px-0 md:px-6 mb-12 md:mb-16">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-12">
             
-            <div className="max-w-3xl space-y-8 px-6 md:px-0 order-1">
-                <div className="flex items-center gap-4 pt-8 md:pt-0">
-                    <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">
+            <div className="max-w-3xl space-y-4 px-6 md:px-0 order-1">
+                <div className="flex items-center gap-3 pt-6 md:pt-0">
+                    <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">
                       {currentCaseStudy.portfolio_type === 'case_study' ? 'Diagnostic Protocol' : 'Exhibition Entry'}
                     </span>
-                    <div className="h-px w-12 bg-black/5" />
+                    <div className="h-px w-8 bg-black/5" />
                 </div>
-                <h1 className="font-display text-5xl md:text-8xl font-black tracking-tighter leading-[0.95]">
+                <h1 className="font-display text-4xl md:text-6xl font-black leading-[0.95]" style={{ letterSpacing: '-0.04em' }}>
                     {currentCaseStudy.title}
                 </h1>
                 {currentCaseStudy.tagline && (
-                  <p className={cn("text-lg md:text-2xl font-medium leading-relaxed", hasBg ? "text-white/60" : "text-[#0D0D0D]/60")}>
+                  <p className={cn("text-sm md:text-base font-medium leading-relaxed", hasBg ? "text-white/60" : "text-[#0D0D0D]/50")}>
                       {currentCaseStudy.tagline}
                   </p>
                 )}
             </div>
 
             {currentCaseStudy.cover_url && (
-                <div className="hidden md:block w-full md:w-[400px] lg:w-[450px] xl:w-[500px] shrink-0 order-2 aspect-[202/158] overflow-hidden rounded-none md:rounded-[2.5rem] bg-black/5 shadow-none md:shadow-2xl md:mr-4 lg:mr-8 transition-transform hover:scale-[1.02]">
+                <div className="hidden md:block w-full md:w-[340px] lg:w-[400px] xl:w-[440px] shrink-0 order-2 aspect-[202/158] overflow-hidden rounded-2xl bg-black/5 shadow-xl md:mr-4 lg:mr-8 transition-transform hover:scale-[1.02]">
                     <img
                         src={currentCaseStudy.cover_url}
                         alt={`${currentCaseStudy.title}`}
@@ -116,44 +116,44 @@ export default function CaseStudy() {
       <main className="container mx-auto px-6 overflow-visible">
 
         {/* Project Intelligence Grid (Always visible if fields exist) */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-20 py-24 border-t border-black/[0.03]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 py-10 md:py-14 border-t border-black/[0.03]">
             {/* Metadata Sidebar */}
             <aside className="space-y-12">
                 <div className="space-y-12">
                     <div>
-                        <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-8">Metadata</h4>
-                        <div className="grid grid-cols-2 gap-8">
+                        <h4 className="text-[9px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-5">Metadata</h4>
+                        <div className="grid grid-cols-2 gap-5">
                             {currentCaseStudy.client && (
                               <div>
-                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-1">Entity</p>
-                                  <p className="text-lg font-bold">{currentCaseStudy.client}</p>
+                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-0.5">Entity</p>
+                                  <p className="text-sm font-bold">{currentCaseStudy.client}</p>
                               </div>
                             )}
                             {currentCaseStudy.industry && (
                               <div>
-                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-1">Industry</p>
-                                  <p className="text-lg font-bold">{currentCaseStudy.industry}</p>
+                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-0.5">Industry</p>
+                                  <p className="text-sm font-bold">{currentCaseStudy.industry}</p>
                               </div>
                             )}
                             {currentCaseStudy.location && (
                               <div>
-                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-1">Location</p>
-                                  <p className="text-lg font-bold">{currentCaseStudy.location}</p>
+                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-0.5">Location</p>
+                                  <p className="text-sm font-bold">{currentCaseStudy.location}</p>
                               </div>
                             )}
                             {currentCaseStudy.year && (
                               <div>
-                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-1">Timeline</p>
-                                  <p className="text-lg font-bold">{currentCaseStudy.year}</p>
+                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-0.5">Timeline</p>
+                                  <p className="text-sm font-bold">{currentCaseStudy.year}</p>
                               </div>
                             )}
                         </div>
                     </div>
                     
                     {currentCaseStudy.our_role && (
-                      <div className="pt-8 border-t border-black/5">
-                           <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-4">Strategic Role</h4>
-                           <div className="text-sm font-bold opacity-80 whitespace-pre-wrap leading-relaxed">
+                      <div className="pt-5 border-t border-black/5">
+                           <h4 className="text-[9px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-2">Strategic Role</h4>
+                           <div className="text-xs font-bold opacity-70 whitespace-pre-wrap leading-relaxed">
                               {currentCaseStudy.our_role}
                            </div>
                       </div>
@@ -164,18 +164,18 @@ export default function CaseStudy() {
 
         {/* Modular Sequence / Media Exhibition */}
         {displayBlocks.length > 0 ? (
-          <section className="py-24 border-t border-black/[0.03] overflow-visible">
-            <div className="max-w-7xl mx-auto space-y-32 overflow-visible">
+          <section className="py-12 md:py-16 border-t border-black/[0.03] overflow-visible">
+            <div className="max-w-7xl mx-auto space-y-12 md:space-y-16 overflow-visible">
                 {displayBlocks.map((block: any) => (
                    <div key={block.id} className="w-full">
                       {/* HEADING BLOCK */}
                       {block.type === 'heading' && (
-                        <h2 className="text-4xl md:text-6xl lg:text-8xl font-display font-black tracking-tighter uppercase max-w-5xl leading-[0.9]" dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} />
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-black uppercase max-w-4xl leading-[0.95]" style={{ letterSpacing: '-0.04em' }} dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} />
                       )}
                       
                       {/* TEXT BLOCK */}
                       {block.type === 'text' && (
-                        <p className={cn("text-2xl md:text-4xl font-medium leading-tight max-w-5xl whitespace-pre-wrap", hasBg ? "text-white/80" : "text-[#0D0D0D]/60")}>
+                        <p className={cn("text-base md:text-xl font-medium leading-relaxed max-w-3xl", hasBg ? "text-white/70" : "text-[#0D0D0D]/55")}>
                             {block.content}
                         </p>
                       )}
