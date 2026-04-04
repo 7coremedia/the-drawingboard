@@ -113,7 +113,7 @@ export default function CaseStudy() {
           </div>
       </div>
 
-      <main className="container mx-auto px-6">
+      <main className="container mx-auto px-6 overflow-visible">
 
         {/* Project Intelligence Grid (Always visible if fields exist) */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-20 py-24 border-t border-black/[0.03]">
@@ -164,8 +164,8 @@ export default function CaseStudy() {
 
         {/* Modular Sequence / Media Exhibition */}
         {displayBlocks.length > 0 ? (
-          <section className="py-24 border-t border-black/[0.03]">
-            <div className="max-w-7xl mx-auto space-y-32">
+          <section className="py-24 border-t border-black/[0.03] overflow-visible">
+            <div className="max-w-7xl mx-auto space-y-32 overflow-visible">
                 {displayBlocks.map((block: any) => (
                    <div key={block.id} className="w-full">
                       {/* HEADING BLOCK */}
@@ -195,8 +195,8 @@ export default function CaseStudy() {
                             <div className={cn(
                               "overflow-hidden shrink-0 shadow-xl border bg-white", 
                               hasBg ? "border-white/10" : "border-black/5",
-                              block.size === 'small' ? 'w-full md:max-w-md rounded-2xl' : 
-                              block.size === 'medium' ? 'w-full md:max-w-3xl rounded-[2rem]' : 'w-full max-w-6xl rounded-[3rem]'
+                              block.size === 'small' ? 'w-full md:max-w-md rounded-lg md:rounded-xl' : 
+                              block.size === 'medium' ? 'w-full md:max-w-3xl rounded-xl md:rounded-2xl' : 'w-full max-w-6xl rounded-xl md:rounded-2xl'
                             )}>
                               <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" loading="lazy" />
                             </div>
@@ -212,19 +212,26 @@ export default function CaseStudy() {
                         </div>
                       )}
                       
-                      {/* GALLERY BLOCK */}
+                      {/* GALLERY BLOCK — horizontal scroll strip */}
                       {block.type === 'gallery' && block.media_urls && block.media_urls.length > 0 && (
-                        <div className={cn(
-                          "w-full flex",
-                          block.layout === 'left' ? 'justify-start w-full md:w-3/4 lg:w-2/3' : block.layout === 'right' ? 'justify-end w-full md:w-3/4 lg:w-2/3' : 'justify-center w-full'
-                        )}>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
-                              {block.media_urls.map((url: string, i: number) => (
-                                <div key={i} className={cn("aspect-square rounded-[2rem] overflow-hidden shadow-lg border bg-white", hasBg ? "border-white/10" : "border-black/5")}>
-                                  <img src={url} alt={`Gallery ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
-                                </div>
-                              ))}
-                            </div>
+                        <div className="relative w-screen left-1/2 -translate-x-1/2">
+                          <div className="flex gap-3 overflow-x-auto px-6 md:px-12 pb-4 snap-x snap-mandatory scrollbar-hide">
+                            {block.media_urls.map((url: string, i: number) => (
+                              <div
+                                key={i}
+                                className="shrink-0 snap-start overflow-hidden rounded-lg md:rounded-xl"
+                                style={{ height: '260px' }}
+                              >
+                                <img
+                                  src={url}
+                                  alt={`Gallery ${i}`}
+                                  className="h-full w-auto object-cover hover:scale-[1.03] transition-transform duration-700"
+                                  loading="lazy"
+                                  style={{ maxWidth: 'none' }}
+                                />
+                              </div>
+                            ))}
+                          </div>
                         </div>
                       )}
 
