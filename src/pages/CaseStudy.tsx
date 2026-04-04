@@ -2,16 +2,11 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
 import { usePublicPortfolioItem, usePublicPortfolio } from "@/hooks/usePublicPortfolio";
-import CaseStudyHeader from "@/components/case-study/CaseStudyHeader";
-import MultiplePartnersHeader from "@/components/case-study/MultiplePartnersHeader";
-import SinglePartnerHeader from "@/components/case-study/SinglePartnerHeader";
 import PortfolioMediaDisplay from "@/components/portfolio/PortfolioMediaDisplay";
-import PortfolioItem from "@/components/portfolio/PortfolioItem";
 import ProjectInfoOverlay from "@/components/smart-blocks/ProjectInfoOverlay";
-import PortfolioActions from "@/components/portfolio/PortfolioActions";
 import RedesignFooter from "@/components/redesign/RedesignFooter";
 import { cn } from '@/lib/utils';
-import { Activity, ShieldCheck, Microscope } from 'lucide-react';
+import { Activity, ShieldCheck } from 'lucide-react';
 
 export default function CaseStudy() {
   const { slug } = useParams<{ slug: string }>();
@@ -72,9 +67,7 @@ export default function CaseStudy() {
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] pt-24 md:pt-40">
       <Helmet>
-        <title>{currentCaseStudy.title} – KŌDĒ Exhibition Archive</title>
-        <meta name="description" content={currentCaseStudy.tagline} />
-        <link rel="canonical" href={`/portfolio/${slug}`} />
+        <title>{currentCaseStudy.title} – KŌDĒ Archive</title>
       </Helmet>
 
       {/* Case Study Header Section */}
@@ -82,125 +75,108 @@ export default function CaseStudy() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
             <div className="max-w-4xl space-y-8">
                 <div className="flex items-center gap-4">
-                    <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">Exhibition Entry</span>
+                    <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">
+                      {currentCaseStudy.portfolio_type === 'case_study' ? 'Diagnostic Protocol' : 'Exhibition Entry'}
+                    </span>
                     <div className="h-px w-12 bg-black/5" />
                 </div>
                 <h1 className="font-display text-5xl md:text-8xl font-black tracking-tighter leading-[0.95]">
                     {currentCaseStudy.title}
                 </h1>
-                <p className="text-[#0D0D0D]/60 text-lg md:text-2xl font-medium leading-relaxed">
-                    {currentCaseStudy.tagline || "Comprehensive brand architecture and identity systems designed for undisputed market authority."}
-                </p>
-            </div>
-            
-            <div className="hidden lg:block">
-                <div className="w-24 h-24 rounded-[2.5rem] bg-white border border-black/5 flex items-center justify-center shadow-lg">
-                    <ShieldCheck size={32} className="text-[#C94A2C]" />
-                </div>
+                {currentCaseStudy.tagline && (
+                  <p className="text-[#0D0D0D]/60 text-lg md:text-2xl font-medium leading-relaxed">
+                      {currentCaseStudy.tagline}
+                  </p>
+                )}
             </div>
           </div>
       </div>
 
       <main className="container mx-auto px-6">
-        {/* Cover Display */}
         {currentCaseStudy.cover_url && (
-            <div className="relative mb-24 group">
-                 <div className="absolute top-8 left-8 z-20 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <span className="bg-white/90 backdrop-blur-md text-[8px] font-black uppercase tracking-[0.4em] px-4 py-2 rounded-full shadow-lg border border-black/5">Archival Frame_01</span>
-                </div>
-                <div className="overflow-hidden rounded-[3rem] md:rounded-[4.5rem] bg-white border border-black/[0.03] shadow-2xl">
+            <div className="relative mb-24 bg-white p-2 md:p-6 rounded-[2rem] md:rounded-[4rem] border border-black/5 shadow-2xl">
+                <div className="overflow-hidden rounded-3xl md:rounded-[3rem] bg-black/5 w-full aspect-video md:aspect-[21/9]">
                     <img
                         src={currentCaseStudy.cover_url}
                         alt={`${currentCaseStudy.title}`}
-                        className="w-full h-auto object-cover"
+                        className="w-full h-full object-cover"
                     />
                 </div>
             </div>
         )}
 
-        {/* Project Intelligence Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-20 py-24 border-t border-black/[0.03]">
+        {/* Project Intelligence Grid (Always visible if fields exist) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-20 py-24 border-t border-black/[0.03]">
             {/* Metadata Sidebar */}
-            <aside className="space-y-16">
-                <div className="space-y-12 bg-white/40 p-10 rounded-[2.5rem] border border-black/5">
+            <aside className="space-y-12">
+                <div className="space-y-12">
                     <div>
-                        <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-4">Diagnostic Context</h4>
-                        <div className="space-y-8">
-                            <div>
-                                <p className="text-[8px] uppercase tracking-widest text-black/20 font-bold mb-1">Entity</p>
-                                <p className="text-xl font-bold">{currentCaseStudy.client || "Confidential Client"}</p>
-                            </div>
-                            <div>
-                                <p className="text-[8px] uppercase tracking-widest text-black/20 font-bold mb-1">Industry</p>
-                                <p className="text-xl font-bold">{currentCaseStudy.industry || "Market Leader"}</p>
-                            </div>
-                            <div>
-                                <p className="text-[8px] uppercase tracking-widest text-black/20 font-bold mb-1">Primary Outcome</p>
-                                <p className="text-xl font-bold">{currentCaseStudy.year || "2026 Archive"}</p>
-                            </div>
+                        <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-8">Metadata</h4>
+                        <div className="grid grid-cols-2 gap-8">
+                            {currentCaseStudy.client && (
+                              <div>
+                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-1">Entity</p>
+                                  <p className="text-lg font-bold">{currentCaseStudy.client}</p>
+                              </div>
+                            )}
+                            {currentCaseStudy.industry && (
+                              <div>
+                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-1">Industry</p>
+                                  <p className="text-lg font-bold">{currentCaseStudy.industry}</p>
+                              </div>
+                            )}
+                            {currentCaseStudy.location && (
+                              <div>
+                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-1">Location</p>
+                                  <p className="text-lg font-bold">{currentCaseStudy.location}</p>
+                              </div>
+                            )}
+                            {currentCaseStudy.year && (
+                              <div>
+                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-1">Timeline</p>
+                                  <p className="text-lg font-bold">{currentCaseStudy.year}</p>
+                              </div>
+                            )}
                         </div>
                     </div>
                     
-                    <div className="pt-8 border-t border-black/5">
-                         <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-black/20 mb-4">Strategic Role</h4>
-                         <ul className="space-y-3">
-                            {roleItems.map(role => (
-                                <li key={role} className="flex items-center gap-3 text-sm font-bold opacity-60">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-[#C94A2C]" />
-                                    {role}
-                                </li>
-                            ))}
-                         </ul>
-                    </div>
-                </div>
-
-                <div className="flex items-center gap-3 text-[#C94A2C]/40 px-10">
-                    <Activity size={16} />
-                    <span className="text-[9px] font-black uppercase tracking-[0.3em]">Protocol Verified</span>
+                    {currentCaseStudy.our_role && (
+                      <div className="pt-8 border-t border-black/5">
+                           <h4 className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-4">Strategic Role</h4>
+                           <div className="text-sm font-bold opacity-80 whitespace-pre-wrap leading-relaxed">
+                              {currentCaseStudy.our_role}
+                           </div>
+                      </div>
+                    )}
                 </div>
             </aside>
 
-            {/* Content Logic */}
-            <div className="space-y-24">
-                {challengeParagraphs.length > 0 && (
-                  <div className="space-y-8">
-                    <div className="flex items-center gap-4">
-                        <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-[#0D0D0D]">Diagnostic (Before)</h3>
-                        <div className="h-px flex-grow bg-black/[0.03]" />
-                    </div>
-                    {challengeParagraphs.map((paragraph, index) => (
-                      <p key={`challenge-${index}`} className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed max-w-4xl">
-                        {paragraph}
-                      </p>
-                    ))}
+            {/* Strategic Content Blocks (The Left Panel Text) */}
+            <div className="space-y-20 lg:pl-12 lg:border-l border-black/5">
+                {currentCaseStudy.the_challenge && (
+                  <div className="space-y-6">
+                    <h3 className="font-display text-3xl font-black tracking-tight text-[#0D0D0D]">The Challenge</h3>
+                    <p className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed whitespace-pre-wrap">
+                      {currentCaseStudy.the_challenge}
+                    </p>
                   </div>
                 )}
 
-                {solutionParagraphs.length > 0 && (
-                  <div className="space-y-8">
-                    <div className="flex items-center gap-4">
-                        <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-[#0D0D0D]">Strategy & Transformation</h3>
-                        <div className="h-px flex-grow bg-black/[0.03]" />
-                    </div>
-                    {solutionParagraphs.map((paragraph, index) => (
-                      <p key={`solution-${index}`} className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed max-w-4xl">
-                        {paragraph}
-                      </p>
-                    ))}
+                {currentCaseStudy.the_solution && (
+                  <div className="space-y-6">
+                    <h3 className="font-display text-3xl font-black tracking-tight text-[#0D0D0D]">Strategy & Solution</h3>
+                    <p className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed whitespace-pre-wrap">
+                      {currentCaseStudy.the_solution}
+                    </p>
                   </div>
                 )}
 
-                {growthParagraphs.length > 0 && (
-                  <div className="space-y-8">
-                    <div className="flex items-center gap-4">
-                        <h3 className="font-display text-2xl font-black uppercase tracking-tighter text-[#0D0D0D]">Digital & Growth Execution</h3>
-                        <div className="h-px flex-grow bg-black/[0.03]" />
-                    </div>
-                    {growthParagraphs.map((paragraph, index) => (
-                      <p key={`growth-${index}`} className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed max-w-4xl">
-                        {paragraph}
-                      </p>
-                    ))}
+                {currentCaseStudy.description && (
+                  <div className="space-y-6">
+                    <h3 className="font-display text-3xl font-black tracking-tight text-[#0D0D0D]">Growth & Digital Execution</h3>
+                    <p className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed whitespace-pre-wrap">
+                      {currentCaseStudy.description}
+                    </p>
                   </div>
                 )}
             </div>
@@ -209,36 +185,85 @@ export default function CaseStudy() {
         {/* Modular Sequence / Media Exhibition */}
         {currentCaseStudy.content_blocks && (currentCaseStudy.content_blocks as any[]).length > 0 ? (
           <section className="py-24 border-t border-black/[0.03]">
-            <div className="max-w-7xl mx-auto space-y-16 lg:space-y-32">
+            <div className="max-w-7xl mx-auto space-y-32">
                 {(currentCaseStudy.content_blocks as any[]).map((block: any) => (
-                   <div key={block.id} className="w-full animate-in fade-in slide-in-from-bottom-8 duration-700">
+                   <div key={block.id} className="w-full">
+                      {/* HEADING BLOCK */}
                       {block.type === 'heading' && (
-                        <h2 className="text-3xl md:text-5xl lg:text-7xl font-display font-black tracking-tighter uppercase max-w-5xl leading-[0.95]" dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} />
+                        <h2 className="text-4xl md:text-6xl lg:text-8xl font-display font-black tracking-tighter uppercase max-w-5xl leading-[0.9] text-[#0D0D0D]" dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} />
                       )}
                       
+                      {/* TEXT BLOCK */}
                       {block.type === 'text' && (
-                        <p className="text-xl md:text-3xl font-medium text-[#0D0D0D]/60 leading-relaxed max-w-4xl whitespace-pre-wrap">
+                        <p className="text-2xl md:text-4xl font-medium text-[#0D0D0D]/60 leading-tight max-w-5xl whitespace-pre-wrap">
                             {block.content}
                         </p>
                       )}
                       
+                      {/* IMAGE BLOCK */}
                       {block.type === 'image' && block.media_url && (
                         <div className={cn(
-                          "overflow-hidden rounded-[2rem] md:rounded-[4rem] shadow-2xl border border-black/5", 
-                          block.style === 'full' ? 'w-full' : block.style === 'inset' ? 'max-w-3xl mx-auto' : 'w-full max-w-6xl'
+                          "overflow-hidden rounded-[2rem] shadow-xl border border-black/5 bg-white", 
+                          block.style === 'full' ? 'w-full' : block.style === 'inset' ? 'max-w-4xl mx-auto' : 'w-full max-w-6xl'
                         )}>
-                          <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" />
+                          <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" loading="lazy" />
                         </div>
                       )}
                       
+                      {/* GALLERY BLOCK */}
                       {block.type === 'gallery' && block.media_urls && block.media_urls.length > 0 && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-10">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                           {block.media_urls.map((url: string, i: number) => (
-                            <div key={i} className="aspect-square rounded-[2rem] overflow-hidden shadow-lg border border-black/5 group cursor-pointer">
-                              <img src={url} alt={`Gallery ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <div key={i} className="aspect-square rounded-[2rem] overflow-hidden shadow-lg border border-black/5 bg-white">
+                              <img src={url} alt={`Gallery ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
                             </div>
                           ))}
                         </div>
+                      )}
+
+                      {/* VIDEO BLOCK */}
+                      {block.type === 'video' && block.media_url && (
+                        <div className="max-w-6xl mx-auto overflow-hidden rounded-[2rem] shadow-2xl bg-[#0D0D0D] border border-black/10 aspect-video">
+                          {block.media_url.includes('youtube') || block.media_url.includes('vimeo') ? (
+                            <iframe 
+                              src={block.media_url.includes('youtube') ? block.media_url.replace('watch?v=', 'embed/') : block.media_url} 
+                              className="w-full h-full" 
+                              allowFullScreen
+                            />
+                          ) : (
+                            <video src={block.media_url} controls className="w-full h-full object-cover" />
+                          )}
+                        </div>
+                      )}
+
+                      {/* PDF BLOCK */}
+                      {block.type === 'pdf' && block.pdf_url && (
+                        <div className="max-w-4xl mx-auto">
+                          <div className="flex flex-col md:flex-row items-center justify-between bg-white rounded-[2rem] p-10 border border-black/5 shadow-xl transition-all hover:-translate-y-2 hover:shadow-2xl">
+                            <div className="flex items-center gap-8 mb-8 md:mb-0">
+                              <div className="w-20 h-20 bg-[#C94A2C]/10 rounded-2xl flex items-center justify-center shrink-0">
+                                <Activity size={40} className="text-[#C94A2C]" />
+                              </div>
+                              <div className="text-left">
+                                <span className="text-[12px] uppercase tracking-[0.4em] font-black text-black/30 block mb-2">Archived Document</span>
+                                <h4 className="text-2xl md:text-3xl font-black text-[#0D0D0D] tracking-tight">{block.pdf_name || "Protocol Documentation"}</h4>
+                              </div>
+                            </div>
+                            <a 
+                              href={block.pdf_url} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="w-full md:w-auto px-12 py-6 bg-[#0D0D0D] text-white rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-[#C94A2C] transition-colors text-center"
+                            >
+                              Download File
+                            </a>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* DIVIDER BLOCK */}
+                      {block.type === 'divider' && (
+                        <div className="max-w-2xl mx-auto h-px bg-black/10 my-16" />
                       )}
                    </div> 
                 ))}
@@ -259,56 +284,15 @@ export default function CaseStudy() {
           </section>
         )}
 
-        {/* Archival Tags */}
-        <section className="py-24 border-t border-black/[0.03]">
-            <div className="flex flex-wrap gap-4 items-center mb-32">
-                <span className="text-[10px] uppercase font-bold tracking-[0.4em] text-black/20 mr-4">Tags:</span>
-                {projectTags.map((tag) => (
-                    <span
-                        key={tag}
-                        className="rounded-full bg-white border border-black/5 px-8 py-3 text-[9px] font-bold uppercase tracking-widest text-[#0D0D0D] transition-all hover:bg-[#C94A2C] hover:text-white hover:shadow-xl"
-                    >
-                        {tag}
-                    </span>
-                ))}
-            </div>
-
-            {/* Cross-Reference Section */}
-            {relatedCaseStudies.length > 0 && (
-                <div className="pb-40">
-                    <div className="flex items-end justify-between mb-16 border-b border-black/[0.03] pb-10">
-                        <h2 className="font-display text-4xl md:text-6xl font-black tracking-tighter leading-none">Diagnostic <br /> Cross-Reference</h2>
-                        <span className="text-[10px] uppercase font-bold tracking-[0.4em] text-black/20">Related Protocols</span>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
-                        {relatedCaseStudies.map((item, index) => (
-                            <PortfolioItem
-                                key={index}
-                                title={item.title}
-                                category={item.category}
-                                imageUrl={item.cover_url}
-                                slug={item.slug}
-                            />
-                        ))}
-                    </div>
-                </div>
-            )}
-        </section>
       </main>
 
       {/* Protocol Actions Block */}
-      <div className="bg-[#0D0D0D] py-32 px-6 flex flex-col items-center justify-center text-white relative overflow-hidden group">
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#C94A2C]/20 to-transparent pointer-events-none" />
+      <div className="bg-[#0D0D0D] py-32 px-6 flex flex-col items-center justify-center text-white relative mt-32">
           <div className="max-w-4xl text-center relative z-10 space-y-12">
-            <h3 className="text-4xl md:text-7xl font-display font-black tracking-tighter leading-[0.95]">Architecting the <br /> Next Milestone?</h3>
-            <div className="flex flex-wrap justify-center gap-6">
-                <a href="/contact" className="bg-[#C94A2C] text-white px-12 py-5 rounded-full text-[11px] font-bold uppercase tracking-widest hover:scale-105 transition-all shadow-2xl">Initiate Protocol</a>
-                <a href="/portfolio" className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-12 py-5 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-white/20 transition-all">Back to Archive</a>
+            <h3 className="text-5xl md:text-8xl font-display font-black tracking-tighter leading-[0.95]">Architecting the <br /> Next Milestone?</h3>
+            <div className="flex justify-center mt-12">
+                <a href="/contact" className="bg-[#C94A2C] text-white px-16 py-6 rounded-full text-[12px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-[#0D0D0D] transition-colors">Initiate Protocol</a>
             </div>
-          </div>
-          
-          <div className="absolute bottom-10 left-10 opacity-10 group-hover:scale-110 transition-transform duration-1000">
-             <Microscope size={120} className="text-white" />
           </div>
       </div>
 

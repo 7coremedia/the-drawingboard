@@ -1,37 +1,42 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import CreatePortfolioFormV2 from "@/components/admin/CreatePortfolioFormV2";
 import { PortfolioItem } from "@/hooks/usePortfolio";
-import { usePortfolioMedia } from "@/hooks/usePortfolioMedia";
-import { ArrowLeft } from "lucide-react";
+import BehanceStyleEditor from "@/components/admin/BehanceStyleEditor";
+import { Loader2 } from "lucide-react";
 
 export default function EditPortfolio() {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const { data: portfolio, isLoading: isLoadingPortfolio } = useQuery({
-    queryKey: ["portfolio", id],
+  const { data: dataArr, isLoading: isLoadingData } = useQuery({
+    queryKey: ["portfolio-and-media", id],
     queryFn: async () => {
-      const { data, error } = await supabase
+      const { data: portfolio, error: pError } = await supabase
         .from("portfolios")
         .select("*")
         .eq("id", id)
         .single();
+      if (pError) throw pError;
 
-      if (error) throw error;      
-      return data as PortfolioItem;
+      const { data: media, error: mError } = await supabase
+        .from("portfolio_media")
+        .select("*")
+        .eq("portfolio_id", id)
+        .order("display_order", { ascending: true });
+      if (mError) throw mError;
+
+      return { portfolio, media };
     },
   });
 
-  // Load existing gallery media for this portfolio (exclude cover in the form)
-  const { data: portfolioMedia = [], isLoading: isLoadingMedia } = usePortfolioMedia(id || "");
+  const portfolio = dataArr?.portfolio;
+  const mediaItems = dataArr?.media;
 
-  const { mutateAsync: updatePortfolio } = useMutation({
+  const { mutateAsync: updatePortfolio, isPending } = useMutation({
     mutationFn: async (data: any): Promise<void> => {
       const updatePayload = {
         title: data.title,
@@ -39,14 +44,13 @@ export default function EditPortfolio() {
         category: data.category,
         tagline: data.tagline,
         year: data.year ?? null,
-        cover_url: data.media_url, // Treat media_url from form as the dedicated cover
+        cover_url: data.media_url,
         media_url: data.media_url,
         media_type: 'image' as const,
         full_image_url: data.full_image_url ?? data.media_url,
         is_published: data.is_published,
         is_multiple_partners: data.is_multiple_partners ?? false,
         brand_name: data.brand_name ?? null,
-        // New fields
         industry: data.industry,
         location: data.location,
         our_role: data.our_role,
@@ -55,8 +59,13 @@ export default function EditPortfolio() {
         notes: data.notes,
         is_notes_downloadable: data.is_notes_downloadable,
         content_blocks: data.content_blocks,
+        portfolio_type: data.portfolio_type,
+        pdf_url: data.pdf_url ?? null,
         updated_at: new Date().toISOString(),
+        description: data.description,
       };
+
+      console.log("[DEBUG] Payload to Supabase:", updatePayload);
 
       const { error } = await supabase
         .from("portfolios")
@@ -64,181 +73,101 @@ export default function EditPortfolio() {
         .eq("id", id);
 
       if (error) throw error;
-
-      // Persist gallery media (exclude cover) using desired list from the form
-      const desiredFiles: Array<{ id?: string; url: string; type: string; name: string; size?: number }> =
-        Array.isArray(data.media_files) ? data.media_files : [];
-
-      // Fetch current media from DB
-      const { data: existingMedia, error: fetchMediaError } = await supabase
-        .from("portfolio_media")
-        .select("id,url,is_cover")
-        .eq("portfolio_id", id);
-      if (fetchMediaError) throw fetchMediaError;
-
-      const existingNonCover = (existingMedia || []).filter((m) => !m.is_cover);
-      const existingByUrl = new Map(existingNonCover.map((m) => [m.url, m]));
-      const desiredUrls = new Set(desiredFiles.map((f) => f.url));
-
-      // Delete removed
-      const toDelete = existingNonCover.filter((m) => !desiredUrls.has(m.url)).map((m) => m.id);
-      if (toDelete.length) {
-        const { error: delErr } = await supabase
-          .from("portfolio_media")
-          .delete()
-          .in("id", toDelete);
-        if (delErr) throw delErr;
-      }
-
-      // Upsert/update order for remaining and insert new
-      const inserts: any[] = [];
-      const updates: Array<{ id: string; display_order: number }> = [];
-
-      desiredFiles.forEach((f, index) => {
-        const match = existingByUrl.get(f.url);
-        if (match) {
-          updates.push({ id: match.id, display_order: index });
-        } else {
-          inserts.push({
-            portfolio_id: id,
-            url: f.url,
-            media_type: f.type,
-            file_name: f.name,
-            file_size: f.size ?? null,
-            display_order: index,
-            is_cover: false,
-          });
-        }
-      });
-
-      if (inserts.length) {
-        const { error: insErr } = await supabase
-          .from("portfolio_media")
-          .insert(inserts);
-        if (insErr) throw insErr;
-      }
-
-      if (updates.length) {
-        // Batch update display orders
-        for (const u of updates) {
-          const { error: updErr } = await supabase
-            .from("portfolio_media")
-            .update({ display_order: u.display_order })
-            .eq("id", u.id);
-          if (updErr) throw updErr;
-        }
-      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["portfolioItems"] });
-      queryClient.invalidateQueries({ queryKey: ["portfolio", id] });
+      queryClient.invalidateQueries({ queryKey: ["portfolio-and-media", id] });
+      queryClient.invalidateQueries({ queryKey: ["publicPortfolio"] });
+      queryClient.invalidateQueries({ queryKey: ["publicPortfolioItem"] });
       toast({
-        title: "Success",
-        description: "Portfolio item updated successfully",
+        title: "Saved",
+        description: "Project updated successfully.",
       });
-      navigate("/management/portfolio");
     },
     onError: (error) => {
       toast({
         title: "Error",
-        description: "Failed to update portfolio item",
+        description: "Failed to update project.",
         variant: "destructive",
       });
       console.error("Update error:", error);
     },
   });
 
-  const [isUpdating, setIsUpdating] = useState(false);
-
-  const handleUpdate = async (data: any) => {
-    setIsUpdating(true);
-    try {
-      await updatePortfolio(data);
-    } finally {
-      setIsUpdating(false);
-    }
-  };
-
-  if (isLoadingPortfolio || isLoadingMedia) {
+  if (isLoadingData) {
     return (
-      <div className="flex h-[50vh] items-center justify-center">
-        <div className="text-lg">Loading...</div>
+      <div className="min-h-screen bg-[#F5F0E8] flex items-center justify-center">
+        <div className="flex items-center gap-3">
+          <Loader2 size={20} className="animate-spin text-[#C94A2C]" />
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-black/40">
+            Loading Project...
+          </span>
+        </div>
       </div>
     );
   }
 
   if (!portfolio) {
     return (
-      <div className="flex h-[50vh] items-center justify-center">
-        <div className="text-lg">Portfolio item not found</div>
+      <div className="min-h-screen bg-[#F5F0E8] flex items-center justify-center">
+        <p className="text-black/40 font-bold text-sm">Project not found.</p>
       </div>
     );
   }
 
+  // Synthesize content_blocks from legacy portfolio_media if empty
+  let synthesizedBlocks = (portfolio as any).content_blocks?.length > 0 
+    ? (portfolio as any).content_blocks 
+    : mediaItems?.filter(m => !m.is_cover).map(m => ({
+        id: m.id,
+        type: m.media_type === 'video' ? 'video' : 'image',
+        media_url: m.url,
+        style: 'default'
+      })) || [];
+
+  // If there's a legacy PDF and no blocks yet, add a PDF block
+  if ((portfolio as any).pdf_url && synthesizedBlocks.length > 0 && !(portfolio as any).content_blocks) {
+    synthesizedBlocks.push({
+      id: 'legacy-pdf',
+      type: 'pdf',
+      pdf_url: (portfolio as any).pdf_url,
+      pdf_name: 'Legacy Project Document'
+    });
+  }
+
   return (
-    <main className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] py-16 md:py-24 selection:bg-[#C94A2C] selection:text-white">
+    <>
       <Helmet>
         <title>Edit {portfolio.title} – KŌDĒ</title>
       </Helmet>
-
-      <div className="container mx-auto px-6">
-        <header className="mb-20 space-y-8">
-            <button 
-                onClick={() => navigate("/management/portfolio")}
-                className="flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] font-black text-black/40 hover:text-[#C94A2C] transition-colors group"
-            >
-                <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
-                Back to Registry
-            </button>
-            
-            <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                    <span className="text-[10px] uppercase tracking-[0.5em] font-black text-[#C94A2C]">Exhibition Entry Protocol</span>
-                    <div className="h-px w-12 bg-black/10" />
-                </div>
-                <h1 className="text-4xl md:text-6xl font-display font-black tracking-tighter leading-none uppercase">Edit Archival <br /><span className="text-black/20"> Entry.</span></h1>
-                <p className="text-lg text-[#0D0D0D]/40 font-medium max-w-xl">
-                    Synchronizing clinical updates for {portfolio.title} into the primary KŌDĒ repository.
-                </p>
-            </div>
-        </header>
-      </div>
-
-      <CreatePortfolioFormV2
-        initialData={{
+      <BehanceStyleEditor
+        mode="edit"
+        initialMeta={{
           title: portfolio.title,
           client: (portfolio as any).client,
           category: portfolio.category as any,
           tagline: (portfolio as any).tagline,
           year: (portfolio as any).year,
           is_published: portfolio.is_published,
-          // New fields
           industry: (portfolio as any).industry,
           location: (portfolio as any).location,
           our_role: (portfolio as any).our_role,
           the_challenge: (portfolio as any).the_challenge,
           the_solution: (portfolio as any).the_solution,
+          description: (portfolio as any).description,
           notes: (portfolio as any).notes,
           is_notes_downloadable: (portfolio as any).is_notes_downloadable,
-          content_blocks: (portfolio as any).content_blocks,
           is_multiple_partners: (portfolio as any).is_multiple_partners,
           brand_name: (portfolio as any).brand_name,
-          portfolio_type: (portfolio as any).portfolio_type || 'gallery',
           media_url: (portfolio as any).cover_url ?? (portfolio as any).media_url,
           full_image_url: (portfolio as any).full_image_url ?? (portfolio as any).cover_url,
-          media_files: (portfolioMedia || [])
-            .filter((m) => !m.is_cover)
-            .map((m) => ({
-              id: m.id,
-              url: m.url,
-              type: m.media_type as any,
-              name: m.file_name,
-              size: m.file_size ?? undefined,
-            })),
+          content_blocks: synthesizedBlocks,
+          portfolio_type: (portfolio as any).portfolio_type || 'gallery',
+          pdf_url: (portfolio as any).pdf_url,
         }}
-        onSubmit={handleUpdate}
-        isLoading={isUpdating}
+        onSubmit={updatePortfolio}
+        isLoading={isPending}
       />
-    </main>
+    </>
   );
 }

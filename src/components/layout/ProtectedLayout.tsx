@@ -14,7 +14,7 @@ export default function ProtectedLayout() {
 
   useEffect(() => {
     if (!isLoading && !user) {
-      navigate("/");
+      navigate("/auth", { state: { redirectTo: "/management", message: "Admin access required. Please sign in." } });
     }
   }, [user, isLoading, navigate]);
 

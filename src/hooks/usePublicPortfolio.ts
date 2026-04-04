@@ -30,6 +30,7 @@ export interface PublicPortfolioItem {
   our_role?: string;
   the_challenge?: string;
   the_solution?: string;
+  description?: string;
   notes?: any;
   is_notes_downloadable?: boolean;
   content_blocks?: any;
@@ -102,7 +103,6 @@ export function usePublicPortfolioItem(slug: string) {
           )
         `)
         .eq("slug", slug)
-        .eq("is_published", true)
         .single();
 
       if (portfolioError) {

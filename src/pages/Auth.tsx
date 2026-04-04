@@ -134,8 +134,9 @@ export default function Auth() {
         }
         
         // If no pending data, redirect to dashboard or home
-        console.log("Redirecting authenticated user to dashboard");
-        navigate('/dashboard');
+        console.log("Redirecting authenticated user");
+        const target = location.state?.redirectTo || '/dashboard';
+        navigate(target);
       }
     };
 

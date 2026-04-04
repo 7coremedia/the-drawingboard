@@ -53,6 +53,16 @@ export default function ProjectInfoCard({ details, isEditable }: Props) {
           </div>
         )}
 
+        {/* Growth & Digital Execution mapped from description */}
+        {(details as any).description && (
+          <div className="space-y-2">
+            <h3 className="font-semibold text-neutral-900">Growth & Execution</h3>
+            <p className="text-sm text-neutral-800 leading-relaxed">
+              {(details as any).description}
+            </p>
+          </div>
+        )}
+
         {/* Notes Section */}
         {hasNotes && (
           <div className="space-y-3 pt-4 border-t border-black/10">
