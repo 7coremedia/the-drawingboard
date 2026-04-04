@@ -71,7 +71,7 @@ export default function PortfolioDetailPage() {
       <div className="container mx-auto py-16">
         <h1 className="text-5xl font-bold">{portfolioItem.title}</h1>
         <p className="text-muted-foreground mt-2">Client: {portfolioItem.client}</p>
-        <img src={portfolioItem.cover_url} alt={portfolioItem.title} className="mt-8 rounded-lg shadow-lg w-full" />
+        <img src={portfolioItem.cover_url} alt={portfolioItem.title} className="mt-8 rounded-lg shadow-lg w-full aspect-[202/158] object-cover" />
       </div>
 
       {/* 2. Place the floating "About project" button here */}

@@ -26,7 +26,7 @@ export default function PortfolioItem({
       className="relative group block select-none focus:outline-none rounded-[1.5rem] overflow-hidden"
     >
       {/* Landscape Media container with rounded corners */}
-      <div className="relative w-full aspect-[1.5/1] bg-black/[0.03] rounded-[1.5rem] overflow-hidden transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
+      <div className="relative w-full aspect-[202/158] bg-black/[0.03] rounded-[1.5rem] overflow-hidden transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
         {/* Skeleton */}
         <div
           className={cn(

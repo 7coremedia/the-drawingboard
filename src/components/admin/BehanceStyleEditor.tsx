@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 
 // ─── Block Types ────────────────────────────────────────────────────────────
 
-export type BlockType = "image" | "text" | "heading" | "gallery" | "video" | "embed" | "pdf" | "divider";
+export type BlockType = "image" | "text" | "heading" | "gallery" | "video" | "embed" | "pdf" | "divider" | "meta_background";
 
 export interface ContentBlock {
   id: string;
@@ -37,6 +37,9 @@ export interface ContentBlock {
   pdf_name?: string;
   // layout hint
   style?: "default" | "inset" | "full" | "wide";
+  size?: "small" | "medium" | "big";
+  layout?: "left" | "center" | "right";
+  side_text?: string;
 }
 
 // ─── Portfolio meta schema ───────────────────────────────────────────────────
@@ -148,22 +151,36 @@ function ImageBlock({ block, onUpdate }: { block: ContentBlock; onUpdate: (u: Pa
           <input type="file" accept="image/*" className="hidden" onChange={handleFile} disabled={uploading} />
         </label>
       )}
-      <div className="flex gap-2 flex-wrap">
-        {(["default", "inset", "full", "wide"] as const).map((s) => (
-          <button
-            key={s}
-            onClick={() => onUpdate({ style: s })}
-            className={cn(
-              "px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all",
-              (block.style ?? "default") === s
-                ? "bg-[#0D0D0D] text-white border-[#0D0D0D]"
-                : "bg-white text-black/40 border-black/10 hover:border-black/30"
-            )}
-          >
-            {s}
-          </button>
-        ))}
+      <div className="flex gap-2 flex-wrap items-center bg-[#F5F0E8] p-3 rounded-xl border border-black/5 mt-4">
+        <div className="flex items-center gap-2">
+            <span className="text-[9px] font-black uppercase tracking-widest text-black/50 mr-2">Size</span>
+            {(["small", "medium", "big"] as const).map((s) => (
+            <button key={s} onClick={() => onUpdate({ size: s })} className={cn("px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all", (block.size ?? "medium") === s ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-white text-black/40 border-black/10 hover:border-black/30")}>
+                {s}
+            </button>
+            ))}
+        </div>
+        <div className="h-4 w-px bg-black/10 mx-2" />
+        <div className="flex items-center gap-2">
+            <span className="text-[9px] font-black uppercase tracking-widest text-black/50 mr-2">Align</span>
+            {(["left", "center", "right"] as const).map((s) => (
+            <button key={s} onClick={() => onUpdate({ layout: s })} className={cn("px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all", (block.layout ?? "center") === s ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-white text-black/40 border-black/10 hover:border-black/30")}>
+                {s}
+            </button>
+            ))}
+        </div>
       </div>
+      {(block.size === "small" || block.size === "medium") && (
+          <div className="mt-3">
+              <label className="text-[9px] font-black uppercase tracking-widest text-black/50 mb-2 block">Contextual Side Text (Optional)</label>
+              <Textarea 
+                placeholder="Explanatory text rendering beside the image..." 
+                className="bg-[#F5F0E8] border-black/10 rounded-xl text-xs font-medium text-[#0D0D0D] placeholder:text-black/20 focus-visible:ring-[#C94A2C] min-h-[60px] resize-none leading-relaxed w-full p-3"
+                value={block.side_text ?? ""}
+                onChange={(e) => onUpdate({ side_text: e.target.value })}
+              />
+          </div>
+      )}
     </div>
   );
 }
@@ -184,20 +201,33 @@ function GalleryBlock({ block, onUpdate }: { block: ContentBlock; onUpdate: (u: 
   };
   const remove = (i: number) => onUpdate({ media_urls: block.media_urls?.filter((_, idx) => idx !== i) });
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-      {(block.media_urls ?? []).map((url, i) => (
-        <div key={i} className="relative aspect-square bg-black/5 rounded-xl overflow-hidden group border border-black/5">
-          <img src={url} alt="" className="w-full h-full object-cover" />
-          <button onClick={() => remove(i)} className="absolute top-2 right-2 w-6 h-6 bg-black/80 hover:bg-[#C94A2C] rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all">
-            <X size={10} />
-          </button>
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+        {(block.media_urls ?? []).map((url, i) => (
+          <div key={i} className="relative aspect-square bg-black/5 rounded-xl overflow-hidden group border border-black/5">
+            <img src={url} alt="" className="w-full h-full object-cover" />
+            <button onClick={() => remove(i)} className="absolute top-2 right-2 w-6 h-6 bg-black/80 hover:bg-[#C94A2C] rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all">
+              <X size={10} />
+            </button>
+          </div>
+        ))}
+        <label className="aspect-square border-2 border-dashed border-black/10 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-[#C94A2C]/40 hover:bg-[#F5F0E8]/60 transition-all group">
+          {uploading ? <Loader2 size={20} className="text-[#C94A2C] animate-spin" /> : <Plus size={20} className="text-black/20 group-hover:text-[#C94A2C] transition-colors" />}
+          <span className="text-[8px] font-black uppercase tracking-widest text-black/30 mt-2">Add</span>
+          <input type="file" accept="image/*" multiple className="hidden" onChange={handleFiles} disabled={uploading} />
+        </label>
+      </div>
+
+      <div className="flex gap-2 flex-wrap items-center bg-[#F5F0E8] p-3 rounded-xl border border-black/5">
+        <div className="flex items-center gap-2">
+            <span className="text-[9px] font-black uppercase tracking-widest text-black/50 mr-2">Align</span>
+            {(["left", "center", "right"] as const).map((s) => (
+            <button key={s} onClick={() => onUpdate({ layout: s })} className={cn("px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all", (block.layout ?? "center") === s ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-white text-black/40 border-black/10 hover:border-black/30")}>
+                {s}
+            </button>
+            ))}
         </div>
-      ))}
-      <label className="aspect-square border-2 border-dashed border-black/10 rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-[#C94A2C]/40 hover:bg-[#F5F0E8]/60 transition-all group">
-        {uploading ? <Loader2 size={20} className="text-[#C94A2C] animate-spin" /> : <Plus size={20} className="text-black/20 group-hover:text-[#C94A2C] transition-colors" />}
-        <span className="text-[8px] font-black uppercase tracking-widest text-black/30 mt-2">Add</span>
-        <input type="file" accept="image/*" multiple className="hidden" onChange={handleFiles} disabled={uploading} />
-      </label>
+      </div>
     </div>
   );
 }
@@ -485,6 +515,49 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
     ? BLOCK_MODULES.filter(m => ["image", "text", "pdf", "heading"].includes(m.type))
     : BLOCK_MODULES;
 
+  const bgBlockRef = blocks.find(b => b.type === "meta_background");
+  const bgImageUrl = bgBlockRef?.media_url ?? "";
+
+  const handleBgImageChange = (url: string) => {
+    setBlocks(prev => {
+      const filtered = prev.filter(b => b.type !== "meta_background");
+      if (url) filtered.push({ id: genId(), type: "meta_background", media_url: url });
+      return filtered;
+    });
+  };
+
+  useEffect(() => {
+    if (initialMeta) {
+      setBlocks(prev => {
+        let newBlocks = [...prev];
+        let migrated = false;
+        
+        const hasChallenge = newBlocks.some(b => b.type === "heading" && b.content?.toLowerCase().includes("challenge"));
+        if (initialMeta.the_challenge && !hasChallenge) {
+          newBlocks.push({ id: genId(), type: "heading", content: "The Challenge" });
+          newBlocks.push({ id: genId(), type: "text", content: initialMeta.the_challenge });
+          migrated = true;
+        }
+
+        const hasSolution = newBlocks.some(b => b.type === "heading" && b.content?.toLowerCase().includes("solution"));
+        if (initialMeta.the_solution && !hasSolution) {
+          newBlocks.push({ id: genId(), type: "heading", content: "The Solution" });
+          newBlocks.push({ id: genId(), type: "text", content: initialMeta.the_solution });
+          migrated = true;
+        }
+
+        const hasGrowth = newBlocks.some(b => b.type === "heading" && (b.content?.toLowerCase().includes("growth") || b.content?.toLowerCase().includes("execution")));
+        if (initialMeta.description && !hasGrowth) {
+          newBlocks.push({ id: genId(), type: "heading", content: "Growth & Digital Execution" });
+          newBlocks.push({ id: genId(), type: "text", content: initialMeta.description });
+          migrated = true;
+        }
+
+        return migrated ? newBlocks : prev;
+      });
+    }
+  }, [initialMeta]);
+
   const form = useForm<MetaFormData>({
     resolver: zodResolver(metaSchema),
     defaultValues: {
@@ -525,12 +598,16 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
     setBlocks((prev) => prev.filter((b) => b.id !== id));
   };
 
+  const displayBlocks = blocks.filter(b => b.type !== "meta_background");
+
   const handleDragEnd = (result: any) => {
     if (!result.destination) return;
-    const items = Array.from(blocks);
+    const items = Array.from(displayBlocks);
     const [moved] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, moved);
-    setBlocks(items);
+    
+    const metas = blocks.filter(b => b.type === "meta_background");
+    setBlocks([...metas, ...items]);
   };
 
   // ── Submit ───────────────────────────────────────────────────────────────
@@ -711,6 +788,15 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
 
             <div className="h-px bg-black/5" />
 
+            {/* Background Image */}
+            <div>
+              <label className={fieldLabel}>Dynamic Background Photo</label>
+              <CoverUploader url={bgImageUrl} onChange={handleBgImageChange} />
+              <p className="text-[8px] font-bold text-black/30 mt-1.5 uppercase tracking-widest">Auto text contrast applied</p>
+            </div>
+
+            <div className="h-px bg-black/5" />
+
             {/* Analytics group */}
             <div>
               <label className={fieldLabel}>Industry / Vertical</label>
@@ -724,18 +810,7 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
               <label className={fieldLabel}>Our Role</label>
               <Input {...form.register("our_role")} placeholder="Brand Strategist..." className={fieldInput} />
             </div>
-            <div>
-              <label className={fieldLabel}>The Challenge</label>
-              <Textarea {...form.register("the_challenge")} placeholder="Diagnostic problem..." className={fieldTextarea} />
-            </div>
-            <div>
-              <label className={fieldLabel}>The Solution</label>
-              <Textarea {...form.register("the_solution")} placeholder="Strategy & transformation..." className={fieldTextarea} />
-            </div>
-            <div>
-              <label className={fieldLabel}>Growth & Digital Execution</label>
-              <Textarea {...form.register("description")} placeholder="Digital metrics/strategy..." className={fieldTextarea} />
-            </div>
+
 
             <div className="h-px bg-black/5" />
 
@@ -789,7 +864,7 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
         <main className="flex-1 overflow-y-auto">
           <div className="max-w-3xl mx-auto px-6 py-12">
 
-            {blocks.length === 0 ? (
+            {displayBlocks.length === 0 ? (
               /* ── Empty state ── */
               <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-display font-black tracking-tighter text-[#0D0D0D] mb-3 px-4">
@@ -817,10 +892,10 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
             ) : (
               /* ── Canvas with blocks ── */
               <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable droppableId="canvas">
+                <Droppable droppableId="blocks">
                   {(provided) => (
                     <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-4">
-                      {blocks.map((block, index) => (
+                      {displayBlocks.map((block, index) => (
                         <Draggable key={block.id} draggableId={block.id} index={index}>
                           {(provided, snapshot) => (
                             <CanvasBlock

@@ -54,15 +54,15 @@ export default function EditPortfolio() {
         industry: data.industry,
         location: data.location,
         our_role: data.our_role,
-        the_challenge: data.the_challenge,
-        the_solution: data.the_solution,
+        the_challenge: null,
+        the_solution: null,
         notes: data.notes,
         is_notes_downloadable: data.is_notes_downloadable,
         content_blocks: data.content_blocks,
         portfolio_type: data.portfolio_type,
         pdf_url: data.pdf_url ?? null,
         updated_at: new Date().toISOString(),
-        description: data.description,
+        description: null,
       };
 
       console.log("[DEBUG] Payload to Supabase:", updatePayload);

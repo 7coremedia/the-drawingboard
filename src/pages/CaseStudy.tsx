@@ -64,17 +64,28 @@ export default function CaseStudy() {
     .map((entry) => entry.trim())
     .filter(Boolean);
 
+  const blocks: any[] = currentCaseStudy?.content_blocks ? (currentCaseStudy.content_blocks as any[]) : [];
+  const displayBlocks = blocks.filter(b => b.type !== 'meta_background');
+  const bgBlock = blocks.find(b => b.type === 'meta_background');
+  const hasBg = !!bgBlock?.media_url;
+
   return (
-    <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] pt-24 md:pt-40">
+    <div className={cn("min-h-screen relative pt-24 md:pt-40 pb-32", hasBg ? "text-white" : "bg-[#F5F0E8] text-[#0D0D0D]")}>
+      {hasBg && (
+         <div className="fixed inset-0 z-[-1]" style={{ backgroundImage: `url(${bgBlock.media_url})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
+            <div className="absolute inset-0 bg-black/70" />
+         </div>
+      )}
       <Helmet>
         <title>{currentCaseStudy.title} – KŌDĒ Archive</title>
       </Helmet>
 
-      {/* Case Study Header Section */}
-      <div className="container mx-auto px-6 mb-24">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-12">
-            <div className="max-w-4xl space-y-8">
-                <div className="flex items-center gap-4">
+      {/* Case Study Header & Cover Section */}
+      <div className="container mx-auto px-0 md:px-6 mb-24">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-12 md:gap-16">
+            
+            <div className="max-w-3xl space-y-8 px-6 md:px-0 order-1">
+                <div className="flex items-center gap-4 pt-8 md:pt-0">
                     <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">
                       {currentCaseStudy.portfolio_type === 'case_study' ? 'Diagnostic Protocol' : 'Exhibition Entry'}
                     </span>
@@ -84,26 +95,25 @@ export default function CaseStudy() {
                     {currentCaseStudy.title}
                 </h1>
                 {currentCaseStudy.tagline && (
-                  <p className="text-[#0D0D0D]/60 text-lg md:text-2xl font-medium leading-relaxed">
+                  <p className={cn("text-lg md:text-2xl font-medium leading-relaxed", hasBg ? "text-white/60" : "text-[#0D0D0D]/60")}>
                       {currentCaseStudy.tagline}
                   </p>
                 )}
             </div>
-          </div>
-      </div>
 
-      <main className="container mx-auto px-6">
-        {currentCaseStudy.cover_url && (
-            <div className="relative mb-24 bg-white p-2 md:p-6 rounded-[2rem] md:rounded-[4rem] border border-black/5 shadow-2xl">
-                <div className="overflow-hidden rounded-3xl md:rounded-[3rem] bg-black/5 w-full aspect-video md:aspect-[21/9]">
+            {currentCaseStudy.cover_url && (
+                <div className="hidden md:block w-full md:w-[400px] lg:w-[450px] xl:w-[500px] shrink-0 order-2 aspect-[202/158] overflow-hidden rounded-none md:rounded-[2.5rem] bg-black/5 shadow-none md:shadow-2xl md:mr-4 lg:mr-8 transition-transform hover:scale-[1.02]">
                     <img
                         src={currentCaseStudy.cover_url}
                         alt={`${currentCaseStudy.title}`}
                         className="w-full h-full object-cover"
                     />
                 </div>
-            </div>
-        )}
+            )}
+          </div>
+      </div>
+
+      <main className="container mx-auto px-6">
 
         {/* Project Intelligence Grid (Always visible if fields exist) */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-20 py-24 border-t border-black/[0.03]">
@@ -150,52 +160,22 @@ export default function CaseStudy() {
                     )}
                 </div>
             </aside>
-
-            {/* Strategic Content Blocks (The Left Panel Text) */}
-            <div className="space-y-20 lg:pl-12 lg:border-l border-black/5">
-                {currentCaseStudy.the_challenge && (
-                  <div className="space-y-6">
-                    <h3 className="font-display text-3xl font-black tracking-tight text-[#0D0D0D]">The Challenge</h3>
-                    <p className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed whitespace-pre-wrap">
-                      {currentCaseStudy.the_challenge}
-                    </p>
-                  </div>
-                )}
-
-                {currentCaseStudy.the_solution && (
-                  <div className="space-y-6">
-                    <h3 className="font-display text-3xl font-black tracking-tight text-[#0D0D0D]">Strategy & Solution</h3>
-                    <p className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed whitespace-pre-wrap">
-                      {currentCaseStudy.the_solution}
-                    </p>
-                  </div>
-                )}
-
-                {currentCaseStudy.description && (
-                  <div className="space-y-6">
-                    <h3 className="font-display text-3xl font-black tracking-tight text-[#0D0D0D]">Growth & Digital Execution</h3>
-                    <p className="text-xl md:text-2xl font-medium text-[#0D0D0D]/60 leading-relaxed whitespace-pre-wrap">
-                      {currentCaseStudy.description}
-                    </p>
-                  </div>
-                )}
-            </div>
         </div>
 
         {/* Modular Sequence / Media Exhibition */}
-        {currentCaseStudy.content_blocks && (currentCaseStudy.content_blocks as any[]).length > 0 ? (
+        {displayBlocks.length > 0 ? (
           <section className="py-24 border-t border-black/[0.03]">
             <div className="max-w-7xl mx-auto space-y-32">
-                {(currentCaseStudy.content_blocks as any[]).map((block: any) => (
+                {displayBlocks.map((block: any) => (
                    <div key={block.id} className="w-full">
                       {/* HEADING BLOCK */}
                       {block.type === 'heading' && (
-                        <h2 className="text-4xl md:text-6xl lg:text-8xl font-display font-black tracking-tighter uppercase max-w-5xl leading-[0.9] text-[#0D0D0D]" dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} />
+                        <h2 className="text-4xl md:text-6xl lg:text-8xl font-display font-black tracking-tighter uppercase max-w-5xl leading-[0.9]" dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} />
                       )}
                       
                       {/* TEXT BLOCK */}
                       {block.type === 'text' && (
-                        <p className="text-2xl md:text-4xl font-medium text-[#0D0D0D]/60 leading-tight max-w-5xl whitespace-pre-wrap">
+                        <p className={cn("text-2xl md:text-4xl font-medium leading-tight max-w-5xl whitespace-pre-wrap", hasBg ? "text-white/80" : "text-[#0D0D0D]/60")}>
                             {block.content}
                         </p>
                       )}
@@ -203,21 +183,48 @@ export default function CaseStudy() {
                       {/* IMAGE BLOCK */}
                       {block.type === 'image' && block.media_url && (
                         <div className={cn(
-                          "overflow-hidden rounded-[2rem] shadow-xl border border-black/5 bg-white", 
-                          block.style === 'full' ? 'w-full' : block.style === 'inset' ? 'max-w-4xl mx-auto' : 'w-full max-w-6xl'
+                          "w-full flex",
+                          block.layout === 'left' ? 'justify-start' : block.layout === 'right' ? 'justify-end' : 'justify-center'
                         )}>
-                          <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" loading="lazy" />
+                          <div className={cn(
+                            "flex flex-col gap-8 w-full",
+                            (block.side_text && (block.size === 'small' || block.size === 'medium')) 
+                              ? (block.layout === 'right' ? 'md:flex-row-reverse' : 'md:flex-row items-center')
+                              : "items-center"
+                          )}>
+                            <div className={cn(
+                              "overflow-hidden shrink-0 shadow-xl border bg-white", 
+                              hasBg ? "border-white/10" : "border-black/5",
+                              block.size === 'small' ? 'w-full md:max-w-md rounded-2xl' : 
+                              block.size === 'medium' ? 'w-full md:max-w-3xl rounded-[2rem]' : 'w-full max-w-6xl rounded-[3rem]'
+                            )}>
+                              <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" loading="lazy" />
+                            </div>
+                            
+                            {block.side_text && (block.size === 'small' || block.size === 'medium') && (
+                               <div className="flex-1 px-4 lg:px-12">
+                                  <p className={cn("text-lg md:text-xl font-medium leading-relaxed", hasBg ? "text-white/70" : "text-[#0D0D0D]/60 whitespace-pre-wrap")}>
+                                     {block.side_text}
+                                  </p>
+                               </div>
+                            )}
+                          </div>
                         </div>
                       )}
                       
                       {/* GALLERY BLOCK */}
                       {block.type === 'gallery' && block.media_urls && block.media_urls.length > 0 && (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                          {block.media_urls.map((url: string, i: number) => (
-                            <div key={i} className="aspect-square rounded-[2rem] overflow-hidden shadow-lg border border-black/5 bg-white">
-                              <img src={url} alt={`Gallery ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                        <div className={cn(
+                          "w-full flex",
+                          block.layout === 'left' ? 'justify-start w-full md:w-3/4 lg:w-2/3' : block.layout === 'right' ? 'justify-end w-full md:w-3/4 lg:w-2/3' : 'justify-center w-full'
+                        )}>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 w-full">
+                              {block.media_urls.map((url: string, i: number) => (
+                                <div key={i} className={cn("aspect-square rounded-[2rem] overflow-hidden shadow-lg border bg-white", hasBg ? "border-white/10" : "border-black/5")}>
+                                  <img src={url} alt={`Gallery ${i}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy" />
+                                </div>
+                              ))}
                             </div>
-                          ))}
                         </div>
                       )}
 
