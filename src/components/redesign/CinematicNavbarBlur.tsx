@@ -35,10 +35,7 @@ export default function CinematicNavbarBlur() {
 
     return (
         <div
-            className={cn(
-                "fixed left-0 right-0 h-32 pointer-events-none z-[45]",
-                isHome && isAtTop ? "top-14 md:top-16" : "top-0"
-            )}
+            className="fixed left-0 right-0 h-28 pointer-events-none z-[45] top-0"
             aria-hidden="true"
         >
             {/* Pure Progressive Blur - No hard lines or highlights */}

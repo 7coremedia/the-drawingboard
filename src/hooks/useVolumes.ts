@@ -5,10 +5,15 @@ import { VolumeRecord } from "@/types/volume";
 const mapVolumeFromDb = (row: any): VolumeRecord => ({
   id: row.id,
   slug: row.slug,
-  volumeNumber: row.volume_number,
+  volumeType: row.volume_type ?? 'article',
+  volumeNumber: row.volume_number ?? undefined,
+  category: row.category ?? undefined,
   title: row.title,
   writer: row.writer,
-  goal: row.goal,
+  writerAvatar: row.writer_avatar ?? null,
+  publishedAt: row.published_at ?? undefined,
+  timeToRead: row.time_to_read ?? undefined,
+  goal: row.goal ?? undefined,
   summary: row.summary,
   content: row.content ?? [],
   leadParagraph: row.lead_paragraph ?? null,
@@ -23,10 +28,15 @@ const mapVolumeFromDb = (row: any): VolumeRecord => ({
 
 const mapVolumeToDb = (input: Partial<VolumeRecord>) => ({
   slug: input.slug,
-  volume_number: input.volumeNumber,
+  volume_type: input.volumeType ?? 'article',
+  volume_number: input.volumeNumber ?? null,
+  category: input.category ?? null,
   title: input.title,
   writer: input.writer,
-  goal: input.goal,
+  writer_avatar: input.writerAvatar ?? null,
+  published_at: input.publishedAt ?? null,
+  time_to_read: input.timeToRead ?? null,
+  goal: input.goal ?? null,
   summary: input.summary,
   content: input.content ?? [],
   lead_paragraph: input.leadParagraph ?? null,
@@ -37,6 +47,7 @@ const mapVolumeToDb = (input: Partial<VolumeRecord>) => ({
   order_index: input.orderIndex ?? 0,
   created_at: input.createdAt ?? new Date().toISOString(),
 });
+
 
 export const volumeQueryKeys = {
   all: ["volumes"] as const,

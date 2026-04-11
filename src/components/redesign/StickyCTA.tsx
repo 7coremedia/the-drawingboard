@@ -7,13 +7,12 @@ export default function StickyCTA() {
     const [isVisible, setIsVisible] = useState(false);
     const location = useLocation();
 
-    // Do not show on contact page or management pages
-    const isContactPage = location.pathname === "/contact";
-    const isManagementPage = location.pathname.startsWith("/management");
-    const isChatPage = location.pathname.startsWith("/branding-chat");
+    // Only show on primary marketing pages
+    const allowedPaths = ["/", "/services", "/solutions", "/about"];
+    const isAllowed = allowedPaths.includes(location.pathname);
     
     useEffect(() => {
-        if (isContactPage || isManagementPage || isChatPage) {
+        if (!isAllowed) {
             setIsVisible(false);
             return;
         }
@@ -34,7 +33,7 @@ export default function StickyCTA() {
 
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [isContactPage, isManagementPage, isChatPage]);
+    }, [isAllowed]);
 
     return (
         <AnimatePresence>

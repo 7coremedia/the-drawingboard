@@ -27,9 +27,11 @@ export default function Navbar() {
 
     const isHome = location.pathname === "/";
     const isSuperstars = location.pathname === "/superstars";
+    const isVolumeRoute = location.pathname.startsWith("/volumes");
     const hasBanner = isHome || isSuperstars;
-    // Dark pages where logo/icons should be white at top
+    // Dark hero sections vs entirely dark pages
     const isDarkHero = isSuperstars;
+    const isWhiteNav = isVolumeRoute || (isDarkHero && isAtTop);
 
     return (
         <>
@@ -45,7 +47,7 @@ export default function Navbar() {
                     <NavLink to="/" className="flex items-center gap-2 flex-shrink-0" onClick={() => setMenuOpen(false)}>
                         <span className={cn(
                             "kode-wordmark text-lg sm:text-xl tracking-tight select-none font-black transition-colors duration-300",
-                            isDarkHero && isAtTop ? "text-white" : "text-[#0D0D0D]"
+                            isWhiteNav ? "text-white" : "text-[#0D0D0D]"
                         )}>
                             KŌDĒ
                         </span>
@@ -56,7 +58,7 @@ export default function Navbar() {
                         <button
                             className={cn(
                                 "p-2 md:p-3 rounded-full border transition-colors backdrop-blur-md z-50 overflow-hidden",
-                                isDarkHero && isAtTop
+                                isWhiteNav
                                     ? "text-white/80 hover:text-white bg-white/10 border-white/20"
                                     : "text-[#0D0D0D]/80 hover:text-black bg-black/5 border-black/10"
                             )}
@@ -114,6 +116,7 @@ export default function Navbar() {
                                     { name: "Studio", path: "/about" },
                                     { name: "Brand Audit", path: "/brand-audit" },
                                     { name: "Management", path: "/management" },
+                                    { name: "Dashboard", path: "/dashboard" },
                                     { name: "Contact", path: "/contact" }
                                 ].map((link) => (
                                     <NavLink

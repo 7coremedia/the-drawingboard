@@ -72,9 +72,12 @@ export default function Solutions() {
                                 animate={{ opacity: 1, x: 0 }}
                                 className="space-y-12"
                             >
-                                <p className="text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-relaxed">
-                                    We don't build generic solutions—we write the code to greatness. Tell us what you are building to see the direction.
-                                </p>
+                                <div className="space-y-6">
+                                    <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#C94A2C]">Which describes you?</span>
+                                    <p className="text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-relaxed">
+                                        We don't build generic solutions—we write the code to greatness. Tell us what you are building to see the direction.
+                                    </p>
+                                </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <button 

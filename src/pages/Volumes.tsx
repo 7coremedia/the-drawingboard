@@ -3,11 +3,30 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { seoArticles, volumes } from "@/data/volumes";
+import { useVolumes } from "@/hooks/useVolumes";
+import { Loader2 } from "lucide-react";
 
 export default function Volumes() {
-  const featureArticle = seoArticles[0];
-  const supportingArticles = seoArticles.length > 1 ? seoArticles.slice(1) : seoArticles;
+  const { volumes: allVolumes, isLoading } = useVolumes();
+  
+  // Filter for published items
+  const publishedVolumes = allVolumes.filter(v => v.isPublished);
+  
+  // Separation of content
+  const articles = publishedVolumes.filter(v => v.volumeType === 'article');
+  const masterclasses = publishedVolumes.filter(v => v.volumeType === 'masterclass');
+  
+  // Determine feature article
+  const latestArticle = articles.find(a => a.isLatest) || articles[0];
+  const supportingArticles = articles.filter(a => a.id !== latestArticle?.id);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-[#0D0D0D]">
+        <Loader2 className="h-12 w-12 animate-spin text-[#F5F0E8]" />
+      </div>
+    );
+  }
 
   return (
     <main className="bg-[#0D0D0D] text-[#F5F0E8] font-display">
@@ -20,51 +39,53 @@ export default function Volumes() {
         <link rel="canonical" href="/volumes" />
       </Helmet>
 
-      <section className="relative -mt-28 md:-mt-32">
+      <section className="relative">
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="relative w-full overflow-hidden bg-[#111115] text-white shadow-[0_30px_80px_rgba(6,7,12,0.65)]"
+          className="relative w-full overflow-hidden bg-[#0D0D0D] text-white"
         >
+          {latestArticle && (
           <div className="relative h-full min-h-[85vh] md:min-h-[92vh]">
             <img
-              src={featureArticle.image}
-              alt={featureArticle.title}
+              src={latestArticle.heroImageUrl || ""}
+              alt={latestArticle.title}
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-[#0f1015]/65 to-[#1a1b1d]" aria-hidden="true" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-[#0D0D0D]" aria-hidden="true" />
             <div className="relative z-10 flex h-full flex-col justify-end">
               <div className="mx-auto w-full max-w-6xl px-6 pt-24 pb-8 sm:px-10 sm:pt-32 sm:pb-10 lg:px-12 lg:pt-40 lg:pb-12">
                 <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-white/70">
                   <span className="rounded-md border border-white/40 px-3 py-1 backdrop-blur-sm">Latest Volume</span>
-                  <span>{featureArticle.category}</span>
+                  <span>{latestArticle.category}</span>
                 </div>
                 <h1 className="mt-6 font-display text-4xl sm:text-5xl md:text-6xl leading-tight text-[#F5F0E8] font-bold tracking-tight">
-                  {featureArticle.title}
+                  {latestArticle.title}
                 </h1>
                 <p className="mt-4 max-w-2xl text-base sm:text-lg text-white/80">
-                  {featureArticle.subtitle}
+                  {latestArticle.summary}
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-white/65">
-                  <span>{featureArticle.author}</span>
+                  <span>{latestArticle.writer}</span>
                   <span className="h-1 w-1 rounded-full bg-white/45" aria-hidden="true" />
-                  <span>{featureArticle.publishedOn}</span>
+                  <span>{latestArticle.publishedAt}</span>
                   <span className="h-1 w-1 rounded-full bg-white/45" aria-hidden="true" />
-                  <span>{featureArticle.readTime}</span>
+                  <span>{latestArticle.timeToRead}</span>
                 </div>
                 <div className="mt-8">
                   <Button
                     asChild
                     className="rounded-lg bg-white text-black hover:bg-white/80"
                   >
-                    <a href={`#${featureArticle.id}`}>Dive into the story</a>
+                    <Link to={`/volumes/${latestArticle.id}`}>Dive into the story</Link>
                   </Button>
                 </div>
               </div>
             </div>
           </div>
+          )}
         </motion.article>
       </section>
 
@@ -136,7 +157,7 @@ export default function Volumes() {
 
         <div className="mt-12 space-y-12">
           <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
-              {[featureArticle, ...supportingArticles].map((article, index) => (
+              {[latestArticle, ...supportingArticles].filter(Boolean).map((article, index) => (
                 <motion.article
                   key={article.id}
                   id={article.id}
@@ -149,7 +170,7 @@ export default function Volumes() {
                   <a href={`#${article.id}`} className="flex h-full flex-col" aria-label={`Read ${article.title} by ${article.author}`}>
                     <div className="relative aspect-[4/3] overflow-hidden">
                       <img
-                        src={article.image}
+                        src={article.heroImageUrl || ""}
                         alt={article.title}
                         className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                         loading="lazy"
@@ -160,14 +181,14 @@ export default function Volumes() {
                       <div className="flex items-center gap-3 text-xs uppercase tracking-[0.35em] text-white/65">
                         <span>{article.category}</span>
                         <span className="h-1 w-1 rounded-full bg-white/30" aria-hidden="true" />
-                        <span>{article.readTime}</span>
+                        <span>{article.timeToRead}</span>
                       </div>
                       <h3 className="font-display text-xl text-[#F5F0E8] sm:text-2xl font-bold tracking-tight">
                         {article.title}
                       </h3>
-                      <p className="text-sm text-white/75 leading-relaxed line-clamp-3">{article.subtitle}</p>
+                      <p className="text-sm text-white/75 leading-relaxed line-clamp-3">{article.summary}</p>
                       <div className="mt-auto flex items-center justify-between text-xs uppercase tracking-[0.35em] text-white/60">
-                        <span className="font-medium text-white">{article.author}</span>
+                        <span className="font-medium text-white">{article.writer}</span>
                         <span className="flex items-center gap-2 transition-all duration-300 group-hover:text-white group-hover:translate-x-1">
                           Read
                           <span className="text-lg leading-none">→</span>
@@ -180,15 +201,16 @@ export default function Volumes() {
             </div>
 
           <div className="space-y-8">
-            {volumes.map((volume, index) => (
+            {masterclasses.map((volume, index) => (
                 <Link
                   key={volume.id}
                   to={`/volumes/${volume.id}`}
+                  className="group relative block overflow-hidden rounded-2xl border border-white/5 bg-[#111111] transition-all duration-300 hover:bg-[#1a1a1f]"
                 >
                   <div className="absolute inset-y-0 left-0 w-1 rounded-l-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-[#C94A2C]" aria-hidden="true" />
                   <div className="relative grid gap-6 px-6 py-8 sm:px-8 sm:py-10 lg:grid-cols-[auto_1fr_auto] lg:items-end">
                     <div className="flex flex-col justify-between text-xs uppercase tracking-[0.5em] text-white/55 lg:h-full">
-                      <span>{volume.number}</span>
+                      <span>{volume.volumeNumber || `Volume ${(index + 1)}`}</span>
                       <span className="mt-6 hidden lg:block">Masterclass</span>
                     </div>
                     <div className="space-y-4">

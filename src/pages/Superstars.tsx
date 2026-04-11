@@ -78,12 +78,14 @@ export default function Superstars() {
 
                     <div className="relative z-10 container mx-auto px-6 max-w-7xl">
                         {/* Track Selector — mobile-safe, wraps cleanly */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: 0.3 }}
-                            className="flex flex-wrap gap-2 mb-10"
-                        >
+                        <div className="flex flex-col mb-10">
+                            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#C94A2C] mb-4">Which describes you?</span>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.3 }}
+                                className="flex flex-wrap gap-2"
+                            >
                             {tracks.map((t, i) => (
                                 <button
                                     key={t.id}
@@ -99,6 +101,7 @@ export default function Superstars() {
                                 </button>
                             ))}
                         </motion.div>
+                        </div>
 
                         {/* Hero headline — scales on mobile */}
                         <div className="relative min-h-[160px] md:min-h-[220px] lg:min-h-[280px] mb-8">

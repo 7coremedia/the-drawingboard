@@ -1838,9 +1838,35 @@ export default function OnboardingForm() {
   const progress = (step / (totalSteps + 1)) * 100;
 
   return (
-    <div className="mx-auto max-w-2xl rounded-xl border bg-card p-8 shadow-lg">
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+    <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] font-sans selection:bg-[#C94A2C] selection:text-[#F5F0E8] py-12 md:py-24">
+      <div className="container px-4 max-w-4xl mx-auto">
+        <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <span className="text-[10px] uppercase font-black tracking-[0.4em] text-[#C94A2C] mb-2 block">Brand Architecture</span>
+          <h1 className="text-4xl md:text-5xl font-display font-black tracking-tighter text-[#0D0D0D]">
+            Diagnostic <span className="text-black/30">Protocol.</span>
+          </h1>
+        </div>
+
+        <div 
+          className="bg-white rounded-[2.5rem] border border-black/5 p-6 md:p-12 shadow-xl animate-in fade-in slide-in-from-bottom-8 duration-700"
+          style={{
+            '--background': '0 0% 100%',
+            '--foreground': '0 0% 5%',
+            '--muted': '0 0% 96%',
+            '--muted-foreground': '0 0% 45%',
+            '--border': '0 0% 90%',
+            '--input': '0 0% 85%',
+            '--card': '0 0% 100%',
+            '--card-foreground': '0 0% 5%',
+            '--popover': '0 0% 100%',
+            '--popover-foreground': '0 0% 5%',
+            '--primary': '13 64% 47%',
+            '--primary-foreground': '36 30% 93%',
+            '--ring': '13 64% 47%'
+          } as React.CSSProperties}
+        >
+          <FormProvider {...methods}>
+            <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="mb-8 space-y-4">
             <Progress value={progress} className="h-2" />
             <div className="flex justify-between items-center">
@@ -1925,8 +1951,10 @@ export default function OnboardingForm() {
               </div>
             )}
           </div>
-        </form>
-      </FormProvider>
+            </form>
+          </FormProvider>
+        </div>
+      </div>
     </div>
   );
 }

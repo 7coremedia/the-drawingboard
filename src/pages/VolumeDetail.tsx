@@ -8,85 +8,112 @@ import { EditorialBlock } from "@/types/blocks";
 import { Loader2, ArrowLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-const EditorialBlockRenderer = ({ block }: { block: EditorialBlock }) => {
+const EditorialBlockRenderer = ({ block }: { block: any }) => {
   switch (block.type) {
     case 'heading':
       return (
-        <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-display font-black tracking-tighter uppercase text-white mt-16 mb-8 first:mt-0"
-        >
-          {block.content}
-        </motion.h2>
+        <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-black tracking-tighter uppercase text-white mt-16 mb-8 lg:mb-12" dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} />
       );
     case 'text':
       return (
-        <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="prose prose-invert prose-neutral max-w-none prose-p:text-white/80 prose-p:leading-relaxed prose-p:text-lg prose-headings:text-white prose-strong:text-[#C94A2C] prose-a:text-[#C94A2C] prose-li:text-white/70"
-            dangerouslySetInnerHTML={{ __html: block.content || '' }} 
-        />
+        <p className="text-[15px] md:text-lg font-medium leading-[1.8] text-white/70 max-w-3xl whitespace-pre-wrap">
+           {block.content}
+        </p>
       );
     case 'image':
+      if (!block.media_url) return null;
       return (
-        <motion.figure 
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className={cn(
-                "my-16 space-y-4",
-                block.style === 'inset' ? "max-w-4xl mx-auto px-6" : block.style === 'full' ? "-mx-4 md:-mx-20 lg:-mx-32" : ""
+        <div className={cn(
+          "w-full flex my-16 space-y-4",
+          block.layout === 'left' ? 'justify-start' : block.layout === 'right' ? 'justify-end' : 'justify-center'
+        )}>
+          <div className={cn(
+            "flex flex-col gap-8 w-full",
+            (block.side_text && (block.size === 'small' || block.size === 'medium')) 
+              ? (block.layout === 'right' ? 'md:flex-row-reverse' : 'md:flex-row items-center')
+              : "items-center"
+          )}>
+            <div className={cn(
+              "overflow-hidden shrink-0 shadow-xl border bg-white/5 border-white/10", 
+              block.size === 'small' ? 'w-full md:max-w-md rounded-[2rem]' : 
+              block.size === 'medium' ? 'w-full md:max-w-3xl rounded-[3rem]' : 'w-full max-w-5xl rounded-[3rem]'
+            )}>
+              <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" loading="lazy" />
+            </div>
+            
+            {block.side_text && (block.size === 'small' || block.size === 'medium') && (
+               <div className="flex-1 px-4 lg:px-12">
+                  <p className="text-lg md:text-xl font-medium leading-relaxed text-white/70 whitespace-pre-wrap">
+                     {block.side_text}
+                  </p>
+               </div>
             )}
-        >
-          <div className="rounded-[3rem] overflow-hidden border border-white/10 bg-white/5">
-             <img src={block.media_url} alt={block.caption || ""} className="w-full h-auto" />
           </div>
-          {block.caption && (
-            <figcaption className="text-[10px] font-black uppercase tracking-[0.4em] text-white/30 text-center px-8">
-              {block.caption}
-            </figcaption>
-          )}
-        </motion.figure>
+        </div>
       );
-    case 'quote':
+    case 'gallery':
+      if (!block.media_urls || block.media_urls.length === 0) return null;
       return (
-        <motion.blockquote 
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="my-16 p-12 bg-white/[0.03] border-l-4 border-[#C94A2C] rounded-r-[3rem] space-y-6"
-        >
-          <p className="text-3xl md:text-4xl font-display font-black tracking-tighter uppercase text-white leading-tight">
-            "{block.content}"
-          </p>
-          {block.caption && (
-              <span className="block text-[11px] font-black uppercase tracking-[0.4em] text-[#C94A2C]">
-                 // {block.caption}
-              </span>
-          )}
-        </motion.blockquote>
+        <div className="relative w-screen left-1/2 -translate-x-1/2 my-16">
+          <div className="flex gap-3 overflow-x-auto px-6 md:px-12 pb-4 snap-x snap-mandatory scrollbar-hide">
+            {block.media_urls.map((url: string, i: number) => (
+              <div
+                key={i}
+                className="shrink-0 snap-start overflow-hidden rounded-[2rem]"
+                style={{ height: '300px' }}
+              >
+                <img
+                  src={url}
+                  alt={`Gallery ${i}`}
+                  className="h-full w-auto object-cover"
+                  loading="lazy"
+                  style={{ maxWidth: 'none' }}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       );
-    case 'registry_highlight':
+    case 'video':
+      if (!block.media_url) return null;
       return (
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="my-10 p-8 rounded-[3rem] border border-white/10 bg-white/[0.02] space-y-4"
-        >
-           <div className="flex items-center gap-4 opacity-30">
-               <div className="h-1 w-1 bg-white rounded-full" />
-               <span className="text-[9px] font-black uppercase tracking-[0.5em]">Clinical_Record</span>
-               <div className="h-px flex-1 bg-white/10" />
-           </div>
-           <p className="text-lg text-white/90 font-medium leading-relaxed">
-             {block.content}
-           </p>
-        </motion.div>
+        <div className="max-w-5xl mx-auto overflow-hidden rounded-[3rem] shadow-2xl bg-[#0D0D0D] border border-white/10 aspect-video my-16">
+          {block.media_url.includes('youtube') || block.media_url.includes('vimeo') ? (
+            <iframe 
+              src={block.media_url.includes('youtube') ? block.media_url.replace('watch?v=', 'embed/') : block.media_url} 
+              className="w-full h-full" 
+              allowFullScreen
+            />
+          ) : (
+            <video src={block.media_url} controls className="w-full h-full object-cover" />
+          )}
+        </div>
+      );
+    case 'pdf':
+      if (!block.pdf_url) return null;
+      return (
+        <div className="max-w-4xl mx-auto my-16">
+          <div className="flex flex-col md:flex-row items-center justify-between bg-white/5 rounded-[3rem] p-10 border border-white/10 shadow-xl">
+            <div className="flex items-center gap-8 mb-8 md:mb-0">
+              <div className="text-left">
+                <span className="text-[12px] uppercase tracking-[0.4em] font-black text-white/30 block mb-2">Archived Document</span>
+                <h4 className="text-2xl md:text-3xl font-black text-white tracking-tight">{block.pdf_name || "Protocol Documentation"}</h4>
+              </div>
+            </div>
+            <a 
+              href={block.pdf_url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full md:w-auto px-12 py-6 bg-white text-black rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-[#C94A2C] hover:text-white transition-colors text-center"
+            >
+              Download File
+            </a>
+          </div>
+        </div>
+      );
+    case 'divider':
+      return (
+        <div className="max-w-2xl mx-auto h-px bg-white/10 my-24" />
       );
     default:
       return null;
@@ -121,30 +148,32 @@ export default function VolumeDetail() {
       <section className="relative pt-32 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#C94A2C]/5 to-transparent pointer-events-none" />
         
-        <div className="container mx-auto px-6 max-w-[1400px]">
-           <div className="flex flex-col gap-12 lg:grid lg:grid-cols-2 lg:items-end">
+        <div className="container mx-auto px-6 max-w-[1200px]">
+           <div className={cn("flex flex-col gap-10 lg:grid lg:items-end", 
+             volume.heroImageOrientation === 'landscape' ? "lg:grid-cols-1" : "lg:grid-cols-[1fr_420px]"
+           )}>
               <motion.div 
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="space-y-8"
+                className={cn("space-y-8", volume.heroImageOrientation === 'landscape' ? "max-w-4xl pt-8 pb-4" : "")}
               >
-                  <Button asChild variant="ghost" className="text-[10px] font-black uppercase tracking-[0.5em] text-white/40 hover:text-[#C94A2C] -ml-4">
+                  <Button asChild variant="ghost" className={cn("text-[10px] font-black uppercase tracking-[0.5em] text-white/40 hover:text-[#C94A2C] -ml-4", volume.heroImageOrientation === 'landscape' ? "hidden" : "inline-flex")}>
                       <Link to="/volumes" className="flex items-center gap-3">
                           <ArrowLeft size={14} /> Back to Archives
                       </Link>
                   </Button>
 
                   <div className="space-y-4">
-                      <div className="flex items-center gap-4 text-[#C94A2C]">
+                      <div className={cn("flex items-center gap-4 text-[#C94A2C]", volume.heroImageOrientation === 'landscape' ? "justify-start" : "")}>
                           <span className="text-[11px] font-black uppercase tracking-[0.8em]">{volume.volumeNumber}</span>
                           <div className="h-px w-20 bg-[#C94A2C]/30" />
                       </div>
-                      <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-black tracking-tighter uppercase leading-[0.9] text-white">
+                      <h1 className="text-4xl md:text-5xl lg:text-7xl font-display font-black tracking-tighter uppercase leading-[0.95] text-white">
                         {volume.title}
                       </h1>
                   </div>
 
-                  <p className="text-xl text-white/60 font-medium max-w-2xl leading-relaxed">
+                  <p className={cn("text-xl text-white/60 font-medium leading-relaxed", volume.heroImageOrientation === 'landscape' ? "max-w-3xl" : "max-w-2xl")}>
                     {volume.summary}
                   </p>
 
@@ -155,10 +184,12 @@ export default function VolumeDetail() {
               </motion.div>
 
               <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="relative rounded-[4rem] overflow-hidden border border-white/10 aspect-[4/5] md:aspect-square bg-white/5"
+                className={cn("relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-white/5", 
+                  volume.heroImageOrientation === 'landscape' ? "aspect-video w-full" : "aspect-[4/5]"
+                )}
               >
                 {volume.heroImageUrl ? (
                     <img src={volume.heroImageUrl} className="w-full h-full object-cover" alt={volume.title} />

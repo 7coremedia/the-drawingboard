@@ -19,6 +19,7 @@ import { Switch } from "@/components/ui/switch";
 import { Loader2, Archive, Activity, PenTool, Hash, UserCircle, Globe, Settings2, LayoutGrid } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import EnhancedMediaUpload from "./EnhancedMediaUpload";
 import VolumeEditorialBuilder from "./VolumeEditorialBuilder";
 
@@ -37,6 +38,7 @@ export const volumeFormSchema = z.object({
   goal: z.string().min(1, "Required"),
   summary: z.string().min(1, "Required"),
   heroImageUrl: z.string().optional(),
+  heroImageOrientation: z.enum(['portrait', 'landscape']).optional().default('portrait'),
   orderIndex: z.coerce.number().int().min(0),
   isPublished: z.boolean().default(false),
   isFeatured: z.boolean().default(false),
@@ -98,6 +100,7 @@ export default function VolumeForm({
       goal: initialData?.goal ?? "",
       summary: initialData?.summary ?? "",
       heroImageUrl: initialData?.heroImageUrl ?? "",
+      heroImageOrientation: initialData?.heroImageOrientation ?? "portrait",
       orderIndex: initialData?.orderIndex ?? defaultOrderIndex,
       isPublished: initialData?.isPublished ?? false,
       isFeatured: initialData?.isFeatured ?? false,
@@ -145,7 +148,7 @@ export default function VolumeForm({
   }, [initialData, titleValue, slugValue, setValue]);
 
   const submitHandler = async (values: VolumeFormValues) => {
-    await onSubmit({ ...values, heroImageUrl: currentCover?.url || undefined, content: values.content as EditorialBlock[] });
+    await onSubmit({ ...values, heroImageUrl: currentCover?.url || undefined, heroImageOrientation: values.heroImageOrientation, content: values.content as EditorialBlock[] });
   };
 
   return (
@@ -318,8 +321,28 @@ export default function VolumeForm({
                             />
                         </div>
                     </div>
+                    <FormField
+                        control={control}
+                        name="heroImageOrientation"
+                        render={({ field }) => (
+                            <FormItem className="px-2 mt-4">
+                                <FormLabel className={labelClasses}>Orientation Mode</FormLabel>
+                                <Select onValueChange={field.onChange} defaultValue={field.value || 'portrait'}>
+                                    <FormControl>
+                                        <SelectTrigger className="bg-white border-black/5 rounded-xl h-11 text-xs font-bold uppercase tracking-widest text-[#0D0D0D]">
+                                            <SelectValue placeholder="Select ratio" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        <SelectItem value="portrait" className="text-xs font-medium uppercase tracking-widest">Portrait (4:5)</SelectItem>
+                                        <SelectItem value="landscape" className="text-xs font-medium uppercase tracking-widest">Landscape (16:9)</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </FormItem>
+                        )}
+                    />
                     <p className="text-[8px] font-black uppercase tracking-[0.5em] text-black/20 text-center px-8">
-                       Recommended aspect ratio mapping: 4:5 or 1:1 Clinical Standards.
+                       Recommended aspect ratio mapping: 4:5 or 16:9 Clinical Standards.
                     </p>
                 </div>
             </div>

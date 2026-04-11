@@ -80,7 +80,9 @@ export default function PersonalBrandLauncher() {
                     <div className="container mx-auto max-w-7xl relative z-10">
                         <div className="max-w-4xl flex flex-col items-start space-y-12">
                             {/* Journey Selection Toggle */}
-                            <div className="flex flex-wrap bg-black/[0.04] p-1.5 rounded-3xl shadow-inner relative z-20">
+                            <div className="flex flex-col space-y-4">
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#C94A2C]">Which describes you?</span>
+                                <div className="flex flex-wrap bg-black/[0.04] p-1.5 rounded-3xl shadow-inner relative z-20 w-fit">
                                 {(['invisible', 'stalled', 'frozen', 'starting'] as JourneyState[]).map((state) => (
                                     <button 
                                         key={state}
@@ -93,6 +95,7 @@ export default function PersonalBrandLauncher() {
                                         {state}
                                     </button>
                                 ))}
+                                </div>
                             </div>
 
                             {/* Interactive Headline - ALIGNED LEFT, STABLE */}

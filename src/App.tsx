@@ -30,6 +30,7 @@ import PersonalBrandLauncher from "./pages/PersonalBrandLauncher";
 import AdvancedBrandLauncher from "./pages/AdvancedBrandLauncher";
 import StrategicBrandSystems from "./pages/StrategicBrandSystems";
 import Superstars from "./pages/Superstars";
+import Portal from "./pages/Portal";
 // Dashboard imports
 import ProtectedLayout from "./components/layout/ProtectedLayout";
 import ManagementDashboard from "./pages/management/Index";
@@ -63,6 +64,7 @@ function AppShell() {
   const isPortfolio = location.pathname === "/portfolio" || location.pathname.startsWith("/portfolio/");
   const isSuperstars = location.pathname === "/superstars";
   const isManagement = location.pathname.startsWith("/management");
+  const isPortal = location.pathname.startsWith("/portal");
   return (
     <>
       <Helmet>
@@ -82,12 +84,11 @@ function AppShell() {
           bgColor="#FFB16B"
         />
       )}
-      {!isChatPage && !location.pathname.startsWith("/management") && <CinematicNavbarBlur />}
-      {!isChatPage && !location.pathname.startsWith("/management") && <Navbar />}
+      {!isChatPage && !location.pathname.startsWith("/management") && !isPortal && <CinematicNavbarBlur />}
+      {!isChatPage && !location.pathname.startsWith("/management") && !isPortal && <Navbar />}
       <main
         className={cn(
-          !isHome && !isChatPage && !isSuperstars && !isManagement && "pt-28 md:pt-32",
-          isVolumeRoute && "bg-[#1a1b1d]"
+          !isHome && !isChatPage && !isSuperstars && !isManagement && !isVolumeRoute && !isPortal && "pt-28 md:pt-32",
         )}
       >
         <Routes>
@@ -111,6 +112,8 @@ function AppShell() {
           <Route path="/onboarding" element={<Onboarding />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/portal" element={<Portal />} />
+          <Route path="/portal/:id" element={<Portal />} />
           {/* Protected Management Routes */}
           <Route path="/management" element={<ProtectedLayout />}>
             <Route index element={<ManagementDashboard />} />
@@ -135,7 +138,7 @@ function AppShell() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      {!isChatPage && !isHome && <Footer />}
+      {!isChatPage && !isHome && !isPortal && <Footer />}
     </>
   );
 }
