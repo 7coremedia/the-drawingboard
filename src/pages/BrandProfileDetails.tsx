@@ -282,13 +282,13 @@ export default function BrandProfileDetails() {
           </div>
           
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" onClick={() => setShowAgreementModal(true)} className="rounded-full border-black/10 hover:bg-black/5 text-[10px] uppercase font-bold tracking-widest hidden md:flex">
+            <Button variant="default" size="sm" onClick={() => setShowAgreementModal(true)} className="rounded-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] text-[10px] uppercase font-bold tracking-widest hidden md:flex">
               <FileSignature className="mr-2 h-3.5 w-3.5" /> Agreement
             </Button>
-            <Button variant="outline" size="sm" onClick={() => setShowProposalModal(true)} className="rounded-full border-black/10 hover:bg-black/5 text-[10px] uppercase font-bold tracking-widest hidden md:flex">
+            <Button variant="default" size="sm" onClick={() => setShowProposalModal(true)} className="rounded-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] text-[10px] uppercase font-bold tracking-widest hidden md:flex">
               <FileText className="mr-2 h-3.5 w-3.5" /> Proposal
             </Button>
-            <Button variant="outline" size="sm" onClick={() => setShowInvoiceModal(true)} className="rounded-full border-black/10 hover:bg-black/5 text-[10px] uppercase font-bold tracking-widest hidden md:flex">
+            <Button variant="default" size="sm" onClick={() => setShowInvoiceModal(true)} className="rounded-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] text-[10px] uppercase font-bold tracking-widest hidden md:flex">
               <Receipt className="mr-2 h-3.5 w-3.5" /> Quick Invoice
             </Button>
             <Button variant="default" size="sm" onClick={() => navigate('/onboarding', { state: { editOnboardingId: id } })} className="rounded-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] text-[10px] uppercase font-bold tracking-widest">
