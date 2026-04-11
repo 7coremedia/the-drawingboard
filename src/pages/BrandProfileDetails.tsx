@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, Edit, Loader2, FileText, Receipt, LayoutDashboard, Database, Activity, Target, PenTool, RadioTower, Plus, Trash2, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Edit, Loader2, FileText, Receipt, LayoutDashboard, Database, Activity, Target, PenTool, RadioTower, Plus, Trash2, CheckCircle, FileSignature } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { 
   AlertDialog,
@@ -22,7 +22,30 @@ import { colorPalettes, logoStyles, typographyPairings, imageryStyles } from '@/
 import ColorPalettePreview from '@/components/ui/ColorPalettePreview';
 import ProposalGenerator from '@/components/powerups/ProposalGenerator';
 import InvoiceGenerator from '@/components/powerups/InvoiceGenerator';
+import AgreementGenerator from '@/components/powerups/AgreementGenerator';
 import { useAuth } from '@/hooks/useAuth';
+
+const milestoneTemplates: Record<string, {title: string, label: string}[]> = {
+  "arch": [
+    { title: "Discovery & Audit", label: "Week 1" },
+    { title: "Strategic Positioning", label: "Week 2" },
+    { title: "Visual Identity Concepting", label: "Week 3-4" },
+    { title: "Brand Bible Formulation", label: "Week 5" },
+    { title: "Deliverables Handover", label: "Week 6" }
+  ],
+  "refresh": [
+    { title: "Brand Diagnostic", label: "Week 1" },
+    { title: "Identity Evolution", label: "Week 2" },
+    { title: "Digital Systems Update", label: "Week 3" },
+    { title: "Rollout Strategy", label: "Week 4" }
+  ],
+  "digital": [
+    { title: "UX/UI Wireframing", label: "Week 1" },
+    { title: "High-Fidelity Prototyping", label: "Week 2-3" },
+    { title: "Development Phase", label: "Week 4-5" },
+    { title: "QA & Deployment", label: "Week 6" }
+  ]
+};
 
 // Keep same types and helpers
 type OnboardingResponse = {
@@ -74,6 +97,7 @@ export default function BrandProfileDetails() {
   const [error, setError] = useState<string | null>(null);
   const [showProposalModal, setShowProposalModal] = useState(false);
   const [showInvoiceModal, setShowInvoiceModal] = useState(false);
+  const [showAgreementModal, setShowAgreementModal] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [activeTab, setActiveTab] = useState<'portal' | 'strategy' | 'settings'>('portal');
   const { toast } = useToast();
@@ -137,6 +161,33 @@ export default function BrandProfileDetails() {
       if (error) throw error;
       toast({ title: "Milestone Added" });
       (e.target as HTMLFormElement).reset();
+      fetchData();
+    } catch (err: any) {
+      toast({ title: "Error", description: err.message, variant: "destructive" });
+    }
+  };
+
+  const handleLoadTemplate = async (templateId: string) => {
+    const template = milestoneTemplates[templateId];
+    if (!template) return;
+    
+    try {
+      // Clear existing
+      await supabase.from('project_milestones').delete().eq('brand_id', id);
+      
+      // Insert new
+      const newMilestones = template.map((m, idx) => ({
+        brand_id: id,
+        title: m.title,
+        date_label: m.label,
+        order_index: idx,
+        status: 'pending'
+      }));
+      
+      const { error } = await supabase.from('project_milestones').insert(newMilestones);
+      if (error) throw error;
+      
+      toast({ title: "Template Loaded", description: "Milestones have been updated." });
       fetchData();
     } catch (err: any) {
       toast({ title: "Error", description: err.message, variant: "destructive" });
@@ -231,6 +282,9 @@ export default function BrandProfileDetails() {
           </div>
           
           <div className="flex gap-2">
+            <Button variant="outline" size="sm" onClick={() => setShowAgreementModal(true)} className="rounded-full border-black/10 hover:bg-black/5 text-[10px] uppercase font-bold tracking-widest hidden md:flex">
+              <FileSignature className="mr-2 h-3.5 w-3.5" /> Agreement
+            </Button>
             <Button variant="outline" size="sm" onClick={() => setShowProposalModal(true)} className="rounded-full border-black/10 hover:bg-black/5 text-[10px] uppercase font-bold tracking-widest hidden md:flex">
               <FileText className="mr-2 h-3.5 w-3.5" /> Proposal
             </Button>
@@ -286,6 +340,16 @@ export default function BrandProfileDetails() {
                        <h3 className="text-xl font-display font-black tracking-tight flex items-center gap-2">
                           <Activity className="w-5 h-5 text-[#C94A2C]" /> Milestones
                        </h3>
+                       <Select onValueChange={handleLoadTemplate}>
+                         <SelectTrigger className="w-[120px] h-8 text-[10px] uppercase font-bold tracking-widest bg-black/5 border-0 rounded">
+                           <SelectValue placeholder="TEMPLATE" />
+                         </SelectTrigger>
+                         <SelectContent>
+                           <SelectItem value="arch">Brand Arch</SelectItem>
+                           <SelectItem value="refresh">Brand Refresh</SelectItem>
+                           <SelectItem value="digital">Digital System</SelectItem>
+                         </SelectContent>
+                       </Select>
                      </div>
 
                      <div className="flex-1 space-y-3 overflow-y-auto max-h-64 pr-2">
@@ -516,6 +580,7 @@ export default function BrandProfileDetails() {
 
       <ProposalGenerator isOpen={showProposalModal} onClose={() => setShowProposalModal(false)} brandData={brandProfile} />
       <InvoiceGenerator isOpen={showInvoiceModal} onClose={() => setShowInvoiceModal(false)} brandData={brandProfile} />
+      <AgreementGenerator isOpen={showAgreementModal} onClose={() => setShowAgreementModal(false)} brandData={brandProfile} />
     </div>
   );
 }

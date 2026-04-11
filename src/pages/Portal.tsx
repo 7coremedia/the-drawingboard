@@ -10,6 +10,10 @@ import {
   ArrowRight,
   Loader2,
   Lock,
+  Activity,
+  Layers,
+  Banknote,
+  LayoutTemplate
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -20,6 +24,7 @@ export default function Portal() {
   const [milestones, setMilestones] = useState<any[]>([]);
   const [invoices, setInvoices] = useState<any[]>([]);
   const [assets, setAssets] = useState<any[]>([]);
+  const [activeTab, setActiveTab] = useState<'matrix' | 'growth' | 'finance'>('matrix');
 
   useEffect(() => {
     const fetchPortalData = async () => {
@@ -29,7 +34,6 @@ export default function Portal() {
       }
 
       try {
-        // Fetch base brand details
         const { data: brandData, error: brandError } = await supabase
           .from("onboarding_responses")
           .select("brand_name, sender_name")
@@ -39,7 +43,6 @@ export default function Portal() {
         if (brandError) throw brandError;
         setBrand(brandData);
 
-        // Fetch milestones
         const { data: milestoneData } = await supabase
           .from("project_milestones")
           .select("*")
@@ -48,7 +51,6 @@ export default function Portal() {
         
         if (milestoneData) setMilestones(milestoneData);
 
-        // Fetch invoices
         const { data: invoiceData } = await supabase
           .from("client_invoices")
           .select("*")
@@ -57,7 +59,6 @@ export default function Portal() {
         
         if (invoiceData) setInvoices(invoiceData);
 
-        // Fetch assets
         const { data: assetData } = await supabase
           .from("client_deliverables")
           .select("*")
@@ -84,7 +85,6 @@ export default function Portal() {
     );
   }
 
-  // If accessed without ID or invalid ID
   if (!brand) {
     return (
       <div className="min-h-screen bg-[#F5F0E8] flex flex-col items-center justify-center p-6 text-center">
@@ -98,7 +98,6 @@ export default function Portal() {
     );
   }
 
-  // Helper to extract initials
   const getInitials = (name: string) => {
     if (!name) return "KD";
     const parts = name.split(" ");
@@ -112,10 +111,16 @@ export default function Portal() {
   const completedMilestones = milestones.filter(m => m.status === 'completed').length;
   const progressPercent = milestones.length > 0 ? Math.round((completedMilestones / milestones.length) * 100) : 0;
 
+  const tabs = [
+    { id: 'matrix', label: 'Project Matrix', icon: LayoutTemplate },
+    { id: 'growth', label: 'Growth & Intel', icon: Activity },
+    { id: 'finance', label: 'Financials', icon: Banknote }
+  ] as const;
+
   return (
     <div className="bg-[#F5F0E8] min-h-screen text-[#0D0D0D] font-sans selection:bg-[#C94A2C] selection:text-[#F5F0E8]">
       <Helmet>
-        <title>{brand.brand_name || "Portal"} – KŌDĒ Client Network</title>
+        <title>{brand.brand_name || "Portal"} – KŌDĒ</title>
       </Helmet>
 
       {/* Minimalist Portal Header */}
@@ -138,7 +143,7 @@ export default function Portal() {
         </div>
       </header>
 
-      <main className="container mx-auto px-6 py-12 md:py-16 md:px-12 max-w-6xl space-y-12 md:space-y-24">
+      <main className="container mx-auto px-6 py-12 md:py-16 md:px-12 max-w-6xl space-y-12">
         
         {/* Intro Section */}
         <section className="space-y-4">
@@ -149,116 +154,135 @@ export default function Portal() {
             Welcome back, <br className="hidden md:block"/>
             <span className="text-black/30">{clientName}.</span>
           </h1>
-          <p className="text-lg md:text-xl text-black/60 font-medium max-w-2xl mt-4">
-            Track your project progress, manage invoices, and access your brand aesthetics all in one place.
-          </p>
         </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
+        {/* Tab Navigation Hub */}
+        <div className="flex overflow-x-auto hide-scrollbar border-b border-black/10">
+           <div className="flex gap-8 px-1">
+              {tabs.map((tab) => (
+                <button 
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as any)}
+                  className={`flex items-center gap-2 pb-4 pt-2 border-b-2 transition-all whitespace-nowrap text-xs sm:text-sm font-bold uppercase tracking-widest ${activeTab === tab.id ? 'border-[#C94A2C] text-black' : 'border-transparent text-black/40 hover:text-black/70'}`}
+                >
+                   <tab.icon className="w-4 h-4" /> {tab.label}
+                   {tab.id === 'growth' && <span className="ml-1 px-1.5 py-0.5 rounded-full bg-[#C94A2C]/10 text-[#C94A2C] text-[8px]">SOON</span>}
+                </button>
+              ))}
+           </div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 pt-4">
           
-          {/* Main Column (Milestones & Invoices) */}
+          {/* Main Content Area based on Active Tab */}
           <div className="lg:col-span-2 space-y-12">
             
-            {/* Milestones */}
-            <section className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/[0.05] shadow-sm">
-               <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-2xl font-display font-black tracking-tighter">Project Matrix</h2>
-                  <span className="text-[10px] font-bold bg-[#C94A2C]/10 uppercase tracking-widest text-[#C94A2C] px-3 py-1.5 rounded-full">
-                    {progressPercent}% Completed
-                  </span>
-               </div>
+            {activeTab === 'matrix' && (
+              <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <section className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/[0.05] shadow-sm">
+                   <div className="flex items-center justify-between mb-8">
+                      <h2 className="text-2xl font-display font-black tracking-tighter">Project Matrix</h2>
+                      <span className="text-[10px] font-bold bg-[#C94A2C]/10 uppercase tracking-widest text-[#C94A2C] px-3 py-1.5 rounded-full">
+                        {progressPercent}% Completed
+                      </span>
+                   </div>
 
-               {milestones.length === 0 ? (
-                 <div className="py-12 text-center border-2 border-dashed border-black/5 rounded-2xl">
-                    <p className="text-sm font-medium text-black/40">Architecting timeline. Your milestones will appear here shortly.</p>
-                 </div>
-               ) : (
-                 <div className="space-y-6 relative before:absolute before:inset-y-0 before:left-[11px] before:w-px before:bg-black/10">
-                   {milestones.map((stone) => (
-                     <div key={stone.id} className="relative flex gap-6 items-start">
-                       <div className={`w-6 h-6 rounded-full flex items-center justify-center z-10 shrink-0 ${stone.status === 'completed' ? 'bg-[#C94A2C] text-white' : stone.status === 'in-progress' ? 'bg-white border-2 border-[#C94A2C]' : 'bg-[#F5F0E8] border border-black/10'}`}>
-                          {stone.status === 'completed' && <CheckCircle2 className="w-4 h-4" />}
-                       </div>
-                       <div className="flex-1 pb-6 border-b border-black/5 last:border-0 last:pb-0">
-                          <div className="flex items-center justify-between">
-                            <h3 className={`font-bold ${stone.status === 'pending' ? 'text-black/40' : 'text-black'} text-lg`}>
-                              {stone.title}
-                            </h3>
-                            <span className="text-xs font-medium text-black/40">{stone.date_label}</span>
-                          </div>
-                          {stone.status === 'in-progress' && (
-                            <div className="mt-3">
-                              <span className="text-[10px] uppercase font-bold tracking-widest text-[#C94A2C] bg-[#C94A2C]/5 px-2 py-1 rounded">Active Phase</span>
+                   {milestones.length === 0 ? (
+                     <div className="py-12 text-center border-2 border-dashed border-black/5 rounded-2xl">
+                        <p className="text-sm font-medium text-black/40">Architecting timeline. Your milestones will appear here shortly.</p>
+                     </div>
+                   ) : (
+                     <div className="space-y-6 relative before:absolute before:inset-y-0 before:left-[11px] before:w-px before:bg-black/10">
+                       {milestones.map((stone) => (
+                         <div key={stone.id} className="relative flex gap-6 items-start">
+                           <div className={`w-6 h-6 rounded-full flex items-center justify-center z-10 shrink-0 ${stone.status === 'completed' ? 'bg-[#C94A2C] text-white' : stone.status === 'in-progress' ? 'bg-white border-2 border-[#C94A2C]' : 'bg-[#F5F0E8] border border-black/10'}`}>
+                              {stone.status === 'completed' && <CheckCircle2 className="w-4 h-4" />}
+                           </div>
+                           <div className="flex-1 pb-6 border-b border-black/5 last:border-0 last:pb-0">
+                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+                                <h3 className={`font-bold ${stone.status === 'pending' ? 'text-black/40' : 'text-black'} text-lg`}>
+                                  {stone.title}
+                                </h3>
+                                <span className="text-xs font-medium text-black/40">{stone.date_label}</span>
+                              </div>
+                              {stone.status === 'in-progress' && (
+                                <div className="mt-3">
+                                  <span className="text-[10px] uppercase font-bold tracking-widest text-[#C94A2C] bg-[#C94A2C]/5 px-2 py-1 rounded">Active Phase</span>
+                                </div>
+                              )}
+                           </div>
+                         </div>
+                       ))}
+                     </div>
+                   )}
+                </section>
+              </div>
+            )}
+
+            {activeTab === 'growth' && (
+              <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                 <section className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/[0.05] shadow-sm text-center">
+                    <Layers className="w-12 h-12 text-black/10 mx-auto mb-6" />
+                    <h2 className="text-2xl font-display font-black tracking-tighter mb-4">Intelligence Reports</h2>
+                    <p className="text-black/50 font-medium max-w-md mx-auto mb-8">
+                      Your monthly strategic performance insights, competitor analyses, and growth roadmaps will populate here as we build toward Phase Two of your brand rollout.
+                    </p>
+                    <div className="inline-block border border-[#C94A2C]/20 bg-[#C94A2C]/5 text-[#C94A2C] text-[10px] uppercase font-bold tracking-widest px-4 py-2 rounded-full">
+                      Engineering Mode
+                    </div>
+                 </section>
+              </div>
+            )}
+
+            {activeTab === 'finance' && (
+              <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                <section className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/[0.05] shadow-sm">
+                   <div className="flex items-center justify-between mb-8">
+                      <h2 className="text-2xl font-display font-black tracking-tighter">Invoices & Ledgers</h2>
+                      <FileText className="w-5 h-5 text-black/30" />
+                   </div>
+
+                   {invoices.length === 0 ? (
+                     <div className="py-12 text-center border-2 border-dashed border-black/5 rounded-2xl">
+                        <p className="text-sm font-medium text-black/40">No outstanding invoices currently active.</p>
+                     </div>
+                   ) : (
+                     <div className="space-y-4 flex flex-col">
+                       {invoices.map(inv => (
+                         <div key={inv.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 md:p-6 rounded-2xl bg-[#F5F0E8]/50 hover:bg-[#F5F0E8] transition-colors border border-black/5 gap-4">
+                            <div className="flex items-center gap-4">
+                               <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm shrink-0">
+                                  <FileText className="w-4 h-4 text-black/60" />
+                               </div>
+                               <div>
+                                  <p className="font-bold text-sm tracking-tight">{inv.id}</p>
+                                  <p className="text-xs text-black/50 font-medium">{inv.date_label}</p>
+                               </div>
                             </div>
-                          )}
-                       </div>
+                            <div className="flex items-center gap-4 sm:gap-6 ml-14 sm:ml-0">
+                               <span className="font-display font-bold tracking-tight text-lg">{inv.amount}</span>
+                               <span className={`text-[9px] w-16 text-center uppercase tracking-widest font-black px-2 py-1 rounded ${inv.status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-red-100/50 text-[#C94A2C]'}`}>
+                                 {inv.status}
+                               </span>
+                               {inv.download_url && (
+                                 <a href={inv.download_url} target="_blank" rel="noreferrer" className="text-black/30 hover:text-black transition-colors" aria-label="Download Invoice">
+                                    <DownloadCloud className="w-5 h-5" />
+                                 </a>
+                               )}
+                            </div>
+                         </div>
+                       ))}
                      </div>
-                   ))}
-                 </div>
-               )}
-            </section>
-
-            {/* Invoices */}
-            <section className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/[0.05] shadow-sm">
-               <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-2xl font-display font-black tracking-tighter">Financials</h2>
-                  <FileText className="w-5 h-5 text-black/30" />
-               </div>
-
-               {invoices.length === 0 ? (
-                 <div className="py-12 text-center border-2 border-dashed border-black/5 rounded-2xl">
-                    <p className="text-sm font-medium text-black/40">No outstanding invoices or ledgers currently active.</p>
-                 </div>
-               ) : (
-                 <div className="space-y-4 flex flex-col">
-                   {invoices.map(inv => (
-                     <div key={inv.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 md:p-6 rounded-2xl bg-[#F5F0E8]/50 hover:bg-[#F5F0E8] transition-colors border border-black/5 gap-4">
-                        <div className="flex items-center gap-4">
-                           <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm shrink-0">
-                              <FileText className="w-4 h-4 text-black/60" />
-                           </div>
-                           <div>
-                              <p className="font-bold text-sm tracking-tight">{inv.id}</p>
-                              <p className="text-xs text-black/50 font-medium">{inv.date_label}</p>
-                           </div>
-                        </div>
-                        <div className="flex items-center gap-4 sm:gap-6 ml-14 sm:ml-0">
-                           <span className="font-display font-bold tracking-tight text-lg">{inv.amount}</span>
-                           <span className={`text-[9px] w-16 text-center uppercase tracking-widest font-black px-2 py-1 rounded ${inv.status === 'paid' ? 'bg-green-100 text-green-700' : 'bg-red-100/50 text-[#C94A2C]'}`}>
-                             {inv.status}
-                           </span>
-                           {inv.download_url && (
-                             <a href={inv.download_url} target="_blank" rel="noreferrer" className="text-black/30 hover:text-black transition-colors" aria-label="Download Invoice">
-                                <DownloadCloud className="w-5 h-5" />
-                             </a>
-                           )}
-                        </div>
-                     </div>
-                   ))}
-                 </div>
-               )}
-            </section>
+                   )}
+                </section>
+              </div>
+            )}
 
           </div>
 
-          {/* Sidebar (Assets & Actions) */}
+          {/* Sidebar Area (Persistent) */}
           <div className="space-y-8 lg:space-y-12">
             
-            {/* Quick Actions */}
-            <section className="bg-black rounded-[2.5rem] p-8 text-white relative overflow-hidden">
-               {/* Lighting effect */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-[50px] pointer-events-none" />
-              
-              <h2 className="text-xl font-display font-black tracking-tighter mb-4 relative z-10">Need Assistance?</h2>
-              <p className="text-white/60 text-sm mb-8 font-medium relative z-10 leading-relaxed">Connect directly with our team for questions about your clinical architecture.</p>
-              
-              <div className="space-y-3 relative z-10">
-                <Button className="w-full bg-white text-black hover:bg-white/90 rounded-full h-12 font-bold uppercase tracking-widest text-[10px] transition-transform active:scale-95">
-                  <MessageSquare className="w-4 h-4 mr-2" /> Open Chat
-                </Button>
-              </div>
-            </section>
-
             {/* Deliverables Vault */}
             <section className="bg-white rounded-[2.5rem] p-8 border border-black/[0.05] shadow-sm">
                <div className="flex items-center justify-between mb-8">
@@ -273,18 +297,32 @@ export default function Portal() {
                ) : (
                  <div className="space-y-3 flex flex-col">
                    {assets.map(asset => (
-                     <a href={asset.download_url} target="_blank" rel="noreferrer" key={asset.id} className="group flex items-center justify-between p-4 rounded-2xl bg-[#F5F0E8]/50 hover:bg-[#0D0D0D] transition-colors border border-black/5 cursor-pointer">
-                        <div className="mr-4">
+                     <a href={asset.download_url} target="_blank" rel="noreferrer" key={asset.id} className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl bg-[#F5F0E8]/50 hover:bg-[#0D0D0D] transition-colors border border-black/5 cursor-pointer gap-2">
+                        <div className="mr-0 sm:mr-4 pr-6 sm:pr-0 relative">
                           <p className="text-sm font-bold text-black group-hover:text-white transition-colors line-clamp-1">{asset.name}</p>
                           <p className="text-[10px] text-black/40 group-hover:text-white/40 font-bold uppercase tracking-widest mt-0.5 transition-colors">{asset.file_type} • {asset.file_size}</p>
                         </div>
-                        <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#333] flex items-center justify-center transition-colors shrink-0">
+                        <div className="w-8 h-8 rounded-full bg-white group-hover:bg-[#333] hidden sm:flex items-center justify-center transition-colors shrink-0">
                           <ArrowRight className="w-3.5 h-3.5 text-black group-hover:text-white" />
                         </div>
                      </a>
                    ))}
                  </div>
                )}
+            </section>
+
+             {/* Quick Actions (Support) */}
+             <section className="bg-black rounded-[2.5rem] p-8 text-white relative overflow-hidden">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 blur-[50px] pointer-events-none" />
+              
+               <h2 className="text-xl font-display font-black tracking-tighter mb-4 relative z-10">Need Assistance?</h2>
+               <p className="text-white/60 text-sm mb-8 font-medium relative z-10 leading-relaxed">Connect directly with our team for questions about your clinical architecture.</p>
+              
+               <div className="space-y-3 relative z-10">
+                 <Button className="w-full bg-white text-black hover:bg-white/90 rounded-full h-12 font-bold uppercase tracking-widest text-[10px] transition-transform active:scale-95">
+                   <MessageSquare className="w-4 h-4 mr-2" /> Open Chat
+                 </Button>
+               </div>
             </section>
 
           </div>
