@@ -117,6 +117,7 @@ export default function Navbar() {
                                     { name: "Brand Audit", path: "/brand-audit" },
                                     { name: "Management", path: "/management" },
                                     { name: "Dashboard", path: "/dashboard" },
+                                    { name: "Client Portal", path: "/portal", isHighlighted: true },
                                     { name: "Contact", path: "/contact" }
                                 ].map((link) => (
                                     <NavLink
@@ -126,7 +127,8 @@ export default function Navbar() {
                                         className={({ isActive }) =>
                                             cn(
                                                 "px-6 py-4 text-left text-2xl md:text-3xl font-display font-medium tracking-tighter transition-all duration-300 w-full rounded-2xl",
-                                                isActive ? "text-[#C94A2C]" : "text-[#0D0D0D]/40 hover:text-black hover:pl-8"
+                                                isActive ? "text-[#C94A2C]" : "text-[#0D0D0D]/40 hover:text-black hover:pl-8",
+                                                link.isHighlighted ? "text-[#C94A2C]/60 hover:text-[#C94A2C]" : ""
                                             )
                                         }
                                     >

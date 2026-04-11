@@ -39,7 +39,6 @@ export default function Dashboard() {
         const { data, error } = await supabase
           .from('onboarding_responses')
           .select('*')
-          .eq('user_id', user.id)
           .order('created_at', { ascending: false });
 
         if (error) throw error;
@@ -89,7 +88,7 @@ export default function Dashboard() {
            <div className="flex items-center gap-3">
              <Button 
                 variant="outline"
-                className="rounded-full border-black/10 hover:bg-black/5 hover:text-black uppercase text-[10px] font-bold tracking-widest px-6"
+                className="bg-transparent rounded-full border-black/10 text-black/80 hover:bg-black/5 hover:text-black uppercase text-[10px] font-bold tracking-widest px-6 disabled:opacity-50"
                 onClick={handleMigrateVolumes}
                 disabled={isMigrating}
              >
@@ -145,12 +144,7 @@ export default function Dashboard() {
                  </div>
 
                  <div className="pt-8 flex flex-col sm:flex-row gap-3 relative z-10">
-                   <Button variant="outline" asChild className="flex-1 rounded-full border-black/10 hover:bg-black/5 hover:text-black uppercase text-[9px] font-bold tracking-widest">
-                     <Link to={`/brand/${brand.id}`}>
-                       Diagnostic
-                     </Link>
-                   </Button>
-                   <Button variant="default" asChild className="flex-1 rounded-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] uppercase text-[9px] font-bold tracking-widest text-center shadow-lg transition-transform focus:scale-95 active:scale-95">
+                   <Button variant="default" asChild className="w-full rounded-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] uppercase text-[9px] font-bold tracking-widest text-center shadow-lg transition-transform focus:scale-95 active:scale-95">
                      <Link to={`/brand-profile/${brand.id}`}>
                        Client Management
                        <ArrowRight className="h-3.5 w-3.5 ml-2 hidden lg:block" />
