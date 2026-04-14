@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 
 export default function RedesignFooter() {
     return (
@@ -8,7 +8,7 @@ export default function RedesignFooter() {
                 {/* 1. BRAND STATEMENT */}
                 <div className="mb-24 md:mb-40 max-w-4xl">
                     <p className="font-display text-4xl md:text-6xl font-black text-[#0D0D0D] tracking-tighter leading-[0.95]">
-                        We build brands that people have feelings about — the kind that travel across industries, borders, and every room you walk into. <span className="text-[#C94A2C]">That is the KŌDĒ standard.</span>
+                        We build brands that people have feelings about — the kind that travel across industries, borders, and every room you walk into. <span className="text-[#C94A2C]">That is the ŌDEY standard.</span>
                     </p>
                 </div>
 
@@ -57,12 +57,12 @@ export default function RedesignFooter() {
                         <span
                             className="select-none pointer-events-none block text-left leading-none font-display font-black tracking-tighter text-[#C94A2C] text-[clamp(4rem,15vw,12rem)]"
                         >
-                            KŌDĒ
+                            ŌDEY
                         </span>
                         
                         <div className="flex flex-col items-start md:items-end gap-4 text-[9px] uppercase tracking-[0.4em] font-bold text-black/20 pb-4">
                             <div className="flex gap-4">
-                                <span>© 2026 KŌDĒ. All Rights Reserved.</span>
+                                <span>© 2026 ŌDEY. All Rights Reserved.</span>
                                 <span className="hidden md:inline">•</span>
                                 <span>Lagos — London</span>
                             </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -53,7 +53,7 @@ export default function VolumeEditPage() {
       queryClient.invalidateQueries({ queryKey: ["volumes"] });
       toast({
         title: "Protocol Success",
-        description: "Volume asset securely synchronized in the KŌDĒ repository.",
+        description: "Volume asset securely synchronized in the ŌDEY repository.",
       });
       navigate("/management/volumes");
     },
@@ -100,7 +100,7 @@ export default function VolumeEditPage() {
   return (
     <>
       <Helmet>
-        <title>Edit {volume.title} – KŌDĒ</title>
+        <title>Edit {volume.title} – ŌDEY</title>
       </Helmet>
       <VolumeBehanceEditor
         mode="edit"

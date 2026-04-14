@@ -1,4 +1,4 @@
-import { BRAND_CONFIG } from "@/config/brand";
+﻿import { BRAND_CONFIG } from "@/config/brand";
 import { cn } from "@/lib/utils";
 
 export default function Footer() {
@@ -9,11 +9,11 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <a href="/" className="block mb-8">
               <span style={{fontFamily:'"Satoshi-Variable",sans-serif', fontWeight:700, fontSize:'1.75rem', letterSpacing:'-0.04em', color:'#F5F0E8', textTransform:'uppercase'}}>
-                KŌDĒ
+                ŌDEY
               </span>
             </a>
             <p className="text-white/40 max-w-sm font-medium leading-relaxed">
-              The Drawing Board by KŌDĒ — building brands that define the next generation of African commerce and culture.
+              The Drawing Board by ŌDEY — building brands that define the next generation of African commerce and culture.
             </p>
           </div>
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Calculator, ArrowRight, TrendingUp, ShieldCheck, Activity } from "lucide-react";
@@ -30,8 +30,8 @@ export default function BrandROICalculator() {
     return (
         <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
             <Helmet>
-                <title>Brand ROI Calculator – KŌDĒ | The Drawing Board</title>
-                <meta name="description" content="Calculate the hidden cost of a weak brand and project your compounding returns with KŌDĒ clinical brand architecture." />
+                <title>Brand ROI Calculator – ŌDEY | The Drawing Board</title>
+                <meta name="description" content="Calculate the hidden cost of a weak brand and project your compounding returns with ŌDEY clinical brand architecture." />
                 <link rel="canonical" href="/brand-roi-calculator" />
             </Helmet>
 
@@ -118,7 +118,7 @@ export default function BrandROICalculator() {
                                     onValueChange={(val) => setTargetCloseRate(val[0])}
                                     className="[&_[role=slider]]:bg-[#0D0D0D] [&_[role=slider]]:border-[#0D0D0D]"
                                 />
-                                <p className="text-[9px] font-bold text-black/30 mt-2">Historically, a KŌDĒ brand architecture system lifts close rates by 15-40% through increased trust and perceived authority.</p>
+                                <p className="text-[9px] font-bold text-black/30 mt-2">Historically, a ŌDEY brand architecture system lifts close rates by 15-40% through increased trust and perceived authority.</p>
                             </div>
                         </motion.div>
                     </div>
@@ -167,7 +167,7 @@ export default function BrandROICalculator() {
                                     <div className="bg-white/5 border border-white/10 rounded-3xl p-6 flex items-start gap-4 mb-10">
                                         <ShieldCheck size={24} className="text-[#C9A66B] shrink-0" />
                                         <p className="text-xs font-bold text-white/70 leading-relaxed">
-                                            The investment to build a KŌDĒ brand system is typically less than 5% of what you are losing annually. Think about that.
+                                            The investment to build a ŌDEY brand system is typically less than 5% of what you are losing annually. Think about that.
                                         </p>
                                     </div>
                                     

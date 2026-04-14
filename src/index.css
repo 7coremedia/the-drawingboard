@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -33,7 +33,7 @@ All colors MUST be HSL.
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
   :root {
-    /* KŌDĒ Brand — Minimalist Bold Retro */
+    /* ŌDEY Brand — Minimalist Bold Retro */
     --background: 0 0% 5%;           /* #0D0D0D Deep Black */
     --foreground: 36 30% 93%;        /* #F5F0E8 Warm Cream */
 
@@ -43,7 +43,7 @@ All colors MUST be HSL.
     --popover: 0 0% 8%;
     --popover-foreground: 36 30% 93%;
 
-    /* KŌDĒ Primary — Signal Red */
+    /* ŌDEY Primary — Signal Red */
     --primary: 13 64% 47%;           /* #C94A2C Retro Signal Red */
     --primary-foreground: 36 30% 93%;
 
@@ -71,7 +71,7 @@ All colors MUST be HSL.
     --sidebar-border: 0 0% 14%;
     --sidebar-ring: 13 64% 47%;
 
-    /* KŌDĒ extras */
+    /* ŌDEY extras */
     --gradient-hero: linear-gradient(135deg, #C94A2C 0%, #0D0D0D 100%);
     --glass-blur: blur(20px);
     --glass-bg: rgba(245, 240, 232, 0.03);
@@ -242,7 +242,7 @@ All colors MUST be HSL.
     @apply opacity-90 scale-[1.02];
   }
 
-  /* KŌDĒ wordmark — the name IS the logo */
+  /* ŌDEY wordmark — the name IS the logo */
   .kode-wordmark {
     font-family: "Inter", sans-serif;
     font-weight: 800;

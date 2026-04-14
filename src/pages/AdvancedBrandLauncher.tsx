@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, ShieldCheck, Microscope, Link as LinkIcon, Command, Activity } from "lucide-react";
@@ -69,7 +69,7 @@ export default function AdvancedBrandLauncher() {
   return (
     <div className="min-h-screen bg-[#0D0D0D] text-white pt-24 pb-32 selection:bg-[#C94A2C] selection:text-white">
       <Helmet>
-        <title>Advanced Brand Diagnostic Protocol | KŌDĒ</title>
+        <title>Advanced Brand Diagnostic Protocol | ŌDEY</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
 
@@ -244,7 +244,7 @@ function ResultsDashboard({ data }: { data: LauncherData }) {
     return (
         <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] pt-24 pb-40">
             <Helmet>
-                <title>Your Personal Brand Protocol | KŌDĒ</title>
+                <title>Your Personal Brand Protocol | ŌDEY</title>
             </Helmet>
 
             <header className="container mx-auto px-6 mb-20 text-center">

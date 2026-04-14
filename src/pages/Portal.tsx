@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
@@ -92,7 +92,7 @@ export default function Portal() {
          <h1 className="text-3xl font-display font-black tracking-tight mb-2">Secure Portal</h1>
          <p className="text-black/50 font-medium max-w-sm mb-8">You need a valid tracking link to access your client portal.</p>
          <Button asChild className="bg-[#0D0D0D] text-white hover:bg-[#C94A2C] rounded-full uppercase text-[10px] tracking-widest px-8">
-            <Link to="/">Return to KŌDĒ</Link>
+            <Link to="/">Return to ŌDEY</Link>
          </Button>
       </div>
     );
@@ -120,14 +120,14 @@ export default function Portal() {
   return (
     <div className="bg-[#F5F0E8] min-h-screen text-[#0D0D0D] font-sans selection:bg-[#C94A2C] selection:text-[#F5F0E8]">
       <Helmet>
-        <title>{brand.brand_name || "Portal"} – KŌDĒ</title>
+        <title>{brand.brand_name || "Portal"} – ŌDEY</title>
       </Helmet>
 
       {/* Minimalist Portal Header */}
       <header className="px-6 py-6 md:px-12 md:py-8 flex items-center justify-between border-b border-black/[0.05]">
         <div className="flex items-center gap-3">
            <span className="kode-wordmark text-xl tracking-tight font-black text-[#0D0D0D]">
-             KŌDĒ
+             ŌDEY
            </span>
           <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-[#C94A2C] bg-[#C94A2C]/10 px-2 py-1 rounded">
             Portal

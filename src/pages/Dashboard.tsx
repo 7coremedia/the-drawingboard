@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
@@ -65,7 +65,7 @@ export default function Dashboard() {
   return (
     <div className="bg-[#F5F0E8] min-h-screen text-[#0D0D0D] font-sans selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-12 pb-24">
       <Helmet>
-        <title>Client Directory – KŌDĒ</title>
+        <title>Client Directory – ŌDEY</title>
         <meta name="description" content="Manage your incoming brands and configure their specific client portals." />
       </Helmet>
 

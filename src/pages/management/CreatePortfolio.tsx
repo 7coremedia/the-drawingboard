@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -55,7 +55,7 @@ export default function CreatePortfolio() {
       queryClient.invalidateQueries({ queryKey: ["publicPortfolioItem"] });
       toast({
         title: "Protocol Success",
-        description: "New exhibition asset registered in the KŌDĒ repository.",
+        description: "New exhibition asset registered in the ŌDEY repository.",
       });
     },
     onError: (error) => {
@@ -71,7 +71,7 @@ export default function CreatePortfolio() {
   return (
     <>
       <Helmet>
-        <title>New Project – KŌDĒ</title>
+        <title>New Project – ŌDEY</title>
       </Helmet>
       <BehanceStyleEditor
         mode="create"

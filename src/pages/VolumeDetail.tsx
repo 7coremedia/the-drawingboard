@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -141,7 +141,7 @@ export default function VolumeDetail() {
   return (
     <main className="bg-[#0D0D0D] min-h-screen text-white pb-32">
       <Helmet>
-        <title>{`${volume.title} | KŌDĒ Archives`}</title>
+        <title>{`${volume.title} | ŌDEY Archives`}</title>
       </Helmet>
 
       {/* Editorial Header */}
@@ -195,7 +195,7 @@ export default function VolumeDetail() {
                     <img src={volume.heroImageUrl} className="w-full h-full object-cover" alt={volume.title} />
                 ) : (
                     <div className="w-full h-full flex items-center justify-center text-white/5">
-                        <span className="text-[10rem] font-black uppercase tracking-widest leading-none">KŌDĒ</span>
+                        <span className="text-[10rem] font-black uppercase tracking-widest leading-none">ŌDEY</span>
                     </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/60 to-transparent" />
@@ -228,7 +228,7 @@ export default function VolumeDetail() {
             <div className="text-center md:text-left space-y-4">
                 <h4 className="text-xl font-display font-black tracking-tighter uppercase">Support This Edition</h4>
                 <p className="text-white/40 text-[11px] font-bold uppercase tracking-widest max-w-sm">
-                    KŌDĒ Volumes are community-funded clinical archives. Join the sequence.
+                    ŌDEY Volumes are community-funded clinical archives. Join the sequence.
                 </p>
             </div>
             <div className="flex gap-4">

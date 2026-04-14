@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+﻿import { useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useUser } from "@/hooks/usePortfolioAuth";
@@ -78,7 +78,7 @@ export default function ManagementVolumes() {
   return (
     <main className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] py-16 md:py-24">
       <Helmet>
-        <title>Volumes Registry – KŌDĒ</title>
+        <title>Volumes Registry – ŌDEY</title>
       </Helmet>
       
       <div className="container mx-auto px-6">
@@ -90,7 +90,7 @@ export default function ManagementVolumes() {
                 </div>
                 <h1 className="text-4xl md:text-6xl font-display font-black tracking-tighter leading-none uppercase">Volumes <br /><span className="text-black/20">Registry.</span></h1>
                 <p className="text-xl text-black/60 font-medium max-w-2xl">
-                    Publish and update KŌDĒ Volumes. Each entry powers the public volumes experience and individual detail pages.
+                    Publish and update ŌDEY Volumes. Each entry powers the public volumes experience and individual detail pages.
                 </p>
             </div>
             

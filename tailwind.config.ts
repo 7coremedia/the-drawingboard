@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss";
+﻿import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
@@ -56,7 +56,7 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // KŌDĒ Brand Palette
+        // ŌDEY Brand Palette
         "brand-red": "#C94A2C",
         "brand-cream": "#F5F0E8",
         "brand-stone": "#E8E4DE",

@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+﻿import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useUser } from "@/hooks/usePortfolioAuth";
 import { Card } from "@/components/ui/card";
@@ -60,7 +60,7 @@ export default function ManagementDashboard() {
     },
     {
       title: "Manage Volumes",
-      description: "Create, edit, and publish KŌDĒ Volumes",
+      description: "Create, edit, and publish ŌDEY Volumes",
       icon: BookOpen,
       href: "/management/volumes",
       roles: ["is_admin", "is_moderator"],
@@ -84,7 +84,7 @@ export default function ManagementDashboard() {
   return (
     <div className="bg-[#F5F0E8] min-h-screen text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-12 md:pt-24">
       <Helmet>
-        <title>Operational Intelligence Dashboard – KŌDĒ</title>
+        <title>Operational Intelligence Dashboard – ŌDEY</title>
       </Helmet>
 
       <main className="container mx-auto py-12 px-6">
@@ -95,7 +95,7 @@ export default function ManagementDashboard() {
           </div>
           <h1 className="text-5xl md:text-7xl font-display font-black tracking-tighter leading-none">Management <br /><span className="text-black/20">Dashboard.</span></h1>
           <p className="text-xl text-black/60 font-medium max-w-2xl">
-            Internal interface for KŌDĒ exhibit governance and database orchestration. 
+            Internal interface for ŌDEY exhibit governance and database orchestration. 
           </p>
         </header>
 
@@ -177,7 +177,7 @@ export default function ManagementDashboard() {
                   <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                     <div className="space-y-3 flex-1">
                         <p className="text-base text-[#0D0D0D]/80 font-medium leading-relaxed">
-                          Migrate existing exhibition archives from the local codebase to the primary KŌDĒ Cloud repository.
+                          Migrate existing exhibition archives from the local codebase to the primary ŌDEY Cloud repository.
                         </p>
                         <div className="flex items-center gap-3 text-[7px] font-black uppercase tracking-[0.4em] text-[#C94A2C]">
                             <span>Stage: Deployment</span>

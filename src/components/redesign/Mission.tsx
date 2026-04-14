@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { MoveRight } from "lucide-react";
 
 const missionCards = [
@@ -32,7 +32,7 @@ export default function Mission() {
                 {/* Section Header */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 md:mb-24">
                     <div className="max-w-2xl space-y-4">
-                        <span className="text-[10px] uppercase tracking-[0.4em] font-bold" style={{color:'#C94A2C'}}>The KŌDĒ Standard</span>
+                        <span className="text-[10px] uppercase tracking-[0.4em] font-bold" style={{color:'#C94A2C'}}>The ŌDEY Standard</span>
                         <h2 className="text-4xl md:text-6xl font-display leading-[1.1] tracking-tight">
                             Brand is not decoration. <br />
                             <span className="opacity-80">Brand is infrastructure.</span>

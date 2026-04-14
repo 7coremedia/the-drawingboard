@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+﻿import { Button } from '@/components/ui/button';
 import { Bookmark, Plus, Activity } from 'lucide-react';
 import PortfolioActions from '@/components/portfolio/PortfolioActions';
 import { useHeaderScroll } from '@/hooks/useHeaderScroll';
@@ -14,7 +14,7 @@ interface SinglePartnerHeaderProps {
 export default function SinglePartnerHeader({
   title,
   partnerName,
-  partnerType = "By KŌDĒ",
+  partnerType = "By ŌDEY",
   slug,
 }: SinglePartnerHeaderProps) {
   const isHidden = useHeaderScroll();

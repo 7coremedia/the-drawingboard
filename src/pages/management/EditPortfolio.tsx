@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+﻿import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
@@ -138,7 +138,7 @@ export default function EditPortfolio() {
   return (
     <>
       <Helmet>
-        <title>Edit {portfolio.title} – KŌDĒ</title>
+        <title>Edit {portfolio.title} – ŌDEY</title>
       </Helmet>
       <BehanceStyleEditor
         mode="edit"

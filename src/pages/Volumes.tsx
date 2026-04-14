@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -31,10 +31,10 @@ export default function Volumes() {
   return (
     <main className="bg-[#0D0D0D] text-[#F5F0E8] font-display">
       <Helmet>
-        <title>Volumes – KŌDĒ | The Drawing Board</title>
+        <title>Volumes – ŌDEY | The Drawing Board</title>
         <meta
           name="description"
-          content="Explore KŌDĒ Volumes: brand intelligence essays, culture-first frameworks, and masterclass-style volumes for African founders and creators."
+          content="Explore ŌDEY Volumes: brand intelligence essays, culture-first frameworks, and masterclass-style volumes for African founders and creators."
         />
         <link rel="canonical" href="/volumes" />
       </Helmet>
@@ -238,7 +238,7 @@ export default function Volumes() {
       <section className="container mx-auto px-4 pb-28">
         <div className="rounded-4xl border border-white/12 bg-white/[0.05] p-8 backdrop-blur-sm lg:flex lg:items-center lg:justify-between lg:gap-12">
           <div className="space-y-4 max-w-3xl">
-            <h3 className="text-xs uppercase tracking-[0.4em] text-white/55">Why KŌDĒ Volumes</h3>
+            <h3 className="text-xs uppercase tracking-[0.4em] text-white/55">Why ŌDEY Volumes</h3>
             <ul className="space-y-3 text-sm text-white/75">
               <li className="flex items-start gap-3">
                 <span className="mt-1 h-2 w-2 flex-none rounded-full bg-white" aria-hidden="true" />

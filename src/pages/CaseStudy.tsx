@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
 import { usePublicPortfolioItem, usePublicPortfolio } from "@/hooks/usePublicPortfolio";
@@ -77,7 +77,7 @@ export default function CaseStudy() {
          </div>
       )}
       <Helmet>
-        <title>{currentCaseStudy.title} – KŌDĒ Archive</title>
+        <title>{currentCaseStudy.title} – ŌDEY Archive</title>
       </Helmet>
 
       {/* Case Study Header & Cover Section */}

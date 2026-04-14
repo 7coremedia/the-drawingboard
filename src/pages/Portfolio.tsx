@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 import { Helmet } from "react-helmet-async";
 import PortfolioGrid from "@/components/sections/PortfolioGrid";
 import { motion } from "framer-motion";
@@ -9,8 +9,8 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
       <Helmet>
-        <title>Exhibition Archive – KŌDĒ | The Drawing Board</title>
-        <meta name="description" content="KŌDĒ brand exhibition. A clinical archive of identity systems, strategic architecture, and creative growth. Lagos — London." />
+        <title>Exhibition Archive – ŌDEY | The Drawing Board</title>
+        <meta name="description" content="ŌDEY brand exhibition. A clinical archive of identity systems, strategic architecture, and creative growth. Lagos — London." />
         <link rel="canonical" href="/portfolio" />
       </Helmet>
 

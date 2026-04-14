@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { useNavigate, Outlet, NavLink } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -92,7 +92,7 @@ export default function ProtectedLayout() {
             to="/" 
             className="flex items-center gap-4 hover:opacity-70 transition-opacity"
           >
-            <span className="text-lg font-display font-black tracking-tighter text-[#0D0D0D]">KŌDĒ</span>
+            <span className="text-lg font-display font-black tracking-tighter text-[#0D0D0D]">ŌDEY</span>
           </NavLink>
             <div className="h-4 w-px bg-black/10 hidden md:block" />
             <span className="text-[8px] font-black uppercase tracking-[0.4em] text-black/20 hidden md:block">Operational_Control</span>

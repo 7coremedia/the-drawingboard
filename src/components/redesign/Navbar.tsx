@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from "react-router-dom";
+﻿import { NavLink, useLocation } from "react-router-dom";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -49,7 +49,7 @@ export default function Navbar() {
                             "kode-wordmark text-lg sm:text-xl tracking-tight select-none font-black transition-colors duration-300",
                             isWhiteNav ? "text-white" : "text-[#0D0D0D]"
                         )}>
-                            KŌDĒ
+                            ŌDEY
                         </span>
                     </NavLink>
 
@@ -96,7 +96,7 @@ export default function Navbar() {
                             <div className="flex items-center justify-between p-6 md:p-10 border-b border-black/[0.03]">
                                 <NavLink to="/" onClick={() => setMenuOpen(false)}>
                                     <span className="kode-wordmark text-lg tracking-tight select-none text-[#0D0D0D] font-black">
-                                        KŌDĒ
+                                        ŌDEY
                                     </span>
                                 </NavLink>
                                 <button

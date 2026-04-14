@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { z } from "zod";
@@ -506,7 +506,7 @@ export default function CreatePortfolioFormV2({
         <div className="bg-black/5 rounded-[4rem] p-16 border border-dashed border-black/10 flex flex-col items-center justify-center text-center space-y-6">
             <Activity size={32} className="text-black/10" />
             <p className="text-[9px] uppercase tracking-[0.6em] font-black text-black/60 leading-relaxed max-w-xs">
-                Real-time security telemetry active... <br /> All archival sequences are audited under KŌDĒ clinical surveillance protocol.
+                Real-time security telemetry active... <br /> All archival sequences are audited under ŌDEY clinical surveillance protocol.
             </p>
         </div>
       </div>

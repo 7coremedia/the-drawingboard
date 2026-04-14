@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+﻿import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Check, X, ArrowRight } from "lucide-react";
 import RedesignFooter from "@/components/redesign/RedesignFooter";
@@ -62,7 +62,7 @@ export default function StrategicBrandSystems() {
     return (
         <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-20">
             <Helmet>
-                <title>Strategic Brand Systems | KŌDĒ</title>
+                <title>Strategic Brand Systems | ŌDEY</title>
                 <meta name="description" content="We design full-spectrum brand ecosystems. The full architecture of a brand, not just the visible parts." />
             </Helmet>
 
@@ -122,7 +122,7 @@ export default function StrategicBrandSystems() {
                         
                         {/* Decorative seals */}
                         <div className="absolute bottom-6 right-6 lg:bottom-10 lg:right-10 w-24 h-24 lg:w-32 lg:h-32 border border-[#3D2C1F]/20 rounded-full flex flex-col items-center justify-center bg-white/20 backdrop-blur-md shadow-xl text-[#3D2C1F]">
-                            <span className="text-[8px] lg:text-[10px] font-black uppercase text-center tracking-[0.3em]">KŌDĒ<br/>Certified</span>
+                            <span className="text-[8px] lg:text-[10px] font-black uppercase text-center tracking-[0.3em]">ŌDEY<br/>Certified</span>
                             <div className="w-full h-px bg-[#3D2C1F]/20 my-1 lg:my-2 w-1/2" />
                             <span className="text-[8px] font-bold uppercase tracking-[0.3em] opacity-60">System</span>
                         </div>

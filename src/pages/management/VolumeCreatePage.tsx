@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
@@ -35,7 +35,7 @@ export default function VolumeCreatePage() {
       queryClient.invalidateQueries({ queryKey: ["volumes"] });
       toast({
         title: "Protocol Success",
-        description: "New volume asset registered in the KŌDĒ repository.",
+        description: "New volume asset registered in the ŌDEY repository.",
       });
       navigate("/management/volumes");
     },
@@ -52,7 +52,7 @@ export default function VolumeCreatePage() {
   return (
     <>
       <Helmet>
-        <title>New Volume – KŌDĒ</title>
+        <title>New Volume – ŌDEY</title>
       </Helmet>
       <VolumeBehanceEditor
         mode="create"

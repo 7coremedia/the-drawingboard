@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -39,7 +39,7 @@ const AgreementGenerator = ({ isOpen, onClose, brandData }: AgreementGeneratorPr
           id: crypto.randomUUID(),
           type: 'paragraph',
           content: { 
-            text: `This Master Services Agreement (the "Agreement") is entered into as of **${effectiveDate}** (the "Effective Date") by and between **KŌDĒ** ("Studio") and **${brandData.brand_name || brandData.sender_name || 'Client'}** ("Client").` 
+            text: `This Master Services Agreement (the "Agreement") is entered into as of **${effectiveDate}** (the "Effective Date") by and between **ŌDEY** ("Studio") and **${brandData.brand_name || brandData.sender_name || 'Client'}** ("Client").` 
           }
         },
         {
@@ -90,7 +90,7 @@ const AgreementGenerator = ({ isOpen, onClose, brandData }: AgreementGeneratorPr
         {
           id: crypto.randomUUID(),
           type: 'paragraph',
-          content: { text: `_____________________________________\nFor KŌDĒ Studio\n\n_____________________________________\nFor ${brandData.brand_name || brandData.sender_name}` }
+          content: { text: `_____________________________________\nFor ŌDEY Studio\n\n_____________________________________\nFor ${brandData.brand_name || brandData.sender_name}` }
         }
       ]
     };

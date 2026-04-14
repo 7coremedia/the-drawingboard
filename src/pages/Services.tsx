@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import ServicesTabbed from "@/components/redesign/Services";
 import Exclusive from "@/components/redesign/Exclusive";
@@ -53,8 +53,8 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
       <Helmet>
-        <title>Services – KŌDĒ | Strategic Brand Systems</title>
-        <meta name="description" content="KŌDĒ brand strategy, identity, and design services. Clear deliverables, transparent pricing — in Naira, Dollars, or Euros." />
+        <title>Services – ŌDEY | Strategic Brand Systems</title>
+        <meta name="description" content="ŌDEY brand strategy, identity, and design services. Clear deliverables, transparent pricing — in Naira, Dollars, or Euros." />
         <link rel="canonical" href="/services" />
       </Helmet>
 

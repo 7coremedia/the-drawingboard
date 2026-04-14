@@ -1,4 +1,4 @@
-**KŌDĒ**
+﻿**ŌDEY**
 
 The Drawing Board
 
@@ -8,15 +8,15 @@ Volume I --- Identity, Audience & Market Position
 
 |                     |                                          |
 |---------------------|------------------------------------------|
-| **Studio**          | The Drawing Board by KŌDĒ                |
-| **Holding Company** | KŌDĒ (formerly Kings Empire)             |
+| **Studio**          | The Drawing Board by ŌDEY                |
+| **Holding Company** | ŌDEY (formerly Kings Empire)             |
 | **Founded**         | Lagos, Nigeria                           |
 | **Domain**          | kode.com.ng / kode.ng                    |
 | **Instagram**       | @kode.designed                           |
 | **Document Type**   | Internal Brand Strategy --- Confidential |
 | **Version**         | 1.0 --- 2025                             |
 
-*Crafted for KŌDĒ by The Drawing Board. Built to last.*
+*Crafted for ŌDEY by The Drawing Board. Built to last.*
 
 **TABLE OF CONTENTS**
 
@@ -63,16 +63,16 @@ Volume I --- Identity, Audience & Market Position
 <tr class="odd">
 <td></td>
 <td><p><em>We are not an agency. We are not a vendor. We are the architects of the brands that will define the next decade of African commerce, culture, and taste.</em></p>
-<p><strong>— KŌDĒ Studio Philosophy</strong></p></td>
+<p><strong>— ŌDEY Studio Philosophy</strong></p></td>
 </tr>
 </tbody>
 </table>
 
-**What Is KŌDĒ?**
+**What Is ŌDEY?**
 
-KŌDĒ (pronounced ko-day) is a prestige branding holding company operating out of Lagos, Nigeria. Under its identity lives The Drawing Board --- the studio arm that executes every creative and strategic mandate. Together, The Drawing Board by KŌDĒ, functions as a lifestyle branding powerhouse: part agency, part creative studio, part strategic consultancy.
+ŌDEY (pronounced ko-day) is a prestige branding holding company operating out of Lagos, Nigeria. Under its identity lives The Drawing Board --- the studio arm that executes every creative and strategic mandate. Together, The Drawing Board by ŌDEY, functions as a lifestyle branding powerhouse: part agency, part creative studio, part strategic consultancy.
 
-KŌDĒ is not built to serve everyone. It is built to serve the founders, brands, and executives who understand that design is not decoration --- it is direction. That brand is not marketing --- it is a living organism. That the right identity does not just make a product look good; it makes it inevitable.
+ŌDEY is not built to serve everyone. It is built to serve the founders, brands, and executives who understand that design is not decoration --- it is direction. That brand is not marketing --- it is a living organism. That the right identity does not just make a product look good; it makes it inevitable.
 
 **The Name**
 
@@ -80,13 +80,13 @@ KŌDĒ is not built to serve everyone. It is built to serve the founders, brands
 |------------------------|--------------------------------------------------------------------------------|
 | **Pronunciation**      | ko-day                                                                         |
 | **Etymology**          | Derived from \'code\' --- the underlying logic, the system beneath the surface |
-| **Visual Distinction** | Macron over the O (KŌDĒ) --- makes it legally and visually distinct            |
+| **Visual Distinction** | Macron over the O (ŌDEY) --- makes it legally and visually distinct            |
 | **Implication**        | There is a code to greatness. We write it.                                     |
 | **Sister Studio**      | The Drawing Board --- where the ideas are born, stress-tested, and made real   |
 
 **What We Do**
 
-KŌDĒ / The Drawing Board designs, builds, and positions brands. Not just logos. Not just decks. Full-spectrum brand ecosystems --- from the naming and identity to the voice, the digital presence, the product naming, the messaging strategy, the launch plan, and the long-term brand architecture. We build brands that people have feelings about.
+ŌDEY / The Drawing Board designs, builds, and positions brands. Not just logos. Not just decks. Full-spectrum brand ecosystems --- from the naming and identity to the voice, the digital presence, the product naming, the messaging strategy, the launch plan, and the long-term brand architecture. We build brands that people have feelings about.
 
 **02 --- INDUSTRY POSITIONING**
 
@@ -98,13 +98,13 @@ Emotionally: Lifestyle. Culture. Experience. Desire.
 
 |     |                                                                                                                                                                                                                                                                        |
 |-----|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     | *KŌDĒ exists at the intersection of branding precision and lifestyle magnetism. We are the only studio in our category that dresses like fashion, moves like hospitality, and heals like wellness --- while delivering the strategic depth of a top-tier consultancy.* |
+|     | *ŌDEY exists at the intersection of branding precision and lifestyle magnetism. We are the only studio in our category that dresses like fashion, moves like hospitality, and heals like wellness --- while delivering the strategic depth of a top-tier consultancy.* |
 
 **The Feel We Are Building Toward**
 
 The brief is clear: this brand should not feel like a tech company. It should not feel clinical, cold, or corporate. It should feel like the best hotel lobby you\'ve ever walked into. Like a fashion house that knows it\'s cooler than you --- and somehow makes you feel cooler for being in the room. Like a wellness brand that makes you believe your life is about to change.
 
-This is the emotional spectrum we are building KŌDĒ inside of:
+This is the emotional spectrum we are building ŌDEY inside of:
 
 |                      |                                                                                    |
 |----------------------|------------------------------------------------------------------------------------|
@@ -115,13 +115,13 @@ This is the emotional spectrum we are building KŌDĒ inside of:
 
 **Why This Matters for Branding**
 
-Most branding studios communicate like IT firms or law offices --- transactional, portfolio-heavy, and visually sterile. KŌDĒ is the opposite. Our brand should trigger desire before a prospect reads a single line of our services. The visual, the copy, the voice --- all of it should make a founder say: I don\'t know exactly what they do but I need them in my corner.
+Most branding studios communicate like IT firms or law offices --- transactional, portfolio-heavy, and visually sterile. ŌDEY is the opposite. Our brand should trigger desire before a prospect reads a single line of our services. The visual, the copy, the voice --- all of it should make a founder say: I don\'t know exactly what they do but I need them in my corner.
 
 **Brand Category Declaration**
 
 |                                                                                                                       |
 |-----------------------------------------------------------------------------------------------------------------------|
-| **KŌDĒ is a Lifestyle Branding Studio --- centered around real people, real moments, and brands worth believing in.** |
+| **ŌDEY is a Lifestyle Branding Studio --- centered around real people, real moments, and brands worth believing in.** |
 
 This declaration shapes everything downstream: the imagery we use, the words we choose, the clients we accept, the prices we command, and the culture we build around the studio name.
 
@@ -164,8 +164,8 @@ These are the frustrations that make our audience available to be found:
 
 |                                                                     |                                                                                                                                                |
 |---------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Pain Point**                                                      | **What It Means for KŌDĒ**                                                                                                                     |
-| 1\. They can\'t afford Pentagram --- but they deserve the thinking. | The gap between \'I\'ll use a freelancer\' and \'I\'ll hire a global agency\' has no great options. KŌDĒ fills this gap.                       |
+| **Pain Point**                                                      | **What It Means for ŌDEY**                                                                                                                     |
+| 1\. They can\'t afford Pentagram --- but they deserve the thinking. | The gap between \'I\'ll use a freelancer\' and \'I\'ll hire a global agency\' has no great options. ŌDEY fills this gap.                       |
 | 2\. They\'ve been burned by pretty-but-empty design.                | Previous agencies delivered logos without strategy. The brand looks okay but converts nothing and communicates nothing.                        |
 | 3\. They don\'t know how to brief a branding partner.               | They know something is wrong but can\'t articulate it. They need a studio that can extract the brief from them --- not wait for a perfect one. |
 | 4\. They\'re embarrassed by their brand in serious rooms.           | Meetings with investors, partners, or enterprise clients expose the brand\'s weakness. This is painful and costly.                             |
@@ -198,7 +198,7 @@ Beyond demographics, our client is defined by worldview:
 |---------------|--------------------------------------------------------|
 | **Style**     | Wordmark / Minimalist                                  |
 | **Character** | Clean, authoritative, typographically precise          |
-| **Treatment** | KŌDĒ --- the macron over the O is the signature detail |
+| **Treatment** | ŌDEY --- the macron over the O is the signature detail |
 | **Principle** | Less is the statement. The name IS the logo.           |
 
 **Color Palette --- Minimalist Bold Retro**
@@ -220,7 +220,7 @@ The palette must do what fashion palettes do: communicate an entire world before
 
 **Typography Style --- Editorial Modern Fun**
 
-Typography is the voice made visible. KŌDĒ\'s type system should feel like it belongs in between a fashion editorial and a strategy whitepaper. It reads beautifully and carries weight.
+Typography is the voice made visible. ŌDEY\'s type system should feel like it belongs in between a fashion editorial and a strategy whitepaper. It reads beautifully and carries weight.
 
 |                         |                                                                                                                                      |
 |-------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
@@ -231,7 +231,7 @@ Typography is the voice made visible. KŌDĒ\'s type system should feel like it 
 
 **Image Style & Visual Language**
 
-This is where KŌDĒ diverges most sharply from conventional branding studios. Our image world is not made of:
+This is where ŌDEY diverges most sharply from conventional branding studios. Our image world is not made of:
 
 - Generic stock photography of diverse professionals in glass offices
 
@@ -241,7 +241,7 @@ This is where KŌDĒ diverges most sharply from conventional branding studios. O
 
 - Branding-forward shots of notebooks, coffee cups, and MacBooks
 
-KŌDĒ\'s image world IS made of:
+ŌDEY\'s image world IS made of:
 
 |                             |                                                                                                                                      |
 |-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
@@ -266,14 +266,14 @@ Every touchpoint --- from Instagram posts to proposal decks --- should produce t
 | **Feeling** | **Internal Client Dialogue**                     |
 | Desire      | I want this brand to touch my brand.             |
 | Confidence  | These people know what they\'re doing.           |
-| Elevation   | Being seen with KŌDĒ makes me look better.       |
+| Elevation   | Being seen with ŌDEY makes me look better.       |
 | Urgency     | I can\'t afford NOT to work with them.           |
 | Belonging   | They understand me without me having to explain. |
 | Wonder      | How did they even think of that?                 |
 
 **05 --- COMPETITIVE LANDSCAPE**
 
-KŌDĒ competes at the top end --- not with the ₦150,000 logo designers but with the world\'s best creative studios. Understanding where they win, where they lose, and where we find our opening is critical.
+ŌDEY competes at the top end --- not with the ₦150,000 logo designers but with the world\'s best creative studios. Understanding where they win, where they lose, and where we find our opening is critical.
 
 **Primary Competitors**
 
@@ -284,7 +284,7 @@ KŌDĒ competes at the top end --- not with the ₦150,000 logo designers but wi
 | **What They Are**     | The world\'s largest independent design consultancy. A partnership model with 21 partners, each running their own practice under one brand.           |
 | **What They Do Well** | Pedigree, prestige, institutional trust, partner-led model, legacy portfolio across all sectors.                                                      |
 | **Their Weakness**    | Inaccessible to the African market. Culturally distant. No local intelligence. Feels like a monument, not a partner.                                  |
-| **KŌDĒ vs Pentagram** | We match their strategic depth with local cultural fluency and a lifestyle energy they will never have. We are accessible in ways they never will be. |
+| **ŌDEY vs Pentagram** | We match their strategic depth with local cultural fluency and a lifestyle energy they will never have. We are accessible in ways they never will be. |
 
 **Mother Design**
 
@@ -293,7 +293,7 @@ KŌDĒ competes at the top end --- not with the ₦150,000 logo designers but wi
 | **What They Are**         | A London and New York creative agency known for bold campaigns, brand identity, and cultural work.       |
 | **What They Do Well**     | Cultural credibility, bold creative risk-taking, campaign-first thinking, strong brand voice work.       |
 | **Their Weakness**        | Primarily campaign-minded. Not positioned as a full brand systems partner. Also: not on this continent.  |
-| **KŌDĒ vs Mother Design** | We match their cultural confidence. We add the strategic systems framework and the geographic relevance. |
+| **ŌDEY vs Mother Design** | We match their cultural confidence. We add the strategic systems framework and the geographic relevance. |
 
 **Instrument**
 
@@ -302,15 +302,15 @@ KŌDĒ competes at the top end --- not with the ₦150,000 logo designers but wi
 | **What They Are**      | A Portland-based digital brand and product studio known for deep digital brand systems and interactive work.  |
 | **What They Do Well**  | Digital-first brand thinking, product/brand integration, clean systematic design.                             |
 | **Their Weakness**     | Tech-adjacent in feel. Does not carry the lifestyle/fashion warmth we are building. No African market access. |
-| **KŌDĒ vs Instrument** | We offer the systems thinking without the cold tech aesthetic. Our brand breathes. Theirs computes.           |
+| **ŌDEY vs Instrument** | We offer the systems thinking without the cold tech aesthetic. Our brand breathes. Theirs computes.           |
 
 **Local Competitive Landscape (Lagos)**
 
-At the local level, most Lagos agencies compete on price, not positioning. Few have achieved the prestige positioning required to command premium pricing consistently. This is both a challenge and our greatest opening. There is no KŌDĒ in this market yet. We are not filling a gap --- we are creating a new category.
+At the local level, most Lagos agencies compete on price, not positioning. Few have achieved the prestige positioning required to command premium pricing consistently. This is both a challenge and our greatest opening. There is no ŌDEY in this market yet. We are not filling a gap --- we are creating a new category.
 
 |                                                                                                                                                                                                   |
 |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **KŌDĒ\'s true competitive moat is not capability --- it is positioning. We are the first lifestyle branding studio in Lagos built for the ambition of the next generation of African founders.** |
+| **ŌDEY\'s true competitive moat is not capability --- it is positioning. We are the first lifestyle branding studio in Lagos built for the ambition of the next generation of African founders.** |
 
 **06 --- UNIQUE SELLING PROPOSITION & DIFFERENTIATION**
 
@@ -318,11 +318,11 @@ At the local level, most Lagos agencies compete on price, not positioning. Few h
 
 |                                                                                                                                                                                                                   |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **KŌDĒ builds brands that people have feelings about --- through the strategic precision of a global consultancy, the cultural intelligence of a Lagos native, and the aesthetic confidence of a fashion house.** |
+| **ŌDEY builds brands that people have feelings about --- through the strategic precision of a global consultancy, the cultural intelligence of a Lagos native, and the aesthetic confidence of a fashion house.** |
 
 **What We Like (Brand Affinities)**
 
-These are the reference points, aesthetics, and values that the KŌDĒ brand system is attracted to and aligned with:
+These are the reference points, aesthetics, and values that the ŌDEY brand system is attracted to and aligned with:
 
 - Editorial photography --- storytelling through the frame
 
@@ -346,7 +346,7 @@ These are the reference points, aesthetics, and values that the KŌDĒ brand sys
 
 **What We Don\'t Like (Brand Repellents)**
 
-These are the aesthetics, behaviors, and approaches that KŌDĒ actively moves away from:
+These are the aesthetics, behaviors, and approaches that ŌDEY actively moves away from:
 
 - Generic stock imagery --- people shaking hands, diverse teams in glass boxes, laptops on wooden desks
 
@@ -375,7 +375,7 @@ These are the aesthetics, behaviors, and approaches that KŌDĒ actively moves a
 | 2\. Lifestyle Brand DNA              | We are the only branding studio in our category that operates with the aesthetic codes of a fashion or hospitality brand. Our brand IS the proof of concept. |
 | 3\. Systems Thinkers, Not Decorators | Every engagement starts with brand architecture --- the strategy, the story, the structure --- before a single visual is created.                            |
 | 4\. Real People, Real Brands         | We are built for founders who are actually building things, not for corporations managing legacies. We understand what is at stake.                          |
-| 5\. The Empire Model                 | KŌDĒ\'s partner model (inspired by Pentagram) means that every engagement benefits from the collective brain of the studio --- not just one account manager. |
+| 5\. The Empire Model                 | ŌDEY\'s partner model (inspired by Pentagram) means that every engagement benefits from the collective brain of the studio --- not just one account manager. |
 | 6\. Output That Travels              | Our work is built to function in Lagos AND London AND Lagos. Global-grade output from African soil.                                                          |
 
 **07 --- CORE VALUES, VISION & MISSION**
@@ -410,7 +410,7 @@ You will leave this engagement with a brand that makes you proud in every room y
 
 **08 --- PRODUCTS & SERVICES**
 
-KŌDĒ / The Drawing Board operates as a full-spectrum brand architecture studio. Our services are organized into tiers that reflect depth of engagement, not just deliverable count.
+ŌDEY / The Drawing Board operates as a full-spectrum brand architecture studio. Our services are organized into tiers that reflect depth of engagement, not just deliverable count.
 
 **Core Service Offerings**
 
@@ -498,7 +498,7 @@ For brands that need thinking more than execution.
 
 |                                                                                                                                                                                                 |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **KŌDĒ is positioned in the Budget--Premium tier: significantly above Lagos commodity pricing, below global agency retainer rates --- with a clear path to Premium-Only as the brand matures.** |
+| **ŌDEY is positioned in the Budget--Premium tier: significantly above Lagos commodity pricing, below global agency retainer rates --- with a clear path to Premium-Only as the brand matures.** |
 
 This means:
 
@@ -552,11 +552,11 @@ This means:
 
 **Tone of Voice**
 
-KŌDĒ communicates with the confidence of a studio that knows its worth and the warmth of one that wants you to succeed. The tone is never cold, never sycophantic, never corporate, never desperate.
+ŌDEY communicates with the confidence of a studio that knows its worth and the warmth of one that wants you to succeed. The tone is never cold, never sycophantic, never corporate, never desperate.
 
 |                             |                                   |                                                                                                 |
 |-----------------------------|-----------------------------------|-------------------------------------------------------------------------------------------------|
-| **Spectrum**                | **KŌDĒ Position**                 | **What This Means**                                                                             |
+| **Spectrum**                | **ŌDEY Position**                 | **What This Means**                                                                             |
 | Friendly vs. Formal         | 70% Friendly / 30% Formal         | We are approachable experts, not institutions. We call you by name. We talk like humans.        |
 | Inspirational vs. Practical | 60% Inspirational / 40% Practical | We sell the vision first, then the plan. Feeling before function --- but always with substance. |
 | Simple vs. Sophisticated    | 65% Simple / 35% Sophisticated    | We make complex ideas feel obvious. We don\'t use jargon to sound smart.                        |
@@ -592,7 +592,7 @@ KŌDĒ communicates with the confidence of a studio that knows its worth and the
 
 **11 --- PLATFORM STRATEGY & LEAD FUNNEL**
 
-Every platform KŌDĒ occupies must earn its place in the funnel. No platform exists for vanity --- each one moves a prospect closer to becoming a paying client.
+Every platform ŌDEY occupies must earn its place in the funnel. No platform exists for vanity --- each one moves a prospect closer to becoming a paying client.
 
 |     |                                                                                                                                               |
 |-----|-----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -605,7 +605,7 @@ Every platform KŌDĒ occupies must earn its place in the funnel. No platform ex
 |                       |                                                                                                                                     |
 |-----------------------|-------------------------------------------------------------------------------------------------------------------------------------|
 | **Funnel Stage**      | Top of Funnel (Awareness) + Mid Funnel (Desire)                                                                                     |
-| **Purpose**           | Where the world discovers KŌDĒ. Where the brand comes alive visually and verbally.                                                  |
+| **Purpose**           | Where the world discovers ŌDEY. Where the brand comes alive visually and verbally.                                                  |
 | **Content Pillars**   | Portfolio work, behind-the-scenes studio moments, brand philosophy content, client transformation stories, aesthetic world-building |
 | **Posting Frequency** | 4--5x per week (Feed + Stories + Reels)                                                                                             |
 | **Conversion Goal**   | Drive profile visitors to website via link in bio. Warm DM inquiries.                                                               |
@@ -639,7 +639,7 @@ Every platform KŌDĒ occupies must earn its place in the funnel. No platform ex
 |                       |                                                                                                                    |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------|
 | **Funnel Stage**      | Top to Mid Funnel (Authority Building → Enterprise Interest)                                                       |
-| **Purpose**           | Where KŌDĒ speaks to decision-makers, investors, enterprise marketing leads, and corporate communications teams.   |
+| **Purpose**           | Where ŌDEY speaks to decision-makers, investors, enterprise marketing leads, and corporate communications teams.   |
 | **Content Type**      | Thought leadership on brand strategy, founder brand-building insights, industry perspectives, studio announcements |
 | **Posting Frequency** | 2--3x per week --- more text-forward, less image-dependent than Instagram                                          |
 | **Conversion Goal**   | Enterprise inquiry, partnership conversations, speaking opportunities                                              |
@@ -649,13 +649,13 @@ Every platform KŌDĒ occupies must earn its place in the funnel. No platform ex
 
 |                  |                                                                                            |
 |------------------|--------------------------------------------------------------------------------------------|
-| **Funnel Stage** | **How It Works for KŌDĒ**                                                                  |
+| **Funnel Stage** | **How It Works for ŌDEY**                                                                  |
 | AWARENESS        | Instagram content → organic reach → discovery by target audience                           |
 | INTEREST         | Profile visit → website click → portfolio and services exploration                         |
 | DESIRE           | Email opt-in → nurture sequence → brand philosophy resonance                               |
 | ACTION           | Inquiry form / DM / email → discovery call → proposal → project start                      |
 | LOYALTY          | Project delivery → client delight → referral network activation → testimonial → case study |
-| AMPLIFICATION    | Case study on website + Instagram → new audience discovers KŌDĒ through social proof       |
+| AMPLIFICATION    | Case study on website + Instagram → new audience discovers ŌDEY through social proof       |
 
 **12 --- MARKETING GOALS**
 
@@ -664,7 +664,7 @@ Every platform KŌDĒ occupies must earn its place in the funnel. No platform ex
 |                                   |                                                                                                                                           |
 |-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
 | **Goal**                          | **What Success Looks Like**                                                                                                               |
-| 1\. Build Core Portfolio          | Complete 8--12 premium brand projects that can anchor the public portfolio and tell the KŌDĒ story visually.                              |
+| 1\. Build Core Portfolio          | Complete 8--12 premium brand projects that can anchor the public portfolio and tell the ŌDEY story visually.                              |
 | 2\. Establish Instagram Authority | Reach 5,000--10,000 highly targeted followers who match the ICP. Prioritize quality of following over vanity numbers.                     |
 | 3\. Launch & Populate Website     | Website live at kode.com.ng / kode.ng with at least 6 strong case studies, full services section, and active inquiry pipeline.            |
 | 4\. Build Email List              | Grow to 500--1,000 quality subscribers through lead magnet, post-inquiry captures, and referral.                                          |
@@ -696,7 +696,7 @@ Every platform KŌDĒ occupies must earn its place in the funnel. No platform ex
 
 Lagos does not lack talent. Lagos does not lack ambition. What Lagos has lacked --- for the founders and brands who are actually building the future --- is a studio that takes them as seriously as they take themselves.
 
-KŌDĒ was born from the recognition that the gap between \'I can afford a freelancer\' and \'I can afford a global agency\' was not just a pricing gap --- it was a thinking gap, a strategic gap, and above all, a gap in how African founders\' ambitions were being treated by the creative industry.
+ŌDEY was born from the recognition that the gap between \'I can afford a freelancer\' and \'I can afford a global agency\' was not just a pricing gap --- it was a thinking gap, a strategic gap, and above all, a gap in how African founders\' ambitions were being treated by the creative industry.
 
 The Drawing Board is where that gap gets closed. One brand at a time.
 
@@ -708,23 +708,23 @@ We believe that brand is not a luxury. It is infrastructure. And infrastructure 
 
 **The Conviction**
 
-KŌDĒ is not a service business. It is a belief system with a business model. The belief is this: there is a code to building something that matters. To building something that lasts. To building something that people feel. We know the code. That is why we are called KŌDĒ.
+ŌDEY is not a service business. It is a belief system with a business model. The belief is this: there is a code to building something that matters. To building something that lasts. To building something that people feel. We know the code. That is why we are called ŌDEY.
 
 **14 --- ONE-YEAR VISION**
 
 |                                                                                                                                                             |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **By the end of Year 1, KŌDĒ is known. Not famous --- known. Among the founders, creatives, and executives who matter in Lagos, the name means something.** |
+| **By the end of Year 1, ŌDEY is known. Not famous --- known. Among the founders, creatives, and executives who matter in Lagos, the name means something.** |
 
 **What Year 1 Looks Like**
 
-- A portfolio of 10--15 brands that each stand as proof of the KŌDĒ standard --- diverse in industry, unified in quality.
+- A portfolio of 10--15 brands that each stand as proof of the ŌDEY standard --- diverse in industry, unified in quality.
 
 - A website and Instagram presence that makes every competitor in Lagos uncomfortable.
 
 - A waiting list --- or at minimum, a predictable inquiry pipeline --- that means we are choosing clients, not chasing them.
 
-- The first KŌDĒ IP product in market, with a first cohort of clients who can speak to its value.
+- The first ŌDEY IP product in market, with a first cohort of clients who can speak to its value.
 
 - At least one brand project that earns press, feature, or industry recognition.
 
@@ -744,7 +744,7 @@ We start with the portfolio. Everything else follows.
 
 |                                                                                                                                                     |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------|
-| **By Year 5, KŌDĒ is not just a studio. It is an institution --- the creative authority that defines what premium brand-building means in Africa.** |
+| **By Year 5, ŌDEY is not just a studio. It is an institution --- the creative authority that defines what premium brand-building means in Africa.** |
 
 **What Year 5 Looks Like**
 
@@ -756,7 +756,7 @@ We start with the portfolio. Everything else follows.
 | Revenue           | ₦250M+ NGN gross annually / \$150,000+ USD equivalent --- with multiple revenue streams across projects, retainers, and IP products.                                    |
 | Geographic Reach  | Active projects across Nigeria, Ghana, Kenya, South Africa, and diaspora clients in UK, USA, and Canada.                                                                |
 | IP Portfolio      | 3--5 productized programs generating passive and semi-passive revenue alongside project work.                                                                           |
-| Brand Properties  | KŌDĒ is publishing original brand intelligence --- a magazine, a podcast, a conference --- that establishes us as a cultural and intellectual force, not just a vendor. |
+| Brand Properties  | ŌDEY is publishing original brand intelligence --- a magazine, a podcast, a conference --- that establishes us as a cultural and intellectual force, not just a vendor. |
 | Global Reputation | Referenced in the same conversations as Pentagram, Mother, and Instrument --- as the African answer to what those studios represent globally.                           |
 | Infrastructure    | Physical studio space in Lagos that functions as a creative landmark. A place people come to.                                                                           |
 
@@ -768,30 +768,30 @@ We start with the portfolio. Everything else follows.
 
 **The Honest Assessment**
 
-KŌDĒ is in its earliest chapter. The vision is clear. The capability is real. The market is ready. But there are genuine challenges that, if not named and addressed directly, will slow or cap growth. We name them here because ignoring them does not make them go away --- it makes us unprepared.
+ŌDEY is in its earliest chapter. The vision is clear. The capability is real. The market is ready. But there are genuine challenges that, if not named and addressed directly, will slow or cap growth. We name them here because ignoring them does not make them go away --- it makes us unprepared.
 
 |                                                     |                                                                                                                                                                                                 |
 |-----------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Challenge**                                       | **The Honest Answer**                                                                                                                                                                           |
-| Challenge 1: Brand Awareness                        | KŌDĒ is not yet widely known in its target market. The name means something to a small circle right now.                                                                                        
+| Challenge 1: Brand Awareness                        | ŌDEY is not yet widely known in its target market. The name means something to a small circle right now.                                                                                        
                                                        How We Win: Consistent Instagram and LinkedIn presence. Every completed project becomes a public case study. The portfolio does the talking.                                                     |
 | Challenge 2: Price Education in the Nigerian Market | A significant portion of our target market has been conditioned to expect design at commodity rates. Convincing them that brand investment returns multiples requires consistent communication. 
                                                        How We Win: We let our portfolio, client stories, and educational content do the price justification before the conversation ever starts.                                                        |
-| Challenge 3: Founder as Sole Point of Execution     | If KŌDĒ depends entirely on one person to both sell and deliver, growth will hit a ceiling fast.                                                                                                
+| Challenge 3: Founder as Sole Point of Execution     | If ŌDEY depends entirely on one person to both sell and deliver, growth will hit a ceiling fast.                                                                                                
                                                        How We Win: Document processes, build systems, bring in trusted collaborators for execution while the founder focuses on strategy and business development.                                      |
 | Challenge 4: Client Quality vs. Revenue Pressure    | The temptation to take any paying client rather than the right paying client is real in early stages.                                                                                           
                                                        How We Win: Define the ideal client profile clearly. Develop a qualification process for inquiry. Let brand positioning do the filtering.                                                        |
-| Challenge 5: Consistency of Output at Scale         | As the client list grows, maintaining the KŌDĒ standard without the founder on every pixel requires systems and people.                                                                         
+| Challenge 5: Consistency of Output at Scale         | As the client list grows, maintaining the ŌDEY standard without the founder on every pixel requires systems and people.                                                                         
                                                        How We Win: Build brand playbooks, creative processes, and team documentation from Day 1. The process is a product.                                                                              |
-| Challenge 6: Building While Running                 | KŌDĒ must build its own brand while simultaneously delivering for client brands. This is the founder\'s paradox.                                                                                
-                                                       How We Win: Block non-negotiable time for internal brand investment. Treat KŌDĒ as Client Zero.                                                                                                  |
+| Challenge 6: Building While Running                 | ŌDEY must build its own brand while simultaneously delivering for client brands. This is the founder\'s paradox.                                                                                
+                                                       How We Win: Block non-negotiable time for internal brand investment. Treat ŌDEY as Client Zero.                                                                                                  |
 
 |                                                                                                                                                                                                                 |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **The first domino is always awareness. When people know you exist and know what you stand for, everything else becomes easier. The goal of Year 1 is to make KŌDĒ impossible to ignore for the right people.** |
+| **The first domino is always awareness. When people know you exist and know what you stand for, everything else becomes easier. The goal of Year 1 is to make ŌDEY impossible to ignore for the right people.** |
 
 ***--- End of Volume I ---***
 
-**The Drawing Board by KŌDĒ**
+**The Drawing Board by ŌDEY**
 
 kode.com.ng \| @kode.designed

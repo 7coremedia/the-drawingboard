@@ -30,7 +30,7 @@ const About = () => {
                 Great brands <br /> aren't lucky. <br /> <span className="text-[#C94A2C]">They're built.</span>
               </h1>
               <p className="max-w-2xl text-lg md:text-2xl font-medium text-[#0D0D0D]/50 leading-relaxed">
-                We started KŌDĒ because the gap between a freelancer and a global agency shouldn't mean settling for less. African founders deserve world-class brand thinking — without the world-class price tag.
+                We started ŌDEY because the gap between a freelancer and a global agency shouldn't mean settling for less. African founders deserve world-class brand thinking — without the world-class price tag.
               </p>
             </motion.div>
           </div>
@@ -69,7 +69,7 @@ const About = () => {
                         <div className="grid md:grid-cols-2 gap-12 text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-[1.6]">
                              <div className="space-y-8">
                                 <p>
-                                    KŌDĒ was born in Lagos — one of the most competitive, culturally demanding business environments on earth. We've built brands across fashion, fintech, music, and consulting that win rooms in Lagos, London, and everywhere in between.
+                                    ŌDEY was born in Lagos — one of the most competitive, culturally demanding business environments on earth. We've built brands across fashion, fintech, music, and consulting that win rooms in Lagos, London, and everywhere in between.
                                 </p>
                                 <p>
                                     The brands that travel are built on one thing: clarity. Clarity about who you are, what you stand for, and why you're the only choice.
@@ -110,9 +110,9 @@ const About = () => {
               >
                 <div className="aspect-[3/4] rounded-[3.5rem] bg-white border border-black/[0.03] overflow-hidden shadow-2xl relative">
                   <img
-                    src="/placeholder.svg"
+                    src="/kingedmund.jpg"
                     alt="Creative Direction Leadership"
-                    className="w-full h-full object-contain p-12 transition-all duration-1000 grayscale hover:grayscale-0"
+                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000"
                   />
                   
                   {/* Digital Signature / Badge */}
@@ -145,7 +145,7 @@ const About = () => {
                 
                 <div className="space-y-8 text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-relaxed max-w-xl">
                   <p>
-                    When you work with KŌDĒ, you have direct access to the creative decision-maker. No account managers playing telephone. No juniors learning on your dime.
+                    When you work with ŌDEY, you have direct access to the creative decision-maker. No account managers playing telephone. No juniors learning on your dime.
                   </p>
                   <p>
                     We operate lean: a dedicated Creative Director, an in-house expert, and strategic administration. We strip away the bloated agency model to focus purely on the architecture of your brand.

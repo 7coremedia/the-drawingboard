@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -51,7 +51,7 @@ export default function Contact() {
   }, [searchParams, form]);
 
   const sendToWhatsApp = (values: Values) => {
-    const message = `Hi — I'm interested in working with KŌDĒ.\n\nName: ${values.name}\nEmail: ${values.email}\nMessage: ${values.message}`;
+    const message = `Hi — I'm interested in working with ŌDEY.\n\nName: ${values.name}\nEmail: ${values.email}\nMessage: ${values.message}`;
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
@@ -66,8 +66,8 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
       <Helmet>
-        <title>Initiate Protocol – KŌDĒ | The Drawing Board</title>
-        <meta name="description" content="Contact KŌDĒ for strategic brand architecture. Lagos — London. Working globally." />
+        <title>Initiate Protocol – ŌDEY | The Drawing Board</title>
+        <meta name="description" content="Contact ŌDEY for strategic brand architecture. Lagos — London. Working globally." />
         <link rel="canonical" href="/contact" />
       </Helmet>
 
@@ -175,7 +175,7 @@ export default function Contact() {
                         type="button"
                         onClick={() => {
                         const values = form.getValues();
-                        const subject = encodeURIComponent("Strategic Briefing Request – KŌDĒ");
+                        const subject = encodeURIComponent("Strategic Briefing Request – ŌDEY");
                         const body = encodeURIComponent(
                             `Protocol Inquiry:\n\n${values.message || ''}\n\nOrigin: ${values.name || ''} (${values.email || ''})`
                         );

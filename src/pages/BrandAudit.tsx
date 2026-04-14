@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+﻿import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ClipboardCheck, Clock, FileText, Activity } from "lucide-react";
@@ -11,8 +11,8 @@ export default function BrandAudit() {
     return (
         <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
             <Helmet>
-                <title>Strategic Diagnostic – KŌDĒ | The Drawing Board</title>
-                <meta name="description" content="KŌDĒ Strategic Diagnostic — a complete 48-hour brand architecture report." />
+                <title>Strategic Diagnostic – ŌDEY | The Drawing Board</title>
+                <meta name="description" content="ŌDEY Strategic Diagnostic — a complete 48-hour brand architecture report." />
                 <link rel="canonical" href="/brand-audit" />
             </Helmet>
 

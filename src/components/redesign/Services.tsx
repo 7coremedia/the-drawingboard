@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+﻿import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -18,7 +18,7 @@ const services = {
         image: "/placeholder.svg"
     },
     studio: {
-        title: "KŌDĒ Studio",
+        title: "ŌDEY Studio",
         subtitle: "Design & Execution",
         description: "Where strategy becomes visible. World-class visual identity, digital design, and brand assets — built to make people stop scrolling and start paying attention.",
         items: [

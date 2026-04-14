@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -22,7 +22,7 @@ export default function Solutions() {
     return (
         <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
             <Helmet>
-                <title>Solutions – KŌDĒ | The Drawing Board</title>
+                <title>Solutions – ŌDEY | The Drawing Board</title>
                 <meta name="description" content="Tailored brand architecture solutions for startup founders, personal brands, and enterprise scale-ups. We build brands that command authority." />
                 <link rel="canonical" href="/solutions" />
             </Helmet>

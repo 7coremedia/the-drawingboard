@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
@@ -123,7 +123,7 @@ export default function BrandAssessment() {
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] font-sans flex flex-col">
       <Helmet>
-        <title>Brand Health Assessment — KŌDĒ</title>
+        <title>Brand Health Assessment — ŌDEY</title>
       </Helmet>
 
       {/* TOP BAR */}

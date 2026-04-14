@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+﻿import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useForm } from "react-hook-form";
@@ -659,7 +659,7 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
         <div className="h-5 w-px bg-black/10" />
 
         <div className="flex flex-col">
-          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#C94A2C]">KŌDĒ</span>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-[#C94A2C]">ŌDEY</span>
           {isMobile && (
             <span className="text-[7px] font-black uppercase tracking-widest text-black/30 -mt-0.5">Mobile_Lite</span>
           )}

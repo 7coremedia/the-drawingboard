@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -207,7 +207,7 @@ export default function Auth() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#F5F0E8] p-6 pt-32">
       <Helmet>
-        <title>Protocol Access – KŌDĒ</title>
+        <title>Protocol Access – ŌDEY</title>
         <meta name="description" content="Sign in to access your strategic brand protocols." />
         <link rel="canonical" href="/auth" />
       </Helmet>

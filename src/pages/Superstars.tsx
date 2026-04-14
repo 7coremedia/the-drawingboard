@@ -50,8 +50,8 @@ export default function Superstars() {
     return (
         <div className="min-h-screen bg-[#0D0D0D] text-white selection:bg-[#C94A2C] selection:text-white">
             <Helmet>
-                <title>Scale Your Presence | KŌDĒ</title>
-                <meta name="description" content="For the talent, creator, and executive who needs a name that commands rooms before they enter them. KŌDĒ builds the brand infrastructure behind superstars." />
+                <title>Scale Your Presence | ŌDEY</title>
+                <meta name="description" content="For the talent, creator, and executive who needs a name that commands rooms before they enter them. ŌDEY builds the brand infrastructure behind superstars." />
             </Helmet>
 
             <main>
@@ -61,14 +61,14 @@ export default function Superstars() {
                     {/* Background editorial image grid */}
                     <div className="absolute inset-0 grid grid-cols-3 gap-px pointer-events-none">
                         <div className="bg-[#141414] relative overflow-hidden">
-                            <img src="/placeholder.svg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity scale-110" />
+                            <img src="/Superstar page/The-Talent.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity scale-110" />
                         </div>
                         <div className="bg-[#1a1a1a] relative overflow-hidden">
-                            <img src="/placeholder.svg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity" />
+                            <img src="/Superstar page/The-Creator.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity" />
                             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0D0D0D]" />
                         </div>
                         <div className="bg-[#111] relative overflow-hidden">
-                            <img src="/placeholder.svg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity scale-110" />
+                            <img src="/Superstar page/The-Executive.jpg" alt="" className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-luminosity scale-110" />
                         </div>
                     </div>
 
@@ -203,9 +203,9 @@ export default function Superstars() {
                         {/* 3-column smaller mosaic */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {[
-                                { caption: "Personal brand architecture for a Series B founder.", tag: "Executive" },
-                                { caption: "Visual identity system for a Lagos-based recording artist.", tag: "Talent" },
-                                { caption: "Platform strategy for a content creator at 2M followers.", tag: "Creator" },
+                                { caption: "Personal brand architecture for a Series B founder.", tag: "Executive", img: "/Superstar page/Personal brand architecture for a Series B founder..png" },
+                                { caption: "Visual identity system for a Lagos-based recording artist.", tag: "Talent", img: "/Superstar page/Visual identity system for a Lagos-based recording artist.jpg" },
+                                { caption: "Platform strategy for a content creator at 2M followers.", tag: "Creator", img: "/Superstar page/Platform strategy for a content creator at 2M followers.JPG" },
                             ].map((item, i) => (
                                 <motion.div
                                     key={i}
@@ -216,7 +216,7 @@ export default function Superstars() {
                                     className="group cursor-pointer"
                                 >
                                     <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden bg-[#1a1a1a] mb-5 relative">
-                                        <img src="/placeholder.svg" alt={item.caption} className="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" />
+                                        <img src={item.img} alt={item.caption} className="w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D]/80 to-transparent" />
                                         <div className="absolute top-6 left-6">
                                             <span className="bg-white/10 backdrop-blur-md text-white text-[8px] font-black uppercase tracking-[0.3em] px-3 py-1.5 rounded-full border border-white/10">{item.tag}</span>
@@ -252,7 +252,7 @@ export default function Superstars() {
                                     <img src="/placeholder.svg" alt="Brand System Mockup" className="w-full h-full object-cover opacity-40" />
                                     <div className="absolute inset-0 flex items-center justify-center">
                                         <div className="text-center">
-                                            <p className="text-[9px] font-black uppercase tracking-[0.5em] text-white/30 mb-1">KŌDĒ</p>
+                                            <p className="text-[9px] font-black uppercase tracking-[0.5em] text-white/30 mb-1">ŌDEY</p>
                                             <p className="text-[9px] font-black uppercase tracking-[0.3em] text-white/20">Superstar System</p>
                                         </div>
                                     </div>
@@ -301,7 +301,7 @@ export default function Superstars() {
                                 <span className="text-[#C94A2C]">unfair advantage.</span><br />
                                 Build it like one."
                             </blockquote>
-                            <p className="mt-10 text-[10px] font-black uppercase tracking-[0.4em] text-white/20">— KŌDĒ Brand Strategy Vol. I</p>
+                            <p className="mt-10 text-[10px] font-black uppercase tracking-[0.4em] text-white/20">— ŌDEY Brand Strategy Vol. I</p>
                         </motion.div>
                     </div>
                 </section>

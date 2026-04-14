@@ -1,4 +1,4 @@
-import * as React from 'react';
+﻿import * as React from 'react';
 import { usePublicPortfolio } from '@/hooks/usePublicPortfolio';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -87,7 +87,7 @@ export default function FeaturedWorksCarousel() {
                             <textPath href="#curveText" startOffset="0%">CERTIFIED · PROTOCOL ·</textPath>
                             </text>
                             <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" className="opacity-50" />
-                            <text x="50" y="54" fontSize="13" fill="currentColor" textAnchor="middle" fontWeight="black" className="font-display">KŌDĒ</text>
+                            <text x="50" y="54" fontSize="13" fill="currentColor" textAnchor="middle" fontWeight="black" className="font-display">ŌDEY</text>
                         </svg>
                     </div>
                 </div>

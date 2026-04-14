@@ -1,10 +1,10 @@
-/**
- * Centralized brand configuration for KŌDĒ — The Drawing Board.
+﻿/**
+ * Centralized brand configuration for ŌDEY — The Drawing Board.
  */
 export const BRAND_CONFIG = {
-  name: "KŌDĒ",
-  shortName: "KŌDĒ",
-  studioName: "The Drawing Board by KŌDĒ",
+  name: "ŌDEY",
+  shortName: "ŌDEY",
+  studioName: "The Drawing Board by ŌDEY",
   domain: "kode.com.ng",
   instagram: "@kode.designed",
   palette: {
@@ -19,8 +19,8 @@ export const BRAND_CONFIG = {
     hero: "There is a code to greatness. We write it.",
   },
   seo: {
-    title: "KŌDĒ | The Drawing Board — Brand Strategy & Identity Studio",
-    description: "KŌDĒ is a lifestyle branding studio for founders who know their brand should be as ambitious as their vision. Brand strategy, identity, and design — Lagos to London.",
+    title: "ŌDEY | The Drawing Board — Brand Strategy & Identity Studio",
+    description: "ŌDEY is a lifestyle branding studio for founders who know their brand should be as ambitious as their vision. Brand strategy, identity, and design — Lagos to London.",
   }
 };
 

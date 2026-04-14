@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+﻿import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { NavLink } from "react-router-dom";
 import { PhoneCall, Mail, ArrowUpRight } from "lucide-react";
@@ -15,7 +15,7 @@ export default function Cta({ background = 'transparent', className }: CtaProps)
   const formRef = useRef<HTMLFormElement>(null);
 
   const handleWhatsAppClick = () => {
-    const encodedMessage = encodeURIComponent(message || "Hi — I came across KŌDĒ and I'm interested in talking about my brand.");
+    const encodedMessage = encodeURIComponent(message || "Hi — I came across ŌDEY and I'm interested in talking about my brand.");
     window.open(`https://wa.me/2348160891799?text=${encodedMessage}`, '_blank');
   };
 

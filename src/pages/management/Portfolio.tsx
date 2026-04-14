@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useUser } from "@/hooks/usePortfolioAuth";
@@ -40,7 +40,7 @@ export default function DashboardPortfolio() {
   return (
     <main className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] py-16 md:py-24 selection:bg-[#C94A2C] selection:text-white">
       <Helmet>
-        <title>Exhibition Registry – KŌDĒ</title>
+        <title>Exhibition Registry – ŌDEY</title>
       </Helmet>
       
       <div className="container mx-auto px-6">
