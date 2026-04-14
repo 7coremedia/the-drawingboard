@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, Mail, Download, ArrowUpRight, Check } from "lucide-react";
@@ -219,7 +219,7 @@ export default function PersonalBrandLauncher() {
                                 className="aspect-[3/4] w-full max-w-md mx-auto bg-white rounded-[3rem] p-2 shadow-2xl relative"
                                 style={{ transformStyle: 'preserve-3d', perspective: '1000px' }}
                             >
-                                <img src="/placeholder.svg" alt="PDF Cover" className="w-full h-full object-cover rounded-[2.5rem] grayscale" />
+                                <img src="/Personal Brand Launcher page/Personal Brand Launcher Cheatsheet Cover.png" alt="PDF Cover" className="w-full h-full object-cover rounded-[2.5rem] grayscale" />
                                 <div className="absolute top-12 left-12 right-12 text-black mix-blend-difference">
                                     <p className="text-[10px] font-black tracking-widest uppercase mb-4">Framework V2.0</p>
                                     <h3 className="text-5xl font-display font-medium tracking-tighter leading-none">The Brand <br/>Launcher.</h3>
@@ -338,7 +338,7 @@ export default function PersonalBrandLauncher() {
                             </p>
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 rounded-full overflow-hidden bg-[#F5F0E8] border border-black/5">
-                                    <img src="/placeholder.svg" alt="Founder" className="w-full h-full object-cover grayscale" />
+                                    <img src="/Personal Brand Launcher page/Tech Founder.jpg" alt="Founder" className="w-full h-full object-cover grayscale" />
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#0D0D0D]">Tech Founder</p>
@@ -354,7 +354,7 @@ export default function PersonalBrandLauncher() {
                             </p>
                             <div className="flex items-center gap-4">
                                 <div className="w-12 h-12 rounded-full overflow-hidden bg-[#F5F0E8] border border-black/5">
-                                    <img src="/placeholder.svg" alt="Executive" className="w-full h-full object-cover grayscale" />
+                                    <img src="/Personal Brand Launcher page/Creative executive.png" alt="Executive" className="w-full h-full object-cover grayscale" />
                                 </div>
                                 <div>
                                     <p className="text-xs font-bold uppercase tracking-[0.1em] text-[#0D0D0D]">Creative Executive</p>

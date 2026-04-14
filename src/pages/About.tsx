@@ -30,7 +30,7 @@ const About = () => {
                 Great brands <br /> aren't lucky. <br /> <span className="text-[#C94A2C]">They're built.</span>
               </h1>
               <p className="max-w-2xl text-lg md:text-2xl font-medium text-[#0D0D0D]/50 leading-relaxed">
-                We started ŌDEY because the gap between a freelancer and a global agency shouldn't mean settling for less. African founders deserve world-class brand thinking — without the world-class price tag.
+                Born from a family name. Built into a cultural force. We are not an agency. We are the architects of the brands that will define the next generation of African commerce, culture, and taste.
               </p>
             </motion.div>
           </div>
@@ -69,18 +69,18 @@ const About = () => {
                         <div className="grid md:grid-cols-2 gap-12 text-[#0D0D0D]/60 text-lg md:text-xl font-medium leading-[1.6]">
                              <div className="space-y-8">
                                 <p>
-                                    ŌDEY was born in Lagos — one of the most competitive, culturally demanding business environments on earth. We've built brands across fashion, fintech, music, and consulting that win rooms in Lagos, London, and everywhere in between.
+                                    The ODEY family from Cross River State — connected to government, politics, and cultural infrastructure — is not background. It is the foundation. Institutional gravity does not come from manufacturing a story. It comes from standing inside one that is already real.
                                 </p>
                                 <p>
-                                    The brands that travel are built on one thing: clarity. Clarity about who you are, what you stand for, and why you're the only choice.
+                                    Cross River is the root. A state whose cultural output represents some of the deepest creative traditions in West Africa. ŌDEY carries this heritage not as decoration, but as direction.
                                 </p>
                              </div>
                              <div className="space-y-8">
                                 <p>
-                                    That's what we build. Not logos. Not slide decks. We build brand systems that make people have feelings about your business — the kind of feelings that turn browsers into buyers and buyers into believers.
+                                    We build for entrepreneurs, brands, and executives who understand that design is not decoration — it is direction. That the right identity does not just make a product look good — it makes it inevitable.
                                 </p>
                                 <div className="pt-8 flex flex-col gap-6">
-                                     <p className="text-2xl md:text-3xl font-display font-black text-[#0D0D0D] tracking-tight leading-tight">If you're building something that matters — let's talk.</p>
+                                     <p className="text-2xl md:text-3xl font-display font-black text-[#0D0D0D] tracking-tight leading-tight">Built for centuries. Not campaigns.</p>
                                      <a href="/onboarding" className="group w-fit flex items-center gap-4 bg-[#0D0D0D] text-white px-10 py-5 rounded-full font-display font-bold text-[10px] tracking-[0.3em] uppercase transition-all hover:scale-105 active:scale-95 shadow-xl">
                                          Start a Conversation
                                          <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
