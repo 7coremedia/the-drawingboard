@@ -407,7 +407,7 @@ function CanvasBlock({
               className={cn(
                 "bg-transparent border-none shadow-none font-display font-black tracking-tighter text-[#0D0D0D] placeholder:text-black/20 h-auto p-0 focus-visible:ring-0",
                 (block.level ?? 1) === 1 ? "text-3xl md:text-5xl" : (block.level ?? 1) === 2 ? "text-2xl md:text-4xl" : "text-xl md:text-2xl",
-                (block.layout ?? "left") === "center" ? "text-center" : (block.layout ?? "right") ? "text-right" : "text-left"
+                (block.layout ?? "left") === "center" ? "text-center" : (block.layout ?? "left") === "right" ? "text-right" : "text-left"
               )}
               value={block.content ?? ""}
               onChange={(e) => onUpdate(block.id, { content: e.target.value })}
@@ -715,8 +715,13 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
       });
       setSaveStatus("saved");
       setTimeout(() => setSaveStatus("idle"), 2500);
-    } catch {
+    } catch (err) {
+      console.error("[EDITOR] Save Failed:", err);
       setSaveStatus("idle");
+      alert("Save failed. Check console for details.");
+    } finally {
+      // Ensure we don't stay in saving mode forever if onSubmit hangs (though finally won't help with a hang)
+      // but it helps with unhandled errors.
     }
   });
 

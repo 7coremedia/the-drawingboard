@@ -194,7 +194,7 @@ export default function CaseStudy() {
                             "flex flex-col gap-6",
                             (block.side_text && (block.size === 'small' || block.size === 'medium')) 
                               ? ((block.layout ?? 'left') === 'right' ? 'md:flex-row-reverse' : 'md:flex-row items-center')
-                              : "items-center",
+                              : ((block.layout ?? 'left') === 'left' ? 'items-start' : (block.layout ?? 'left') === 'right' ? 'items-end' : 'items-center'),
                             block.size === 'small' ? 'md:max-w-[40%]' : 
                             block.size === 'medium' ? 'md:max-w-[70%]' : 'w-full'
                           )}>
