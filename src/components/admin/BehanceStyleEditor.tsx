@@ -38,6 +38,7 @@ export interface ContentBlock {
   // layout hint
   style?: "default" | "inset" | "full" | "wide";
   size?: "small" | "medium" | "big";
+  level?: 1 | 2 | 3;
   layout?: "left" | "center" | "right";
   side_text?: string;
 }
@@ -167,7 +168,7 @@ function ImageBlock({ block, onUpdate }: { block: ContentBlock; onUpdate: (u: Pa
         <div className="flex items-center gap-2">
             <span className="text-[9px] font-black uppercase tracking-widest text-black/50 mr-2">Align</span>
             {(["left", "center", "right"] as const).map((s) => (
-            <button key={s} onClick={() => onUpdate({ layout: s })} className={cn("px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all", (block.layout ?? "center") === s ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-white text-black/40 border-black/10 hover:border-black/30")}>
+            <button key={s} onClick={() => onUpdate({ layout: s })} className={cn("px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all", (block.layout ?? "left") === s ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-white text-black/40 border-black/10 hover:border-black/30")}>
                 {s}
             </button>
             ))}
@@ -225,7 +226,7 @@ function GalleryBlock({ block, onUpdate }: { block: ContentBlock; onUpdate: (u: 
         <div className="flex items-center gap-2">
             <span className="text-[9px] font-black uppercase tracking-widest text-black/50 mr-2">Align</span>
             {(["left", "center", "right"] as const).map((s) => (
-            <button key={s} onClick={() => onUpdate({ layout: s })} className={cn("px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all", (block.layout ?? "center") === s ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-white text-black/40 border-black/10 hover:border-black/30")}>
+            <button key={s} onClick={() => onUpdate({ layout: s })} className={cn("px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border transition-all", (block.layout ?? "left") === s ? "bg-[#0D0D0D] text-white border-[#0D0D0D]" : "bg-white text-black/40 border-black/10 hover:border-black/30")}>
                 {s}
             </button>
             ))}
@@ -371,21 +372,76 @@ function CanvasBlock({
     switch (block.type) {
       case "heading":
         return (
-          <Input
-            placeholder="Add a heading..."
-            className="bg-transparent border-none shadow-none text-3xl md:text-4xl font-display font-black tracking-tighter text-[#0D0D0D] placeholder:text-black/20 h-auto p-0 focus-visible:ring-0"
-            value={block.content ?? ""}
-            onChange={(e) => onUpdate(block.id, { content: e.target.value })}
-          />
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 bg-[#F5F0E8] p-2 rounded-xl w-fit border border-black/5">
+                {( [1, 2, 3] as const).map(n => (
+                    <button
+                        key={n}
+                        type="button"
+                        onClick={() => onUpdate(block.id, { level: n })}
+                        className={cn(
+                            "px-3 py-1 rounded-lg text-[9px] font-black tracking-widest uppercase transition-all",
+                            (block.level ?? 1) === n ? "bg-[#0D0D0D] text-white" : "text-black/40 hover:text-black"
+                        )}
+                    >
+                        H{n}
+                    </button>
+                ))}
+                <div className="w-px h-3 bg-black/10 mx-1" />
+                {(["left", "center", "right"] as const).map(l => (
+                    <button
+                        key={l}
+                        type="button"
+                        onClick={() => onUpdate(block.id, { layout: l })}
+                        className={cn(
+                            "px-2 py-1 rounded-lg text-[10px] transition-all",
+                            (block.layout ?? "left") === l ? "bg-[#0D0D0D] text-white" : "text-black/40 hover:text-black"
+                        )}
+                    >
+                        {l === 'left' ? <AlignLeft size={12} /> : l === 'center' ? <AlignLeft size={12} className="rotate-0 mx-auto" /> : <AlignLeft size={12} className="scale-x-[-1]" />}
+                    </button>
+                ))}
+            </div>
+            <Input
+              placeholder="Add a heading..."
+              className={cn(
+                "bg-transparent border-none shadow-none font-display font-black tracking-tighter text-[#0D0D0D] placeholder:text-black/20 h-auto p-0 focus-visible:ring-0",
+                (block.level ?? 1) === 1 ? "text-3xl md:text-5xl" : (block.level ?? 1) === 2 ? "text-2xl md:text-4xl" : "text-xl md:text-2xl",
+                (block.layout ?? "left") === "center" ? "text-center" : (block.layout ?? "right") ? "text-right" : "text-left"
+              )}
+              value={block.content ?? ""}
+              onChange={(e) => onUpdate(block.id, { content: e.target.value })}
+            />
+          </div>
         );
       case "text":
         return (
-          <Textarea
-            placeholder="Write something..."
-            className="bg-transparent border-none shadow-none resize-none text-base font-medium leading-relaxed text-[#0D0D0D] placeholder:text-black/20 p-0 focus-visible:ring-0 min-h-[80px]"
-            value={block.content ?? ""}
-            onChange={(e) => onUpdate(block.id, { content: e.target.value })}
-          />
+          <div className="space-y-4">
+            <div className="flex items-center gap-3 bg-[#F5F0E8] p-2 rounded-xl w-fit border border-black/5">
+                {(["left", "center", "right"] as const).map(l => (
+                    <button
+                        key={l}
+                        type="button"
+                        onClick={() => onUpdate(block.id, { layout: l })}
+                        className={cn(
+                            "px-2 py-1 rounded-lg text-[10px] transition-all",
+                            (block.layout ?? "left") === l ? "bg-[#0D0D0D] text-white" : "text-black/40 hover:text-black"
+                        )}
+                    >
+                        {l === 'left' ? <AlignLeft size={12} /> : l === 'center' ? <AlignLeft size={12} className="rotate-0 mx-auto" /> : <AlignLeft size={12} className="scale-x-[-1]" />}
+                    </button>
+                ))}
+            </div>
+            <Textarea
+              placeholder="Write something..."
+              className={cn(
+                "bg-transparent border-none shadow-none resize-none text-base font-medium leading-relaxed text-[#0D0D0D] placeholder:text-black/20 p-0 focus-visible:ring-0 min-h-[80px]",
+                (block.layout ?? "left") === "center" ? "text-center" : (block.layout ?? "left") === "right" ? "text-right" : "text-left"
+              )}
+              value={block.content ?? ""}
+              onChange={(e) => onUpdate(block.id, { content: e.target.value })}
+            />
+          </div>
         );
       case "image":
         return <ImageBlock block={block} onUpdate={(u) => onUpdate(block.id, u)} />;

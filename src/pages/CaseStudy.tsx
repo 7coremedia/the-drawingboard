@@ -149,16 +149,22 @@ export default function CaseStudy() {
                       {block.type === 'heading' && (
                         <div className={cn(
                           "w-full flex",
-                          block.layout === 'left' ? 'justify-start' : block.layout === 'right' ? 'justify-end' : 'justify-center'
+                          (block.layout ?? 'left') === 'left' ? 'justify-start' : (block.layout ?? 'left') === 'right' ? 'justify-end' : 'justify-center'
                         )}>
-                          <h2 
-                            className={cn(
-                              "text-2xl md:text-4xl lg:text-5xl font-display font-black uppercase max-w-4xl leading-[0.95]",
-                              block.layout === 'left' ? 'text-left' : block.layout === 'right' ? 'text-right' : 'text-center'
-                            )} 
-                            style={{ letterSpacing: '-0.04em' }} 
-                            dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} 
-                          />
+                          {React.createElement(
+                            block.level === 1 ? 'h1' : block.level === 2 ? 'h2' : 'h3',
+                            {
+                              className: cn(
+                                "font-display font-black uppercase max-w-4xl leading-[0.95]",
+                                block.level === 1 ? "text-3xl md:text-5xl lg:text-6xl" : 
+                                block.level === 2 ? "text-2xl md:text-4xl lg:text-5xl" : 
+                                "text-xl md:text-2xl",
+                                (block.layout ?? 'left') === 'left' ? 'text-left' : (block.layout ?? 'left') === 'right' ? 'text-right' : 'text-center'
+                              ),
+                              style: { letterSpacing: '-0.04em' },
+                              dangerouslySetInnerHTML: { __html: (block.content || '').replace(/\n/g, '<br/>') }
+                            }
+                          )}
                         </div>
                       )}
                       
@@ -166,11 +172,11 @@ export default function CaseStudy() {
                       {block.type === 'text' && (
                         <div className={cn(
                           "w-full flex",
-                          block.layout === 'left' ? 'justify-start' : block.layout === 'right' ? 'justify-end' : 'justify-center'
+                          (block.layout ?? 'left') === 'left' ? 'justify-start' : (block.layout ?? 'left') === 'right' ? 'justify-end' : 'justify-center'
                         )}>
                           <p className={cn(
                             "text-base md:text-lg font-medium leading-relaxed max-w-2xl opacity-60",
-                            block.layout === 'left' ? 'text-left' : block.layout === 'right' ? 'text-right' : 'text-center',
+                            (block.layout ?? 'left') === 'left' ? 'text-left' : (block.layout ?? 'left') === 'right' ? 'text-right' : 'text-center',
                             hasBg ? "text-white" : "text-[#0D0D0D]"
                           )}>
                               {block.content}
@@ -182,12 +188,12 @@ export default function CaseStudy() {
                       {block.type === 'image' && block.media_url && (
                         <div className={cn(
                           "w-full flex mb-6",
-                          block.layout === 'left' ? 'justify-start' : block.layout === 'right' ? 'justify-end' : 'justify-center'
+                          (block.layout ?? 'left') === 'left' ? 'justify-start' : (block.layout ?? 'left') === 'right' ? 'justify-end' : 'justify-center'
                         )}>
                           <div className={cn(
                             "flex flex-col gap-6",
                             (block.side_text && (block.size === 'small' || block.size === 'medium')) 
-                              ? (block.layout === 'right' ? 'md:flex-row-reverse' : 'md:flex-row items-center')
+                              ? ((block.layout ?? 'left') === 'right' ? 'md:flex-row-reverse' : 'md:flex-row items-center')
                               : "items-center",
                             block.size === 'small' ? 'md:max-w-[40%]' : 
                             block.size === 'medium' ? 'md:max-w-[70%]' : 'w-full'
