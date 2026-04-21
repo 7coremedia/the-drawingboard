@@ -39,32 +39,6 @@ export default function CaseStudy() {
     .filter((item) => currentCaseStudy && item.slug !== slug && item.category === currentCaseStudy.category)
     .slice(0, 3);
 
-  const projectTags = [
-    currentCaseStudy.category,
-    currentCaseStudy.client || "Client Work",
-    currentCaseStudy.industry || "Design System",
-  ];
-
-  const roleItems = (currentCaseStudy.our_role || "")
-    .split(/\r?\n|•|,/)
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-
-  const challengeParagraphs = (currentCaseStudy.the_challenge || "")
-    .split(/\n+/)
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-
-  const solutionParagraphs = (currentCaseStudy.the_solution || "")
-    .split(/\n+/)
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-
-  const growthParagraphs = (currentCaseStudy.description || "")
-    .split(/\n+/)
-    .map((entry) => entry.trim())
-    .filter(Boolean);
-
   const blocks: any[] = currentCaseStudy?.content_blocks ? (currentCaseStudy.content_blocks as any[]) : [];
   const displayBlocks = blocks.filter(b => b.type !== 'meta_background' && b.type !== 'meta_background_image' && b.type !== 'meta_background_color');
   const bgImageBlock = blocks.find(b => b.type === 'meta_background' || b.type === 'meta_background_image');
@@ -98,19 +72,18 @@ export default function CaseStudy() {
       )}
 
       {/* Case Study Header */}
-      <div className="px-8 md:px-16 lg:px-24 pt-10 pb-8">
-        <div className="max-w-4xl space-y-3">
+      <div className="px-8 md:px-16 lg:px-24 pt-8 pb-6">
+        <div className="max-w-4xl space-y-2">
           <div className="flex items-center gap-3">
-            <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">
+            <span className="text-[8px] uppercase tracking-[0.4em] font-black text-[#C94A2C] opacity-80">
               {currentCaseStudy.portfolio_type === 'case_study' ? 'Diagnostic Protocol' : 'Exhibition Entry'}
             </span>
-            <div className="h-px w-8 bg-current opacity-10" />
           </div>
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9]" style={{ letterSpacing: '-0.04em' }}>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95]" style={{ letterSpacing: '-0.04em' }}>
             {currentCaseStudy.title}
           </h1>
           {currentCaseStudy.tagline && (
-            <p className={cn("text-base md:text-lg font-medium leading-relaxed max-w-2xl", hasBg ? "text-white/60" : "text-[#0D0D0D]/50")}>
+            <p className={cn("text-sm md:text-base font-medium leading-relaxed max-w-2xl opacity-60", hasBg ? "text-white" : "text-[#0D0D0D]")}>
               {currentCaseStudy.tagline}
             </p>
           )}
@@ -119,45 +92,45 @@ export default function CaseStudy() {
 
       <main className="px-8 md:px-16 lg:px-24 overflow-visible">
 
-        {/* Project Intelligence Grid (Always visible if fields exist) */}
+        {/* Project Intelligence Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 py-8 md:py-10 border-t border-black/[0.03]">
             {/* Metadata Sidebar */}
-            <aside className="space-y-12">
-                <div className="space-y-12">
+            <aside className="space-y-8">
+                <div className="space-y-8">
                     <div>
-                        <h4 className="text-[9px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-5">Metadata</h4>
-                        <div className="grid grid-cols-2 gap-5">
+                        <h4 className="text-[8px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-4 opacity-50">Intelligence_Data</h4>
+                        <div className="grid grid-cols-2 gap-4">
                             {currentCaseStudy.client && (
                               <div>
-                                  <p className="text-[7.5px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-1 opacity-60">Entity</p>
-                                  <p className="text-sm font-bold">{currentCaseStudy.client}</p>
+                                  <p className="text-[7px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-0.5 opacity-60">Entity</p>
+                                  <p className="text-xs font-bold">{currentCaseStudy.client}</p>
                               </div>
                             )}
                             {currentCaseStudy.industry && (
                               <div>
-                                  <p className="text-[7.5px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-1 opacity-60">Industry</p>
-                                  <p className="text-sm font-bold">{currentCaseStudy.industry}</p>
+                                  <p className="text-[7px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-0.5 opacity-60">Industry</p>
+                                  <p className="text-xs font-bold">{currentCaseStudy.industry}</p>
                               </div>
                             )}
                             {currentCaseStudy.location && (
                               <div>
-                                  <p className="text-[7.5px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-1 opacity-60">Location</p>
-                                  <p className="text-sm font-bold">{currentCaseStudy.location}</p>
+                                  <p className="text-[7px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-0.5 opacity-60">Location</p>
+                                  <p className="text-xs font-bold">{currentCaseStudy.location}</p>
                               </div>
                             )}
                             {currentCaseStudy.year && (
                               <div>
-                                  <p className="text-[7.5px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-1 opacity-60">Timeline</p>
-                                  <p className="text-sm font-bold">{currentCaseStudy.year}</p>
+                                  <p className="text-[7px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-0.5 opacity-60">Timeline</p>
+                                  <p className="text-xs font-bold">{currentCaseStudy.year}</p>
                               </div>
                             )}
                         </div>
                     </div>
-                    
+
                     {currentCaseStudy.our_role && (
-                      <div className="pt-5 border-t border-black/5">
-                           <h4 className="text-[9px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-2">Strategic Role</h4>
-                           <div className="text-xs font-bold opacity-70 whitespace-pre-wrap leading-relaxed">
+                      <div className="pt-4 border-t border-black/5">
+                           <h4 className="text-[7px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-1.5 opacity-60">Strategic Role</h4>
+                           <div className="text-[10px] font-bold opacity-50 whitespace-pre-wrap leading-relaxed max-w-sm">
                               {currentCaseStudy.our_role}
                            </div>
                       </div>
@@ -174,39 +147,58 @@ export default function CaseStudy() {
                    <div key={block.id} className="w-full">
                       {/* HEADING BLOCK */}
                       {block.type === 'heading' && (
-                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-display font-black uppercase max-w-4xl leading-[0.95]" style={{ letterSpacing: '-0.04em' }} dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} />
+                        <div className={cn(
+                          "w-full flex",
+                          block.layout === 'left' ? 'justify-start' : block.layout === 'right' ? 'justify-end' : 'justify-center'
+                        )}>
+                          <h2 
+                            className={cn(
+                              "text-2xl md:text-4xl lg:text-5xl font-display font-black uppercase max-w-4xl leading-[0.95]",
+                              block.layout === 'left' ? 'text-left' : block.layout === 'right' ? 'text-right' : 'text-center'
+                            )} 
+                            style={{ letterSpacing: '-0.04em' }} 
+                            dangerouslySetInnerHTML={{ __html: (block.content || '').replace(/\n/g, '<br/>') }} 
+                          />
+                        </div>
                       )}
                       
                       {/* TEXT BLOCK */}
                       {block.type === 'text' && (
-                        <p className={cn("text-base md:text-xl font-medium leading-relaxed max-w-3xl", hasBg ? "text-white/70" : "text-[#0D0D0D]/55")}>
-                            {block.content}
-                        </p>
+                        <div className={cn(
+                          "w-full flex",
+                          block.layout === 'left' ? 'justify-start' : block.layout === 'right' ? 'justify-end' : 'justify-center'
+                        )}>
+                          <p className={cn(
+                            "text-base md:text-lg font-medium leading-relaxed max-w-2xl opacity-60",
+                            block.layout === 'left' ? 'text-left' : block.layout === 'right' ? 'text-right' : 'text-center',
+                            hasBg ? "text-white" : "text-[#0D0D0D]"
+                          )}>
+                              {block.content}
+                          </p>
+                        </div>
                       )}
                       
                       {/* IMAGE BLOCK */}
                       {block.type === 'image' && block.media_url && (
                         <div className={cn(
-                          "w-full flex",
+                          "w-full flex mb-6",
                           block.layout === 'left' ? 'justify-start' : block.layout === 'right' ? 'justify-end' : 'justify-center'
                         )}>
                           <div className={cn(
-                            "flex flex-col gap-8 w-full",
+                            "flex flex-col gap-6",
                             (block.side_text && (block.size === 'small' || block.size === 'medium')) 
                               ? (block.layout === 'right' ? 'md:flex-row-reverse' : 'md:flex-row items-center')
-                              : "items-center"
+                              : "items-center",
+                            block.size === 'small' ? 'md:max-w-[40%]' : 
+                            block.size === 'medium' ? 'md:max-w-[70%]' : 'w-full'
                           )}>
-                            <div className={cn(
-                              "overflow-hidden shrink-0",
-                              block.size === 'small' ? 'w-full md:max-w-md' : 
-                              block.size === 'medium' ? 'w-full md:max-w-3xl' : 'w-full'
-                            )}>
-                              <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" loading="lazy" />
+                            <div className="w-full overflow-hidden shrink-0">
+                               <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" loading="lazy" />
                             </div>
                             
                             {block.side_text && (block.size === 'small' || block.size === 'medium') && (
-                               <div className="flex-1 px-4 lg:px-12">
-                                  <p className={cn("text-lg md:text-xl font-medium leading-relaxed", hasBg ? "text-white/70" : "text-[#0D0D0D]/60 whitespace-pre-wrap")}>
+                               <div className="px-4">
+                                  <p className={cn("text-[15px] font-medium leading-relaxed opacity-60", hasBg ? "text-white" : "text-[#0D0D0D] whitespace-pre-wrap")}>
                                      {block.side_text}
                                   </p>
                                </div>
@@ -216,26 +208,26 @@ export default function CaseStudy() {
                       )}
                       {/* GALLERY BLOCK — horizontal automatic marquee */}
                       {block.type === 'gallery' && block.media_urls && block.media_urls.length > 0 && (
-                        <div className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden py-4">
+                        <div className="relative w-[100vw] left-[50%] -translate-x-[50%] overflow-hidden py-10">
                           <motion.div 
-                            className="flex gap-4 px-8 md:px-16"
-                            animate={{ x: ["0%", "-50%"] }}
+                            className="flex gap-4 px-0"
+                            animate={{ x: ["0%", `-${100 / ([...block.media_urls, ...block.media_urls, ...block.media_urls].length / block.media_urls.length)}%`] }}
                             transition={{
-                              duration: 50,
+                              duration: block.media_urls.length * 8,
                               ease: "linear",
                               repeat: Infinity,
                             }}
                           >
-                            {[...block.media_urls, ...block.media_urls].map((url: string, i: number) => (
+                            {[...block.media_urls, ...block.media_urls, ...block.media_urls].map((url: string, i: number) => (
                               <div
                                 key={i}
                                 className="shrink-0 overflow-hidden"
-                                style={{ height: 'clamp(200px, 40vh, 400px)' }}
+                                style={{ height: 'clamp(220px, 45vh, 480px)' }}
                               >
                                 <img
                                   src={url}
                                   alt={`Gallery ${i}`}
-                                  className="h-full w-auto object-cover"
+                                  className="h-full w-auto object-cover block"
                                   loading="lazy"
                                   style={{ maxWidth: 'none' }}
                                 />

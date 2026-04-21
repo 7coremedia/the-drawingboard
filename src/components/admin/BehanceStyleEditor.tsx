@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 
 // ─── Block Types ────────────────────────────────────────────────────────────
 
-export type BlockType = "image" | "text" | "heading" | "gallery" | "video" | "embed" | "pdf" | "divider" | "meta_background";
+export type BlockType = "image" | "text" | "heading" | "gallery" | "video" | "embed" | "pdf" | "divider" | "meta_background" | "meta_background_image" | "meta_background_color";
 
 export interface ContentBlock {
   id: string;
@@ -61,6 +61,7 @@ const metaSchema = z.object({
   is_published: z.boolean().default(false),
   is_multiple_partners: z.boolean().default(false),
   brand_name: z.string().optional(),
+  slug: z.string().optional(),
 });
 
 type MetaFormData = z.infer<typeof metaSchema>;
@@ -88,6 +89,7 @@ interface BehanceStyleEditorProps {
     content_blocks?: ContentBlock[];
     pdf_url?: string;
     portfolio_type?: string;
+    slug?: string;
   };
   onSubmit: (data: MetaFormData & {
     media_url: string;
@@ -95,6 +97,7 @@ interface BehanceStyleEditorProps {
     content_blocks: ContentBlock[];
     portfolio_type: "gallery" | "case_study";
     pdf_url?: string | null;
+    slug?: string;
   }) => Promise<void>;
   isLoading?: boolean;
 }
@@ -515,15 +518,15 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
     ? BLOCK_MODULES.filter(m => ["image", "text", "pdf", "heading"].includes(m.type))
     : BLOCK_MODULES;
 
-  const bgBlockRef = blocks.find(b => b.type === "meta_background");
-  const bgImageUrl = bgBlockRef?.media_url ?? "";
-
   const bgColorBlockRef = blocks.find(b => b.type === "meta_background_color");
   const bgColor = bgColorBlockRef?.content ?? "";
 
+  const bgImageBlockRef = blocks.find(b => b.type === "meta_background" || b.type === "meta_background_image");
+  const bgImageUrl = bgImageBlockRef?.media_url ?? "";
+
   const handleBgImageChange = (url: string) => {
     setBlocks(prev => {
-      const filtered = prev.filter(b => b.type !== "meta_background");
+      const filtered = prev.filter(b => !["meta_background", "meta_background_image"].includes(b.type));
       if (url) filtered.push({ id: genId(), type: "meta_background", media_url: url });
       return filtered;
     });
@@ -588,6 +591,7 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
       is_published: initialMeta?.is_published ?? false,
       is_multiple_partners: initialMeta?.is_multiple_partners ?? false,
       brand_name: initialMeta?.brand_name ?? "",
+      slug: initialMeta?.slug ?? "",
     },
   });
 
@@ -601,6 +605,17 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
     setBlocks((prev) => [...prev, { id: genId(), type }]);
   };
 
+  const handleSyncSlug = () => {
+    const title = form.getValues("title");
+    if (title) {
+      const generated = title
+        .toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '');
+      form.setValue("slug", generated);
+    }
+  };
+
   const updateBlock = (id: string, updates: Partial<ContentBlock>) => {
     setBlocks((prev) => prev.map((b) => (b.id === id ? { ...b, ...updates } : b)));
   };
@@ -609,7 +624,8 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
     setBlocks((prev) => prev.filter((b) => b.id !== id));
   };
 
-  const displayBlocks = blocks.filter(b => b.type !== "meta_background");
+  const isMetaBlock = (type: string) => ["meta_background", "meta_background_image", "meta_background_color"].includes(type);
+  const displayBlocks = blocks.filter(b => !isMetaBlock(b.type));
 
   const handleDragEnd = (result: any) => {
     if (!result.destination) return;
@@ -617,7 +633,7 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
     const [moved] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, moved);
     
-    const metas = blocks.filter(b => b.type === "meta_background");
+    const metas = blocks.filter(b => isMetaBlock(b.type));
     setBlocks([...metas, ...items]);
   };
 
@@ -778,6 +794,34 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
                 </SelectContent>
               </Select>
             </div>
+
+            {/* Slug / Permalink */}
+            <div>
+              <label className={fieldLabel}>Protocol URL (Slug)</label>
+              <div className="relative">
+                <Input 
+                  {...form.register("slug")} 
+                  placeholder="project-identity-url" 
+                  className={cn(fieldInput, "pr-20 font-mono text-[10px]")} 
+                />
+                <button
+                  type="button"
+                  onClick={handleSyncSlug}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-[8px] font-black uppercase tracking-widest text-[#C94A2C] hover:text-[#0D0D0D] transition-colors bg-[#F5F0E8] px-2 py-1 rounded-md"
+                >
+                  Sync
+                </button>
+              </div>
+              <div className="flex items-center gap-1.5 mt-1.5">
+                <Globe size={10} className="text-black/20" />
+                <span className="text-[8px] font-bold text-black/30 truncate max-w-full">
+                  the-drawingboard.com/portfolio/{form.watch("slug") || "..."}
+                </span>
+              </div>
+              <p className="text-[8px] font-bold text-black/30 mt-1 uppercase tracking-widest leading-tight">Permanent archive link extension</p>
+            </div>
+
+            <div className="h-px bg-black/5" />
 
             {/* Client */}
             <div>

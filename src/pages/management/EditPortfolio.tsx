@@ -1,4 +1,4 @@
-﻿import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
@@ -61,6 +61,7 @@ export default function EditPortfolio() {
         content_blocks: data.content_blocks,
         portfolio_type: data.portfolio_type,
         pdf_url: data.pdf_url ?? null,
+        slug: data.slug || data.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
         updated_at: new Date().toISOString(),
         description: null,
       };
@@ -164,6 +165,7 @@ export default function EditPortfolio() {
           content_blocks: synthesizedBlocks,
           portfolio_type: (portfolio as any).portfolio_type || 'gallery',
           pdf_url: (portfolio as any).pdf_url,
+          slug: portfolio.slug,
         }}
         onSubmit={updatePortfolio}
         isLoading={isPending}
