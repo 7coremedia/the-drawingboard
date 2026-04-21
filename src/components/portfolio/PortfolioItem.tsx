@@ -23,10 +23,10 @@ export default function PortfolioItem({
   return (
     <Link
       to={`/portfolio/${slug}`}
-      className="relative group block select-none focus:outline-none rounded-[1.5rem] overflow-hidden"
+      className="relative group block select-none focus:outline-none overflow-hidden"
     >
-      {/* Landscape Media container with rounded corners */}
-      <div className="relative w-full aspect-[202/158] bg-black/[0.03] rounded-[1.5rem] overflow-hidden transition-all duration-700 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] group-hover:-translate-y-2">
+      {/* Landscape Media container */}
+      <div className="relative w-full aspect-video overflow-hidden transition-all duration-700">
         {/* Skeleton */}
         <div
           className={cn(
@@ -56,7 +56,7 @@ export default function PortfolioItem({
         </div>
       </div>
       
-      <div className="mt-5 px-1 pb-4">
+      <div className="mt-3 px-0 pb-2">
         <div className="flex flex-col gap-1 text-left">
             <div className="flex justify-between items-center">
                 <span className="text-[9px] uppercase font-bold tracking-[0.2em] text-black/40">{category}</span>

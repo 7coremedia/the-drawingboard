@@ -1,4 +1,5 @@
-﻿import React from "react";
+import React from "react";
+import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { useParams, Link } from "react-router-dom";
 import { usePublicPortfolioItem, usePublicPortfolio } from "@/hooks/usePublicPortfolio";
@@ -65,14 +66,19 @@ export default function CaseStudy() {
     .filter(Boolean);
 
   const blocks: any[] = currentCaseStudy?.content_blocks ? (currentCaseStudy.content_blocks as any[]) : [];
-  const displayBlocks = blocks.filter(b => b.type !== 'meta_background');
-  const bgBlock = blocks.find(b => b.type === 'meta_background');
-  const hasBg = !!bgBlock?.media_url;
+  const displayBlocks = blocks.filter(b => b.type !== 'meta_background' && b.type !== 'meta_background_image' && b.type !== 'meta_background_color');
+  const bgImageBlock = blocks.find(b => b.type === 'meta_background' || b.type === 'meta_background_image');
+  const bgColorBlock = blocks.find(b => b.type === 'meta_background_color');
+  const hasBg = !!bgImageBlock?.media_url;
+  const customBgColor = bgColorBlock?.content;
 
   return (
-    <div className={cn("min-h-screen relative pt-24 md:pt-40 pb-32", hasBg ? "text-white" : "bg-[#F5F0E8] text-[#0D0D0D]")}>
+    <div
+      className={cn("min-h-screen relative pb-32", hasBg ? "text-white" : "text-[#0D0D0D]")}
+      style={{ backgroundColor: customBgColor || (hasBg ? 'transparent' : '#F5F0E8') }}
+    >
       {hasBg && (
-         <div className="fixed inset-0 z-[-1]" style={{ backgroundImage: `url(${bgBlock.media_url})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
+         <div className="fixed inset-0 z-[-1]" style={{ backgroundImage: `url(${bgImageBlock.media_url})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
             <div className="absolute inset-0 bg-black/70" />
          </div>
       )}
@@ -80,43 +86,41 @@ export default function CaseStudy() {
         <title>{currentCaseStudy.title} – ŌDEY Archive</title>
       </Helmet>
 
-      {/* Case Study Header & Cover Section */}
-      <div className="container mx-auto px-0 md:px-6 mb-12 md:mb-16">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-12">
-            
-            <div className="max-w-3xl space-y-4 px-6 md:px-0 order-1">
-                <div className="flex items-center gap-3 pt-6 md:pt-0">
-                    <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">
-                      {currentCaseStudy.portfolio_type === 'case_study' ? 'Diagnostic Protocol' : 'Exhibition Entry'}
-                    </span>
-                    <div className="h-px w-8 bg-black/5" />
-                </div>
-                <h1 className="font-display text-4xl md:text-6xl font-black leading-[0.95]" style={{ letterSpacing: '-0.04em' }}>
-                    {currentCaseStudy.title}
-                </h1>
-                {currentCaseStudy.tagline && (
-                  <p className={cn("text-sm md:text-base font-medium leading-relaxed", hasBg ? "text-white/60" : "text-[#0D0D0D]/50")}>
-                      {currentCaseStudy.tagline}
-                  </p>
-                )}
-            </div>
+      {/* Full-width cover hero */}
+      {currentCaseStudy.cover_url && (
+        <div className="w-full" style={{ height: 'clamp(320px, 60vh, 720px)' }}>
+          <img
+            src={currentCaseStudy.cover_url}
+            alt={currentCaseStudy.title}
+            className="w-full h-full object-cover block"
+          />
+        </div>
+      )}
 
-            {currentCaseStudy.cover_url && (
-                <div className="hidden md:block w-full md:w-[340px] lg:w-[400px] xl:w-[440px] shrink-0 order-2 aspect-[202/158] overflow-hidden rounded-2xl bg-black/5 shadow-xl md:mr-4 lg:mr-8 transition-transform hover:scale-[1.02]">
-                    <img
-                        src={currentCaseStudy.cover_url}
-                        alt={`${currentCaseStudy.title}`}
-                        className="w-full h-full object-cover"
-                    />
-                </div>
-            )}
+      {/* Case Study Header */}
+      <div className="px-8 md:px-16 lg:px-24 pt-10 pb-8">
+        <div className="max-w-4xl space-y-3">
+          <div className="flex items-center gap-3">
+            <span className="text-[9px] uppercase tracking-[0.4em] font-bold text-[#C94A2C]">
+              {currentCaseStudy.portfolio_type === 'case_study' ? 'Diagnostic Protocol' : 'Exhibition Entry'}
+            </span>
+            <div className="h-px w-8 bg-current opacity-10" />
           </div>
+          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-black leading-[0.9]" style={{ letterSpacing: '-0.04em' }}>
+            {currentCaseStudy.title}
+          </h1>
+          {currentCaseStudy.tagline && (
+            <p className={cn("text-base md:text-lg font-medium leading-relaxed max-w-2xl", hasBg ? "text-white/60" : "text-[#0D0D0D]/50")}>
+              {currentCaseStudy.tagline}
+            </p>
+          )}
+        </div>
       </div>
 
-      <main className="container mx-auto px-6 overflow-visible">
+      <main className="px-8 md:px-16 lg:px-24 overflow-visible">
 
         {/* Project Intelligence Grid (Always visible if fields exist) */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 py-10 md:py-14 border-t border-black/[0.03]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 py-8 md:py-10 border-t border-black/[0.03]">
             {/* Metadata Sidebar */}
             <aside className="space-y-12">
                 <div className="space-y-12">
@@ -125,25 +129,25 @@ export default function CaseStudy() {
                         <div className="grid grid-cols-2 gap-5">
                             {currentCaseStudy.client && (
                               <div>
-                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-0.5">Entity</p>
+                                  <p className="text-[7.5px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-1 opacity-60">Entity</p>
                                   <p className="text-sm font-bold">{currentCaseStudy.client}</p>
                               </div>
                             )}
                             {currentCaseStudy.industry && (
                               <div>
-                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-0.5">Industry</p>
+                                  <p className="text-[7.5px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-1 opacity-60">Industry</p>
                                   <p className="text-sm font-bold">{currentCaseStudy.industry}</p>
                               </div>
                             )}
                             {currentCaseStudy.location && (
                               <div>
-                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-0.5">Location</p>
+                                  <p className="text-[7.5px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-1 opacity-60">Location</p>
                                   <p className="text-sm font-bold">{currentCaseStudy.location}</p>
                               </div>
                             )}
                             {currentCaseStudy.year && (
                               <div>
-                                  <p className="text-[8px] uppercase tracking-widest text-[#C94A2C] font-bold mb-0.5">Timeline</p>
+                                  <p className="text-[7.5px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-1 opacity-60">Timeline</p>
                                   <p className="text-sm font-bold">{currentCaseStudy.year}</p>
                               </div>
                             )}
@@ -164,8 +168,8 @@ export default function CaseStudy() {
 
         {/* Modular Sequence / Media Exhibition */}
         {displayBlocks.length > 0 ? (
-          <section className="py-12 md:py-16 border-t border-black/[0.03] overflow-visible">
-            <div className="max-w-7xl mx-auto space-y-12 md:space-y-16 overflow-visible">
+          <section className="py-8 md:py-12 border-t border-black/[0.03] overflow-visible">
+            <div className="max-w-5xl space-y-8 md:space-y-12 overflow-visible">
                 {displayBlocks.map((block: any) => (
                    <div key={block.id} className="w-full">
                       {/* HEADING BLOCK */}
@@ -193,10 +197,9 @@ export default function CaseStudy() {
                               : "items-center"
                           )}>
                             <div className={cn(
-                              "overflow-hidden shrink-0 shadow-xl border bg-white", 
-                              hasBg ? "border-white/10" : "border-black/5",
-                              block.size === 'small' ? 'w-full md:max-w-md rounded-lg md:rounded-xl' : 
-                              block.size === 'medium' ? 'w-full md:max-w-3xl rounded-xl md:rounded-2xl' : 'w-full max-w-6xl rounded-xl md:rounded-2xl'
+                              "overflow-hidden shrink-0",
+                              block.size === 'small' ? 'w-full md:max-w-md' : 
+                              block.size === 'medium' ? 'w-full md:max-w-3xl' : 'w-full'
                             )}>
                               <img src={block.media_url} alt="Exhibit Media" className="w-full h-auto object-cover" loading="lazy" />
                             </div>
@@ -211,33 +214,40 @@ export default function CaseStudy() {
                           </div>
                         </div>
                       )}
-                      
-                      {/* GALLERY BLOCK — horizontal scroll strip */}
+                      {/* GALLERY BLOCK — horizontal automatic marquee */}
                       {block.type === 'gallery' && block.media_urls && block.media_urls.length > 0 && (
-                        <div className="relative w-screen left-1/2 -translate-x-1/2">
-                          <div className="flex gap-3 overflow-x-auto px-6 md:px-12 pb-4 snap-x snap-mandatory scrollbar-hide">
-                            {block.media_urls.map((url: string, i: number) => (
+                        <div className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden py-4">
+                          <motion.div 
+                            className="flex gap-4 px-8 md:px-16"
+                            animate={{ x: ["0%", "-50%"] }}
+                            transition={{
+                              duration: 50,
+                              ease: "linear",
+                              repeat: Infinity,
+                            }}
+                          >
+                            {[...block.media_urls, ...block.media_urls].map((url: string, i: number) => (
                               <div
                                 key={i}
-                                className="shrink-0 snap-start overflow-hidden rounded-lg md:rounded-xl"
-                                style={{ height: '260px' }}
+                                className="shrink-0 overflow-hidden"
+                                style={{ height: 'clamp(200px, 40vh, 400px)' }}
                               >
                                 <img
                                   src={url}
                                   alt={`Gallery ${i}`}
-                                  className="h-full w-auto object-cover hover:scale-[1.03] transition-transform duration-700"
+                                  className="h-full w-auto object-cover"
                                   loading="lazy"
                                   style={{ maxWidth: 'none' }}
                                 />
                               </div>
                             ))}
-                          </div>
+                          </motion.div>
                         </div>
                       )}
 
                       {/* VIDEO BLOCK */}
                       {block.type === 'video' && block.media_url && (
-                        <div className="max-w-6xl mx-auto overflow-hidden rounded-[2rem] shadow-2xl bg-[#0D0D0D] border border-black/10 aspect-video">
+                        <div className="w-full bg-[#0D0D0D] aspect-video overflow-hidden">
                           {block.media_url.includes('youtube') || block.media_url.includes('vimeo') ? (
                             <iframe 
                               src={block.media_url.includes('youtube') ? block.media_url.replace('watch?v=', 'embed/') : block.media_url} 
@@ -252,10 +262,10 @@ export default function CaseStudy() {
 
                       {/* PDF BLOCK */}
                       {block.type === 'pdf' && block.pdf_url && (
-                        <div className="max-w-4xl mx-auto">
-                          <div className="flex flex-col md:flex-row items-center justify-between bg-white rounded-[2rem] p-10 border border-black/5 shadow-xl transition-all hover:-translate-y-2 hover:shadow-2xl">
-                            <div className="flex items-center gap-8 mb-8 md:mb-0">
-                              <div className="w-20 h-20 bg-[#C94A2C]/10 rounded-2xl flex items-center justify-center shrink-0">
+                        <div className="max-w-3xl">
+                          <div className="flex flex-col md:flex-row items-center justify-between border-t border-black/[0.06] py-8 gap-8 md:gap-12">
+                            <div className="flex items-center gap-6 mb-0">
+                              <div className="w-14 h-14 bg-[#C94A2C]/10 flex items-center justify-center shrink-0">
                                 <Activity size={40} className="text-[#C94A2C]" />
                               </div>
                               <div className="text-left">
@@ -267,7 +277,7 @@ export default function CaseStudy() {
                               href={block.pdf_url} 
                               target="_blank" 
                               rel="noopener noreferrer"
-                              className="w-full md:w-auto px-12 py-6 bg-[#0D0D0D] text-white rounded-full text-[12px] font-bold uppercase tracking-widest hover:bg-[#C94A2C] transition-colors text-center"
+                              className="w-full md:w-auto px-8 py-4 bg-[#0D0D0D] text-white text-[11px] font-bold uppercase tracking-widest hover:bg-[#C94A2C] transition-colors text-center"
                             >
                               Download File
                             </a>
@@ -305,7 +315,7 @@ export default function CaseStudy() {
           <div className="max-w-4xl text-center relative z-10 space-y-12">
             <h3 className="text-5xl md:text-8xl font-display font-black tracking-tighter leading-[0.95]">Architecting the <br /> Next Milestone?</h3>
             <div className="flex justify-center mt-12">
-                <a href="/contact" className="bg-[#C94A2C] text-white px-16 py-6 rounded-full text-[12px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-[#0D0D0D] transition-colors">Initiate Protocol</a>
+                <a href="/contact" className="bg-[#C94A2C] text-white px-16 py-6 rounded-xl text-[12px] font-bold uppercase tracking-[0.3em] hover:bg-white hover:text-[#0D0D0D] transition-colors shadow-lg">Initiate Protocol</a>
             </div>
           </div>
       </div>

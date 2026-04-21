@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useForm } from "react-hook-form";
@@ -518,10 +518,21 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
   const bgBlockRef = blocks.find(b => b.type === "meta_background");
   const bgImageUrl = bgBlockRef?.media_url ?? "";
 
+  const bgColorBlockRef = blocks.find(b => b.type === "meta_background_color");
+  const bgColor = bgColorBlockRef?.content ?? "";
+
   const handleBgImageChange = (url: string) => {
     setBlocks(prev => {
       const filtered = prev.filter(b => b.type !== "meta_background");
       if (url) filtered.push({ id: genId(), type: "meta_background", media_url: url });
+      return filtered;
+    });
+  };
+
+  const handleBgColorChange = (color: string) => {
+    setBlocks(prev => {
+      const filtered = prev.filter(b => b.type !== "meta_background_color");
+      if (color) filtered.push({ id: genId(), type: "meta_background_color", content: color });
       return filtered;
     });
   };
@@ -792,7 +803,36 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
             <div>
               <label className={fieldLabel}>Dynamic Background Photo</label>
               <CoverUploader url={bgImageUrl} onChange={handleBgImageChange} />
-              <p className="text-[8px] font-bold text-black/30 mt-1.5 uppercase tracking-widest">Auto text contrast applied</p>
+              <p className="text-[8px] font-bold text-black/30 mt-1.5 uppercase tracking-widest">Sets a full-bleed background (auto contrast)</p>
+            </div>
+
+            {/* Background Color Picker */}
+            <div>
+              <label className={fieldLabel}>Background Color</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="color"
+                  value={bgColor || "#F5F0E8"}
+                  onChange={(e) => handleBgColorChange(e.target.value)}
+                  className="w-10 h-10 cursor-pointer border border-black/10 bg-white shrink-0"
+                  style={{ padding: '2px' }}
+                />
+                <Input
+                  placeholder="#F5F0E8"
+                  value={bgColor}
+                  onChange={(e) => handleBgColorChange(e.target.value)}
+                  className={cn(fieldInput, "flex-1 font-mono")}
+                />
+                {bgColor && (
+                  <button
+                    onClick={() => handleBgColorChange("")}
+                    className="text-[9px] font-black uppercase tracking-widest text-black/30 hover:text-[#C94A2C] transition-colors shrink-0"
+                  >
+                    Clear
+                  </button>
+                )}
+              </div>
+              <p className="text-[8px] font-bold text-black/30 mt-1.5 uppercase tracking-widest">Overrides default page bg. Use with no photo.</p>
             </div>
 
             <div className="h-px bg-black/5" />

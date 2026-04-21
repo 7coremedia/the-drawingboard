@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import { Helmet } from "react-helmet-async";
 import PortfolioGrid from "@/components/sections/PortfolioGrid";
 import { motion } from "framer-motion";
@@ -7,16 +7,16 @@ import { cn } from "@/lib/utils";
 
 export default function Portfolio() {
   return (
-    <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8] pt-24 md:pt-40">
+    <div className="min-h-screen bg-[#F5F0E8] text-[#0D0D0D] selection:bg-[#C94A2C] selection:text-[#F5F0E8]">
       <Helmet>
         <title>Exhibition Archive – ŌDEY | The Drawing Board</title>
         <meta name="description" content="ŌDEY brand exhibition. A clinical archive of identity systems, strategic architecture, and creative growth. Lagos — London." />
         <link rel="canonical" href="/portfolio" />
       </Helmet>
 
-      <main className="container mx-auto px-6 relative">
+      <main className="container mx-auto px-8 md:px-16 lg:px-24 relative">
         {/* Clinical Header Section */}
-        <div className="max-w-4xl mb-24 md:mb-40">
+        <div className="max-w-4xl mb-12 md:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,9 +72,9 @@ export default function Portfolio() {
         </div>
 
         <div className="flex justify-end mb-8 relative z-20 mx-4">
-          <a href="/brand-roi-calculator" className="bg-white rounded-full pl-6 pr-2 py-2 flex items-center gap-4 hover:shadow-lg transition-shadow border border-black/5 group">
+          <a href="/brand-roi-calculator" className="bg-white rounded-xl pl-5 pr-2 py-1.5 flex items-center gap-3 hover:shadow-md transition-shadow border border-black/5 group">
             <span className="text-sm font-bold text-[#0D0D0D]">Brand ROI Calculator</span>
-            <span className="bg-[#C9A66B] text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-sm group-hover:scale-105 transition-transform">New</span>
+            <span className="bg-[#C9A66B] text-white text-[9px] font-black uppercase tracking-[0.2em] px-2.5 py-1 rounded-lg shadow-sm group-hover:scale-105 transition-transform">New</span>
           </a>
         </div>
 
