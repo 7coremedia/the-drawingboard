@@ -32,12 +32,12 @@ export default function ProjectInfoCard({ details, isEditable = false }: Props) 
     <div className="bg-[#F5F0E8]/40 max-h-[70vh] overflow-y-auto custom-scrollbar relative">
       {/* Editorial Header */}
       <div className="bg-white/80 backdrop-blur-md sticky top-0 z-10 border-b border-black/5 px-8 pt-8 pb-6">
-         <span className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C] block mb-2 opacity-80">Intelligence Data</span>
+         <span className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C] block mb-2 opacity-80">Project Details</span>
          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6">
             {renderDetailItem("Client", details.client)}
             {renderDetailItem("Industry", details.industry)}
             {renderDetailItem("Location", details.location)}
-            {renderDetailItem("Outcome", details.year)}
+            {renderDetailItem("Year", details.year)}
          </div>
          {details.our_role && (
            <div className="mt-6 pt-6 border-t border-black/5">
