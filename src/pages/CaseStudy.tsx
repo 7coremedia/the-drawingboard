@@ -9,6 +9,60 @@ import RedesignFooter from "@/components/redesign/RedesignFooter";
 import { cn } from '@/lib/utils';
 import { Activity, ShieldCheck } from 'lucide-react';
 
+function ScrollableMarquee({ urls }: { urls: string[] }) {
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const [isPaused, setIsPaused] = React.useState(false);
+
+  React.useEffect(() => {
+    let animationId: number;
+    let lastTime = performance.now();
+
+    const scroll = (time: number) => {
+      if (!isPaused && containerRef.current) {
+         const delta = time - lastTime;
+         const speed = 0.04; // px per ms
+         containerRef.current.scrollLeft += delta * speed;
+         
+         const singleSetWidth = containerRef.current.scrollWidth / 4;
+         if (containerRef.current.scrollLeft >= singleSetWidth * 2) {
+            containerRef.current.scrollLeft = containerRef.current.scrollLeft - singleSetWidth;
+         }
+      }
+      lastTime = time;
+      animationId = requestAnimationFrame(scroll);
+    };
+    animationId = requestAnimationFrame(scroll);
+    return () => cancelAnimationFrame(animationId);
+  }, [isPaused]);
+
+  return (
+    <div 
+      className="relative w-[100vw] left-[50%] -translate-x-[50%] overflow-x-auto py-10 flex gap-4 px-4 scrollbar-hide"
+      ref={containerRef}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => setTimeout(() => setIsPaused(false), 1000)}
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', WebkitOverflowScrolling: 'touch' }}
+    >
+      {[...urls, ...urls, ...urls, ...urls].map((url: string, i: number) => (
+         <div
+           key={i}
+           className="shrink-0 overflow-hidden"
+           style={{ height: 'clamp(150px, 30vh, 320px)' }}
+         >
+           <img
+             src={url}
+             alt={`Gallery ${i}`}
+             className="h-full w-auto object-cover block bg-black/5"
+             loading="lazy"
+           />
+         </div>
+      ))}
+    </div>
+  )
+}
+
 export default function CaseStudy() {
   const { slug } = useParams<{ slug: string }>();
   const { data: currentCaseStudy, isLoading, error } = usePublicPortfolioItem(slug || '');
@@ -223,33 +277,7 @@ export default function CaseStudy() {
                       )}
                       {/* GALLERY BLOCK — horizontal automatic marquee */}
                       {block.type === 'gallery' && block.media_urls && block.media_urls.length > 0 && (
-                        <div className="relative w-[100vw] left-[50%] -translate-x-[50%] overflow-hidden py-10">
-                          <motion.div 
-                            className="flex gap-4 px-0"
-                            animate={{ x: ["0%", `-${100 / ([...block.media_urls, ...block.media_urls, ...block.media_urls].length / block.media_urls.length)}%`] }}
-                            transition={{
-                              duration: block.media_urls.length * 8,
-                              ease: "linear",
-                              repeat: Infinity,
-                            }}
-                          >
-                            {[...block.media_urls, ...block.media_urls, ...block.media_urls].map((url: string, i: number) => (
-                              <div
-                                key={i}
-                                className="shrink-0 overflow-hidden"
-                                style={{ height: 'clamp(220px, 45vh, 480px)' }}
-                              >
-                                <img
-                                  src={url}
-                                  alt={`Gallery ${i}`}
-                                  className="h-full w-auto object-cover block"
-                                  loading="lazy"
-                                  style={{ maxWidth: 'none' }}
-                                />
-                              </div>
-                            ))}
-                          </motion.div>
-                        </div>
+                        <ScrollableMarquee urls={block.media_urls} />
                       )}
 
                       {/* VIDEO BLOCK */}
