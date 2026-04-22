@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useUser } from "@/hooks/usePortfolioAuth";
+import { toast } from "sonner";
 
 export default function Portal() {
   const { id } = useParams();
@@ -226,10 +227,10 @@ export default function Portal() {
           </span>
         </div>
         <div className="flex items-center gap-4">
-          <Button variant="outline" className="hidden sm:flex border-black/10 hover:bg-black/5 hover:text-black rounded-full h-10 px-5 text-xs font-bold tracking-widest uppercase">
+          <Button variant="outline" className="hidden sm:flex border-black/10 text-black hover:bg-black hover:text-white rounded-full h-10 px-5 text-[10px] font-bold tracking-widest uppercase transition-all">
             <MessageSquare className="w-3.5 h-3.5 mr-2" /> Support
           </Button>
-          <div className="w-10 h-10 rounded-full bg-white border border-black/10 flex items-center justify-center text-sm font-black shadow-sm">
+          <div className="w-10 h-10 rounded-full bg-white border border-black/10 flex items-center justify-center text-sm font-black shadow-sm text-black">
             {getInitials(clientName)}
           </div>
         </div>
@@ -249,18 +250,31 @@ export default function Portal() {
                    variant="outline" 
                    size="sm" 
                    onClick={async () => {
-                     const newPin = Math.floor(100000 + Math.random() * 900000).toString();
+                     if (brand.portal_pin) {
+                        navigator.clipboard.writeText(brand.portal_pin);
+                        toast.success("Access PIN copied to clipboard");
+                        return;
+                     }
+                     // Use crypto for more secure random generation
+                     const array = new Uint32Array(1);
+                     window.crypto.getRandomValues(array);
+                     const newPin = (array[0] % 900000 + 100000).toString();
+                     
                      await supabase.from("onboarding_responses").update({ portal_pin: newPin }).eq("id", id);
                      setBrand({ ...brand, portal_pin: newPin });
+                     toast.success("Secure PIN generated successfully");
                    }} 
                    className="text-[10px] uppercase font-bold tracking-widest border-[#C94A2C] text-[#C94A2C] hover:bg-[#C94A2C]/10"
                  >
-                   <Lock className="w-3 h-3 mr-2" /> {brand.portal_pin ? `PIN: ${brand.portal_pin}` : 'Generate PIN'}
+                   <Lock className="w-3 h-3 mr-2" /> {brand.portal_pin ? `PIN: ${brand.portal_pin} (Copy)` : 'Generate PIN'}
                  </Button>
                  <Button 
                    variant="outline" 
                    size="sm" 
-                   onClick={() => navigator.clipboard.writeText(window.location.href)} 
+                   onClick={() => {
+                     navigator.clipboard.writeText(window.location.href);
+                     toast.success("Portal link copied to clipboard");
+                   }} 
                    className="text-[10px] uppercase font-bold tracking-widest border-black/10 hover:bg-black/5"
                  >
                    Copy Link
