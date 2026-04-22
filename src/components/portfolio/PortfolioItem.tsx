@@ -26,7 +26,7 @@ export default function PortfolioItem({
       className="relative group block select-none focus:outline-none overflow-hidden"
     >
       {/* Landscape Media container */}
-      <div className="relative w-full aspect-video overflow-hidden transition-all duration-700">
+      <div className="relative w-full aspect-video overflow-hidden rounded-[1rem] transition-all duration-700">
         {/* Skeleton */}
         <div
           className={cn(

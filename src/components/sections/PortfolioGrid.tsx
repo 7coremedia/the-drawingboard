@@ -226,10 +226,10 @@ export default function PortfolioGrid() {
               )}
 
               {tab === 'research_docs' && (
-                <div className="border border-black/[0.05] p-16 text-center bg-white relative overflow-hidden">
+                <div className="border border-black/[0.05] p-16 text-center bg-white relative overflow-hidden rounded-[1.5rem]">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-[#C94A2C]/5 blur-[100px] pointer-events-none" />
                   <div className="max-w-2xl mx-auto space-y-8 relative z-10">
-                    <div className="w-16 h-16 bg-[#F5F0E8] border border-black/5 flex items-center justify-center mx-auto mb-8">
+                    <div className="w-16 h-16 bg-[#F5F0E8] border border-black/5 flex items-center justify-center mx-auto mb-8 rounded-2xl">
                         <Microscope size={28} className="text-[#C94A2C]" />
                     </div>
                     <h3 className="text-4xl font-display font-black tracking-tighter leading-none">Internal Protocol <br /> Under Stage 4 Audit</h3>
