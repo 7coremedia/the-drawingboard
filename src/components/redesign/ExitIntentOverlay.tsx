@@ -76,7 +76,7 @@ export default function ExitIntentOverlay() {
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 1.05, y: -20 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="bg-[#0D0D0D] text-white w-full max-w-xl rounded-[2.5rem] p-8 md:p-12 relative z-10 shadow-2xl overflow-hidden"
+                        className="bg-[#0D0D0D] text-white w-full max-w-xl rounded-[2.5rem] p-6 md:p-10 relative z-10 shadow-2xl overflow-y-auto max-h-[90vh] no-scrollbar"
                     >
                         {/* Background flare */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-[#C94A2C]/20 blur-[100px] pointer-events-none" />
@@ -103,7 +103,7 @@ export default function ExitIntentOverlay() {
                                         animate={{ rotateY: [0, -10, 0], y: [0, -8, 0] }}
                                         transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
                                         style={{ perspective: "1000px" }}
-                                        className="mb-8 w-40 md:w-48 relative"
+                                        className="mb-6 w-32 md:w-40 relative shrink-0"
                                     >
                                         <div className="absolute -inset-4 bg-[#C94A2C]/20 blur-2xl rounded-full" />
                                         <img 
@@ -113,11 +113,11 @@ export default function ExitIntentOverlay() {
                                         />
                                     </motion.div>
                                     
-                                    <h2 className="text-3xl md:text-4xl font-display font-medium tracking-tight mb-4">
+                                    <h2 className="text-2xl md:text-3xl font-display font-medium tracking-tight mb-3">
                                         Don't leave your brand to chance.
                                     </h2>
                                     
-                                    <p className="text-white/60 text-base md:text-lg mb-8 max-w-md">
+                                    <p className="text-white/60 text-sm md:text-base mb-6 max-w-md">
                                         Get the <span className="text-white font-bold">Personal Brand Launcher PDF</span> — our internal diagnostic checklist used to validate ₦100M+ brands.
                                     </p>
 
@@ -128,11 +128,11 @@ export default function ExitIntentOverlay() {
                                             onChange={(e) => setEmail(e.target.value)}
                                             placeholder="Where should we send it?" 
                                             required
-                                            className="w-full bg-white/5 border border-white/10 rounded-full px-6 py-4 text-white placeholder:text-white/30 focus:outline-none focus:border-[#C94A2C] transition-colors font-medium"
+                                            className="w-full bg-white/5 border border-white/10 rounded-full px-5 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-[#C94A2C] transition-colors font-medium text-sm"
                                         />
                                         <button
                                             type="submit"
-                                            className="group w-full bg-[#C94A2C] text-white py-4 px-6 rounded-full font-display text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-[#0D0D0D] transition-colors flex items-center justify-center gap-3 shadow-lg"
+                                            className="group w-full bg-[#C94A2C] text-white py-3.5 px-6 rounded-full font-display text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-white hover:text-[#0D0D0D] transition-colors flex items-center justify-center gap-3 shadow-lg"
                                         >
                                             Unlock Framework
                                             <ShieldCheck size={16} className="transition-transform group-hover:scale-110" />

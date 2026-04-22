@@ -21,7 +21,7 @@ const Index = () => {
       <Hero />
 
       {/* Footer */}
-      <RedesignFooter />
+      <RedesignFooter showPortfolio={true} />
     </div>
   );
 };

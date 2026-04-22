@@ -1,16 +1,30 @@
-﻿import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import PortfolioGrid from "./../sections/PortfolioGrid";
 
-export default function RedesignFooter() {
+interface RedesignFooterProps {
+    showPortfolio?: boolean;
+}
+
+export default function RedesignFooter({ showPortfolio = false }: RedesignFooterProps) {
     return (
         <footer className="bg-white pt-24 md:pt-48 pb-20 border-t border-black/[0.05]">
             <div className="container px-6 max-w-7xl mx-auto">
                 
                 {/* 1. BRAND STATEMENT */}
-                <div className="mb-24 md:mb-40 max-w-4xl">
+                <div className="mb-16 md:mb-24 max-w-4xl">
                     <p className="font-display text-4xl md:text-6xl font-black text-[#0D0D0D] tracking-tighter leading-[0.95]">
                         We build brands that people have feelings about — the kind that travel across industries, borders, and every room you walk into. <span className="text-[#C94A2C]">That is the ŌDEY standard.</span>
                     </p>
                 </div>
+
+                {/* PORTFOLIO GRID (Homepage Only) */}
+                {showPortfolio && (
+                    <div className="mb-24 md:mb-40 -mx-6 md:-mx-12 overflow-hidden">
+                        <div className="px-6 md:px-12">
+                            <PortfolioGrid />
+                        </div>
+                    </div>
+                )}
 
                 {/* 2. INFORMATION GRID */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-20 mb-32 border-t border-black/[0.03] pt-16">
