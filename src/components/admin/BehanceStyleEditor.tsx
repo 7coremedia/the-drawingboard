@@ -898,7 +898,7 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
             {/* Client */}
             <div>
               <label className={fieldLabel}>Client</label>
-              <Input {...form.register("client")} placeholder="Entity name" className={fieldInput} />
+              <Input {...form.register("client")} placeholder="Client name" className={fieldInput} />
             </div>
 
             {/* Tagline */}
@@ -909,8 +909,8 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
 
             {/* Year / result */}
             <div>
-              <label className={fieldLabel}>Primary Outcome</label>
-              <Input {...form.register("year")} placeholder="+45% Conversion..." className={fieldInput} />
+              <label className={fieldLabel}>Year</label>
+              <Input {...form.register("year")} placeholder="e.g. 2024" className={fieldInput} />
             </div>
 
             <div className="h-px bg-black/5" />

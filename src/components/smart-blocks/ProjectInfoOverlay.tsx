@@ -18,6 +18,8 @@ export type ProjectDetails = {
   the_solution?: string;
   notes?: any; // Using 'any' for now to represent the rich-text editor content (e.g., JSON)
   is_notes_downloadable?: boolean;
+  year?: string;
+  content_blocks?: any[];
 };
 
 type Props = {

@@ -1,4 +1,4 @@
-﻿import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
@@ -6,8 +6,10 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
     const location = useLocation();
+    const isCaseStudy = location.pathname.startsWith("/portfolio/") && location.pathname !== "/portfolio";
     const [isAtTop, setIsAtTop] = React.useState(true);
     const [menuOpen, setMenuOpen] = React.useState(false);
+    const [isVisible, setIsVisible] = React.useState(true);
     const lastScrollY = React.useRef(0);
 
     React.useEffect(() => {
@@ -15,6 +17,16 @@ export default function Navbar() {
             const currentY = window.scrollY;
             const atTop = currentY < 20;
             setIsAtTop(atTop);
+            
+            // Auto hide/show logic based on scroll direction
+            if (currentY > lastScrollY.current && currentY > 50) {
+                // Scrolling down
+                setIsVisible(false);
+            } else if (currentY < lastScrollY.current) {
+                // Scrolling up
+                setIsVisible(true);
+            }
+            
             lastScrollY.current = currentY;
         };
 
@@ -39,7 +51,8 @@ export default function Navbar() {
                 className={cn(
                     "fixed inset-x-0 z-[60] h-16 md:h-20 transition-all duration-500 flex items-center border-none shadow-none",
                     hasBanner && isAtTop ? "top-14 md:top-16" : "top-0",
-                    isAtTop ? "translate-y-0" : "translate-y-[-4px] backdrop-blur-sm bg-black/5"
+                    isCaseStudy && !isVisible ? "-translate-y-full opacity-0 pointer-events-none" : "translate-y-0 opacity-100",
+                    isAtTop ? "" : "backdrop-blur-sm bg-black/5"
                 )}
             >
                 <div className="w-full flex items-center justify-between px-6 md:px-10 relative">

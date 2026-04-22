@@ -54,7 +54,7 @@ function ScrollableMarquee({ urls }: { urls: string[] }) {
            <img
              src={url}
              alt={`Gallery ${i}`}
-             className="h-full w-auto object-cover block bg-black/5"
+             className="h-full w-auto object-cover block"
              loading="lazy"
            />
          </div>
@@ -161,11 +161,11 @@ export default function CaseStudy() {
             <aside className="space-y-8">
                 <div className="space-y-8">
                     <div>
-                        <h4 className="text-[8px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-4 opacity-50">Intelligence_Data</h4>
+                        <h4 className="text-[8px] uppercase tracking-[0.4em] font-black text-[#C94A2C] mb-4 opacity-50">Project Details</h4>
                         <div className="grid grid-cols-2 gap-4">
                             {currentCaseStudy.client && (
                               <div>
-                                  <p className="text-[7px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-0.5 opacity-60">Entity</p>
+                                  <p className="text-[7px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-0.5 opacity-60">Client</p>
                                   <p className="text-xs font-bold">{currentCaseStudy.client}</p>
                               </div>
                             )}
@@ -183,7 +183,7 @@ export default function CaseStudy() {
                             )}
                             {currentCaseStudy.year && (
                               <div>
-                                  <p className="text-[7px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-0.5 opacity-60">Timeline</p>
+                                  <p className="text-[7px] uppercase tracking-[0.3em] text-[#C94A2C] font-black mb-0.5 opacity-60">Year</p>
                                   <p className="text-xs font-bold">{currentCaseStudy.year}</p>
                               </div>
                             )}
