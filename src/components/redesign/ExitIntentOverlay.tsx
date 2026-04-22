@@ -107,7 +107,7 @@ export default function ExitIntentOverlay() {
                                     >
                                         <div className="absolute -inset-4 bg-[#C94A2C]/20 blur-2xl rounded-full" />
                                         <img 
-                                            src="/Personal%20Brand%20Launcher%20page/Personal%20Brand%20Launcher%20Cheatsheet%20Cover.png" 
+                                            src="/Personal Brand Launcher page/Personal Brand Launcher Cheatsheet Cover.png" 
                                             alt="Personal Brand Launcher Cover" 
                                             className="w-full h-auto object-contain relative z-10 shadow-[20px_20px_40px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.1)] rounded-md"
                                         />
