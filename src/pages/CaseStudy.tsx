@@ -40,9 +40,13 @@ export default function CaseStudy() {
     .slice(0, 3);
 
   const blocks: any[] = currentCaseStudy?.content_blocks ? (currentCaseStudy.content_blocks as any[]) : [];
-  const displayBlocks = blocks.filter(b => b.type !== 'meta_background' && b.type !== 'meta_background_image' && b.type !== 'meta_background_color');
+  const displayBlocks = blocks.filter(b => !['meta_background', 'meta_background_image', 'meta_background_color', 'meta_title_font'].includes(b.type));
   const bgImageBlock = blocks.find(b => b.type === 'meta_background' || b.type === 'meta_background_image');
   const bgColorBlock = blocks.find(b => b.type === 'meta_background_color');
+  const titleFontBlock = blocks.find(b => b.type === 'meta_title_font');
+  
+  const customTitleFont = titleFontBlock?.content;
+  const googleFontUrl = customTitleFont ? `https://fonts.googleapis.com/css2?family=${customTitleFont.replace(/\s+/g, '+')}:wght@100;200;300;400;500;600;700;800;900&display=swap` : null;
   const hasBg = !!bgImageBlock?.media_url;
   const customBgColor = bgColorBlock?.content;
 
@@ -58,37 +62,38 @@ export default function CaseStudy() {
       )}
       <Helmet>
         <title>{currentCaseStudy.title} – ŌDEY Archive</title>
+        {googleFontUrl && <link href={googleFontUrl} rel="stylesheet" />}
       </Helmet>
 
-      {/* Full-width cover hero */}
+      {/* Full-width cover hero with centered title */}
       {currentCaseStudy.cover_url && (
-        <div className="w-full" style={{ height: 'clamp(320px, 60vh, 720px)' }}>
+        <div className="relative w-full flex items-center justify-center overflow-hidden bg-[#0D0D0D]">
           <img
             src={currentCaseStudy.cover_url}
             alt={currentCaseStudy.title}
-            className="w-full h-full object-cover block"
+            className="w-full h-auto md:h-[min(100vh,900px)] object-contain md:object-cover block opacity-80"
           />
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 lg:px-12 pointer-events-none z-10">
+             <span className="text-[9px] md:text-[10px] uppercase tracking-[0.5em] font-black text-white/80 mb-4 md:mb-6 drop-shadow-md">
+                {currentCaseStudy.portfolio_type === 'case_study' ? 'Diagnostic Protocol' : 'Exhibition Entry'}
+             </span>
+             <h1 
+               className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-white drop-shadow-2xl leading-[0.95]" 
+               style={{ 
+                 fontFamily: customTitleFont ? `"${customTitleFont}", sans-serif` : "var(--font-display)",
+                 letterSpacing: customTitleFont ? 'normal' : '-0.04em' 
+               }}
+             >
+                {currentCaseStudy.title}
+             </h1>
+             {currentCaseStudy.tagline && (
+                <p className="mt-4 md:mt-6 text-sm md:text-lg lg:text-xl font-medium text-white/90 max-w-2xl drop-shadow-lg text-balance">
+                   {currentCaseStudy.tagline}
+                </p>
+             )}
+          </div>
         </div>
       )}
-
-      {/* Case Study Header */}
-      <div className="px-8 md:px-16 lg:px-24 pt-8 pb-6">
-        <div className="max-w-4xl space-y-2">
-          <div className="flex items-center gap-3">
-            <span className="text-[8px] uppercase tracking-[0.4em] font-black text-[#C94A2C] opacity-80">
-              {currentCaseStudy.portfolio_type === 'case_study' ? 'Diagnostic Protocol' : 'Exhibition Entry'}
-            </span>
-          </div>
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[0.95]" style={{ letterSpacing: '-0.04em' }}>
-            {currentCaseStudy.title}
-          </h1>
-          {currentCaseStudy.tagline && (
-            <p className={cn("text-sm md:text-base font-medium leading-relaxed max-w-2xl opacity-60", hasBg ? "text-white" : "text-[#0D0D0D]")}>
-              {currentCaseStudy.tagline}
-            </p>
-          )}
-        </div>
-      </div>
 
       <main className="px-8 md:px-16 lg:px-24 overflow-visible">
 

@@ -65,6 +65,7 @@ function AppShell() {
   const isSuperstars = location.pathname === "/superstars";
   const isManagement = location.pathname.startsWith("/management");
   const isPortal = location.pathname.startsWith("/portal");
+  const isCaseStudy = location.pathname.startsWith("/portfolio/") && location.pathname !== "/portfolio";
   return (
     <>
       <Helmet>
@@ -88,7 +89,7 @@ function AppShell() {
       {!isChatPage && !location.pathname.startsWith("/management") && !isPortal && <Navbar />}
       <main
         className={cn(
-          !isHome && !isChatPage && !isSuperstars && !isManagement && !isVolumeRoute && !isPortal && "pt-28 md:pt-32",
+          !isHome && !isChatPage && !isSuperstars && !isManagement && !isVolumeRoute && !isPortal && !isCaseStudy && "pt-28 md:pt-32",
         )}
       >
         <Routes>

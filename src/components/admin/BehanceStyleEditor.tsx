@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 
 // ─── Block Types ────────────────────────────────────────────────────────────
 
-export type BlockType = "image" | "text" | "heading" | "gallery" | "video" | "embed" | "pdf" | "divider" | "meta_background" | "meta_background_image" | "meta_background_color";
+export type BlockType = "image" | "text" | "heading" | "gallery" | "video" | "embed" | "pdf" | "divider" | "meta_background" | "meta_background_image" | "meta_background_color" | "meta_title_font";
 
 export interface ContentBlock {
   id: string;
@@ -596,6 +596,17 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
     });
   };
 
+  const titleFontBlockRef = blocks.find(b => b.type === "meta_title_font");
+  const titleFont = titleFontBlockRef?.content ?? "";
+
+  const handleTitleFontChange = (font: string) => {
+    setBlocks(prev => {
+      const filtered = prev.filter(b => b.type !== "meta_title_font");
+      if (font) filtered.push({ id: genId(), type: "meta_title_font", content: font });
+      return filtered;
+    });
+  };
+
   useEffect(() => {
     if (initialMeta) {
       setBlocks(prev => {
@@ -680,7 +691,7 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
     setBlocks((prev) => prev.filter((b) => b.id !== id));
   };
 
-  const isMetaBlock = (type: string) => ["meta_background", "meta_background_image", "meta_background_color"].includes(type);
+  const isMetaBlock = (type: string) => ["meta_background", "meta_background_image", "meta_background_color", "meta_title_font"].includes(type);
   const displayBlocks = blocks.filter(b => !isMetaBlock(b.type));
 
   const handleDragEnd = (result: any) => {
@@ -938,6 +949,18 @@ export default function BehanceStyleEditor({ mode, initialMeta, onSubmit, isLoad
                 )}
               </div>
               <p className="text-[8px] font-bold text-black/30 mt-1.5 uppercase tracking-widest">Overrides default page bg. Use with no photo.</p>
+            </div>
+
+            {/* Title Font Customization */}
+            <div>
+              <label className={fieldLabel}>Project Title Font</label>
+              <Input 
+                value={titleFont} 
+                onChange={(e) => handleTitleFontChange(e.target.value)} 
+                placeholder="e.g. Playfair Display" 
+                className={fieldInput} 
+              />
+              <p className="text-[8px] font-bold text-black/30 mt-1.5 uppercase tracking-widest">Connects directly to Google Fonts API</p>
             </div>
 
             <div className="h-px bg-black/5" />
