@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
@@ -12,19 +12,69 @@ import {
   Lock,
   Activity,
   Layers,
+  Layers,
   Banknote,
-  LayoutTemplate
+  LayoutTemplate,
+  Plus,
+  X,
+  Upload
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useUser } from "@/hooks/usePortfolioAuth";
 
 export default function Portal() {
   const { id } = useParams();
+  const { role } = useUser();
+  const isAdmin = role?.is_admin || role?.is_moderator || role?.is_worker;
+
   const [loading, setLoading] = useState(true);
   const [brand, setBrand] = useState<any>(null);
   const [milestones, setMilestones] = useState<any[]>([]);
   const [invoices, setInvoices] = useState<any[]>([]);
   const [assets, setAssets] = useState<any[]>([]);
   const [activeTab, setActiveTab] = useState<'matrix' | 'growth' | 'finance'>('matrix');
+
+  // Admin Form States
+  const [showMilestoneForm, setShowMilestoneForm] = useState(false);
+  const [newMilestone, setNewMilestone] = useState({ title: '', date_label: '' });
+  
+  const [showInvoiceForm, setShowInvoiceForm] = useState(false);
+  const [newInvoice, setNewInvoice] = useState({ id: '', date_label: '', amount: '', download_url: '' });
+
+  const [showAssetForm, setShowAssetForm] = useState(false);
+  const [newAsset, setNewAsset] = useState({ name: '', file_type: '', file_size: '', download_url: '' });
+  const [isUploadingAsset, setIsUploadingAsset] = useState(false);
+
+  const handleAssetUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !id) return;
+    setIsUploadingAsset(true);
+    try {
+       const fileExt = file.name.split('.').pop();
+       const fileName = `${Math.random().toString(36).substring(2)}.${fileExt}`;
+       const filePath = `${id}/${fileName}`;
+       const { error: uploadError } = await supabase.storage.from('portal_assets').upload(filePath, file);
+       if (uploadError) throw uploadError;
+       const { data } = supabase.storage.from('portal_assets').getPublicUrl(filePath);
+       
+       const sizeMb = (file.size / (1024 * 1024)).toFixed(1);
+       setNewAsset({
+          name: file.name.replace(`.${fileExt}`, ''),
+          file_type: fileExt?.toUpperCase() || 'FILE',
+          file_size: `${sizeMb} MB`,
+          download_url: data.publicUrl
+       });
+    } catch (err) {
+       console.error("Upload failed", err);
+       alert("Failed to upload file. Check permissions.");
+    } finally {
+       setIsUploadingAsset(false);
+    }
+  };
+
+  const [enteredPin, setEnteredPin] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [pinError, setPinError] = useState(false);
 
   useEffect(() => {
     const fetchPortalData = async () => {
@@ -36,7 +86,7 @@ export default function Portal() {
       try {
         const { data: brandData, error: brandError } = await supabase
           .from("onboarding_responses")
-          .select("brand_name, sender_name")
+          .select("brand_name, sender_name, portal_pin")
           .eq("id", id)
           .single();
 
@@ -81,6 +131,48 @@ export default function Portal() {
     return (
       <div className="min-h-screen bg-[#F5F0E8] flex items-center justify-center">
         <Loader2 className="w-8 h-8 text-[#C94A2C] animate-spin" />
+      </div>
+    );
+  }
+
+  if (brand && !isAuthenticated && !isAdmin) {
+    const handlePinSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      if (brand.portal_pin && enteredPin === brand.portal_pin) {
+         setIsAuthenticated(true);
+         setPinError(false);
+      } else {
+         setPinError(true);
+      }
+    };
+
+    return (
+      <div className="min-h-screen bg-[#F5F0E8] flex flex-col items-center justify-center p-6 text-center">
+         <Lock className="w-12 h-12 text-[#C94A2C] mb-6" />
+         <h1 className="text-3xl font-display font-black tracking-tight mb-2">Secure Protocol Access</h1>
+         <p className="text-black/50 font-medium max-w-sm mb-8">Enter your 6-digit access PIN to unlock the {brand.brand_name} portal.</p>
+         
+         <form onSubmit={handlePinSubmit} className="flex flex-col items-center gap-4 w-full max-w-xs">
+            <input 
+              type="password" 
+              maxLength={6}
+              value={enteredPin}
+              onChange={(e) => { setEnteredPin(e.target.value); setPinError(false); }}
+              placeholder="••••••" 
+              className={`w-full text-center text-3xl tracking-[1em] font-mono bg-white border ${pinError ? 'border-red-500' : 'border-black/10'} rounded-xl py-4 shadow-sm outline-none focus:border-[#C94A2C] transition-colors`} 
+            />
+            {pinError && <p className="text-xs text-red-500 font-bold uppercase tracking-widest">Invalid PIN Code</p>}
+            
+            <Button type="submit" className="w-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] rounded-full uppercase text-[10px] tracking-widest h-12 mt-2">
+              Unlock Portal
+            </Button>
+         </form>
+
+         <div className="mt-12">
+            <Link to="/contact" className="text-[10px] font-bold text-black/40 hover:text-black uppercase tracking-widest transition-colors flex items-center gap-2">
+               <MessageSquare className="w-3 h-3" /> Request New PIN
+            </Link>
+         </div>
       </div>
     );
   }
@@ -147,9 +239,35 @@ export default function Portal() {
         
         {/* Intro Section */}
         <section className="space-y-4">
-          <p className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C]">
-            Project Directory — {brand.brand_name}
-          </p>
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+             <p className="text-[10px] uppercase tracking-[0.4em] font-black text-[#C94A2C]">
+               Project Directory — {brand.brand_name}
+             </p>
+             {isAdmin && (
+               <div className="flex items-center gap-2">
+                 <Button 
+                   variant="outline" 
+                   size="sm" 
+                   onClick={async () => {
+                     const newPin = Math.floor(100000 + Math.random() * 900000).toString();
+                     await supabase.from("onboarding_responses").update({ portal_pin: newPin }).eq("id", id);
+                     setBrand({ ...brand, portal_pin: newPin });
+                   }} 
+                   className="text-[10px] uppercase font-bold tracking-widest border-[#C94A2C] text-[#C94A2C] hover:bg-[#C94A2C]/10"
+                 >
+                   <Lock className="w-3 h-3 mr-2" /> {brand.portal_pin ? `PIN: ${brand.portal_pin}` : 'Generate PIN'}
+                 </Button>
+                 <Button 
+                   variant="outline" 
+                   size="sm" 
+                   onClick={() => navigator.clipboard.writeText(window.location.href)} 
+                   className="text-[10px] uppercase font-bold tracking-widest border-black/10 hover:bg-black/5"
+                 >
+                   Copy Link
+                 </Button>
+               </div>
+             )}
+          </div>
           <h1 className="text-4xl md:text-6xl font-display font-black tracking-tighter leading-none">
             Welcome back, <br className="hidden md:block"/>
             <span className="text-black/30">{clientName}.</span>
@@ -182,9 +300,16 @@ export default function Portal() {
                 <section className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/[0.05] shadow-sm">
                    <div className="flex items-center justify-between mb-8">
                       <h2 className="text-2xl font-display font-black tracking-tighter">Project Matrix</h2>
-                      <span className="text-[10px] font-bold bg-[#C94A2C]/10 uppercase tracking-widest text-[#C94A2C] px-3 py-1.5 rounded-full">
-                        {progressPercent}% Completed
-                      </span>
+                      <div className="flex items-center gap-3">
+                        <span className="text-[10px] font-bold bg-[#C94A2C]/10 uppercase tracking-widest text-[#C94A2C] px-3 py-1.5 rounded-full">
+                          {progressPercent}% Completed
+                        </span>
+                        {isAdmin && (
+                          <Button size="sm" onClick={() => setShowMilestoneForm(true)} className="bg-black text-white hover:bg-[#C94A2C] rounded-full h-8 px-4 text-[10px] uppercase font-bold tracking-widest">
+                            <Plus className="w-3 h-3 mr-1" /> Add
+                          </Button>
+                        )}
+                      </div>
                    </div>
 
                    {milestones.length === 0 ? (
@@ -194,7 +319,16 @@ export default function Portal() {
                    ) : (
                      <div className="space-y-6 relative before:absolute before:inset-y-0 before:left-[11px] before:w-px before:bg-black/10">
                        {milestones.map((stone) => (
-                         <div key={stone.id} className="relative flex gap-6 items-start">
+                         <div 
+                           key={stone.id} 
+                           className={`relative flex gap-6 items-start ${isAdmin ? 'cursor-pointer hover:bg-black/[0.02] p-2 -ml-2 rounded-xl transition-colors' : ''}`}
+                           onClick={async () => {
+                              if (!isAdmin) return;
+                              const nextStatus = stone.status === 'pending' ? 'in-progress' : stone.status === 'in-progress' ? 'completed' : 'pending';
+                              await supabase.from("project_milestones").update({ status: nextStatus }).eq("id", stone.id);
+                              setMilestones(milestones.map(m => m.id === stone.id ? { ...m, status: nextStatus } : m));
+                           }}
+                         >
                            <div className={`w-6 h-6 rounded-full flex items-center justify-center z-10 shrink-0 ${stone.status === 'completed' ? 'bg-[#C94A2C] text-white' : stone.status === 'in-progress' ? 'bg-white border-2 border-[#C94A2C]' : 'bg-[#F5F0E8] border border-black/10'}`}>
                               {stone.status === 'completed' && <CheckCircle2 className="w-4 h-4" />}
                            </div>
@@ -208,6 +342,11 @@ export default function Portal() {
                               {stone.status === 'in-progress' && (
                                 <div className="mt-3">
                                   <span className="text-[10px] uppercase font-bold tracking-widest text-[#C94A2C] bg-[#C94A2C]/5 px-2 py-1 rounded">Active Phase</span>
+                                </div>
+                              )}
+                              {stone.status === 'pending' && (
+                                <div className="mt-3">
+                                  <span className="text-[10px] uppercase font-bold tracking-widest text-black/40 bg-black/5 px-2 py-1 rounded">Pending</span>
                                 </div>
                               )}
                            </div>
@@ -239,7 +378,14 @@ export default function Portal() {
                 <section className="bg-white rounded-[2.5rem] p-8 md:p-12 border border-black/[0.05] shadow-sm">
                    <div className="flex items-center justify-between mb-8">
                       <h2 className="text-2xl font-display font-black tracking-tighter">Invoices & Ledgers</h2>
-                      <FileText className="w-5 h-5 text-black/30" />
+                      <div className="flex items-center gap-3">
+                        <FileText className="w-5 h-5 text-black/30" />
+                        {isAdmin && (
+                          <Button size="sm" onClick={() => setShowInvoiceForm(true)} className="bg-black text-white hover:bg-[#C94A2C] rounded-full h-8 px-4 text-[10px] uppercase font-bold tracking-widest">
+                            <Plus className="w-3 h-3 mr-1" /> Add
+                          </Button>
+                        )}
+                      </div>
                    </div>
 
                    {invoices.length === 0 ? (
@@ -249,7 +395,16 @@ export default function Portal() {
                    ) : (
                      <div className="space-y-4 flex flex-col">
                        {invoices.map(inv => (
-                         <div key={inv.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 md:p-6 rounded-2xl bg-[#F5F0E8]/50 hover:bg-[#F5F0E8] transition-colors border border-black/5 gap-4">
+                         <div 
+                           key={inv.id} 
+                           className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 md:p-6 rounded-2xl bg-[#F5F0E8]/50 hover:bg-[#F5F0E8] transition-colors border border-black/5 gap-4 ${isAdmin ? 'cursor-pointer' : ''}`}
+                           onClick={async () => {
+                             if (!isAdmin) return;
+                             const nextStatus = inv.status === 'unpaid' ? 'paid' : 'unpaid';
+                             await supabase.from("client_invoices").update({ status: nextStatus }).eq("id", inv.id);
+                             setInvoices(invoices.map(i => i.id === inv.id ? { ...i, status: nextStatus } : i));
+                           }}
+                         >
                             <div className="flex items-center gap-4">
                                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm shrink-0">
                                   <FileText className="w-4 h-4 text-black/60" />
@@ -287,7 +442,14 @@ export default function Portal() {
             <section className="bg-white rounded-[2.5rem] p-8 border border-black/[0.05] shadow-sm">
                <div className="flex items-center justify-between mb-8">
                   <h2 className="text-xl font-display font-black tracking-tighter">Deliverables</h2>
-                  {assets.length > 0 && <span className="text-[10px] bg-black/5 px-2 py-1 rounded uppercase tracking-widest font-bold text-black/50">{assets.length} Files</span>}
+                  <div className="flex items-center gap-3">
+                    {assets.length > 0 && <span className="text-[10px] bg-black/5 px-2 py-1 rounded uppercase tracking-widest font-bold text-black/50">{assets.length} Files</span>}
+                    {isAdmin && (
+                      <Button size="sm" onClick={() => setShowAssetForm(true)} className="bg-[#F5F0E8] text-black hover:bg-black hover:text-white rounded-full h-8 px-4 text-[10px] uppercase font-bold tracking-widest border border-black/5 transition-colors">
+                        <Plus className="w-3 h-3" />
+                      </Button>
+                    )}
+                  </div>
                </div>
 
                {assets.length === 0 ? (
@@ -329,6 +491,122 @@ export default function Portal() {
 
         </div>
       </main>
+
+      {/* ADMIN MODALS */}
+      {showMilestoneForm && (
+        <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white p-8 rounded-[2rem] w-full max-w-md shadow-2xl relative">
+            <button onClick={() => setShowMilestoneForm(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-black/5"><X size={16} /></button>
+            <h3 className="text-2xl font-display font-black mb-6">Add Milestone</h3>
+            <div className="space-y-4">
+              <div>
+                 <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">Title</label>
+                 <input type="text" value={newMilestone.title} onChange={e => setNewMilestone({...newMilestone, title: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="e.g. Identity Prototyping" />
+              </div>
+              <div>
+                 <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">Date Label</label>
+                 <input type="text" value={newMilestone.date_label} onChange={e => setNewMilestone({...newMilestone, date_label: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="e.g. Oct 28" />
+              </div>
+              <Button onClick={async () => {
+                 if (!newMilestone.title) return;
+                 const { data, error } = await supabase.from("project_milestones").insert([{ brand_id: id, title: newMilestone.title, date_label: newMilestone.date_label, status: 'pending', order_index: milestones.length }]).select().single();
+                 if (data && !error) setMilestones([...milestones, data]);
+                 setShowMilestoneForm(false);
+                 setNewMilestone({ title: '', date_label: '' });
+              }} className="w-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] rounded-full mt-4">Save Milestone</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showInvoiceForm && (
+        <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white p-8 rounded-[2rem] w-full max-w-md shadow-2xl relative">
+            <button onClick={() => setShowInvoiceForm(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-black/5"><X size={16} /></button>
+            <h3 className="text-2xl font-display font-black mb-6">Create Invoice</h3>
+            <div className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                   <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">Invoice ID</label>
+                   <input type="text" value={newInvoice.id} onChange={e => setNewInvoice({...newInvoice, id: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="INV-001" />
+                </div>
+                <div>
+                   <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">Amount</label>
+                   <input type="text" value={newInvoice.amount} onChange={e => setNewInvoice({...newInvoice, amount: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="$5,000" />
+                </div>
+              </div>
+              <div>
+                 <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">Date Range</label>
+                 <input type="text" value={newInvoice.date_label} onChange={e => setNewInvoice({...newInvoice, date_label: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="Oct 24, 2024" />
+              </div>
+              <div>
+                 <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">PDF Download URL</label>
+                 <input type="url" value={newInvoice.download_url} onChange={e => setNewInvoice({...newInvoice, download_url: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="https://..." />
+              </div>
+              <Button onClick={async () => {
+                 if (!newInvoice.id) return;
+                 const { data, error } = await supabase.from("client_invoices").insert([{ ...newInvoice, brand_id: id, status: 'unpaid' }]).select().single();
+                 if (data && !error) setInvoices([data, ...invoices]);
+                 setShowInvoiceForm(false);
+                 setNewInvoice({ id: '', date_label: '', amount: '', download_url: '' });
+              }} className="w-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] rounded-full mt-4">Save Invoice</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showAssetForm && (
+        <div className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="bg-white p-8 rounded-[2rem] w-full max-w-md shadow-2xl relative">
+            <button onClick={() => setShowAssetForm(false)} className="absolute top-6 right-6 p-2 rounded-full hover:bg-black/5"><X size={16} /></button>
+            <h3 className="text-2xl font-display font-black mb-6">Add Deliverable</h3>
+            
+            <div className="p-4 border-2 border-dashed border-black/10 rounded-2xl mb-6 text-center hover:bg-black/[0.02] transition-colors relative">
+              <input type="file" onChange={handleAssetUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+              {isUploadingAsset ? (
+                 <div className="flex flex-col items-center gap-2"><Loader2 className="w-5 h-5 animate-spin text-[#C94A2C]" /><span className="text-xs font-bold">Uploading...</span></div>
+              ) : (
+                 <div className="flex flex-col items-center gap-2"><Upload className="w-5 h-5 text-black/40" /><span className="text-xs font-bold text-black/60">Click or drag file to upload directly to Vault</span></div>
+              )}
+            </div>
+
+            <div className="flex items-center gap-4 mb-6">
+              <div className="flex-1 h-px bg-black/10" />
+              <span className="text-[10px] uppercase font-bold text-black/30 tracking-widest">OR PASTE EXTERNAL LINK</span>
+              <div className="flex-1 h-px bg-black/10" />
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                 <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">Asset Name</label>
+                 <input type="text" value={newAsset.name} onChange={e => setNewAsset({...newAsset, name: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="e.g. Brand Guidelines" />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                   <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">Type (Ext)</label>
+                   <input type="text" value={newAsset.file_type} onChange={e => setNewAsset({...newAsset, file_type: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="PDF, FIGMA..." />
+                </div>
+                <div>
+                   <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">Size</label>
+                   <input type="text" value={newAsset.file_size} onChange={e => setNewAsset({...newAsset, file_size: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="12 MB" />
+                </div>
+              </div>
+              <div>
+                 <label className="text-[10px] font-bold uppercase tracking-widest text-black/50 mb-2 block">URL</label>
+                 <input type="url" value={newAsset.download_url} onChange={e => setNewAsset({...newAsset, download_url: e.target.value})} className="w-full border border-black/10 rounded-xl p-3 text-sm font-medium outline-none focus:border-[#C94A2C]" placeholder="https://..." />
+              </div>
+              <Button onClick={async () => {
+                 if (!newAsset.name || !newAsset.download_url) return;
+                 const { data, error } = await supabase.from("client_deliverables").insert([{ ...newAsset, brand_id: id }]).select().single();
+                 if (data && !error) setAssets([data, ...assets]);
+                 setShowAssetForm(false);
+                 setNewAsset({ name: '', file_type: '', file_size: '', download_url: '' });
+              }} className="w-full bg-[#0D0D0D] text-white hover:bg-[#C94A2C] rounded-full mt-4">Save Asset</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
