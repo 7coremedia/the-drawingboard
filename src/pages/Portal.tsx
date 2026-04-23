@@ -12,7 +12,6 @@ import {
   Lock,
   Activity,
   Layers,
-  Layers,
   Banknote,
   LayoutTemplate,
   Plus,

@@ -187,9 +187,15 @@ export default function Superstars() {
                             transition={{ duration: 1, ease: "easeOut" }}
                             className="w-full aspect-video md:aspect-[21/9] rounded-[2rem] lg:rounded-[3rem] overflow-hidden bg-[#1a1a1a] mb-6 relative group"
                         >
-                            {/* Swap src to a real video once available */}
-                            {/* <video src="/Hero Videos/superstars-reel.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" /> */}
-                            <img src="/placeholder.svg" alt="Featured Work" className="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-1000" />
+                            {/* Built To Win Rooms brand video */}
+                            <video
+                                src="/Hero Videos/Built To Win Rooms.mp4"
+                                autoPlay
+                                muted
+                                loop
+                                playsInline
+                                className="w-full h-full object-cover scale-110 group-hover:scale-125 transition-transform duration-1000"
+                            />
                             <div className="absolute inset-0 bg-gradient-to-r from-[#0D0D0D]/70 via-transparent to-transparent" />
                             <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10 right-6 md:right-10">
                                 <p className="text-[10px] font-black uppercase tracking-[0.4em] text-white/40 mb-2 md:mb-3">Featured Case</p>

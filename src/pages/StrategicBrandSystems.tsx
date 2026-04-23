@@ -1,4 +1,4 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import { Check, X, ArrowRight } from "lucide-react";
 import RedesignFooter from "@/components/redesign/RedesignFooter";
@@ -116,14 +116,23 @@ export default function StrategicBrandSystems() {
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, ease: "easeOut" }}
-                        className="w-full lg:w-[55%] bg-[#D9C5B2] rounded-[3rem] relative overflow-hidden aspect-square lg:aspect-[4/3] flex items-center justify-center border border-black/5"
+                        className="w-full lg:w-[55%] bg-[#0D0D0D] rounded-[3rem] relative overflow-hidden aspect-square lg:aspect-[4/3] flex items-center justify-center border border-black/5"
                     >
-                        <img src="/placeholder.svg" alt="Brand System" className="w-full h-full object-cover mix-blend-multiply opacity-60" />
-                        
-                        {/* Decorative seals */}
-                        <div className="absolute bottom-6 right-6 lg:bottom-10 lg:right-10 w-24 h-24 lg:w-32 lg:h-32 border border-[#3D2C1F]/20 rounded-full flex flex-col items-center justify-center bg-white/20 backdrop-blur-md shadow-xl text-[#3D2C1F]">
+                        <video
+                            src="/Hero Videos/Strategic Brand Systems.mp4"
+                            autoPlay
+                            muted
+                            loop
+                            playsInline
+                            className="w-full h-full object-cover"
+                        />
+                        {/* Subtle gradient to anchor text below */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+
+                        {/* Decorative seal */}
+                        <div className="absolute bottom-6 right-6 lg:bottom-10 lg:right-10 w-24 h-24 lg:w-32 lg:h-32 border border-white/20 rounded-full flex flex-col items-center justify-center bg-white/10 backdrop-blur-md shadow-xl text-white">
                             <span className="text-[8px] lg:text-[10px] font-black uppercase text-center tracking-[0.3em]">ŌDEY<br/>Certified</span>
-                            <div className="w-full h-px bg-[#3D2C1F]/20 my-1 lg:my-2 w-1/2" />
+                            <div className="w-full h-px bg-white/20 my-1 lg:my-2 w-1/2" />
                             <span className="text-[8px] font-bold uppercase tracking-[0.3em] opacity-60">System</span>
                         </div>
                     </motion.div>

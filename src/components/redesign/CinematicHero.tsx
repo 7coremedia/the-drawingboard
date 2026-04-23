@@ -4,8 +4,24 @@ import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import FeaturedWorksCarousel from "./FeaturedWorksCarousel";
 import SocialProofTicker from "./SocialProofTicker";
+import { useRef, useState } from "react";
+
+// 🎬 Brand video playlist — add more videos here as you create them
+const BRAND_VIDEOS = [
+    { src: "/Hero Videos/LOOM REVEAL.mp4", label: "Brand Film" },
+    { src: "/Hero Videos/ShowMeLove Short Film.mp4", label: "Short Film" },
+];
 
 export default function CinematicHero() {
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    const handleVideoEnd = () => {
+        // 2 second gap between videos, then auto-advance playlist
+        setTimeout(() => {
+            setCurrentVideoIndex((prev) => (prev + 1) % BRAND_VIDEOS.length);
+        }, 2000);
+    };
     return (
         <div className="bg-[#F5F0E8] text-[#0D0D0D] relative min-h-screen flex flex-col pt-32 md:pt-40 pb-20">
             {/* Main Container */}
@@ -93,19 +109,21 @@ export default function CinematicHero() {
                     transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
                 >
                     <Link to="/portfolio" className="block relative w-full aspect-video rounded-[2.5rem] overflow-hidden shadow-sm shrink-0 group">
-                        <video 
-                            src="/Hero%20Videos/LOOM%20REVEAL.mp4" 
-                            autoPlay 
-                            muted 
-                            loop 
-                            playsInline 
+                        <video
+                            ref={videoRef}
+                            key={`mobile-${currentVideoIndex}`}
+                            src={BRAND_VIDEOS[currentVideoIndex].src}
+                            autoPlay
+                            muted
+                            playsInline
+                            onEnded={handleVideoEnd}
                             className="w-full h-full object-cover"
                         />
-                        
+
                         {/* Dramatic Overlay */}
                         <div className="absolute inset-0 bg-black/20 group-active:bg-black/40 transition-colors" />
 
-                        {/* Top Left Label: Latest Project */}
+                        {/* Top Left Label: Always 'Latest Project' on mobile */}
                         <div className="absolute top-6 left-6 flex items-center gap-2">
                             <span className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-[9px] font-bold px-4 py-1.5 rounded-full uppercase tracking-[0.2em] shadow-lg">
                                 Latest Project
@@ -115,12 +133,13 @@ export default function CinematicHero() {
                         {/* Bottom Right Label: Case Study Arrow */}
                         <div className="absolute bottom-6 right-6 flex items-center gap-2">
                             <span className="text-white text-[11px] font-medium tracking-tight flex items-center gap-1.5 drop-shadow-md">
-                                Case Study 
+                                Case Study
                                 <span className="text-lg leading-none translate-y-[-1px]">→</span>
                             </span>
                         </div>
                     </Link>
                 </motion.div>
+
 
                 {/* Section 1: 2 Large Cards (Side-by-side on mobile) */}
                 <motion.div 
@@ -131,19 +150,20 @@ export default function CinematicHero() {
                 >
                     <Link to="/contact" className="group">
                         <div className="bg-[#3D2C1F] text-white rounded-[1.5rem] md:rounded-[2.5rem] p-5 md:p-8 aspect-[3/4] md:aspect-video relative overflow-hidden flex flex-col justify-between transition-transform duration-500 hover:scale-[0.99] shadow-sm">
-                            
-                            {/* Web Video Background (remains unchanged for web) */}
-                            <video 
-                                src="/Hero%20Videos/LOOM%20REVEAL.mp4" 
-                                autoPlay 
-                                muted 
-                                loop 
-                                playsInline 
+
+                            {/* Desktop: Playlist Video Background */}
+                            <video
+                                key={`desktop-${currentVideoIndex}`}
+                                src={BRAND_VIDEOS[currentVideoIndex].src}
+                                autoPlay
+                                muted
+                                playsInline
+                                onEnded={handleVideoEnd}
                                 className="hidden md:block absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105"
                             />
                             {/* Overlay for text readability on Web */}
                             <div className="hidden md:block absolute inset-0 bg-black/40 z-0 group-hover:bg-black/30 transition-colors duration-500" />
-                            
+
                             <div className="z-10 relative flex flex-col items-start gap-1">
                                 <div className="bg-[#C9A66B] text-[#3D2C1F] text-[7px] md:text-[10px] font-bold px-2 md:px-3 py-0.5 md:py-1 rounded-full uppercase tracking-widest shadow-xl absolute top-0 right-0 md:relative md:top-auto md:right-auto">New</div>
                                 <p className="text-[#C9A66B] font-bold text-[10px] sm:text-xs md:text-base lg:text-lg xl:text-xl mb-0 md:mb-1 drop-shadow-md">Ready for a</p>
@@ -188,6 +208,7 @@ export default function CinematicHero() {
                         </div>
                     </Link>
                 </motion.div>
+
 
                 {/* Section 2: 4 Small Cards (Stacked Rows on Mobile, Landscape Capsules on Web) */}
                 <motion.div 
